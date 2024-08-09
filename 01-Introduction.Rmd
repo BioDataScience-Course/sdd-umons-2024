@@ -192,7 +192,7 @@ if (exists("assignment2"))
     course.ids = c(
       'S-BIOG-006' = !"A01Ga_{YY}M_biology_challenge"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/qjqBdB5p"),
+      'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-006' = !"{W[3]+1} 13:00:00"),
     course.ends = c(
@@ -408,7 +408,7 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-006' = !"A01Ia_{YY}M_covid19"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/5l0vI2UV"),
+      'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-006' = !"{W[3]+5} 08:00:00"),
     course.ends = c(

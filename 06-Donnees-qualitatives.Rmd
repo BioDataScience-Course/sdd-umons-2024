@@ -309,7 +309,7 @@ comment(frog$weight) # Rien!
 Le dictionnaire des données est un [élément important de la constitution d'une base de données](https://ineumann.developpez.com/tutoriels/merise/initiation-merise/#LII-B). Il s'agit d'un tableau annexe qui reprend au minimum le **nom** de chaque variable, son **label** (nom plus long et explicite), ses **unités** éventuelles, son **type** (numérique, facteur, facteur ordonné, date ...), les **niveaux** de variables qualitatives, la façon dont les **valeurs manquantes** sont encodées, et un **commentaire** éventuel. Cela donne donc un tableau du genre :
 
 | Variable | Label            | Unités |  Type   |    Niveaux    | Val. manquantes | Commentaire                                              |
-|:---------|:---------|:--------:|:--------:|:--------:|:--------:|:-----------|
+|:---------|:-----------------|:------:|:-------:|:-------------:|:---------------:|:---------------------------------------------------------|
 | date     | Date             |   \-   |  Date   |               |       NA        | Date de mesure                                           |
 | age      | Âge              | années | numeric |               |       -1        |                                                          |
 | diameter | Diamètre du test |   mm   | numeric |               |       NA        | Moyenne de deux diamètres perpendiculaires               |
@@ -498,7 +498,7 @@ if (exists("assignment2"))
     course.ids = c(
       'S-BIOG-006' = !"A05Ga_{YY}M_biometry"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/MpqUix6k"),
+      'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-006' = !"{W[12]+5} 08:00:00"),
     course.ends = c(
@@ -789,7 +789,7 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-006' = !"A06Ia_{YY}M_belgium_demo"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/2j5KvEZK"),
+      'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-006' = !"{W[14]+1} 13:00:00"),
     course.ends = c(

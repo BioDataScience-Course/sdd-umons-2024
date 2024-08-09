@@ -510,6 +510,7 @@ Vous voyez que vous obtenez ici un `data.table` qui ne contient plus que trois c
 urchin2 <- urchin[, c(1, 3)]
 head(urchin2)
 ```
+
 Au contraire, pour conserver tout sauf les colonnes 1 et 3, on écrira :
 
 ```{r}
@@ -533,7 +534,7 @@ Ces fonctions ont toutes un comportement commun et sont conçues pour travailler
 -   le **tibble** est un data.frame particulier implémenté dans le tidyverse, et
 -   le **data.table** est implémenté dans le package {data.table} et permet de réaliser des remaniements de tableaux plus rapidement que les deux précédents.
 
-Dans `SciViews::R`, l'objet **data.table** est utilisé par défaut. Les fonctions speedy sont écrites pour utiliser cet objet de manière native. Il existe une surcouche des fonctions tidy dans le package {dtplyr} qui fonctionne aussi sur des objets de classe `data.table`. 
+Dans `SciViews::R`, l'objet **data.table** est utilisé par défaut. Les fonctions speedy sont écrites pour utiliser cet objet de manière native. Il existe une surcouche des fonctions tidy dans le package {dtplyr} qui fonctionne aussi sur des objets de classe `data.table`.
 
 Les fonctions `select()` et `sselect()` permettent aussi de sélectionner des colonnes par leur position dans le tableau :
 
@@ -616,7 +617,7 @@ copepoda <- sfilter(zooplankton,
 rmarkdown::paged_table(sselect(copepoda, ecd:perimeter, class))
 ```
 
-Enfin, la détection et l'élimination de lignes contenant des valeurs manquantes (encodées comme `NA`) est spéciale. En effet, vous ne pouvez pas écrire quelque chose comme `x == NA` car ceci se lit comme "x est égale à ... je ne sais pas quoi", ce qui renvoie à son tour `NA` pour toutes les comparaisons quelles qu'elles soient. Vous pouvez utiliser la fonction spécialement prévue pour ce test `is.na()`. Ainsi, `is.na(x)` effectue en réalité ce que vous voulez. Il peut être utilisé à l'intérieur de `filter()` ou `sfilter()`. Par exemple pour conserver toutes les lignes n'ayant pas de valeurs manquantes pour `skeleton`, vous écrirez `sfilter(urchin2, !is.na(skeleton))`. Vous noterez tout de même que ce n'est pas des plus lisibles.  Il existe une fonction spécialement prévue pour débarrasser les tableaux des lignes contenant des valeurs manquantes : `drop_na()` ou `sdrop_na()`. Si vous spécifier des noms de colonnes (facultatifs), la fonction ira rechercher les valeurs manquantes uniquement dans ces colonnes-là, sinon, elle scrutera tout le tableau (mais faites très attention à ne pas utiliser inconsidérément cette fonction sans spécifier les colonnes : éliminer des individus sur base de valeurs manquantes dans des colonnes que vous n'utilisez pas ensuite est idiot).
+Enfin, la détection et l'élimination de lignes contenant des valeurs manquantes (encodées comme `NA`) est spéciale. En effet, vous ne pouvez pas écrire quelque chose comme `x == NA` car ceci se lit comme "x est égale à ... je ne sais pas quoi", ce qui renvoie à son tour `NA` pour toutes les comparaisons quelles qu'elles soient. Vous pouvez utiliser la fonction spécialement prévue pour ce test `is.na()`. Ainsi, `is.na(x)` effectue en réalité ce que vous voulez. Il peut être utilisé à l'intérieur de `filter()` ou `sfilter()`. Par exemple pour conserver toutes les lignes n'ayant pas de valeurs manquantes pour `skeleton`, vous écrirez `sfilter(urchin2, !is.na(skeleton))`. Vous noterez tout de même que ce n'est pas des plus lisibles. Il existe une fonction spécialement prévue pour débarrasser les tableaux des lignes contenant des valeurs manquantes : `drop_na()` ou `sdrop_na()`. Si vous spécifier des noms de colonnes (facultatifs), la fonction ira rechercher les valeurs manquantes uniquement dans ces colonnes-là, sinon, elle scrutera tout le tableau (mais faites très attention à ne pas utiliser inconsidérément cette fonction sans spécifier les colonnes : éliminer des individus sur base de valeurs manquantes dans des colonnes que vous n'utilisez pas ensuite est idiot).
 
 ```{r}
 urchin_sub4 <- sdrop_na(urchin)
@@ -630,7 +631,7 @@ urchin_sub2 <- urchin2[urchin2$height > 20, ]
 head(urchin_sub2)
 ```
 
-Notez la différence importante : en R de base, les variables du jeu de données `urchin2` ne sont pas accessibles juste avec leur nom. Il faut spécifier de manière complète "la variable `height` du jeu de données `urchin2`" qui s'écrit `urchin2$height`, sans quoi R vous dira qu'il ne connait pas l'objet `height`.  Avec `filter()` ou `sfilter()`, vous pouvez utiliser directement le nom de la variable, sans spécifier le nom du jeu de données qui est connu car c'est le premier argument de la fonction.
+Notez la différence importante : en R de base, les variables du jeu de données `urchin2` ne sont pas accessibles juste avec leur nom. Il faut spécifier de manière complète "la variable `height` du jeu de données `urchin2`" qui s'écrit `urchin2$height`, sans quoi R vous dira qu'il ne connait pas l'objet `height`. Avec `filter()` ou `sfilter()`, vous pouvez utiliser directement le nom de la variable, sans spécifier le nom du jeu de données qui est connu car c'est le premier argument de la fonction.
 
 Enfin, l'opérateur `[` permet de sélectionner des lignes **et** des colonnes en une seule opération, là ou les fonctions tidy ou speedy nécessitent un appel de `filter()`/`sfilter()` suivi d'un second appel de `select()`/`sselect()`. Donc, à partir du tableau complet `urchin`, pour sélectionner les six première lignes et les trois premières colonnes vous ferez en R de base :
 
@@ -1028,7 +1029,7 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-006' = !"A05Ia_{YY}M_transformation"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/m6qqsVX0"),
+      'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-006' = !"{W[12]+1} 13:00:00"),
     course.ends = c(
@@ -1061,7 +1062,7 @@ if (exists("assignment2"))
     course.ids = c(
       'S-BIOG-006' = !"A05Ga_{YY}M_biometry"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/MpqUix6k"),
+      'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-006' = !"{W[12]+5} 08:00:00"),
     course.ends = c(

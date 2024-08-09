@@ -889,7 +889,7 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-027' = !"A09Ia_{YY}M_ttest"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/DD2JyN3u"),
+      'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-027' = !"{W[27]+1} 13:00:00"),
     course.ends = c(
@@ -943,7 +943,7 @@ Quand choisir le test *t* de Student ou le test de Wilcoxon ? Nous serions tent
 Cette analyse est valable pour toute paire de test paramétrique *versus* non paramétrique. Le tableau suivant résume cela.
 
 |                                     | Test paramétrique | Test non paramétrique                                    |
-|:---------------------|:----------------|:---------------------------------|
+|:------------------------------------|:------------------|:---------------------------------------------------------|
 | **Contrainte (distribution)**       | à vérifier        | indépendant de toute distribution                        |
 | **Puissance (même jeu de données)** | plus puissant     | moins puissant                                           |
 | **Choix**                           | à privilégier     | à utiliser seulement si test paramétrique non applicable |
@@ -1107,7 +1107,7 @@ if (exists("assignment2"))
     course.ids = c(
       'S-BIOG-027' = !"A08Ga_{YY}M_human_health"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/HvBUqMqi"),
+      'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-027' = !"{W[25]+1} 13:00:00"),
     course.ends = c(

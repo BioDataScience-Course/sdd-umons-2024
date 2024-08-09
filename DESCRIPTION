@@ -1,7 +1,7 @@
 Type: Book
 Package: placeholder
-Title: SDD I UMONS version 2023
-Version: 2023.0.0
+Title: SDD I UMONS version 2024
+Version: 2024.0.0
 Depends: 
     learnitdown
 Imports: 

@@ -506,7 +506,7 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-027' = !"A10Ia_{YY}M_acidification_effect"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/Jy9gGqx0"),
+      'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-027' = !"{W[29]+1} 13:00:00"),
     course.ends = c(
@@ -594,7 +594,7 @@ if (exists("assignment2"))
     course.ids = c(
       'S-BIOG-027' = !"A08Ga_{YY}M_human_health"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/HvBUqMqi"),
+      'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-027' = !"{W[25]+1} 13:00:00"),
     course.ends = c(
@@ -623,7 +623,6 @@ if (exists("assignment2"))
     term = "Q2", level = 4, n = 2,
     toc = "Biométrie de l'oursin violet, part IV") -->
 ```
-
 ## Récapitulatif des exercices
 
 Vous venez de terminer le module 10. Ce module vous a permis d'apprendre une grande partie des subtilités qui se cachent derrière l'analyse de variance. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :

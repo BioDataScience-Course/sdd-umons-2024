@@ -142,7 +142,7 @@ Souvent en biologie, on choisi $\alpha$ = 5%, mais dans les cas où nous souhait
 
 ##### Explications détaillées {.unnumbered}
 
-Voici comment ce test se construit. *Ces détails sont fournis pour vous aider à comprendre les calculs réalisés, mais en pratique, vous ne devez pas les faire vous-même : vous utiliser simplement `chisq.test()` comme ci-dessus*  Notre tableau de contingence à simple entrée `crossbill_tab` contient nos $a_i$. Nous devons donc calculer quels sont les effectifs théoriques $\alpha_i$. Le nombre total d'oiseaux observés est :
+Voici comment ce test se construit. *Ces détails sont fournis pour vous aider à comprendre les calculs réalisés, mais en pratique, vous ne devez pas les faire vous-même : vous utiliser simplement `chisq.test()` comme ci-dessus* Notre tableau de contingence à simple entrée `crossbill_tab` contient nos $a_i$. Nous devons donc calculer quels sont les effectifs théoriques $\alpha_i$. Le nombre total d'oiseaux observés est :
 
 ```{r}
 sum(crossbill_tab)
@@ -315,7 +315,7 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-027' = !"A08Ia_{YY}M_pea"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/aGvNXSjS"),
+      'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-027' = !"{W[25]+1} 13:00:00"),
     course.ends = c(
@@ -580,7 +580,7 @@ if (exists("assignment2"))
     course.ids = c(
       'S-BIOG-027' = !"A08Ga_{YY}M_human_health"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/HvBUqMqi"),
+      'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-027' = !"{W[25]+1} 13:00:00"),
     course.ends = c(
@@ -589,7 +589,7 @@ if (exists("assignment2"))
     toc = "Biométrie humaine, part I")
 ```
 
-````{=html}
+```{=html}
 <!-- G.E. Je ne supprime pas car on pourrait le placer dans un autre module 
 
 ## Evaluation par les pairs 
@@ -615,8 +615,7 @@ Les instructions sont détaillées ici\ :
   <https://github.com/BioDataScience-Course/sdd_lesson/blob/master/sdd1_08/presentations/correction.md>
 ``
 -->
-````
-
+```
 ## Récapitulatif des exercices
 
 Vous venez de terminer le module 8. Ce module vous a permis d'apprendre à réaliser vos premiers tests d'hypothèses. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :

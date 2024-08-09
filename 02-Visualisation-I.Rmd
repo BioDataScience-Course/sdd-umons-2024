@@ -187,7 +187,7 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-006' = !"A02Ia_{YY}M_scatterplot"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/8_oZPNZT"),
+      'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-006' = !"{W[5]+1} 13:00:00"),
     course.ends = c(
@@ -195,7 +195,6 @@ if (exists("assignment"))
     term = "Q1", level = 3,
     toc = "Graphiques avec `urchin_bio` (partie I)")
 ```
-
 
 ##### Pour en savoir plus {.unnumbered}
 
@@ -211,7 +210,7 @@ if (exists("assignment"))
 
 ## Graphiques dans Quarto/R Markdown
 
-Un fichier [Quarto](https://quarto.org) a une extension `.qmd`[^02-visualisation-i-3]. Un fichier R Markdown est caractérisé par l'extension `.Rmd`. Ces deux formats sont très similaires, Quarto étant la version plus récente de R Markdown. Tous deux sont développés et maintenus par la même société (Posit). À partir d'ici, nous indiquerons Quarto/R Markdown lorsque la phrase s'applique indifféremment aux deux formats. Donc, Quarto/R Markdown permet de combiner le langage Markdown que vous avez déjà abordé au premier module avec du code R, tel que celui utilisé dans la première partie de ce module 2, voire du code dans d'autres langages comme Python, Julia, SQL\... Ces zones contenant du code exécutable en R ou autre s'appellent des **chunks**, ou **morceaux** dans l'interface RStudio en français (mais nous utiliserons préférentiellement le terme anglais dans cet ouvrage).
+Un fichier [Quarto](https://quarto.org) a une extension `.qmd`[^02-visualisation-i-3]. Un fichier R Markdown est caractérisé par l'extension `.Rmd`. Ces deux formats sont très similaires, Quarto étant la version plus récente de R Markdown. Tous deux sont développés et maintenus par la même société (Posit). À partir d'ici, nous indiquerons Quarto/R Markdown lorsque la phrase s'applique indifféremment aux deux formats. Donc, Quarto/R Markdown permet de combiner le langage Markdown que vous avez déjà abordé au premier module avec du code R, tel que celui utilisé dans la première partie de ce module 2, voire du code dans d'autres langages comme Python, Julia, SQL... Ces zones contenant du code exécutable en R ou autre s'appellent des **chunks**, ou **morceaux** dans l'interface RStudio en français (mais nous utiliserons préférentiellement le terme anglais dans cet ouvrage).
 
 [^02-visualisation-i-3]: L'**extension d'un fichier** est un indicateur de son format à la fin de son nom, sous forme d'un point (.) suivi d'un sigle. Par exemple `.txt` caractérise un fichier texte, alors que `.png` indique qu'il s'agit d'une image au format PNG. Attention que les extensions sont parfois cachées (c'est systématique dans l'explorateur de fichiers de Windows avec la configuration par défaut, et c'est selon le fichier dans le Finder de MacOS. Sous Linux, et donc dans votre machine Saturn CLoud, l'extension est *toujours* affichée heureusement.
 
@@ -251,7 +250,7 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-006' = !"A02Ia_{YY}M_scatterplot"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/8_oZPNZT"),
+      'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-006' = !"{W[5]+1} 13:00:00"),
     course.ends = c(
@@ -271,7 +270,7 @@ if (exists("assignment2"))
     course.ids = c(
       'S-BIOG-006' = !"A02Ga_{YY}M_analysis"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/L0JZAlcP"),
+      'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-006' = !"{W[5]+5} 08:00:00"),
     course.ends = c(

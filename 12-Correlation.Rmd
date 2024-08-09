@@ -367,7 +367,7 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-027' = !"A12Ia_{YY}M_correlation"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/IqgFScPW"),
+      'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-027' = !"{W[35]+1} 13:00:00"),
     course.ends = c(
@@ -385,7 +385,7 @@ if (exists("assignment2"))
     course.ids = c(
       'S-BIOG-027' = !"A08Ga_{YY}M_human_health"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/HvBUqMqi"),
+      'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-027' = !"{W[25]+1} 13:00:00"),
     course.ends = c(
@@ -413,7 +413,6 @@ if (exists("assignment2"))
     toc = "Biométrie de l'oursin violet, part VI")
 -->
 ```
-
 ## Communication
 
 Savoir communiquer ses résultats est vital en science des données. Ce n'est pas si facile, car il faut pouvoir simplifier les analyses et utiliser au mieux les visuels (c'est-à-dire, les graphiques) pour raconter une histoire qui soit à la fois captivante et compréhensible. **Communiquer le fruit de ses recherches de la meilleure façon qui soit pour que les non-initiés puissent le comprendre fait partie du bagage indispensable du scientifique des données**.
@@ -479,7 +478,6 @@ Quel type de présentation R Markdown ou Quarto choisir au final ? Toute cette 
 
 **Note : il est indispensable de pouvoir synthétiser un travail complexe. Dans votre carrière de chercheur, vous serez souvent confronté à devoir réaliser des présentations. Réalisez une présentation de maximum cinq diapositives dans le format de votre souhait.** -->
 ```
-
 ## Critique statistique
 
 `r img("sdd1_12/cars-travolta.gif")`
@@ -734,7 +732,7 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-027' = !"A12Ia_{YY}M_correlation"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/IqgFScPW"),
+      'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-027' = !"{W[35]+1} 13:00:00"),
     course.ends = c(
@@ -742,7 +740,6 @@ if (exists("assignment"))
     term = "Q2", level = 3,
     toc = "Critique statistique")
 ```
-
 
 ## Challenge
 
@@ -757,7 +754,7 @@ if (exists("challenge"))
     course.ids = c(
       'S-BIOG-027' = !"A12Ca_{YY}M_infer"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/mnRje_EM"),
+      'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
       'S-BIOG-027' = !"{W[35]+5} 10:00:00"),
     course.ends = c(
@@ -774,7 +771,6 @@ Vous pouvez soumettre vos résultats pendant une période de temps précise via 
 
 `r launch_shiny("https://sdd.umons.ac.be/A12Ca_infer/", height = 800, delay = 20, toc = NULL, alt1 = "*Cliquez pour visualiser le classement.*", alt2 = "*Cliquez pour visualiser le classement.*")`
 :::
-
 
 ## Récapitulatif des exercices
 
