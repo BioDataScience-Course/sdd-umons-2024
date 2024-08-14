@@ -35,9 +35,9 @@ small_dataset <- dtx_rows(
 small_dataset
 ```
 
-Dans la plupart des cas, vous utiliserez ou collecterez des données stockées dans des formats divers : feuilles Excel, fichiers CSV ("comma-separated-values", un format standard d'encodage d'un tableau de données sous forme textuelle), formats spécifiques à divers logiciels statistiques comme SAS, Stata, Systat... Ces données peuvent être sur un disque local ou disponibles depuis un lien URL sur le net[^05-importation-transformation-1]. De nombreuses fonctions existent dans R pour importer toutes ces données. La fonction `read()` du package {data.io} est l'une des plus simples et conviviales d'entre-elles. Vous l'avez déjà utilisée, mais reprenons un exemple pour en discuter les détails.
+Dans la plupart des cas, vous utiliserez ou collecterez des données stockées dans des formats divers : feuilles Excel, fichiers CSV ("comma-separated-values", un format standard d'encodage d'un tableau de données sous forme textuelle), formats spécifiques à divers logiciels statistiques comme SAS, Stata, Systat... Ces données peuvent être sur un disque local ou disponibles depuis un lien URL sur le net[^04-importation-transformation-1]. De nombreuses fonctions existent dans R pour importer toutes ces données. La fonction `read()` du package {data.io} est l'une des plus simples et conviviales d'entre-elles. Vous l'avez déjà utilisée, mais reprenons un exemple pour en discuter les détails.
 
-[^05-importation-transformation-1]: R permet également d'interroger des bases de données spécialisées, mais nous n'aborderons ce sujet spécifique qu'au cours de Science des Données Biologiques II en dernière année de Bachelier.
+[^04-importation-transformation-1]: R permet également d'interroger des bases de données spécialisées, mais nous n'aborderons ce sujet spécifique qu'au cours de Science des Données Biologiques II en dernière année de Bachelier.
 
 ```{r}
 biometry <- read("biometry", package = "BioDataScience", lang = "fr")
@@ -131,9 +131,9 @@ Lorsque vous travaillez sur des données issues d'une source externe, et donc su
 
 Faites bien attention que le dossier dans lequel vous souhaitez stocker une copie de vos données doit être présent sur votre disque. Dans le cas contraire, un message d'erreur sera généré et vous ne pourrez pas importer les données.
 
-Vous pouvez aussi vous passer de cette fonctionnalité, mais importer vos données dans un script à part qui remanie aussi ces données à la suite. Vous pouvez alors terminer ce script en écrivant les données remaniées dans un dossier local. Si vous travaillez exclusivement avec R, l'un des meilleurs formats est RDS, un format natif qui conservera toutes les caractéristiques de votre objet, y compris sa classe, et d'éventuels attributs[^05-importation-transformation-2]. Par défaut, les données seront stockées non compressées, mais vous pourrez aussi décider de compresser avec les algorithmes `"gz"` (plus rapide et répandu), `"bz2"` (intermédiaire), ou `"xz"` (le plus efficace en taux de compression, mais aussi le plus lent et gourmand en ressources CPU). Par exemple, pour enregistrer les données avec compression `"gz"`, dans le sous-dossier `data` de votre projet, vous écrirez (le dossier `data` doit être préexistant) :
+Vous pouvez aussi vous passer de cette fonctionnalité, mais importer vos données dans un script à part qui remanie aussi ces données à la suite. Vous pouvez alors terminer ce script en écrivant les données remaniées dans un dossier local. Si vous travaillez exclusivement avec R, l'un des meilleurs formats est RDS, un format natif qui conservera toutes les caractéristiques de votre objet, y compris sa classe, et d'éventuels attributs[^04-importation-transformation-2]. Par défaut, les données seront stockées non compressées, mais vous pourrez aussi décider de compresser avec les algorithmes `"gz"` (plus rapide et répandu), `"bz2"` (intermédiaire), ou `"xz"` (le plus efficace en taux de compression, mais aussi le plus lent et gourmand en ressources CPU). Par exemple, pour enregistrer les données avec compression `"gz"`, dans le sous-dossier `data` de votre projet, vous écrirez (le dossier `data` doit être préexistant) :
 
-[^05-importation-transformation-2]: Si vous devez aussi accéder à vos données à partir d'autres langages comme Python, Java ou C++, utilisez un format commun reconnu par les différents logiciels. Le CSV fonctionne généralement bien, mais des formats binaires plus performants sont également disponibles. Parmi ces formats "inter-langages", gardez un œil sur [Apache Arrow](https://arrow.apache.org) qui offre des possibilités très intéressantes d'intercompatibilité de performance.
+[^04-importation-transformation-2]: Si vous devez aussi accéder à vos données à partir d'autres langages comme Python, Java ou C++, utilisez un format commun reconnu par les différents logiciels. Le CSV fonctionne généralement bien, mais des formats binaires plus performants sont également disponibles. Parmi ces formats "inter-langages", gardez un œil sur [Apache Arrow](https://arrow.apache.org) qui offre des possibilités très intéressantes d'intercompatibilité de performance.
 
 ```{r, eval=FALSE}
 write$rds(coral, file = "data/coral.rds", compress = "gz")
@@ -374,9 +374,9 @@ Les fonctions `as.factor()` ou `factor()` et `as.ordered()` ou `ordered()` effec
 
 ### Découpage en classes
 
-La conversion d'une variable quantitative à qualitative doit souvent passer par une réduction des niveaux en rassemblant les valeurs proches dans des **classes**. Vous avez déjà utilisé de manière implicite le découpage en classes lorsque vous avez réalisé des histogrammes. Si les histogrammes sont bi- ou multimodaux, un découpage se justifie. Par exemple, le jeu de données portant sur la biométrie humaine est typique d'un cas de distribution bimodale. En fait, ce sont des étudiants (ayant tous une vingtaine d'années) qui ont réalisé ces mesures. La plupart ont choisi de s'inclure dans l'échantillon, d'où un premier mode vers une vingtaine d'années. Ensuite, ils ont pu mesurer d'autres personnes, éventuellement dans leur entourage. Beaucoup ont demandé à leurs parents, ce qui résulte en un second mode vers la cinquantaine[^05-importation-transformation-3]. Donc, la distribution bimodale résulte plus de l'échantillonnage en lui-même que d'une réalité démographique ! Cela ne change cependant rien pour l'exercice.
+La conversion d'une variable quantitative à qualitative doit souvent passer par une réduction des niveaux en rassemblant les valeurs proches dans des **classes**. Vous avez déjà utilisé de manière implicite le découpage en classes lorsque vous avez réalisé des histogrammes. Si les histogrammes sont bi- ou multimodaux, un découpage se justifie. Par exemple, le jeu de données portant sur la biométrie humaine est typique d'un cas de distribution bimodale. En fait, ce sont des étudiants (ayant tous une vingtaine d'années) qui ont réalisé ces mesures. La plupart ont choisi de s'inclure dans l'échantillon, d'où un premier mode vers une vingtaine d'années. Ensuite, ils ont pu mesurer d'autres personnes, éventuellement dans leur entourage. Beaucoup ont demandé à leurs parents, ce qui résulte en un second mode vers la cinquantaine[^04-importation-transformation-3]. Donc, la distribution bimodale résulte plus de l'échantillonnage en lui-même que d'une réalité démographique ! Cela ne change cependant rien pour l'exercice.
 
-[^05-importation-transformation-3]: Notez que ceci ne constitue **pas** un échantillonnage correct par rapport à la population générale du Hainaut pour plusieurs raisons. (1) toutes les tranches d'âges ne sont échantillonnées de manière équivalente pour les raisons évoquées, (2) des liens génétiques existent au sein des familles, ce qui résulte en une **non indépendance** des observations entre elles, et (3) seule une sous-population constituée de personnes fréquentant l'université et de leur entourage a été échantillonnée. Cependant, dans le cadre de l'exercice, nous accepterons ces biais, tout en étant conscients qu'ils existent.
+[^04-importation-transformation-3]: Notez que ceci ne constitue **pas** un échantillonnage correct par rapport à la population générale du Hainaut pour plusieurs raisons. (1) toutes les tranches d'âges ne sont échantillonnées de manière équivalente pour les raisons évoquées, (2) des liens génétiques existent au sein des familles, ce qui résulte en une **non indépendance** des observations entre elles, et (3) seule une sous-population constituée de personnes fréquentant l'université et de leur entourage a été échantillonnée. Cependant, dans le cadre de l'exercice, nous accepterons ces biais, tout en étant conscients qu'ils existent.
 
 ```{r}
 biometry <- read("biometry", package = "BioDataScience", lang = "fr")
@@ -477,11 +477,11 @@ rmarkdown::paged_table(urchin)
 
 ### `select()`/`sselect()`
 
-![](images/sdd1_05/select.gif)
+![](images/sdd1_04/select.gif)
 
-Lors de l'utilisation de vos jeux de données, vous serez amené à réduire vos données en sous-tableau ne reprenant qu'un sous-ensemble des variables initiales. `select()` et `sselect()` effectuent cette opération[^05-importation-transformation-4] :
+Lors de l'utilisation de vos jeux de données, vous serez amené à réduire vos données en sous-tableau ne reprenant qu'un sous-ensemble des variables initiales. `select()` et `sselect()` effectuent cette opération[^04-importation-transformation-4] :
 
-[^05-importation-transformation-4]: Voyez `?tidyselect::select_helpers` pour une panoplie de fonctions supplémentaires qui permettent une sélection "intelligente" des variables utilisables avec `select()`.
+[^04-importation-transformation-4]: Voyez `?tidyselect::select_helpers` pour une panoplie de fonctions supplémentaires qui permettent une sélection "intelligente" des variables utilisables avec `select()`.
 
 La fonction `select()` est une fonction du "tidyverse" (nous l'appellerons désormais une **fonction tidy**) qui a un comportement particulier dans R. Une fonction relativement équivalente, mais "non-tidy" est `sselect()`. Le préfixe "s" est là pour indiquer que c'est une fonction "speedy". Ces fonctions sont similaire à leur équivalents tidy, mais généralement plus rapides. Les fonctions tidy, ont cependant d'autres qualités. Notamment, elles fonctionneront aussi en grande partie sur des bases de données. Ces deux fonctions sont souvent interchangeables, mais pas toujours. **Dans `SciViews::R`, il est très important de faire la distinction entre les deux types de fonctions et leurs particularités.**
 
@@ -559,7 +559,7 @@ head(urchin4)
 
 ### `filter()`/`sfilter()`
 
-![](images/sdd1_05/filter.gif)
+![](images/sdd1_04/filter.gif)
 
 De même que toutes les colonnes d'un tableau ne sont pas forcément utiles, il est souvent nécessaire de sélectionner les lignes en fonction de critères particuliers pour restreindre l'analyse à une sous-population données, ou pour éliminer les cas qui ne correspondent pas à ce que vous voulez. `filter()` est une fonction tidy qui effectue ce travail. L'équivalent speedy est `sfilter()`. Repartons du jeu de données `urchin` simplifié à trois variables (`urchin2`).
 
@@ -568,9 +568,9 @@ urchin2 <- sselect(urchin, origin, height, skeleton)
 head(urchin2)
 ```
 
-Si vous voulez sélectionner uniquement un niveau `"lvl"` d'une variable facteur `fact`, vous pouvez utiliser une **instruction de comparaison** "égal à" (`==`) : `fact == "lvl"`. Notez bien le **double** signe égal ici, et n'oubliez pas d'indiquer le niveau entre guillemets. De même, vous pouvez sélectionner tout **sauf** ce niveau avec l'opérateur "différent de" (`!=`). Les opérateurs "plus petit que" (`<`) ou "plus grand que" (`>`) fonctionnent sur les chaines de caractères selon une logique d'ordre alphabétique, donc, `"a" < "b"`[^05-importation-transformation-5].
+Si vous voulez sélectionner uniquement un niveau `"lvl"` d'une variable facteur `fact`, vous pouvez utiliser une **instruction de comparaison** "égal à" (`==`) : `fact == "lvl"`. Notez bien le **double** signe égal ici, et n'oubliez pas d'indiquer le niveau entre guillemets. De même, vous pouvez sélectionner tout **sauf** ce niveau avec l'opérateur "différent de" (`!=`). Les opérateurs "plus petit que" (`<`) ou "plus grand que" (`>`) fonctionnent sur les chaines de caractères selon une logique d'ordre alphabétique, donc, `"a" < "b"`[^04-importation-transformation-5].
 
-[^05-importation-transformation-5]: L'ordre alphabétique qui fait également intervenir les caractères accentués diffère en fonction de la configuration du système (langue). L'état du système tel que vu par R pour le tri alphabétique est obtenu par `Sys.getlocale("LC_COLLATE")`. Dans la SciViews Box, ceci est **toujours** `"en_US.UTF-8"`, ceci afin de rendre le traitement reproductible d'un PC à l'autre, qu'il soit en anglais, français, espagnol, chinois, ou n'importe quelle autre langue.
+[^04-importation-transformation-5]: L'ordre alphabétique qui fait également intervenir les caractères accentués diffère en fonction de la configuration du système (langue). L'état du système tel que vu par R pour le tri alphabétique est obtenu par `Sys.getlocale("LC_COLLATE")`. Dans la SciViews Box, ceci est **toujours** `"en_US.UTF-8"`, ceci afin de rendre le traitement reproductible d'un PC à l'autre, qu'il soit en anglais, français, espagnol, chinois, ou n'importe quelle autre langue.
 
 | Comparaison           | Opérateur | Exemple         |
 |:----------------------|:---------:|:----------------|
@@ -655,7 +655,7 @@ urchin_sub5
 
 ### `mutate()`/`smutate()`
 
-![](images/sdd1_05/mutate.gif)
+![](images/sdd1_04/mutate.gif)
 
 La fonction tidy `mutate()` permet de calculer de nouvelles variables (si le nom fourni n'existe pas encore dans le jeu de donnée) ou écrase les variables existantes de même nom. La fonction speedy équivalente est `smutate()`. Repartons du jeu de données `urchin`. Pour calculer de nouvelles variables, vous pouvez employer :
 
@@ -714,7 +714,7 @@ Selon le contexte, la version tidy/speedy ou la version R de base sera la plus p
 
 ### `group_by()`/`sgroup_by()`
 
-![](images/sdd1_05/group_by.gif)
+![](images/sdd1_04/group_by.gif)
 
 La fonction tidy `group_by()` ou la fonction speedy `sgroup_by()` ne change rien dans le tableau lui-même, mais ajoute une annotation qui indique que les calculs ultérieurs devront être effectués sur des sous-ensembles du tableau en parallèle. Ceci est surtout utile avec `summarise()`/`ssummarise()` (voir ci-dessous), mais aussi avec `mutate()`/`smutate()` pour faire des transformations par groupes. Pour annuler le regroupement, il suffit d'utiliser `ungroup()`/`sungroup()`.
 
@@ -741,7 +741,7 @@ identical(urchin_collected, urchin)
 
 ### `summarise()`/`ssummarise()`
 
-![](images/sdd1_05/summarise.gif)
+![](images/sdd1_04/summarise.gif)
 
 Si vous voulez résumer vos données (calcul de la moyenne, médiane, etc.), vous pouvez réaliser ceci sur une variable en particulier avec les fonctions dédiées. Par exemple `mean(urchin$skeleton)` renvoie la masse moyenne de squelette pour tous les oursins (ce calcul donne `NA` dès qu'il y a des valeurs manquantes, mais l'argument `na.rm = TRUE` permet d'obtenir un résultat en ne tenant pas compte de ces données manquantes : `mean(urchin$skeleton, na.rm = TRUE)`). Cela devient vite laborieux s'il faut réitérer ce genre de calcul sur plusieurs variables du jeu de données, et assembler ensuite les résultats dans un petit tableau synthétique. D'autant plus, s'il faut séparer d'abord le jeu de données en sous-groupes pour faire ces calculs. La fonction tidy `summarise()`, ou son équivalent speedy `ssummarise()` reporte automatiquement ces calculs, en tenant compte des regroupements proposés via `group_by()`/`sgroup_by()`.
 
@@ -936,9 +936,9 @@ Notez bien aussi les fonction `fn()` et `fnobs()` que nous avons vues pour énum
 
 Le chaînage (ou *"pipe"* en anglais, prononcez "païpe") permet de combiner une suite d'instructions R. Il permet une représentation facilement lisible et compréhensible d'un traitement décomposé en plusieurs étapes simples de remaniement des données.
 
-Différents opérateurs de chaînage existent dans R. Le [Tidyverse](https://www.tidyverse.org) a introduit un opérateur de chaînage **`%>%`** issu du package [{magrittr}](https://magrittr.tidyverse.org). Si nous sommes sensibles au clin d'œil fait ici à un artiste belge bien connu ("ceci n'est pas un pipe"), nous n'adhérons pas à ce choix pour des raisons multiples et plutôt techniques qui n'ont pas leur place dans ce document[^05-importation-transformation-6]. Nous vous présentons ici l'un des opérateurs de chaînage du package {svFlow} : **`%>.%`**. Le jeu de données sur la biométrie humaine est employé pour cette démonstration qui va comparer le remaniement d'un tableau de données avec et sans l'utilisation du chaînage.
+Différents opérateurs de chaînage existent dans R. Le [Tidyverse](https://www.tidyverse.org) a introduit un opérateur de chaînage **`%>%`** issu du package [{magrittr}](https://magrittr.tidyverse.org). Si nous sommes sensibles au clin d'œil fait ici à un artiste belge bien connu ("ceci n'est pas un pipe"), nous n'adhérons pas à ce choix pour des raisons multiples et plutôt techniques qui n'ont pas leur place dans ce document[^04-importation-transformation-6]. Nous vous présentons ici l'un des opérateurs de chaînage du package {svFlow} : **`%>.%`**. Le jeu de données sur la biométrie humaine est employé pour cette démonstration qui va comparer le remaniement d'un tableau de données avec et sans l'utilisation du chaînage.
 
-[^05-importation-transformation-6]: Le lecteur intéressé pourra lire les différents articles suivants : [more pipes in R](http://www.win-vector.com/blog/2017/12/more-pipes-in-r/), y compris les liens qui s'y trouvent, permet de se faire une idée de la diversité des opérateurs de chaînage dans R et de leur historique. [Dot pipe](https://winvector.github.io/wrapr/articles/dot_pipe.html) présente l'opérateur `%.>%` du package {wrapr} très proche du nôtre et [in praise of syntactic sugar](http://www.win-vector.com/blog/2017/07/in-praise-of-syntactic-sugar/) explique ses avantages. Nous partageons l'idée que le "pipe de base" ne devrait pas modifier l'instruction de droite contrairement à ce que fait `%>%` de {magrittr}, et notre opérateur `%>.%` va en outre plus loin encore que `%.>%` dans la facilité de débogage du code chaîne.
+[^04-importation-transformation-6]: Le lecteur intéressé pourra lire les différents articles suivants : [more pipes in R](http://www.win-vector.com/blog/2017/12/more-pipes-in-r/), y compris les liens qui s'y trouvent, permet de se faire une idée de la diversité des opérateurs de chaînage dans R et de leur historique. [Dot pipe](https://winvector.github.io/wrapr/articles/dot_pipe.html) présente l'opérateur `%.>%` du package {wrapr} très proche du nôtre et [in praise of syntactic sugar](http://www.win-vector.com/blog/2017/07/in-praise-of-syntactic-sugar/) explique ses avantages. Nous partageons l'idée que le "pipe de base" ne devrait pas modifier l'instruction de droite contrairement à ce que fait `%>%` de {magrittr}, et notre opérateur `%>.%` va en outre plus loin encore que `%.>%` dans la facilité de débogage du code chaîne.
 
 ```{r}
 biometry <- read("biometry", package = "BioDataScience", lang = "fr")
@@ -987,9 +987,9 @@ knitr::kable(biometry_tab, rows = NULL, digits = 1,
   caption = "IMC d'hommes (M) et femmes (W) de 25 ans maximum.")
 ```
 
--   Des trois approches, la version ci-dessous avec chaînage des opérations est la plus lisible et la plus pratique[^05-importation-transformation-7].
+-   Des trois approches, la version ci-dessous avec chaînage des opérations est la plus lisible et la plus pratique[^04-importation-transformation-7].
 
-[^05-importation-transformation-7]: Le chaînage n'est cependant pas forcément plus facile à déboguer que la version avec variables intermédiaires. Le package {svFlow} propose la fonction `debug_flow()` à appeler directement après un plantage pour inspecter la dernière instruction qui a causé l'erreur, voir `?debug_flow`.
+[^04-importation-transformation-7]: Le chaînage n'est cependant pas forcément plus facile à déboguer que la version avec variables intermédiaires. Le package {svFlow} propose la fonction `debug_flow()` à appeler directement après un plantage pour inspecter la dernière instruction qui a causé l'erreur, voir `?debug_flow`.
 
 ```{r}
 biometry %>.%
@@ -1020,11 +1020,11 @@ En `SciViews::R` nous utilisons `%>.%` pour relier les différentes étapes d'un
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A05La_wrangling", title = "Traitement des données", toc = "Traitement des données")`
+`r learnr("A04La_wrangling", title = "Traitement des données", toc = "Traitement des données")`
 
-```{r assign_A05Ia_transformation, echo=FALSE, results='asis'}
+```{r assign_A04Ia_transformation, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("A05Ia_transformation", part = NULL,
+  assignment("A04Ia_transformation", part = NULL,
     url = "https://github.com/BioDataScience-Course/A05Ia_transformation",
     course.ids = c(
       'S-BIOG-006' = !"A05Ia_{YY}M_transformation"),
@@ -1055,9 +1055,9 @@ Consignez vos résultats dans un document R Markdown avec une explication de vos
 
 **Vous allez maintenant planifier la récolte et collecter des données relatives à l'étude de l'obésité afin de préparer le travail du module 6.**
 
-```{r assign_A05Ga_biometry_I, echo=FALSE, results='asis'}
+```{r assign_A04Ga_biometry_I, echo=FALSE, results='asis'}
 if (exists("assignment2"))
-  assignment2("A05Ga_biometry", part = "I",
+  assignment2("A04Ga_biometry", part = "I",
     url = "https://github.com/BioDataScience-Course/A05Ga_biometry",
     course.ids = c(
       'S-BIOG-006' = !"A05Ga_{YY}M_biometry"),
@@ -1079,10 +1079,10 @@ if (exists("assignment2"))
 
 ## Récapitulatif des exercices
 
-Le module 5 que vous venez de terminer vous a permis d'apprendre à importer des données depuis différents formats et sources grâce à la fonction `read()` et de transformer un tableau de données ou le résumez à l'aide des fonctions tidy, speedy et fstat. Pour évaluer votre compréhension de cette matière vous aviez les exercices suivants à réaliser :
+Le module 4 que vous venez de terminer vous a permis d'apprendre à importer des données depuis différents formats et sources grâce à la fonction `read()` et de transformer un tableau de données ou le résumez à l'aide des fonctions tidy, speedy et fstat. Pour évaluer votre compréhension de cette matière vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 
 ##### Progression {.unnumbered}
 
-`r launch_report("05", height = 800)`
+`r launch_report("04", height = 800)`

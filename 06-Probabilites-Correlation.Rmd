@@ -1,6 +1,6 @@
 # (PART) SDD I: inférence {.unnumbered}
 
-# Probabilités & distributions {#proba}
+# Probabilités, distributions I & corrélation {#probacorr}
 
 ```{r setup, include=FALSE, echo=FALSE, message=FALSE, results='hide'}
 SciViews::R("infer")
@@ -11,13 +11,21 @@ SciViews::R("infer")
 
 -   Comprendre et être capable de calculer des probabilités
 
--   Appréhender les principales lois de distributions statistiques et leurs utilisations pratiques
+-   Appréhender des lois de distributions statistiques et leurs utilisations pratiques (distribution uniforme, binomiale, Poisson)
+
+-   Comprendre les différents niveaux d'association de deux variables numériques
+
+-   Connaître et savoir utiliser les coefficients de corrélation de Pearson, de Spearman, et de Kendall
+
+-   Pouvoir manipuler des matrices de corrélation et des corrélogrammes. Utiliser également la matrice de nuages de points comme représentation graphique complémentaire
+
+-   Maîtriser le test de corrélation
 
 ##### Prérequis {.unnumbered}
 
 Vous devez être à l'aise avec l'utilisation de R, RStudio et R Markdown. Vous avez appris à maîtriser ces outils dans les modules \@ref(intro) & \@ref(visu1).
 
-## Probabilités
+## Probabilités {#proba}
 
 La vidéo suivante vous introduit la notion de probabilité et le calcul de probabilités d'une manière plaisante à partir d'un jeu de hasard proposé par un petit chat à ses amis...
 
@@ -157,7 +165,7 @@ Le calcul se fait ensuite comme suit. Nous repérons tous les cas qui nous inté
 
 Vous noterez que l'arbre des probabilités représente, en réalité, des probabilités conditionnelles à partir du second niveau (l'arbre peut être évidemment plus complexe). Naturellement, il fonctionnera également si les évènements sont indépendants. Nous aurons simplement les mêmes probabilités reprises aux différents endroits.
 
-![Arbre de probabilités avec probabilités conditionnelles en rouge.](images/sdd1_07/probtree2.png)
+![Arbre de probabilités avec probabilités conditionnelles en rouge.](images/sdd1_06/probtree2.png)
 
 Nous connaissons déjà la probabilité conditionnelle d'avoir un résultat positif au test si la personne est malade $\mathrm{P}(positif|malade)$. C'est une donnée du problème (0.95). Maintenant, la probabilité qu'une personne soit malade si elle est positive au test $\mathrm{P}(malade|positif)$ est une information capitale ici, mais nous ne la connaissons pas. Le lien entre les deux n'est pas facile à faire. C'est grâce aux travaux du révérend **Thomas Bayes** au 18^e^ siècle que ce problème a été résolu. Les implications du **théorème de Bayes** sont énormes, car cela permet de déterminer des probabilités dites *a posteriori* (suite à l'occurrence des évènements) en fonction de connaissances *a priori* du problème.
 
@@ -203,7 +211,11 @@ $$\mathrm{P(A\, \mathrm{ou}\, B)} = \mathrm{P}(A) + \mathrm{P(B)} - \mathrm{P}(A
 
 ```
 
-<center>![Application vraiment utile du théorème de Bayes par xkcd.](https://imgs.xkcd.com/comics/seashell.png)</center>
+<center>
+
+![Application vraiment utile du théorème de Bayes par xkcd.](https://imgs.xkcd.com/comics/seashell.png)
+
+</center>
 
 ##### Pour en savoir plus {.unnumbered}
 
@@ -263,7 +275,9 @@ Nous devons soustraire le nombre de fois où les deux évènements se sont produ
 
 Dans une très grande population, voici les proportions de différents groupes sanguins :
 
-    44% O, 42% A, 10% B, 4% AB
+```         
+44% O, 42% A, 10% B, 4% AB
+```
 
 -   Quelle est la probabilité d'obtenir un individu du groupe B ? Cette question peut s'écrire : $\mathrm{P}(B)$.
 
@@ -297,7 +311,7 @@ Il s'agit d'évènements successifs **non indépendants**. En effet, le retrait 
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A07La_proba", title = "Probabilités", toc = "Calculs des probabilités")`
+`r learnr("A06La_proba", title = "Probabilités", toc = "Calculs des probabilités")`
 
 ## Lois de distributions
 
@@ -307,7 +321,11 @@ Il s'agit d'évènements successifs **non indépendants**. En effet, le retrait 
 La comparaison des probabilités théoriques et observées constitue l’un des piliers des statistiques. Le raisonnement est le suivant : si les probabilités observées sont suffisamment proches des probabilités théoriques, alors, nous pouvons considérer que les évènements sont générés selon un mécanisme identique ou proche de celui qui est à la base de la loi de distribution théorique correspondante.
 ```
 
-<center>![Même dans la vie de tous les jours, les calculs de probabilités peuvent être utiles, enfin... d\'après xkcd.](https://imgs.xkcd.com/comics/boyfriend.png)</center>
+<center>
+
+![Même dans la vie de tous les jours, les calculs de probabilités peuvent être utiles, enfin... d'après xkcd.](https://imgs.xkcd.com/comics/boyfriend.png)
+
+</center>
 
 Avant d'explorer ces lois de distributions statistiques, nous devons d'abord introduire la distinction entre **probabilité discrète** et **probabilité continue**. Une probabilité discrète est associée à une variable qualitative ou à la rigueur, à une variable continue discrète qui peut prendre un nombre fini -et généralement relativement petit- de valeurs. À chaque valeur est associé un évènement. Chaque évènement a une certaine probabilité de se produire dans un contexte donné. *Jusqu'à présent, nous n'avons traité que ce cas-là.* Par contre, une variable quantitative continue peut prendre un nombre infini de valeurs représentées généralement par l'ensemble des nombres réels. Dans ce cas, l'association d'un évènement à une valeur de la variable, et d'une probabilité à chaque évènement reste vraie en théorie. Mais en pratique, ces probabilités dites continues ne sont pas calculables par les équations étudiées jusqu'ici. Par contre, les **lois de distributions continues** permettent des calculs, moyennant une petite astuce que nous dévoilerons plus loin dans ce chapitre.
 
@@ -342,9 +360,9 @@ $$\mathrm{P}(E) = \frac{1}{n_E} = \frac{1}{\infty} = 0$$
 Dans le cas de probabilités continues, la probabilité d'un évènement en particulier est **toujours nulle**. Nous pouvons seulement calculer que l'un parmi plusieurs évènements se produise (compris dans un intervalle).
 ```
 
-La représentation graphique d'une loi de distribution continue est un outil utile pour la comprendre et vérifier ses calculs. La forme la plus courante consiste à montrer la **courbe de densité de probabilité** pour une distribution continue. Sur l'axe *X*, nous avons les **quantiles** (les valeurs observables), et sur l'axe *Y*, la densité de probabilité[^07-probabilites-distributions-1]. Par exemple, si nous constatons qu'un insecte butineur arrive sur une fleur en moyenne toutes les 4 minutes, la probabilité qu'un butineur arrive dans un intervalle de temps compris entre 0 et 4 min depuis le moment initial $t_0$ de nos observations suit une distribution uniforme continue (Fig. \@ref(fig:unif2)).
+La représentation graphique d'une loi de distribution continue est un outil utile pour la comprendre et vérifier ses calculs. La forme la plus courante consiste à montrer la **courbe de densité de probabilité** pour une distribution continue. Sur l'axe *X*, nous avons les **quantiles** (les valeurs observables), et sur l'axe *Y*, la densité de probabilité[^06-probabilites-correlation-1]. Par exemple, si nous constatons qu'un insecte butineur arrive sur une fleur en moyenne toutes les 4 minutes, la probabilité qu'un butineur arrive dans un intervalle de temps compris entre 0 et 4 min depuis le moment initial $t_0$ de nos observations suit une distribution uniforme continue (Fig. \@ref(fig:unif2)).
 
-[^07-probabilites-distributions-1]: Plus la densité de probabilité est élevée, plus les évènements dans cette région du graphique sont probables.
+[^06-probabilites-correlation-1]: Plus la densité de probabilité est élevée, plus les évènements dans cette région du graphique sont probables.
 
 ```{r unif2, echo=FALSE, fig.cap="Probabilité qu'un nouvel insecte butineur arrive dans un intervalle de 0 à 4 min si, en moyenne, un insecte arrive toutes les 4 min."}
 # Uniform distribution (density probability) with parameters:
@@ -504,7 +522,6 @@ Le snippet `.iurandom` nécessite quelques explications supplémentaires. R est 
 
 [^07-probabilites-distributions-2]: Si vous utilisez `set.seed()` prenez soin de spécifier **toujours une valeur différente** prise au hasard comme argument de la fonction ! -->
 ```
-
 ### Calculs dans R
 
 Dans R de base, pour chaque distribution statistique, quatre fonctions sont proposées qui commencent par p/q/r/d, suivi d'un diminutif pour la loi de distribution. Pour la distribution uniforme, c'est `unif`. Nous avons donc :
@@ -595,9 +612,9 @@ Les conditions particulières de cette situation sont appelées **épreuve de Be
 
 $$P(Y=j)= C^j_n \times p^j \times (1-p)^{n-j}$$
 
-Le **coefficient binomial** $C^j_n$ vaut[^07-probabilites-distributions-2] : $$C^j_n = \frac{n!}{j!(n-j)!}$$
+Le **coefficient binomial** $C^j_n$ vaut[^06-probabilites-correlation-2] : $$C^j_n = \frac{n!}{j!(n-j)!}$$
 
-[^07-probabilites-distributions-2]: Le factoriel d'un nombre $n$, noté $n!$ est $1 \times 2 \times 3 \times ... \times n$, avec $0! = 1$.
+[^06-probabilites-correlation-2]: Le factoriel d'un nombre $n$, noté $n!$ est $1 \times 2 \times 3 \times ... \times n$, avec $0! = 1$.
 
 $C^j_n$ représente le nombre de combinaisons possibles pour obtenir $j$ succès parmi $n$ essais réalisés dans un ordre quelconque. Nous pourrons aussi écrire :
 
@@ -637,17 +654,17 @@ chart(dist_binomial(size = 6, prob = 0.5)) +
 
 ## Distribution de Poisson
 
-Maintenant, nous pouvons poser la question autrement. Prenons un couple sain au hasard en Belgique, quelle est la probabilité que ce couple transmette la mucoviscidose à leur descendance ? Ne considérons pas ici les personnes elles-mêmes atteintes de la maladie qui prendront certainement des précautions particulières. Sachant qu'une personne sur 20 est porteuse du gène défectueux (hétérozygote) dans la population saine belge, la probabilité de former un couple doublement hétérozygote qui pourrait transmettre la maladie est de[^07-probabilites-distributions-3] :
+Maintenant, nous pouvons poser la question autrement. Prenons un couple sain au hasard en Belgique, quelle est la probabilité que ce couple transmette la mucoviscidose à leur descendance ? Ne considérons pas ici les personnes elles-mêmes atteintes de la maladie qui prendront certainement des précautions particulières. Sachant qu'une personne sur 20 est porteuse du gène défectueux (hétérozygote) dans la population saine belge, la probabilité de former un couple doublement hétérozygote qui pourrait transmettre la maladie est de[^06-probabilites-correlation-3] :
 
-[^07-probabilites-distributions-3]: Comme il y a la même proportion d'hommes et de femmes porteurs, nous avons 1/20 des hommes et 1/20 des femmes qui sont porteurs. Nous formons des couples au hasard en piochant un homme dans la population masculine et une femme dans la population féminine de manière indépendante. Dans ce cas, nous obtenons un couple double porteur à une fréquence de 1/20 \* 1/20 = 1/400.
+[^06-probabilites-correlation-3]: Comme il y a la même proportion d'hommes et de femmes porteurs, nous avons 1/20 des hommes et 1/20 des femmes qui sont porteurs. Nous formons des couples au hasard en piochant un homme dans la population masculine et une femme dans la population féminine de manière indépendante. Dans ce cas, nous obtenons un couple double porteur à une fréquence de 1/20 \* 1/20 = 1/400.
 
 ```{r}
 1/20 * 1/20
 ```
 
-... soit un couple sur 400. Donc, globalement, les probabilités d'avoir des enfants sains sont beaucoup plus grandes que 0.75 si nous incluons tous les couples belges de parents sains porteurs ou non. Cette probabilité est de[^07-probabilites-distributions-4] :
+... soit un couple sur 400. Donc, globalement, les probabilités d'avoir des enfants sains sont beaucoup plus grandes que 0.75 si nous incluons tous les couples belges de parents sains porteurs ou non. Cette probabilité est de[^06-probabilites-correlation-4] :
 
-[^07-probabilites-distributions-4]: Sur 400 couples, 399 ont une probabilité d'engendrer des enfants sains (porteurs hétérozygotes ou non porteurs confondus) de 100%. À cela il faut ajouter un couple sur 400 qui aura une probabilité de 75% de faire des enfants non atteints, car non homozygotes.
+[^06-probabilites-correlation-4]: Sur 400 couples, 399 ont une probabilité d'engendrer des enfants sains (porteurs hétérozygotes ou non porteurs confondus) de 100%. À cela il faut ajouter un couple sur 400 qui aura une probabilité de 75% de faire des enfants non atteints, car non homozygotes.
 
 ```{r}
 (399 * 1 + 1 * 0.75) / 400
@@ -933,14 +950,408 @@ Si quasiment tous les points sont compris dans l'enveloppe de confiance à 95%, 
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A07Lc_distri2", title = "Lois de distributions (suite)", toc = "Lois de distributions (suite)")`
+`r learnr("A07La_distri2", title = "Lois de distributions (suite)", toc = "Lois de distributions (suite)")`
 
+## Corrélation
+
+### Association de deux variables
+
+Nous pouvons décrire l'étendue d'une variable numérique à l'aide de la **variance** qui, pour rappel, est la somme des écarts à la moyenne divisée par le nombre de degrés de liberté (*n* dans le cas d'une population et *n* - 1 dans le cas d'un échantillon).
+
+$$var_x = S^2_x = \frac{\sum_{i = 1}^n (x_i - \bar{x})^2}{n-1}$$
+
+L'écart type, noté $\sigma$ dans le cas d'une population et $S$ dans le cas d'un échantillon, est la racine carrée de la variance. C'est une autre mesure de la dispersion d'une variable numérique. Donc :
+
+$$S_x = \sqrt{S^2_x}$$
+
+Plus la variance est élevée, plus les observations sont dispersées autour de la moyenne. Lorsque nous avons affaire à deux variables numériques, une représentation de *l'une par rapport à l'autre* se fait naturellement à l'aide d'un graphique en nuage de points. Voici trois situations fictives différentes (*y1*, *y2* et *y3* en fonction de *x*) :
+
+```{r, echo=FALSE, results='hide', fig.width=9, fig.height=3}
+set.seed(653643)
+df <- dtx(
+  x  =  rnorm(100),
+  y1 = x + rnorm(100, sd = 0.2),
+  y2 = rnorm(100),
+  y3 = -x + rnorm(100, sd = 0.2))
+pl <- list(
+  chart(data = df, y1 ~ x) + geom_point(),
+  chart(data = df, y2 ~ x) + geom_point(),
+  chart(data = df, y3 ~ x) + geom_point()
+)
+combine_charts(pl, ncol = 3L)
+```
+
+Nous pouvons observer que la **forme du nuage de points** diffère entre ces trois situations. Le graphique **A** est allongé le long d'une oblique. Cela signifie que, lorsque des valeurs de *x* sont faibles, les valeurs de *y1* sont faibles aussi. Lorsque les valeurs de *x* sont élevées, celles de *y1* tendent à l'être également. Nous avons plutôt une **proportionnalité** entre les valeurs observées pour *x* et pour *y1*. Dans le graphique **C** de droite, c'est l'inverse. Nous avons une **proportionnalité inverse** entre *x* et *y3*. Dans le graphique **B** du centre, le nuage de point ne s'étire pas dans une direction oblique particulière. Nous dirons ici qu'il n'y a pas d'association entre *x* et *y2*. Ce type d'association entre deux variables numérique est un élément important dans notre analyse, car un nuage de points qui s'allonge le long d'une direction oblique sur le graphique est signe d'un mécanisme sous-jacent responsable de cette association (mais attention à ne pas conclure directement à un mécanisme de cause à effet direct, voir plus loin). Il serait donc souhaitable de pouvoir quantifier le degré d'une telle association.
+
+Nous pouvons définir la **covariance** comme étant une mesure de la variance dans le même sens pour toutes les paires de valeurs observées entre nos deux variables numériques. Elle se définit de manière très similaire à la variance, mais fait naturellement intervenir simultanément les observations de *x* et *y*, ainsi que leurs moyennes respectives :
+
+$$cov_{x,y} = \frac{\sum_{i = 1}^n (x_i - \bar{x}) \cdot (y_i - \bar{y})}{n-1}$$
+
+Voyons ce que cela donne dans notre exemple fictif contenu dans un data frame nommé `df` :
+
+```{r}
+cov(df$x, df$y1)
+cov(df$x, df$y2)
+cov(df$x, df$y3)
+```
+
+La covariance (fonction `cov()` dans R) quantifie effectivement l'association entre les deux variables *x* et *y*. Nous avons une valeur positive entre *x* et *y1*, faible et se rapprochant de zéro entre *x* et *y2*, et négative pour *x* et *y3* d'une proportionnalité inverse. Cette mesure n'est cependant pas *normée*, c'est-à-dire qu'elle peut varier vers des valeurs très grandes ou très petites en fonction des données. Donc, pour une même forme de nuage de points, la valeur dépendra, par exemple, des unités de mesure choisies. Si je transforme les données de mon jeu fictif `df` en les multipliant par dix pour simuler un changement d'unité dans `df2`, j'obtiens :
+
+```{r}
+df2 <- df * 10
+cov(df2$x, df2$y1)
+cov(df2$x, df2$y2)
+cov(df2$x, df2$y3)
+```
+
+C'est embêtant, puisque la forme du nuage de points n'a, lui, pas changé du tout.
+
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(127, height = 400, toc = "Covariance entre 2 variables")`
+
+Le **coefficient de corrélation de Pearson**, noté *r*, est une autre mesure qui est *normée* de telle façon qu'il prenne la valeur +1 pour une proportionnalité directe parfaite (les points sont strictement alignés le long d'une droite) et -1 lorsque la proportionnalité est inverse parfaite (et toujours 0 en cas de non-association).
+
+$$cor_{x,y} = r_{x,y} = \frac{cov_{x,y}}{\sqrt{S^2_x \cdot S^2_y}} = \frac{cov_{x,y}}{\sqrt{S^2_x} \cdot \sqrt{S^2_y}} = \frac{cov_{x,y}}{S_x \cdot S_y}$$
+
+C'est grâce à la division par le produit des écarts types de *x* et *y* que nous arrivons à normer correctement le coefficient. Celui-ci peut se calculer à l'aide de la fonction `cor()` dans R. Cela donne :
+
+```{r}
+cor(df$x, df$y1)
+cor(df2$x, df2$y1)
+cor(df$x, df$y2)
+cor(df2$x, df2$y2)
+cor(df$x, df$y3)
+cor(df2$x, df2$y3)
+```
+
+Cette fois-ci, nous obtenons la même valeur pour *r* que le calcul se fasse à partir de `df` ou de `df2`. De plus les valeurs absolues très proches de 1 (0,978 dans le cas **A** et 0,980 dans le cas **C**) suggèrent que la proportionnalité est très forte. C'est effectivement ce que nous observons sur les graphiques.
+
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(128, height = 400, toc = "Avantage du coefficient de corrélation de Pearson")`
+
+Faites attention à deux points importants.
+
+1.  Le coefficient de corrélation de Pearson mesure une association *linéaire* entre deux variables numériques. La figure suivante montre quelques nuages de points et les valeurs de *r* associées.
+
+![Exemples de nuages de points et leurs coefficients de corrélation de Pearson associés, issu de <https://commons.wikimedia.org/w/index.php?curid=15165296>.](images/sdd1_12/correlation-examples.png)
+
+2.  L'existence d'une corrélation n'implique pas forcément que la variation d'une des deux variables est le résultat de la variation de l'autre (cause à effet). Il se peut, par exemple, qu'il y ait une troisième variable non prise en compte qui soit à l'origine de la variation, directement ou indirectement des deux autres. Une variable particulièrement pernicieuse de ce point de vue est le temps. À peu près tout ce qu'on étudie en biologie est variable dans le temps. Et donc, bien souvent, il existe des corrélations entre des variables qui n'ont rien à voir l'une avec l'autre lorsqu'elles sont toutes deux mesurées à différents moments, ce qu'on appelle des séries temporelles ou chronologiques. La vidéo suivante apporte d'autres éclaircissements sur ce sujet, sur base d'un exemple tiré de la littérature scientifique.
+
+```{r, echo=FALSE}
+vembedr::embed_youtube("4EWKAoKGAyg", width = 770, height = 433)
+```
+
+L'association entre deux variables numériques peut ainsi s'envisager selon trois niveaux impliquant des hypothèses de plus en plus fortes quant aux mécanismes responsables de cette association :
+
+1.  La **corrélation**. Ici les deux variables numériques sont sur le même pied d'égalité. Nous nous bornons à *observer* l'association sans élaborer plus d'explication sur son existence. C'est le coefficient de corrélation qui la quantifie.
+
+2.  La **relation**. Ici, nous modélisons l'association, par exemple par une droite, dite **droite de régression**. Nous verrons cet outil très important des statistiques et de la science des données dans la partie modélisation du cours de Science des Données Biologiques II. Dans ce cas, nous considérons qu'un mécanisme sous-jacent est responsable de la forme du nuage de points, et nous considérons qu'une fonction mathématique peut être utilisée pour prédire les valeurs d'une variable connaissant celles de l'autre.
+
+3.  La **causalité**. En plus de la relation, nous considérons que c'est la variation d'une des deux variables qui est **à l'origine**, directement ou indirectement de la variation de l'autre. Une relation de cause à effet ne peut être démontrée de manière sûre que par l'expérience, comme expliqué dans la vidéo plus haut.
+
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(126, height = 400, toc = "Association de 2 variables")`
+
+#### Matrice de corrélation
+
+Dans un cas multivarié (plus de deux variables), nous pouvons toujours étudier les associations entre variables numériques à l'aide de *r* à condition de calculer ces descripteurs statistiques pour tous les couples de variables considérées deux à deux. Pour *N* variables, nous rassemblerons tous ces calculs dans une matrice carrée *N* par *N* qui croise tous les cas deux à deux possibles dans un même tableau.
+
+Prenons un exemple à trois variables. Le jeu de données `trees` rassemble la mesure du diamètre, de la hauteur et du volume de bois de cerisiers noirs. La matrice de corrélation peut se calculer à l'aide de `cor()` dans R, ou mieux, à l'aide de `correlation()` dans `SciViews::R`.
+
+```{r}
+trees <- read("trees", package = "datasets")
+tabularise$headtail(trees)
+trees_cor <- correlation(trees)
+trees_cor |> tabularise()
+```
+
+Vous noterez que :
+
+-   Les éléments sur la diagonale de la matrice de corrélation valent toujours 1. En effet, il s'agit de la corrélation d'une variable en fonction d'elle-même, or
+
+$$r_{x,x} = 1$$
+
+-   Le triangle inférieur et le triangle supérieur (de part et d'autre de la diagonale) sont identiques, ou si vous préférez, sont comme le reflet dans un miroir l'un de l'autre. C'est parce que le coefficient de corrélation de *x* et *y* est toujours le même que celui de *y* et *x*.
+
+$$r_{x,y} = r_{y,x}$$
+
+Pour ces raisons seul le triangle inférieur (ou supérieur) est informatif. Le reste (diagonale et autre triangle) est trivial ou répétitif. Vous trouverez parfois une représentation de la matrice de confusion sous la forme uniquement du triangle inférieur. La fonction `summary()` effectue une telle représentation, et simplifie encore la représentation pour aider à trouver les corrélations importantes dans un gros tableau.
+
+```{r}
+summary(trees_cor)
+```
+
+Voyez la page d'aide de `correlation()` pour plus d'information via `?correlation`. Vous pouvez passer un data frame à la fonction, ou encore, utiliser `correlation(data = df, ~ var1 + var2 + var3)` avec une formule pour spécifier les variables à traiter. L'argument `use =` permet de spécifier quoi faire en cas de valeurs manquantes. Si vous indiquez `"complete.obs"`, toute ligne du tableau contenant au moins une valeur manquante sera éliminée avant le calcul. Avec `"pairwise.complete.obs"` les éliminations de valeurs manquantes se font pour chaque paire de variables individuellement des autres.
+
+Il existe aussi des représentations graphiques spécialisées, appelées **corrélogrammes** pour visualiser les coefficients de corrélations dans un cas multivarié. La fonction `plot()` appliquée à notre objet **Correlation** en offre une version simple.
+
+```{r}
+plot(trees_cor)
+```
+
+La matrice est représentée par des ellipses de plus en plus allongées au fur et à mesure que *r* se rapproche de 1. Une couleur bleue est utilisée pour les corrélations positives et une couleur rouge pour les corrélations négatives (mais vous pouvez aussi choisir d'autres couleurs). Ici, toutes les corrélations sont positives. Sur le jeu de données zooplancton, nous pouvons réaliser un corrélogramme plus intéressant qui illustre mieux la diversité de cette représentation graphique. Considérons, à titre d'exemple, les variables contiguës `size` jusqu'à `density` (que l'on peut indiquer par `size:density` dans un `sselect()`) :
+
+```{r}
+zoo <- read("zooplankton", package = "data.io")
+zoo %>.%
+  sselect(., size:density) %>.%
+  correlation(.) ->
+  zoo_cor
+plot(zoo_cor)
+```
+
+Vous noterez que les variables `elongation` et `compactness` sont redondantes (*r* = 1). De plus, les données le long de la diagonale et sur le triangle supérieur n'apportent rien. Nous pouvons aussi bien décider de ne représenter que le triangle inférieur sur notre corrélogramme en ajoutant un argument `type = "lower"`.
+
+```{r}
+plot(zoo_cor, type = "lower")
+```
+
+#### Importance des graphiques
+
+```{block, type='warning'}
+Faites bien attention avec le coefficient de corrélation, la matrice de corrélation et le corrélogramme, car des formes de nuages de points complexes peuvent se solder par des valeurs peu indicatives !
+```
+
+Un jeu de données artificiel appelé "quartet d'Anscombe" montre très bien comment des données très différentes peuvent avoir même moyenne, même variance et même coefficient de corrélation. Ce n'est qu'avec un graphique en nuage de points (ou matrice de nuages de points, voir plus loin) qu'il est possible de détecter le problème.
+
+```{r}
+anscombe <- read("anscombe", package = "datasets")
+head(anscombe)
+```
+
+Séparons les quatre variables *x* d'un côté et les quatre variables *y* de l'autre.
+
+```{r}
+ans_x <- anscombe[, 1:4]
+ans_y <- anscombe[, 5:8]
+```
+
+````{=html}
+<!--- G.E.
+Que valent les moyennes^[La fonction `lapply()` distribue la fonction donnée en argument sur tous les éléments du tableau, et calcule ici la moyenne successivement pour les 4 variables.], les variances et les coefficients de corrélation\ ?
+
+```{r, eval=FALSE}
+# Moyennes des X
+lapply(ans_x, mean)
+# Variance des X
+lapply(ans_x, var)
+# Moyenne des Y
+lapply(ans_y, mean)
+# Variance des Y
+lapply(ans_y, var)
+```
+
+--->
+````
+
+Que valent les moyennes, les variances, les écarts-types pour les quatre variables *x* ?
+
+```{r}
+fmean(ans_x)
+fvar(ans_x)
+fsd(ans_x)
+```
+
+Nous voyons que les quatre variables ont identiquement la même moyenne, la même variance et le même écart-type.
+
+Que valent les moyennes, les variances, les écarts-types pour les quatre variables *y* ?
+
+```{r}
+fmean(ans_y)
+fvar(ans_y)
+fsd(ans_y)
+```
+
+À nouveau, c'est les mêmes valeurs pour les quatre séries, aux arrondis près. Que donnent les coefficients de corrélation[^06-probabilites-correlation-5] ?
+
+[^06-probabilites-correlation-5]: Ici, nous croisons les *x* et les *y*, et extrayons la diagonale de ce tableau qui correspond aux coefficients entre *x1* et *y1*, entre *x2* et *y2*, entre *x3* et *y3* et entre *x4* et *y4*, respectivement.
+
+```{r}
+diag(correlation(ans_x, ans_y))
+```
+
+Nous avons à nouveau quatre fois la même valeur... et pourtant :
+
+```{r}
+pl <- list(
+  chart(data = anscombe, y1 ~ x1) + geom_point(),
+  chart(data = anscombe, y2 ~ x2) + geom_point(),
+  chart(data = anscombe, y3 ~ x3) + geom_point(),
+  chart(data = anscombe, y4 ~ x4) + geom_point()
+)
+combine_charts(pl)
+```
+
+Nous voyons que ces quatre paires de variables n'ont **rien à voir les unes avec les autres !** Il est même possible d'aller encore plus loin, voir le [datasaurus dozen](https://blog.revolutionanalytics.com/2017/05/the-datasaurus-dozen.html), ou encore [ici](https://www.autodeskresearch.com/publications/samestats).
+
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(129, height = 400, toc = "Variables les plus corrélées")`
+
+#### Matrice de nuages de points
+
+La matrice de nuages de points part du même principe que la matrice de corrélation ou que le corrélogramme : représenter plusieurs variables deux à deux selon une grille *N* par *N* pour *N* variables numériques. Ici, il s'agit de représenter des **nuages de points** deux à deux. Nous venons de voir pourquoi c'est important de le faire en complément des autres outils dans le cadre de notre exploration de l'association entre ces variables. Pour réaliser ce graphique, nous pouvons utiliser `ggscatmat()` du package {GGally} :
+
+<!-- Dans la SciViews Box, un snippet est disponible dans le menu `charts: multivariate` à partir de `.cm`, entrée de menu `multivariate X-Y scatterplot`. -->
+
+```{r}
+GGally::ggscatmat(trees, 1:3)
+```
+
+Comme dans le cas de la matrice de corrélation, les graphiques en nuage de points sur la diagonale ne seraient pas très utiles puisqu'ils représenteraient une variable par rapport à elle-même. Ils sont donc remplacés par des graphes de densité montrant la répartition des données pour chaque variable considérée individuellement. Sur le triangle supérieur, ce sont les coefficients de corrélation de Pearson qui sont indiqués. Sur le triangle inférieur, les différentes possibilités de nuages de points deux à deux sont représentées. La variable sur l'axe des abscisses se lit dans la colonne au-dessus et la variable représentée sur l'axe des ordonnées se lit dans la ligne à droite. Par exemple, le graphique en bas à gauche correspond au diamètre en abscisse et au volume en ordonnée. Cette représentation graphique est donc complémentaire au corrélogramme.
+
+#### Matrice de variances-covariances
+
+De même que nous pouvons calculer une matrice de corrélations, nous pouvons calculer une matrice de covariances, mais sachant que $cov_{x,x} = var_x$, nous avons également les variances le long de la diagonale. Pour cette raison, nous appelons ce tableau, une **matrice de variances-covariances**. Par exemple, pour le jeu de données `trees`, cela donne :
+
+```{r}
+cov(trees) |> tabularise()
+```
+
+Comme ces descripteurs statistiques ne sont pas normés, ils sont plus difficiles à interpréter. Nous préférons donc la matrice de corrélations pour étudier l'association entre plusieurs variables numériques. Néanmoins, la matrice de variances-covariances interviendra plus tard dans d'autres traitements statistiques et il est utile de la connaitre (par exemple, dans le cadre de l'ACP que nous étudierons en Science des Données Biologiques II).
+
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(130, height = 400, toc = "Matrice de variances-covariances")`
+
+#### Corrélations de Spearman et Kendall
+
+Le coefficient de corrélation de Pearson représente une corrélation **linéaire**. Cependant, il se peut que vous soyez intéressé par une corrélation **non linéaire**, un nuage de points qui s'allonge le long d'une courbe. Dans ce cas, vous pouvez utiliser soit le coefficient $\rho$ de Spearman, soit le $\tau$ de Kendall.
+
+-   Le $\rho$ de Spearman est le même calcul que le coefficient de Pearson, mais appliqué sur les données préalablement transformées en rangs. Sa valeur vaudra +1 ou -1 lorsque les points s'alignent parfaitement le long de n'importe quelle fonction monotone croissante ou décroissante.
+
+-   Le $\tau$ de Kendall utilise un calcul selon la même logique que les tests de Wilcoxon ou de Kruskal-Wallis. Nous allons ici compter le nombre de paires concordantes $n_c$ définies par $x_i < x_j\ \mathrm{et}\ y_i < y_j$, ou $x_i > x_j\ \mathrm{et}\ y_i > y_j$. Nous compterons aussi le nombre de paires discordantes $n_d$ telles que $x_i < x_j\ \mathrm{et}\ y_i > y_j$, ou $x_i > x_j\ \mathrm{et}\ y_i < y_j$. Enfin, si $x_i = x_j\ \mathrm{et}\ y_i = y_j$, la paire n'est pas comptabilisée. Nous avons alors pour un échantillon de *n* observations des variables numériques *x* et *y* :
+
+$$\tau_{x,y} = \frac{n_c - n_d}{\frac{1}{2} \cdot n \cdot (n - 1)}$$
+
+En pratique dans R, les fonctions `cor()` et `correlation()` peuvent être utilisées, mais en spécifiant `method = "spearman"` ou `method = "kendall"`. Pour `trees`, cela donne :
+
+```{r}
+correlation(trees, method = "spearman")
+```
+
+```{r}
+correlation(trees, method = "kendall")
+```
+
+... à comparer avec la matrice de corrélation de Pearson :
+
+```{r}
+correlation(trees) # Équivalent à method = "pearson"
+```
+
+Les valeurs obtenues diffèrent, mais les tendances restent similaires ici. Les différences sont d'autant plus importantes que le nuage de points est curvilinéaire. À vous de bien choisir votre coefficient en fonction de ce que vous recherchez, une association linéaire (Pearson) ou pas (Spearman, le plus utilisé, ou Kendall éventuellement).
+
+#### Test de corrélation
+
+C'est bien beau de pouvoir quantifier une corrélation, mais à partir de quand est-elle *significative* ? En d'autres termes, nous voudrions déterminer si l'allongement du nuage de points peut être fortuit (par le biais de l'échantillonnage aléatoire) ou non. Il existe un test d'hypothèse qui répond à cette question, avec une version pour chacun des trois coefficients de corrélation, *r* de Pearson, $\rho$ de Spearman, et $\tau$ de Kendall. Pour *r* de Pearson, nous aurons les hypothèses suivantes :
+
+-   $H_0\ :\ r = 0$
+-   $H_1\ :\ r \neq 0$
+
+Il existe aussi des variantes unilatérales à gauche ($H_1\ :\ r < 0$) ou à droite ($H_1\ :\ r > 0$) dans le cas où nous aurions des indications que l'association ne peut qu'être de type proportionnalité inverse ou directe, respectivement.
+
+Prenons l'exemple de *r* pour les deux variables les plus corrélées dans `trees` : `diameter` et `volume`. Notez la forme particulière de la formule à utiliser. Comme les deux variables sont sur le même pied d'égalité, il n'y a pas de raison d'en placer une à gauche du signe `~` dans la formule. On l'écrit alors `~ var1 + var2`. Choisissons notre seuil $\alpha$ à 5% avant d'effectuer le test, ensuite, considérons un test unilatéral à droite avec `alternative = "greater"` puisque le volume de bois ne peut qu'augmenter avec le diamètre de l'arbre (relation inverse non crédible ici).
+
+```{r}
+cor.test(data = trees, ~ diameter + volume, alternative = "greater")
+```
+
+Comme la valeur *p* est inférieure à $\alpha$, nous pouvons rejeter $H_0$ et conclure que le coefficient de corrélation entre le diamètre et le volume est significativement positif au seuil $\alpha$ de 5% (*r* = 0.967, ddl = 29, valeur *p* \<\< 0.001). On s'en doutait avec un coefficient aussi proche de 1. Mais qu'en est-il pour l'association entre le diamètre et la hauteur ?
+
+```{r}
+cor.test(data = trees, ~ diameter + height, alternative = "greater")
+```
+
+Elle est, elle aussi, significative au seuil $\alpha$ de 5%. La valeur *p* vaut ici un peu plus de 0,1%. Que donnerait un test de Spearman sur ces mêmes variables ?
+
+```{r}
+cor.test(data = trees, ~ diameter + height,
+  alternative = "greater", method = "spearman")
+```
+
+Le test nous avertit qu'en présence d'ex aequo, le calcul n'est qu'approchant. Ici aussi, nous rejetons $H_0$. Enfin, pour comparaison (en pratique, on ne fait pas systématiquement tous les tests, mais on choisit celui qui est le plus adéquat), que donnerait un test de Kendall ?
+
+```{r}
+cor.test(data = trees, ~ diameter + height,
+  alternative = "greater", method = "kendall")
+```
+
+Même remarque concernant les ex aequo et valeur *p* très similaire ici à celle du test de Spearman.
+
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(131, height = 400, toc = "Test de corrélation")`
+
+`r learnr("A06Lc_correlation", title = "Association de deux variables", toc = "Association de deux variables")`
+
+```{r assign_A06Ia_correlation_I, echo=FALSE, results='asis'}
+if (exists("assignment"))
+  assignment("A06Ia_correlation", part = "I",
+    url = "https://github.com/BioDataScience-Course/A12Ia_correlation",
+    course.ids = c(
+      'S-BIOG-027' = !"A12Ia_{YY}M_correlation"),
+    course.urls = c(
+      'S-BIOG-027' = "https://classroom.github.com/a/..."),
+    course.starts = c(
+      'S-BIOG-027' = !"{W[35]+1} 13:00:00"),
+    course.ends = c(
+      'S-BIOG-027' = !"{W[37]+1} 23:59:59"),
+    term = "Q2", level = 3,
+    toc = "Association entre des variables")
+```
+
+````{=html}
+<!--
+**Finalisez maintenant votre gros projet transmodule sur `human_health` en y ajoutant un test de corrélation et en terminant le rapport.**
+
+```{r assign_A06Ga_human_health_V, echo=FALSE, results='asis'}
+if (exists("assignment2"))
+  assignment2("A08Ga_human_health", part = "V",
+    url = "https://github.com/BioDataScience-Course/A08Ga_human_health",
+    course.ids = c(
+      'S-BIOG-027' = !"A08Ga_{YY}M_human_health"),
+    course.urls = c(
+      'S-BIOG-027' = "https://classroom.github.com/a/..."),
+    course.starts = c(
+      'S-BIOG-027' = !"{W[25]+1} 13:00:00"),
+    course.ends = c(
+      'S-BIOG-027' = !"{W[37]+1} 23:59:59"),
+    term = "Q2", level = 4, n = 4,
+    toc = "Biométrie humaine, part V")
+```
+
+-->
+````
+
+```{=html}
+<!-- {r assign_A10Ga_urchin_VI, echo=FALSE, results='asis'}
+if (exists("assignment2"))
+  assignment2("A10Ga_urchin", part = "VI",
+    url = "https://github.com/BioDataScience-Course/A03Ga_urchin",
+    course.ids = c(
+      'S-BIOG-027' = !"A03Ga_{YY}M_urchin", # TODO: how to account it in Q2???
+      'S-BIOG-921' = !"A03Ga_{YY}C_urchin"),
+    course.urls = c(
+      'S-BIOG-027' = "https://classroom.github.com/a/...", 
+      'S-BIOG-921' = "https://classroom.github.com/g/..."),
+    course.starts = c(
+      'S-BIOG-027' = !"{W[29]+1} 13:00:00"),
+    course.ends = c(
+      'S-BIOG-027' = !"{W[37]+1} 23:59:59"),
+    term = "Q2", level = 4, n = 2,
+    toc = "Biométrie de l'oursin violet, part VI")
+-->
+```
 ## Récapitulatif des exercices
 
-Vous venez de terminer le module 7. Ce module vous a permis d'apprendre les bases des probabilités et les principales lois de distribution. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
+Vous venez de terminer le module 6. Ce module vous a permis d'apprendre les bases des probabilités et les principales lois de distribution. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 
 ##### Progression {.unnumbered}
 
-`r launch_report("07", height = 800)`
+`r launch_report("06", height = 800)`

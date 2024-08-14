@@ -1,4 +1,4 @@
-# Test Chi carré {#chi2}
+# Distribution & Test Chi carré {#districhi2}
 
 ```{r setup, include=FALSE, echo=FALSE, message=FALSE, results='hide'}
 SciViews::R("infer", lang = "fr")
@@ -9,6 +9,8 @@ SciViews::R("infer", lang = "fr")
 Dans ce module, nous entrons dans le monde de l'inférence statistique et des tests d'hypothèses qui nous permettront de répondre à des questions biologiques sur base de données empiriques malgré une incertitude inévitable (hasard de l'échantillonnage, variabilité individuelle, erreurs de mesure ...).
 
 ##### Objectifs {.unnumbered}
+
+-   Appréhender des lois de distributions statistiques et leurs utilisations pratiques (distribution normale, log-normale)
 
 -   Appréhender l'inférence statistique
 
@@ -22,7 +24,11 @@ Dans ce module, nous entrons dans le monde de l'inférence statistique et des te
 
 Les probabilités et lois de distributions statistiques vues au module \@ref(proba) doivent être comprises avant d'attaquer cette section.
 
-## Échantillonnage
+## Distributions continues {#distri2}
+
+## Test Chi carré {#chi2}
+
+### Échantillonnage
 
 Nous avons déjà abordé cette question dans le chapitre 6. Si nous pouvions mesurer **tous** les individus d'une population à chaque fois, nous n'aurions pas besoin des statistiques. Mais ce n'est pratiquement jamais possible. Tout d'abord, le nombre d'individus est potentiellement très grand. Le travail nécessaire risque alors d'être démesuré. Afin de limiter les mesures à un nombre raisonnable de cas, nous effectuons un **échantillonnage** qui consiste à prélever un petit sous-ensemble de taille $N$ donné depuis la population de départ. Il existe différentes stratégies d'échantillonnage, que nous avons déjà abordées.
 
@@ -55,7 +61,7 @@ Avant de vous lancer dans l'inférence statistique, assurez-vous d'avoir effectu
 
 3.  Vous avez effectué une analyse exploratoire des données. Vous avez représenté les données à l'aide de graphiques appropriés et vous avez interprété ces graphiques afin de comprendre ce que le jeu de données contient. Vous avez également résumé les données sous forme de tableaux synthétiques et vous avez, si nécessaire, remanié et nettoyé vos données.
 
-## Test d'hypothèse
+### Test d'hypothèse
 
 Le test d'hypothèse ou test statistique est l'outil le plus simple pour répondre à une question par l'inférence statistique. Il s'agit ici de réduire la question à sa plus simple expression en la réduisant à deux **hypothèses** contradictoires (en gros, la réponse à la question est soit "oui", soit "non" et rien d'autre).
 
@@ -68,11 +74,11 @@ Les deux hypothèses ne sont pas symétriques. Notre intention est de **rejeter*
 
 `r h5p(83, height = 400, toc = "Hypothèse nulle")`
 
-### Becs croisés des sapins
+#### Becs croisés des sapins
 
 Tout cela reste très abstrait. Prenons un exemple concret simple. Le bec-croisé des sapins *Loxia curvirostra* Linné 1758 est un passereau qui a la particularité d'avoir un bec dont les deux parties se croisent, ce qui donne un outil particulièrement adapté pour extraire les graines de conifères dont il se nourrit.
 
-![Bec-croisés des sapins mâles montrant les deux variétés (bec croisé à gauche ou à droite). Photo : Elaine R. Wilson (license CC BY-SA 3.0).](images/sdd1_08/red-crossbills-male.jpg)
+![Bec-croisés des sapins mâles montrant les deux variétés (bec croisé à gauche ou à droite). Photo : Elaine R. Wilson (license CC BY-SA 3.0).](images/sdd1_07/red-crossbills-male.jpg)
 
 Comme des individus à bec croisé à gauche et d'autres à bec croisé à droite se rencontrent dans la même population, Groth (1992) a comptabilisé les deux types dans un échantillon aléatoire et représentatif de plus de 3000 oiseaux. Il a obtenu le tableau suivant :
 
@@ -101,11 +107,11 @@ Les scientifiques pensent que les variétés gauches et droites se rencontrent a
 
 Pouvons-nous rejeter $H_0$ ici ?
 
-### Test Chi^2^ univarié
+#### Test Chi^2^ univarié
 
 Le test Chi^2^ (ou $\chi^2$) de Pearson est un test d'hypothèse qui permet de comparer des **effectifs observés** notés $a_i$ à des **effectifs théoriques** notés $\alpha_i$ sous l'hypothèse nulle pour les différents niveaux $i$ allant de 1 à $n$ d'une variable qualitative (version dite univariée du test). À noter que par rapport à la définition des hypothèses ci-dessus, ce ne sont **pas** les probabilités qui sont testées, mais les effectifs.
 
-##### Conditions d'application {.unnumbered}
+###### Conditions d'application {.unnumbered}
 
 Tout test d'hypothèse impose des **conditions d'application** qu'il faudra vérifier avant d'effectuer le test. Pour le test $\chi^2$, ce sont :
 
@@ -115,7 +121,7 @@ Tout test d'hypothèse impose des **conditions d'application** qu'il faudra vér
 
 Ces conditions d'application sont bien rencontrées ici.
 
-##### Réalisation du test Chi^2^ dans R {.unnumbered}
+###### Réalisation du test Chi^2^ dans R {.unnumbered}
 
 Dans R, le test du $\chi^2$ est réalisé facilement à l'aide de la fonction `chisq.test()`. Voici ce que cela donne et comment on l'interprète :
 
@@ -140,7 +146,7 @@ L'exécution de ce code nous donne un court rapport avec :
 
 Souvent en biologie, on choisi $\alpha$ = 5%, mais dans les cas où nous souhaitons avoir plus de "certitude" dans notre réponse, nous pouvons aussi choisir un seuil plus restrictif de 1%, voire de 0,1%. Encore une fois, les explications sont détaillées ci-dessous.
 
-##### Explications détaillées {.unnumbered}
+###### Explications détaillées {.unnumbered}
 
 Voici comment ce test se construit. *Ces détails sont fournis pour vous aider à comprendre les calculs réalisés, mais en pratique, vous ne devez pas les faire vous-même : vous utiliser simplement `chisq.test()` comme ci-dessus* Notre tableau de contingence à simple entrée `crossbill_tab` contient nos $a_i$. Nous devons donc calculer quels sont les effectifs théoriques $\alpha_i$. Le nombre total d'oiseaux observés est :
 
@@ -165,17 +171,17 @@ $$\chi^2_\mathrm{obs} = \sum_{i=1}^n\frac{(a_i - \alpha_i)^2}{\alpha_i}$$
 
 Notez que cette statistique vaut zéro lorsque tous les $a_i$ sont strictement égaux aux $\alpha_i$. Dans tous les autres cas, des termes positifs (le carré de différences est toujours une valeur positive) apparaissent. Donc la statistique $\chi^2$ est d'autant plus grande que les observations s'éloignent de la théorie.
 
-Calculons $\chi^2_\mathrm{obs}$ dans notre cas[^08-test-chi2-1] :
+Calculons $\chi^2_\mathrm{obs}$ dans notre cas[^07-distributions-chi2-1] :
 
-[^08-test-chi2-1]: Faites également le calcul manuellement à la calculatrice pour vérifier que vous avez bien compris.
+[^07-distributions-chi2-1]: Faites également le calcul manuellement à la calculatrice pour vérifier que vous avez bien compris.
 
 ```{r}
 (chi2_obs <- sum((crossbill_tab - alpha_i)^2 / alpha_i))
 ```
 
-Pour répondre à la question, il nous faut une loi de distribution statistique qui permette d'associer une probabilité au quantile $\chi^2_\mathrm{obs}$ sous $H_0$. C'est là que le statisticien Karl Pearson vient à notre secours. Il a, en effet, modélisé la distribution statistique du $\chi^2$. La loi du même nom admet un seul paramètre, les **degrés de liberté** (ddl) qui sont égaux au nombre de niveaux de la variable facteur étudiée $n$ moins un. Ici, ddl = 2 - 1 = 1. La Fig. \@ref(fig:chi2plot) représente la densité de probabilité d'une loi $\chi^2$ typique[^08-test-chi2-2]. C'est une distribution qui démarre à zéro, passe par un maximum et est asymptotique horizontale à $+\infty$.
+Pour répondre à la question, il nous faut une loi de distribution statistique qui permette d'associer une probabilité au quantile $\chi^2_\mathrm{obs}$ sous $H_0$. C'est là que le statisticien Karl Pearson vient à notre secours. Il a, en effet, modélisé la distribution statistique du $\chi^2$. La loi du même nom admet un seul paramètre, les **degrés de liberté** (ddl) qui sont égaux au nombre de niveaux de la variable facteur étudiée $n$ moins un. Ici, ddl = 2 - 1 = 1. La Fig. \@ref(fig:chi2plot) représente la densité de probabilité d'une loi $\chi^2$ typique[^07-distributions-chi2-2]. C'est une distribution qui démarre à zéro, passe par un maximum et est asymptotique horizontale à $+\infty$.
 
-[^08-test-chi2-2]: Les fonctions qui permettent les calculs relatifs à la distribution $\chi^2$ dans R sont `<x>chisq()`. Leur utilisation est similaire à celle des distributions vues au module \@ref(proba).
+[^07-distributions-chi2-2]: Les fonctions qui permettent les calculs relatifs à la distribution $\chi^2$ dans R sont `<x>chisq()`. Leur utilisation est similaire à celle des distributions vues au module \@ref(proba).
 
 <!-- , et les snippets correspondants dans la SciViews Box sont disponibles à partir de `.ic` -->
 
@@ -292,9 +298,9 @@ Dans notre exemple, nous pouvons donc rejeter $H_0$ et nous dirons que **la prob
 ```
 ### Effet de l'effectif étudié
 
-En inférence, la qualité des données (échantillons *représentatifs*) est importante, mais la quantité aussi. **Plus vous pourrez mesurer d'individus, mieux c'est.** Par contre, dès que la taille de l'échantillon (ici, l'effectif total mesuré $N$) est suffisante pour rejeter $H_0$, vous n'avez plus besoin d'augmenter la taille de votre échantillon[^08-test-chi2-3]. Voyons l'effet de la taille de l'échantillon sur l'étude des becs-croisés des sapins. Nous n'avons pas besoin d'un effectif plus grand que celui mesuré, car nous rejetons $H_0$ ici. Qu'aurait donné notre test $\chi^2$, par contre, si l'auteur avait mesuré disons 10 fois moins d'oiseaux, les proportions restant par ailleurs identiques entre becs-croisés à gauche et à droite ?
+En inférence, la qualité des données (échantillons *représentatifs*) est importante, mais la quantité aussi. **Plus vous pourrez mesurer d'individus, mieux c'est.** Par contre, dès que la taille de l'échantillon (ici, l'effectif total mesuré $N$) est suffisante pour rejeter $H_0$, vous n'avez plus besoin d'augmenter la taille de votre échantillon[^07-distributions-chi2-3]. Voyons l'effet de la taille de l'échantillon sur l'étude des becs-croisés des sapins. Nous n'avons pas besoin d'un effectif plus grand que celui mesuré, car nous rejetons $H_0$ ici. Qu'aurait donné notre test $\chi^2$, par contre, si l'auteur avait mesuré disons 10 fois moins d'oiseaux, les proportions restant par ailleurs identiques entre becs-croisés à gauche et à droite ?
 
-[^08-test-chi2-3]: Attention ! Vous devez fixer la taille de l'échantillon dès le départ *a priori*. Vous ne pouvez pas accumuler des données jusqu'à obtenir un rejet de $H_0$, sans quoi votre analyse sera biaisée.
+[^07-distributions-chi2-3]: Attention ! Vous devez fixer la taille de l'échantillon dès le départ *a priori*. Vous ne pouvez pas accumuler des données jusqu'à obtenir un rejet de $H_0$, sans quoi votre analyse sera biaisée.
 
 ```{r}
 # Proportions équivalentes, mais échantillon 10x plus petit
@@ -306,11 +312,11 @@ Nous constatons que la valeur du $\chi^2_{obs}$ dépend de l'effectif. Sa valeur
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A08La_chi2", title = "Loi de distribution du Chi2 et test univarié", toc = "Loi de distribution du Chi2 et test univarié")`
+`r learnr("A07Lb_chi2", title = "Loi de distribution du Chi2 et test univarié", toc = "Loi de distribution du Chi2 et test univarié")`
 
-```{r assign_A08Ia_pea, echo=FALSE, results='asis'}
+```{r assign_A07Ia_pea, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("A08Ia_pea", part = NULL,
+  assignment("A07Ia_pea", part = NULL,
     url = "https://github.com/BioDataScience-Course/A08Ia_pea",
     course.ids = c(
       'S-BIOG-027' = !"A08Ia_{YY}M_pea"),
@@ -324,11 +330,11 @@ if (exists("assignment"))
     toc = "Génétique mendélienne")
 ```
 
-### Test Chi^2^ d'indépendance
+#### Test Chi^2^ d'indépendance
 
 Dans le cas d'un tableau de contingence à **double entrée**, qui croise les niveaux de deux variables qualitatives, nous pouvons effectuer également un test $\chi^2$. Celui-ci est calculé légèrement différemment et surtout, les hypothèses testées sont différentes.
 
-##### Conditions d'application {.unnumbered}
+###### Conditions d'application {.unnumbered}
 
 Comme toujours, le test $\chi^2$ d'indépendance est assortis de conditions d'application que nous devons vérifier *avant* de considérer d'utiliser ce test :
 
@@ -337,7 +343,7 @@ Comme toujours, le test $\chi^2$ d'indépendance est assortis de conditions d'ap
 -   aucun effectif théorique nul,
 -   Si possible, aucun effectif observé inférieur à 5 (pas règle stricte, mais voir à utiliser un test exact de Fisher ci-dessous dans la section "pour en savoir plus" en base de page dans ce cas).
 
-##### Exemple et résolution dans R {.unnumbered}
+###### Exemple et résolution dans R {.unnumbered}
 
 Prenons le jeu de données concernant le test d'une molécule potentiellement anticancéreuse, le timolol :
 
@@ -397,11 +403,11 @@ Enfin, nous comparons cette valeur à la distribution théorique de $\chi^2$ à 
 (chi2. <- chisq.test(timolol_table)); cat("Expected frequencies:\n"); chi2.[["expected"]]
 ```
 
-##### Interprétation {.unnumbered}
+###### Interprétation {.unnumbered}
 
 La valeur *P* de 0,0026 est inférieure au seuil $\alpha$ choisi de 0,01. Donc, nous rejetons $H_0$. Il n'y a pas indépendance entre les deux variables. Pour voir quels sont les effets de la dépendance entre les variables, nous devons comparer les effectifs théoriques affichés ci-dessus avec les effectifs observés. Dans le cas du placebo, sous $H_0$, nous aurions du obtenir 117 malades contre 30 patients guéris. Or, nous en avons 128 malades et seulement 19 guéris. D'un autre côté, sous $H_0$ nous aurions du observer 127 patients malades et 33 sains avec le timolol. Or, nous en observons 116 malades et 44 sains. Donc, les valeurs observées sont en faveur d'un meilleur effet avec le timolol. Nous pourrons dire : le timolol a un effet positif significatif sur la guérison de la maladie au seuil $\alpha$ de 1% ($\chi^2$ d'indépendance = 9,10, ddl = 1, valeur *P* = 0,0026).
 
-##### Correction de Yates {.unnumbered}
+###### Correction de Yates {.unnumbered}
 
 Si nous calculons le $\chi^2_{obs}$ à la main, nous obtenons :
 
@@ -422,7 +428,7 @@ chisq.test(timolol_table, correct = FALSE)
 
 `r learnr("A08Lb_chi2b", title = "Test Chi2 d'indépendance", toc = "test Chi2 d'indépendance")`
 
-### Autres tests Chi^2^
+#### Autres tests Chi^2^
 
 Le test du $\chi^2$ est également utilisé, dans sa forme univariée, pour comparer les effectifs observés par rapport à des effectifs théoriques suivant une loi de distribution discrète. Ce test s'appelle un **test de qualité d'ajustement** ("goodness-of-fit test" en anglais). Dans ce cas, le nombre de degrés de liberté est le nombre de catégories moins le nombre de paramètres de la distribution moins un.
 
@@ -434,7 +440,7 @@ Pour l'ajustement à une loi de distribution continue, il est possible de décou
 Gardez toujours à l'esprit que, quelle que soit la qualité d'un test d'ajustement, vous n'aurez jamais qu'une réponse binaire (oui ou non l'échantillon s'ajuste à la distribution théorique de référence). Les causes de dérive sont innombrables et seules des bonnes représentations graphiques (histogramme, graphe en violon, et surtout, graphique quantile-quantile) sont suffisamment riche en information pour explorer *pourquoi* et *comment* la distribution diffère d'une distribution théorique.
 ```
 
-##### Pour en savoir plus {.unnumbered}
+###### Pour en savoir plus {.unnumbered}
 
 -   Le [test de Chi2 avec R](http://www.sthda.com/french/wiki/test-de-chi2-avec-r),
 
@@ -535,9 +541,9 @@ crabs %>.%
     ylab("Ratio largeur arrière/longueur")
 ```
 
-Notre métrique `rear_length` est naturellement ultra-simple. Elle ne permet pas de différencier *tous* les mâles de *toutes* les femelles, mais la séparation est déjà bien meilleure qu'en utilisant soit `rear` soit `length` seuls. À l'aide de techniques statistiques que vous étudierez au [cours de science des données biologiques II](https://wp.sciviews.org/sdd-umons2/?iframe=wp.sciviews.org/sdd-umons2-2023/lm.html) l'an prochain, nous pouvons montrer qu'une meilleure métrique (on parle encore d'indice) pour séparer les mâles des femelles est en réalité : `rear / (0.3 * length + 2.4)`[^08-test-chi2-4]. La séparation entre les sexes n'est pas totale, mais s'en rapproche fortement, surtout pour la variété orange.
+Notre métrique `rear_length` est naturellement ultra-simple. Elle ne permet pas de différencier *tous* les mâles de *toutes* les femelles, mais la séparation est déjà bien meilleure qu'en utilisant soit `rear` soit `length` seuls. À l'aide de techniques statistiques que vous étudierez au [cours de science des données biologiques II](https://wp.sciviews.org/sdd-umons2/?iframe=wp.sciviews.org/sdd-umons2-2023/lm.html) l'an prochain, nous pouvons montrer qu'une meilleure métrique (on parle encore d'indice) pour séparer les mâles des femelles est en réalité : `rear / (0.3 * length + 2.4)`[^07-distributions-chi2-4]. La séparation entre les sexes n'est pas totale, mais s'en rapproche fortement, surtout pour la variété orange.
 
-[^08-test-chi2-4]: Pour le lecteur plus avancé, il s'agit en fait de la droite de régression ajustée dans le nuage de points.
+[^07-distributions-chi2-4]: Pour le lecteur plus avancé, il s'agit en fait de la droite de régression ajustée dans le nuage de points.
 
 ```{r}
 crabs %>.%
@@ -573,9 +579,9 @@ Les **métriques** sont des variables issues de calculs plus complexes et qui vi
 
 `r h5p(85, height = 400, toc = "Variables calculées")`
 
-```{r assign_A08Ga_human_health_I, echo=FALSE, results='asis'}
+```{r assign_A07Ga_human_health_I, echo=FALSE, results='asis'}
 if (exists("assignment2"))
-  assignment2("A08Ga_human_health", part = "I",
+  assignment2("A07Ga_human_health", part = "I",
     url = "https://github.com/BioDataScience-Course/A08Ga_human_health",
     course.ids = c(
       'S-BIOG-027' = !"A08Ga_{YY}M_human_health"),
@@ -618,10 +624,10 @@ Les instructions sont détaillées ici\ :
 ```
 ## Récapitulatif des exercices
 
-Vous venez de terminer le module 8. Ce module vous a permis d'apprendre à réaliser vos premiers tests d'hypothèses. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
+Vous venez de terminer le module 7. Ce module vous a permis d'apprendre à réaliser vos premiers tests de chi\^2. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 
 ##### Progression {.unnumbered}
 
-`r launch_report("08", height = 800)`
+`r launch_report("07", height = 800)`

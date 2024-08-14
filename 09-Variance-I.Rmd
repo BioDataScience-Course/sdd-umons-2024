@@ -81,11 +81,11 @@ Nous voyons ici beaucoup mieux que la distribution bimodale qui avait été obse
 
 Comment comparer valablement ces quatre groupes ? Comme nous savons maintenant comparer deux groupes à l'aide d'un test *t* de Student, il est tentant d'effectuer toutes les comparaisons deux à deux et de résumer l'ensemble, par exemple, dans un tableau synthétique. Cela fait quand même beaucoup de comparaisons (`B-F` \<-\> `B-M`, `B-F` \<-\> `O-F`, `B-F` \<-\> `O-M`, `B-M` \<-\> `O-F`, `B-M`\<-\> `O-M`, et finalement `O-F` \<-\> `O-M`). Cela fait donc six comparaisons à réaliser.
 
-N'oublions pas que, à chaque test, nous prenons un risque de nous tromper. **Le risque de se tromper au moins une fois dans l'ensemble des tests est alors décuplé en cas de tests multiples.** Prenons un point de vue naïf, mais qui suffira ici pour démontrer le problème qui apparaît. Admettons que le risque de nous tromper est constant, que nous rejetons ou non $H_0$ (donc les risques $\alpha$ et $\beta$ sont identiques), et qu'il est de l'ordre de 10% dans chaque test individuellement[^10-variance-i-1]. La seule solution acceptable est que les interprétations de *tous* les tests soient correctes. Considérant chaque interprétation indépendante, nous pouvons multiplier les probabilités d'avoir un test correct (90%) le nombre de fois que nous faisons le test, soit $0,9 \times 0,9 \times 0,9 \times 0,9 \times 0,9 \times 0,9 = 0,9^6 = 0,53$. Tous les autres cas ayant au moins un test faux, nous constatons que notre analyse globale sera incorrecte $1 - 0,53 = 47\%$ du temps[^10-variance-i-2]. **Notre analyse sera incorrecte une fois sur deux environ.**
+N'oublions pas que, à chaque test, nous prenons un risque de nous tromper. **Le risque de se tromper au moins une fois dans l'ensemble des tests est alors décuplé en cas de tests multiples.** Prenons un point de vue naïf, mais qui suffira ici pour démontrer le problème qui apparaît. Admettons que le risque de nous tromper est constant, que nous rejetons ou non $H_0$ (donc les risques $\alpha$ et $\beta$ sont identiques), et qu'il est de l'ordre de 10% dans chaque test individuellement[^09-variance-i-1]. La seule solution acceptable est que les interprétations de *tous* les tests soient correctes. Considérant chaque interprétation indépendante, nous pouvons multiplier les probabilités d'avoir un test correct (90%) le nombre de fois que nous faisons le test, soit $0,9 \times 0,9 \times 0,9 \times 0,9 \times 0,9 \times 0,9 = 0,9^6 = 0,53$. Tous les autres cas ayant au moins un test faux, nous constatons que notre analyse globale sera incorrecte $1 - 0,53 = 47\%$ du temps[^09-variance-i-2]. **Notre analyse sera incorrecte une fois sur deux environ.**
 
-[^10-variance-i-1]: Attention ! vous savez bien que c'est plus compliqué que cela. D'une part, le risque de se tromper est probablement différent si on rejette $H_0$ ($\alpha$) ou non ($\beta$), et ces risques sont encore à moduler en fonction de la probabilité *a priori*, un cas similaire au dépistage d'une maladie plus ou moins rare, rappelez-vous, au module \@ref(proba).
+[^09-variance-i-1]: Attention ! vous savez bien que c'est plus compliqué que cela. D'une part, le risque de se tromper est probablement différent si on rejette $H_0$ ($\alpha$) ou non ($\beta$), et ces risques sont encore à moduler en fonction de la probabilité *a priori*, un cas similaire au dépistage d'une maladie plus ou moins rare, rappelez-vous, au module \@ref(proba).
 
-[^10-variance-i-2]: Dans R, vous pouvez utiliser `choose(n, j)` pour calculer le coefficient binomial. Donc votre calcul du risque de se tromper au moins une fois dans un ensemble de `n` tests dont le risque individuel est `r` sera `1 - (1 - r)^choose(n, 2)`.
+[^09-variance-i-2]: Dans R, vous pouvez utiliser `choose(n, j)` pour calculer le coefficient binomial. Donc votre calcul du risque de se tromper au moins une fois dans un ensemble de `n` tests dont le risque individuel est `r` sera `1 - (1 - r)^choose(n, 2)`.
 
 ```{block, type='info'}
 De manière générale, le nombre de combinaisons deux à deux possibles dans un set de `n` groupes distincts sera calculé à l'aide du coefficient binomial que nous avions déjà rencontré avec la distribution du même nom, ici avec $j$ valant deux.
@@ -256,9 +256,9 @@ La **statistique *F*~obs~ est le rapport des carrés moyens inter/intra.** Elle 
 
 ### Distribution *F*
 
-La distribution *F* est une distribution asymétrique n'admettant que des valeurs nulles ou positives, d'une allure assez similaire à la distribution du $\chi^2$ que nous avons étudié au module \@ref(chi2). Elle est appelée loi de Fisher, ou encore, loi de Fisher-Snedecor. Elle a une asymptote horizontale à $+\infty$. La distribution *F* admet deux paramètres, respectivement les degrés de liberté au numérateur (inter) et au dénominateur (intra). La Fig. \@ref(fig:fplot) représente la densité de probabilité d'une loi *F* typique[^10-variance-i-3].
+La distribution *F* est une distribution asymétrique n'admettant que des valeurs nulles ou positives, d'une allure assez similaire à la distribution du $\chi^2$ que nous avons étudié au module \@ref(chi2). Elle est appelée loi de Fisher, ou encore, loi de Fisher-Snedecor. Elle a une asymptote horizontale à $+\infty$. La distribution *F* admet deux paramètres, respectivement les degrés de liberté au numérateur (inter) et au dénominateur (intra). La Fig. \@ref(fig:fplot) représente la densité de probabilité d'une loi *F* typique[^09-variance-i-3].
 
-[^10-variance-i-3]: Les fonctions qui permettent les calculs relatifs à la distribution *F* dans R sont `<q|p|r|d>f()`. En outre, `dist_f()` génère un objet permettant d'en tracer facilement le graphique. Leur utilisation est similaire à celle des distributions vues au module \@ref(proba).
+[^09-variance-i-3]: Les fonctions qui permettent les calculs relatifs à la distribution *F* dans R sont `<q|p|r|d>f()`. En outre, `dist_f()` génère un objet permettant d'en tracer facilement le graphique. Leur utilisation est similaire à celle des distributions vues au module \@ref(proba).
 
 <!-- et les snippets correspondants dans la SciViews Box sont disponibles à partir de `.if`. -->
 
@@ -466,9 +466,9 @@ Une approche simple consisterait à modifier notre seuil $\alpha$ pour chaque te
 
 $$(1 - 0,05/6)^6 = 0,951$$
 
-Donc, le risque *global* pour l'ensemble des six tests est bien de 1 - 0,951 = 0,049, soit 5%. Si elle a le mérite d'être simple, cette façon de faire n'est pas considérée comme la plus efficace. Actuellement, la méthode **HSD de Tukey** est préférée. HSD veut dire "Honest Significant Difference". La technique consiste à calculer l'écart minimal des moyennes pour considérer qu'elles sont significativement différentes l'une de l'autre. Ensuite, pour chaque comparaison deux à deux, l'écart entre les moyennes est comparé à cette valeur de référence[^10-variance-i-4]. Dans R, le test peut se visualiser soit sous une forme textuelle, soit sous une version graphique qui résume les comparaisons. Le code est un peu plus complexe et fait intervenir le package {multcomp}. Inspirez-vous de ce code dans vos projets.
+Donc, le risque *global* pour l'ensemble des six tests est bien de 1 - 0,951 = 0,049, soit 5%. Si elle a le mérite d'être simple, cette façon de faire n'est pas considérée comme la plus efficace. Actuellement, la méthode **HSD de Tukey** est préférée. HSD veut dire "Honest Significant Difference". La technique consiste à calculer l'écart minimal des moyennes pour considérer qu'elles sont significativement différentes l'une de l'autre. Ensuite, pour chaque comparaison deux à deux, l'écart entre les moyennes est comparé à cette valeur de référence[^09-variance-i-4]. Dans R, le test peut se visualiser soit sous une forme textuelle, soit sous une version graphique qui résume les comparaisons. Le code est un peu plus complexe et fait intervenir le package {multcomp}. Inspirez-vous de ce code dans vos projets.
 
-[^10-variance-i-4]: Nous ne détaillons pas le calcul du test de Tukey dans le cours, mais vous pouvez aller voir [ici](https://www.itl.nist.gov/div898/handbook/prc/section4/prc471.htm).
+[^09-variance-i-4]: Nous ne détaillons pas le calcul du test de Tukey dans le cours, mais vous pouvez aller voir [ici](https://www.itl.nist.gov/div898/handbook/prc/section4/prc471.htm).
 
 <!-- Le test de comparaisons multiples de Tukey est accessible à partir des "snippets" dans la SciViews Box (`.hm` pour le menu `hypothesis tests: means`, puis `anova - multiple comparisons`). -->
 
@@ -497,11 +497,11 @@ Les conditions d'application pour le test post hoc de Tukey sont les mêmes que 
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A10La_anova", title = "ANOVA et tests post-hoc", toc = "Analyse de variance et tests post-hoc")`
+`r learnr("A09La_anova", title = "ANOVA et tests post-hoc", toc = "Analyse de variance et tests post-hoc")`
 
-```{r assign_A10Ia_acidification_effect, echo=FALSE, results='asis'}
+```{r assign_A09Ia_acidification_effect, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("A10Ia_acidification_effect", part = NULL,
+  assignment("A09Ia_acidification_effect", part = NULL,
     url = "https://github.com/BioDataScience-Course/A10Ia_acidification_effect",
     course.ids = c(
       'S-BIOG-027' = !"A10Ia_{YY}M_acidification_effect"),
@@ -583,13 +583,13 @@ Au final, que conclure ? Lorsque l'ANOVA peut être utilisée, elle est à pré
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A10Lb_kruskal", title = "Test de Kruskal-Wallis", toc = "Test de Kruskal-Wallis")`
+`r learnr("A09Lb_kruskal", title = "Test de Kruskal-Wallis", toc = "Test de Kruskal-Wallis")`
 
 Appliquez vos nouvelles connaissances dans le projet de groupe que vous avez débuté aux deux modules précédents.
 
-```{r assign_A10Ga_human_health_III, echo=FALSE, results='asis'}
+```{r assign_A09Ga_human_health_III, echo=FALSE, results='asis'}
 if (exists("assignment2"))
-  assignment2("A08Ga_human_health", part = "III",
+  assignment2("A07Ga_human_health", part = "III",
     url = "https://github.com/BioDataScience-Course/A08Ga_human_health",
     course.ids = c(
       'S-BIOG-027' = !"A08Ga_{YY}M_human_health"),
@@ -631,7 +631,7 @@ Vous venez de terminer le module 10. Ce module vous a permis d'apprendre une gra
 
 ##### Progression {.unnumbered}
 
-`r launch_report("10", height = 800)`
+`r launch_report("09", height = 800)`
 
 ````{=html}
 <!--- G.E. Gardons nous cet exercice ?  

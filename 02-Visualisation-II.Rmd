@@ -34,11 +34,11 @@ La fin de ce module va traiter de la gestion des conflits dans GitHub. Vous deve
 
 ## Histogramme
 
-Vous souhaitez visualiser l'étalement de vos données sur un axe (on parle de **distribution**[^03-visualisation-ii-1] en statistique) pour l'une des variables étudiées. L'histogramme est l'un des graphiques qui vous apportent cette information de manière visuelle. Il représente sous forme de barres un découpage en plusieurs **classes**[^03-visualisation-ii-2] d'une variable numérique.
+Vous souhaitez visualiser l'étalement de vos données sur un axe (on parle de **distribution**[^02-visualisation-ii-1] en statistique) pour l'une des variables étudiées. L'histogramme est l'un des graphiques qui vous apportent cette information de manière visuelle. Il représente sous forme de barres un découpage en plusieurs **classes**[^02-visualisation-ii-2] d'une variable numérique.
 
-[^03-visualisation-ii-1]: La **distribution** des données en statistique se réfère à la fréquence avec laquelle les différentes valeurs d'une variable s'observent.
+[^02-visualisation-ii-1]: La **distribution** des données en statistique se réfère à la fréquence avec laquelle les différentes valeurs d'une variable s'observent.
 
-[^03-visualisation-ii-2]: Une variable numérique est **découpée en classes** en spécifiant différents intervalles, et ensuite en dénombrant le nombre de fois que les observations rentrent dans ces intervalles.
+[^02-visualisation-ii-2]: Une variable numérique est **découpée en classes** en spécifiant différents intervalles, et ensuite en dénombrant le nombre de fois que les observations rentrent dans ces intervalles.
 
 ```{r histo-dist, fig.cap="Exemple d'histogramme montrant la distribution de la taille dans un échantillon de zooplancton. Des couleurs sont utilisées pour mettre en évidence différentes parties du graphique (en pratique, les axes et leurs labels seront noirs).", echo=FALSE, message=FALSE, warning=FALSE}
 zooplankton <- read("zooplankton", package = "data.io", lang = "FR")
@@ -76,11 +76,11 @@ La fonction `chart()` requiert comme argument le jeu de donnée (`data = zooplan
 
 `r h5p(172, height = 270, toc = "Les fonctions chart() et geom_histogram()")`
 
-Vous pouvez interpréter votre histogramme sur base des **modes**[^03-visualisation-ii-3] et de la **symétrie**[^03-visualisation-ii-4] de ces derniers. Un histogramme peut être **unimodal** (un seul mode), **bimodal** (deux modes) ou **multimodal** (plus de deux modes). En général, s'il y a plus d'un mode, nous pouvons suspecter que des sous-populations distinctes existent dans les données (par exemple des différences morphométriques entre mâles et femelles pour une espèce au dimorphisme sexuel marqué).
+Vous pouvez interpréter votre histogramme sur base des **modes**[^02-visualisation-ii-3] et de la **symétrie**[^02-visualisation-ii-4] de ces derniers. Un histogramme peut être **unimodal** (un seul mode), **bimodal** (deux modes) ou **multimodal** (plus de deux modes). En général, s'il y a plus d'un mode, nous pouvons suspecter que des sous-populations distinctes existent dans les données (par exemple des différences morphométriques entre mâles et femelles pour une espèce au dimorphisme sexuel marqué).
 
-[^03-visualisation-ii-3]: Les **modes** d'un histogramme correspondent à des classes plus abondantes localement, c'est-à-dire que les classes à gauche et à droite du mode comptent moins d'occurrences que lui.
+[^02-visualisation-ii-3]: Les **modes** d'un histogramme correspondent à des classes plus abondantes localement, c'est-à-dire que les classes à gauche et à droite du mode comptent moins d'occurrences que lui.
 
-[^03-visualisation-ii-4]: Un histogramme est dit **symétrique** lorsque son profil à gauche est identique ou très similaire à son profil à droite autour d'un mode.
+[^02-visualisation-ii-4]: Un histogramme est dit **symétrique** lorsque son profil à gauche est identique ou très similaire à son profil à droite autour d'un mode.
 
 ```{r histo-mode, fig.cap = "Histogrammes montrant les modes et symétries : A. histogramme unimodal et symétrique, B. histogramme bimodal et asymétrique, C. histogramme unimodal et asymétrique, D. histogramme multimodal et symétrique.", echo=FALSE, message=FALSE, warning=FALSE}
 set.seed(1000)
@@ -172,9 +172,9 @@ Les variables numériques sont représentées par des nombres, donc **numeric** 
 Attention que les variables facteur peuvent très bien être importées comme chaînes de caractères (objet **character**), et il faudra peut-être les convertir à l'aide des fonctions `factor()` ou `ordered()` avant de les utiliser.
 ```
 
-Par exemple, dans un jeu de données sur des fleurs d'iris, la variable `species`[^03-visualisation-ii-5] représente l'espèce d'iris étudiée (trois espèces différentes : *I. setosa*, *I. versicolor* et *I. virginica*).
+Par exemple, dans un jeu de données sur des fleurs d'iris, la variable `species`[^02-visualisation-ii-5] représente l'espèce d'iris étudiée (trois espèces différentes : *I. setosa*, *I. versicolor* et *I. virginica*).
 
-[^03-visualisation-ii-5]: Attention : le jeu de donnée `iris` est un grand classique dans R, mais lorsqu'il est chargé à l'aide de la fonction `read()` du package {data.io}, le nom de ses variables est modifié pour suivre la convention "snake_case" qui veut que seules des lettres minuscules soient utilisées et que les mots soient séparés par un trait souligné `_`. Ainsi, dans le jeu de données d'origine, les variables sont nommées `Petal.Length` ou `Species`. Ici, ces mêmes variables se nomment `petal_length` et `species`.
+[^02-visualisation-ii-5]: Attention : le jeu de donnée `iris` est un grand classique dans R, mais lorsqu'il est chargé à l'aide de la fonction `read()` du package {data.io}, le nom de ses variables est modifié pour suivre la convention "snake_case" qui veut que seules des lettres minuscules soient utilisées et que les mots soient séparés par un trait souligné `_`. Ainsi, dans le jeu de données d'origine, les variables sont nommées `Petal.Length` ou `Species`. Ici, ces mêmes variables se nomment `petal_length` et `species`.
 
 ```{r, fig.cap= "Distribution de la longueur des sépales de trois espèces d'iris."}
 # Importation du jeu de données
@@ -198,9 +198,9 @@ chart(data = iris, ~ sepal_length | species) +
   ylab("Effectifs")
 ```
 
-L'histogramme est maintenant séparé en trois en fonction des niveaux de la variable facteur `species`. Cela rend la lecture plus aisée. Une seconde solution combine les facettes avec `|` et l'argument `%fill=%`[^03-visualisation-ii-6]. Il faut ensuite ajouter par derrière un histogramme grisé de l'ensemble des données.
+L'histogramme est maintenant séparé en trois en fonction des niveaux de la variable facteur `species`. Cela rend la lecture plus aisée. Une seconde solution combine les facettes avec `|` et l'argument `%fill=%`[^02-visualisation-ii-6]. Il faut ensuite ajouter par derrière un histogramme grisé de l'ensemble des données.
 
-[^03-visualisation-ii-6]: Astuce proposée [ici](https://drsimonj.svbtle.com/plotting-background-data-for-groups-with-ggplot2).
+[^02-visualisation-ii-6]: Astuce proposée [ici](https://drsimonj.svbtle.com/plotting-background-data-for-groups-with-ggplot2).
 
 ```{r histo-facteurs-facettes, fig.cap= "Distribution des longueurs de sépales de trois espèces d'iris (avec facettes et histogrammes complets grisés en arrière-plans)."}
 nbins <- 25
@@ -224,9 +224,9 @@ Vous découvrez sans doute que les graphiques réalisables avec R sont modulable
 
 ## Graphique de densité
 
-L'histogramme n'est pas le seul outil à votre disposition. Vous pouvez également utiliser le **graphique de densité** qui se présente un peu comme un histogramme lissé. Le passage d'un histogramme vers un graphe de densité se base sur une **estimation par noyau gaussien**[^03-visualisation-ii-7]
+L'histogramme n'est pas le seul outil à votre disposition. Vous pouvez également utiliser le **graphique de densité** qui se présente un peu comme un histogramme lissé. Le passage d'un histogramme vers un graphe de densité se base sur une **estimation par noyau gaussien**[^02-visualisation-ii-7]
 
-[^03-visualisation-ii-7]: L'opération effectuée pour passer d'un histogramme à une courbe de densité consiste effectivement à lisser les pics plus ou moins fortement dans l'histogramme de départ.
+[^02-visualisation-ii-7]: L'opération effectuée pour passer d'un histogramme à une courbe de densité consiste effectivement à lisser les pics plus ou moins fortement dans l'histogramme de départ.
 
 ```{r histo-densite, fig.cap= "A. Histogramme et B. graphique de densité montrant la distribution de la taille de zooplancton étudié par analyse d'image. Les couleurs pour les axes et les labels servent à les mettre en évidence, mais en pratique ils seront noirs.", echo=FALSE, message=FALSE}
 a <- chart(data = zooplankton, ~ size) +
@@ -275,9 +275,9 @@ Ici, nous utilisons donc la fonction `geom_density()`.
 
 `r h5p(173, height = 270, toc = "La fonction chart() et geom_density()")`
 
-```{r assign_A03Ia_distributions, echo=FALSE, results='asis'}
+```{r assign_A02Ia_distributions, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("A03Ia_distributions", part = NULL,
+  assignment("A02Ia_distributions", part = NULL,
     url = "https://github.com/BioDataScience-Course/A03Ia_distributions",
     course.ids = c(
       'S-BIOG-006' = !"A03Ia_{YY}M_distributions"),
@@ -373,7 +373,7 @@ En pratique, vous ne représenterez pas systématiquement tous ces types de grap
 
 ## Travail collaboratif
 
-Si GitHub permet de travailler seul sur ses dépôts, il est prévu pour collaborer. En tant que scientifique, vous serez amené à collaborer abondamment à l'avenir.
+Si GitHub et Git permettent de travailler seul sur ses dépôts, ils sont prévu pour collaborer. En tant que scientifique, vous serez amené à collaborer abondamment à l'avenir.
 
 ### Ajout d'un collaborateur
 
@@ -397,7 +397,7 @@ Jusqu'à présent, les deux scientifiques ont échangé par mail. Cependant, Il 
 
 **Petit rappel :** une issue est une zone de discussion attachée à votre dépôt GitHub... **pour y discuter de questions techniques et scientifiques strictement en relation avec ce dépôt**. Il ne s'agit pas d'un système de chat comme Discord, messenger... Vos "memes", et autres gifs animés pour y exprimer vos émotions n'y ont pas leur place. De même des échanges du genre : "tu es là?", "oui... tu travailles sur quoi?", "sur le premier graphique, mais sinon, je me cure les ongles, kiss kiss" n'ont pas du tout leur place dans les issues !
 
-![](images/sdd1_03/github_issues1.png)
+![](images/sdd1_02/github_issues1.png)
 
 Rappelez-vous aussi qu'une issue doit être **fermée** lorsque le sujet de cette dernière a été débattu et le problème résolu. Ouvrez une issue différente pour *chaque* problème.
 
@@ -463,4 +463,4 @@ Ce module 3 vous a permis de réaliser différents graphiques uni- et bivariés 
 
 ##### Progression {.unnumbered}
 
-`r launch_report("03", height = 800)`
+`r launch_report("02", height = 800)`

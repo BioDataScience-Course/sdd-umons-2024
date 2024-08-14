@@ -126,9 +126,9 @@ anova(crabs2_anova2 <- lm(data = crabs2, aspect5 ~ species + sex)) %>.%
 
 Comme la variance est décomposée en trois étapes (selon l'espèce, puis selon le sexe, puis les résidus), nous avons trois lignes dans le tableau de l'ANOVA. Nous effectuons **deux tests**. Le premier consiste à comparer les carrés moyens pour l'espèce par rapport aux résidus, lignes 1 et 3. Donc, la valeur *F* observée est le ratio de la somme des carrés `species` divisé par la somme des carrés des résidus (2,75•10^-5^ / 1,61•10^-6^ = 17,2), et cette valeur est reportée sur la loi de distribution théorique *F* pour obtenir une première valeur *P* (ici 5,12•10^-5^). De même, le second test qui s'intéresse au sexe calcule la valeur *F* par le ratio de la somme des carrés pour `sex` divisé par la somme des carrés des résidus (lignes 2 et 3, 6,99•10^-4^ / 1,61•10^-6^ = 435,7), et la loi *F* nous permet de calculer une valeur *P* pour ce second test (ici la valeur est inférieure à 2,2•10^-16^).
 
-Nous interprétons chacun des deux tests séparément. Dans notre cas, nous pouvons dire avec un seuil $\alpha$ de 5% que nous rejetons $H_0$ dans les deux cas (*P* \< $\alpha$). Donc le rapport largeur arrière sur largeur max de la carapace (à la puissance 5) est significativement différent au seuil $\alpha$ de 5% à la fois en fonction de l'espèce (F = 17,2, ddl = 1 et 197, valeur *P* \<\< 0,001) et du sexe (F = 436, ddl = 1 et 197, valeur *P* \<\< 0,001)[^11-variance-ii-1].
+Nous interprétons chacun des deux tests séparément. Dans notre cas, nous pouvons dire avec un seuil $\alpha$ de 5% que nous rejetons $H_0$ dans les deux cas (*P* \< $\alpha$). Donc le rapport largeur arrière sur largeur max de la carapace (à la puissance 5) est significativement différent au seuil $\alpha$ de 5% à la fois en fonction de l'espèce (F = 17,2, ddl = 1 et 197, valeur *P* \<\< 0,001) et du sexe (F = 436, ddl = 1 et 197, valeur *P* \<\< 0,001)[^10-variance-ii-1].
 
-[^11-variance-ii-1]: Notez que si vous incluez le tableau de l'ANOVA dans votre rapport ou dans une publication, il n'est pas nécessaire de répéter les résultats des tests entre parenthèses. Vous pouvez juste vous référer au tableau en question.
+[^10-variance-ii-1]: Notez que si vous incluez le tableau de l'ANOVA dans votre rapport ou dans une publication, il n'est pas nécessaire de répéter les résultats des tests entre parenthèses. Vous pouvez juste vous référer au tableau en question.
 
 La suite logique consiste à réaliser des tests "post hoc". Ils ne sont pas vraiment nécessaires ici puisque nous n'avons que deux niveaux pour chacune des deux variables, mais nous les réalisons quand même pour montrer le code correspondant.
 
@@ -163,9 +163,9 @@ Encore une fois, nous voyons que les résidus sont quasiment les mêmes que pré
 
 ## Modèle croisé complet
 
-Le modèle ANOVA que nous venons de faire s'appelle un **modèle croisé** parce que les mesures sont effectuées pour chaque combinaison des niveaux des deux variables facteurs explicatives, et ce, de manière indépendante (les observations d'un niveau ne sont pas dépendantes de celles d'un autre niveau)[^11-variance-ii-2].
+Le modèle ANOVA que nous venons de faire s'appelle un **modèle croisé** parce que les mesures sont effectuées pour chaque combinaison des niveaux des deux variables facteurs explicatives, et ce, de manière indépendante (les observations d'un niveau ne sont pas dépendantes de celles d'un autre niveau)[^10-variance-ii-2].
 
-[^11-variance-ii-2]: De plus, nous avons ici un **plan balancé** puisque le nombre de réplicats pour chaque niveau est le même. C'est une situation optimale qu'il faut toujours chercher à atteindre pour une ANOVA, même si un nombre différent d'observations par niveau est également accepté.
+[^10-variance-ii-2]: De plus, nous avons ici un **plan balancé** puisque le nombre de réplicats pour chaque niveau est le même. C'est une situation optimale qu'il faut toujours chercher à atteindre pour une ANOVA, même si un nombre différent d'observations par niveau est également accepté.
 
 ```{r}
 crabs2 %>.%
@@ -210,7 +210,7 @@ Les conditions d'application sont les mêmes que pour l'ANOVA à deux facteurs s
 
 `r h5p(112, height = 400, toc = "Graphique des interactions")`
 
-`r learnr("A11La_anova2", title = "ANOVA à 2 facteurs", toc = "Analyse de variance à 2 facteurs")`
+`r learnr("A10La_anova2", title = "ANOVA à 2 facteurs", toc = "Analyse de variance à 2 facteurs")`
 
 ##### Pour en savoir plus {.unnumbered}
 
@@ -220,9 +220,9 @@ Les conditions d'application sont les mêmes que pour l'ANOVA à deux facteurs s
 
 ##### À vous de jouer ! {.unnumbered}
 
-```{r assign_A11Ia_anova2_I, echo=FALSE, results='asis'}
+```{r assign_A10Ia_anova2_I, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("A11Ia_anova2", part = "I",
+  assignment("A10Ia_anova2", part = "I",
     url = "https://github.com/BioDataScience-Course/A11Ia_anova2",
     course.ids = c(
       'S-BIOG-027' = !"A11Ia_{YY}M_anova2"),
@@ -248,9 +248,9 @@ $$y_{ijk} = \mu + \tau1_j + \tau2_k(\tau1_j) + \epsilon_i \mathrm{\ avec\ } \ \e
 
 $$y \sim fact1 + fact2\ \%in\%\ fact1$$
 
-Voici un exemple concret. Un gros échantillon homogène d'œufs déshydratés est réparti entre six laboratoires différents en vue de la détermination de la teneur en matières grasses dans cet échantillon. Le but de la manœuvre est de déterminer si les laboratoires donnent des résultats consistants entre eux. Les deux techniciens de chaque laboratoire sont libellés `one` et `two`, mais ce sont en fait à chaque fois des techniciens *différents* dans chaque laboratoire[^11-variance-ii-3].
+Voici un exemple concret. Un gros échantillon homogène d'œufs déshydratés est réparti entre six laboratoires différents en vue de la détermination de la teneur en matières grasses dans cet échantillon. Le but de la manœuvre est de déterminer si les laboratoires donnent des résultats consistants entre eux. Les deux techniciens de chaque laboratoire sont libellés `one` et `two`, mais ce sont en fait à chaque fois des techniciens *différents* dans chaque laboratoire[^10-variance-ii-3].
 
-[^11-variance-ii-3]: La variable `Sample` valant `G` ou `H` ne sera pas utilisée ici. En fait, au départ, les initiateurs de l'expérience ont fait croire aux laboratoires qu'il s'agissait de deux échantillons différents alors que c'est le même en réalité.
+[^10-variance-ii-3]: La variable `Sample` valant `G` ou `H` ne sera pas utilisée ici. En fait, au départ, les initiateurs de l'expérience ont fait croire aux laboratoires qu'il s'agissait de deux échantillons différents alors que c'est le même en réalité.
 
 ```{r}
 eggs <- read("eggs", package = "faraway")
@@ -439,9 +439,9 @@ Dans la suite, nous verrons deux modèles aléatoires particuliers qui ont une c
 
 <!-- Not accessible any more ? [parcelles divisées](https://stat.ethz.ch/education/semesters/as2015/anova/08_Split_Plots.pdf) -->
 
-Un des modèles pour lequel les valeurs *P* sont calculables est le modèle dit en parcelles divisées (*split-plot* en anglais). Cette situation apparaît lorsque, parmi deux facteurs, l'un est plus difficile à diviser en sous-unités *indépendantes*. C'est le cas ici avec nos boites de Pétri qui forment chacune un petit microcosme unique. Il est possible de diviser la boite de Pétri en sous-régions. C'est ce qui a été fait ici pour tester les six lots, mais ces sous-régions ne **sont pas indépendantes** les unes des autres, elles continuent d'être liées entre elles au sein de la même boite de Pétri. Nous pouvons néanmoins considérer la boite de Pétri comme facteur aléatoire dans ce modèle split-plot. Dans ce cas, nous avons intérêt à utiliser `lmeTest::lmer()` qui calculera ces valeurs *P* là où elles sont pertinentes[^11-variance-ii-4]. Dans la formule, un facteur aléatoire simple s'écrit `(1 | facteur)`. Il considère un décalage constant pour tous les autres facteurs qui est propre à chaque niveau du facteur aléatoire. Concrètement ici, une boite de Pétri donne des résultats globalement meilleurs ou moins bons pour l'ensemble des six lots de pénicilline. Cela donne :
+Un des modèles pour lequel les valeurs *P* sont calculables est le modèle dit en parcelles divisées (*split-plot* en anglais). Cette situation apparaît lorsque, parmi deux facteurs, l'un est plus difficile à diviser en sous-unités *indépendantes*. C'est le cas ici avec nos boites de Pétri qui forment chacune un petit microcosme unique. Il est possible de diviser la boite de Pétri en sous-régions. C'est ce qui a été fait ici pour tester les six lots, mais ces sous-régions ne **sont pas indépendantes** les unes des autres, elles continuent d'être liées entre elles au sein de la même boite de Pétri. Nous pouvons néanmoins considérer la boite de Pétri comme facteur aléatoire dans ce modèle split-plot. Dans ce cas, nous avons intérêt à utiliser `lmeTest::lmer()` qui calculera ces valeurs *P* là où elles sont pertinentes[^10-variance-ii-4]. Dans la formule, un facteur aléatoire simple s'écrit `(1 | facteur)`. Il considère un décalage constant pour tous les autres facteurs qui est propre à chaque niveau du facteur aléatoire. Concrètement ici, une boite de Pétri donne des résultats globalement meilleurs ou moins bons pour l'ensemble des six lots de pénicilline. Cela donne :
 
-[^11-variance-ii-4]: Notez toutefois qu'il est conseillé de manière générale de **ne pas** utiliser les valeurs *P* du tout, mais de privilégier d'autres approches comme le rapport de la log-vraisemblance entre modèles, voir [ici](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-9450.2010.00852.x), mais cela sort du cadre de ce cours.
+[^10-variance-ii-4]: Notez toutefois qu'il est conseillé de manière générale de **ne pas** utiliser les valeurs *P* du tout, mais de privilégier d'autres approches comme le rapport de la log-vraisemblance entre modèles, voir [ici](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-9450.2010.00852.x), mais cela sort du cadre de ce cours.
 
 ```{r}
 pen_split_plot <- lmerTest::lmer(data = pen, diameter ~ sample + (1 | plate))
@@ -525,9 +525,9 @@ L'analyse des résidus (indispensable) n'est pas reproduite ici. Elle reste la m
 
 ##### À vous de jouer ! {.unnumbered}
 
-```{r assign_A11Ia_anova2_II, echo=FALSE, results='asis'}
+```{r assign_A10Ia_anova2_II, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("A11Ia_anova2", part = "II",
+  assignment("A10Ia_anova2", part = "II",
     url = "https://github.com/BioDataScience-Course/A11Ia_anova2",
     course.ids = c(
       'S-BIOG-027' = !"A11Ia_{YY}M_anova2"),
@@ -657,7 +657,7 @@ Dans tous les cas, une analyse des résidus, en particulier un graphique quantil
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A11Lb_anova2mixte", title = "ANOVA à 2 facteurs mixte", toc = "Analyse de variance à 2 facteurs mixte")`
+`r learnr("A10Lb_anova2mixte", title = "ANOVA à 2 facteurs mixte", toc = "Analyse de variance à 2 facteurs mixte")`
 
 ##### Pour aller plus loin {.unnumbered}
 
@@ -673,9 +673,9 @@ Dans cette dernière section du module \@ref(variance2), nous revenons sur nos o
 
 ```
 
-Vous avez pu vous rendre compte que R n'est pas qu'un logiciel de science des données. Il comprend également un **langage informatique** du même nom[^11-variance-ii-5] dédié à la manipulation, la visualisation et l'analyse des données.
+Vous avez pu vous rendre compte que R n'est pas qu'un logiciel de science des données. Il comprend également un **langage informatique** du même nom[^10-variance-ii-5] dédié à la manipulation, la visualisation et l'analyse des données.
 
-[^11-variance-ii-5]: Historiquement, ce langage s'appelait **S** à l'origine dans les années 1970 alors qu'il a été inventé par John Chambers et ses collègues aux laboratoires Bell. R est une implémentation open source de S écrite dans les années 1990 par Ross Ihaka et Robert Gentleman. Ensuite R a pris de l'importance à tel point qu'on parle maintenant du langage R (sachant bien qu'il s'agit d'un *dialecte* du langage S).
+[^10-variance-ii-5]: Historiquement, ce langage s'appelait **S** à l'origine dans les années 1970 alors qu'il a été inventé par John Chambers et ses collègues aux laboratoires Bell. R est une implémentation open source de S écrite dans les années 1990 par Ross Ihaka et Robert Gentleman. Ensuite R a pris de l'importance à tel point qu'on parle maintenant du langage R (sachant bien qu'il s'agit d'un *dialecte* du langage S).
 
 Les langages informatiques sont, pour la plupart, conçus autour de standards bien définis. Mais R est toujours resté volontairement très libertaire à ce niveau. Comme R permet également de presque tout redéfinir dans son langage, il est apparu au cours du temps différents styles. Ces styles co-existent et co-existeront encore longtemps, car ils ont tous des avantages et des inconvénients, ce qui mène à des choix personnels de chaque utilisateur dictés par l'usage qu'il fait de R, ses goûts, son caractère, et comment il a été formé (à quelle "école" il appartient). Nous n'entrerons pas dans les débats stériles autant que passionnés autour de ces questions de styles. Il est cependant utile de comprendre ces différentes approches au moins dans leurs grandes lignes.
 
@@ -861,9 +861,9 @@ Comme contingenter des observations est une opération fréquente, il existe *ex
 count(zoo, class)
 ```
 
-Le résultat est le même. Comparons maintenant la fonction `table()` de base et `count()` de tidyverse du point de vue des arguments. `table()` prends un vecteur comme argument. À nous de l'extraire du data frame à l'aide de `zoo$class`, ce qui donne `table(zoo$class)`. Par contre, `count()` comme toute fonction tidyverse qui se respecte, prend comme premier argument un **tibble**, un **data.table** ou un **data.frame**, bref un tableau cas par variables. C'est ensuite au niveau du second argument que l'on spécifie la variable que nous souhaitons utiliser à partir de ce tableau. Ici, plus besoin d'indiquer que c'est une variable qui vient du tableau `zoo`, car `count()` le sait déjà. Bien que ce ne soit pas évident au premier coup d'œil, `count()` ne respecte *pas* la syntaxe de base de R et évalue `class` de manière particulière[^11-variance-ii-6]. Au final, l'appel à `table()` nécessite de comprendre ce que fait l'opérateur `$`. Au contraire, l'instruction tidyverse `count(zoo, class)` se lit et se comprend très bien presque comme si c'était écrit en anglais. Vous lisez en effet "compte dans zoo la classe" (avantage), mais le coût en est une évaluation non standard de ses arguments (inconvénient qui ne peut pas apparaître à ce stade, mais que vous constaterez plus tard quand vous ferez des choses plus évoluées avec ces instructions).
+Le résultat est le même. Comparons maintenant la fonction `table()` de base et `count()` de tidyverse du point de vue des arguments. `table()` prends un vecteur comme argument. À nous de l'extraire du data frame à l'aide de `zoo$class`, ce qui donne `table(zoo$class)`. Par contre, `count()` comme toute fonction tidyverse qui se respecte, prend comme premier argument un **tibble**, un **data.table** ou un **data.frame**, bref un tableau cas par variables. C'est ensuite au niveau du second argument que l'on spécifie la variable que nous souhaitons utiliser à partir de ce tableau. Ici, plus besoin d'indiquer que c'est une variable qui vient du tableau `zoo`, car `count()` le sait déjà. Bien que ce ne soit pas évident au premier coup d'œil, `count()` ne respecte *pas* la syntaxe de base de R et évalue `class` de manière particulière[^10-variance-ii-6]. Au final, l'appel à `table()` nécessite de comprendre ce que fait l'opérateur `$`. Au contraire, l'instruction tidyverse `count(zoo, class)` se lit et se comprend très bien presque comme si c'était écrit en anglais. Vous lisez en effet "compte dans zoo la classe" (avantage), mais le coût en est une évaluation non standard de ses arguments (inconvénient qui ne peut pas apparaître à ce stade, mais que vous constaterez plus tard quand vous ferez des choses plus évoluées avec ces instructions).
 
-[^11-variance-ii-6]: Cette évaluation particulière s'appelle le *"tidyeval"*. Son explication est hors de propos dans cette introduction à la science des données, mais si vous êtes curieux, vous pouvez toujours [lire ceci](https://thinkr.fr/tidyeval/).
+[^10-variance-ii-6]: Cette évaluation particulière s'appelle le *"tidyeval"*. Son explication est hors de propos dans cette introduction à la science des données, mais si vous êtes curieux, vous pouvez toujours [lire ceci](https://thinkr.fr/tidyeval/).
 
 ```{block, type='note'}
 Le style de SciViews::R accepte à la fois la syntaxe de base et celle de tidyverse, avec une préférence pour cette dernière lorsque la lisibilité des instructions est primordiale. Il propose même sa propre version des fonctions "tidy", sous forme de fonctions "speedy" dont le nom commence par 's' est sont souvent plus rapides. De plus, le style formule est également abondamment utilisé dès qu'il s'agit de réaliser un graphique ou un modèle statistique (les deux étant d'ailleurs souvent associés).
@@ -984,7 +984,7 @@ Pour finir, il parait que les Belges sont forts en autodérision. La caricature 
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A11Lc_syntaxr", title = "Syntaxes dans R", toc = "Syntaxes dans R")`
+`r learnr("A10Lc_syntaxr", title = "Syntaxes dans R", toc = "Syntaxes dans R")`
 
 ##### Pour en savoir plus {.unnumbered}
 
@@ -998,7 +998,7 @@ Pour finir, il parait que les Belges sont forts en autodérision. La caricature 
 
 ```{r assign_A10Ga_human_health_IV, echo=FALSE, results='asis'}
 if (exists("assignment2"))
-  assignment2("A08Ga_human_health", part = "IV",
+  assignment2("A07Ga_human_health", part = "IV",
     url = "https://github.com/BioDataScience-Course/A08Ga_human_health",
     course.ids = c(
       'S-BIOG-027' = !"A08Ga_{YY}M_human_health"),
@@ -1041,4 +1041,4 @@ if (exists("assignment2"))
 
 ##### Progression {.unnumbered}
 
-`r launch_report("11", height = 800)`
+`r launch_report("10", height = 800)`

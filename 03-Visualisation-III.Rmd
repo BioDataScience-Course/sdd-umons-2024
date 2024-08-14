@@ -316,7 +316,7 @@ Dans ce dernier cas, c'est bien plus facile : il y a 24 observations relatives 
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A04La_barplot", title = "Graphiques en barres et camembert", toc = "Graphiques en barres et camembert")`
+`r learnr("A03La_barplot", title = "Graphiques en barres et camembert", toc = "Graphiques en barres et camembert")`
 
 ##### Pour en savoir plus {.unnumbered}
 
@@ -353,9 +353,9 @@ Le premier descripteur des cinq nombres est la **médiane** qui est la valeur se
 median(x)
 ```
 
-En effet, nous voyons sur le vecteur ordonné que cinq valeurs sont plus petites que 68 et cinq valeurs sont plus grandes. Les quartiles séparent l'échantillon en quatre. Le **premier quartile** (Q1) sera la valeur pour laquelle 25% des observations seront plus petites. Elle se situe donc entre la valeur minimale et la médiane. Cette médiane est égale au second quartile (50% des observations plus petites). Le **troisième quartile** (Q3) est la valeur pour laquelle 75% des observations de l'échantillon sont plus petites[^04-visualisation-iii-1]. Enfin, la valeur **minimale** et la valeur **maximale** observées dans l'échantillon complètent ces cinq nombres qui décrivent de manière synthétique la *position* et l'*étendue* des observations.
+En effet, nous voyons sur le vecteur ordonné que cinq valeurs sont plus petites que 68 et cinq valeurs sont plus grandes. Les quartiles séparent l'échantillon en quatre. Le **premier quartile** (Q1) sera la valeur pour laquelle 25% des observations seront plus petites. Elle se situe donc entre la valeur minimale et la médiane. Cette médiane est égale au second quartile (50% des observations plus petites). Le **troisième quartile** (Q3) est la valeur pour laquelle 75% des observations de l'échantillon sont plus petites[^03-visualisation-iii-1]. Enfin, la valeur **minimale** et la valeur **maximale** observées dans l'échantillon complètent ces cinq nombres qui décrivent de manière synthétique la *position* et l'*étendue* des observations.
 
-[^04-visualisation-iii-1]: Notez que, lorsque la coupure tombe entre deux observations, une valeur intermédiaire est utilisée. Ici par exemple, le premier quartile est entre 53 et 55, donc, il vaut 54. Le troisième quartile se situe entre 78 et 82. Il vaut donc 80.
+[^03-visualisation-iii-1]: Notez que, lorsque la coupure tombe entre deux observations, une valeur intermédiaire est utilisée. Ici par exemple, le premier quartile est entre 53 et 55, donc, il vaut 54. Le troisième quartile se situe entre 78 et 82. Il vaut donc 80.
 
 `r h5p(209, height = 270, toc = "Médiane")`
 
@@ -369,9 +369,9 @@ Voici comment on les calcule facilement dans R :
 fivenum(x)
 ```
 
-La boite de dispersion est une représentation graphique codifiée de ces cinq nombres. La représentation de `x` sous forme de nuage de points n'est ni très esthétique, ni très lisible, surtout si nous avons affaire à des milliers ou des millions d'observations qui se chevauchent sur le graphique[^04-visualisation-iii-2].
+La boite de dispersion est une représentation graphique codifiée de ces cinq nombres. La représentation de `x` sous forme de nuage de points n'est ni très esthétique, ni très lisible, surtout si nous avons affaire à des milliers ou des millions d'observations qui se chevauchent sur le graphique[^03-visualisation-iii-2].
 
-[^04-visualisation-iii-2]: Il est possible de modifier la transparence des points en utilisant l'argument `alpha =` et/ou de les déplacer légèrement vers la gauche ou vers la droite de manière aléatoire pour résoudre le problème de leur chevauchement sur un graphique en nuage de points univarié en replaçant `geom_point()` par `geom_jitter()`.
+[^03-visualisation-iii-2]: Il est possible de modifier la transparence des points en utilisant l'argument `alpha =` et/ou de les déplacer légèrement vers la gauche ou vers la droite de manière aléatoire pour résoudre le problème de leur chevauchement sur un graphique en nuage de points univarié en replaçant `geom_point()` par `geom_jitter()`.
 
 ```{r nuage-de-points, fig.cap="Nuage de points univarié.", echo=FALSE}
 df <- dtx(x = x)
@@ -571,9 +571,9 @@ chart(data = df, Valeur ~ Facteur) +
   geom_point(color = "red") 
 ```
 
-La boite de dispersion pour le niveau `"A"` est calculée à partir de seulement quatre observations. C'est trop peu. Comme les points représentant les observations ne sont habituellement pas superposés à la boite, cela peut passer inaperçu et tromper le lecteur ! Une bonne pratique consiste à ajouter *n*, le nombre d'observations au-dessus de chaque boite. Cela peut se faire facilement avec les fonctions `give_n()` et `stat_summary()` ci-dessous[^04-visualisation-iii-3].
+La boite de dispersion pour le niveau `"A"` est calculée à partir de seulement quatre observations. C'est trop peu. Comme les points représentant les observations ne sont habituellement pas superposés à la boite, cela peut passer inaperçu et tromper le lecteur ! Une bonne pratique consiste à ajouter *n*, le nombre d'observations au-dessus de chaque boite. Cela peut se faire facilement avec les fonctions `give_n()` et `stat_summary()` ci-dessous[^03-visualisation-iii-3].
 
-[^04-visualisation-iii-3]: La fonction `give_n()` est une **fonction personnalisée** que nous avons écrite nous-mêmes. Elle positionne du texte `y =` 10% plus haut que le `max(x)`, et ce texte est `length(x)`, la longueur du vecteur qui correspond au nombre d'observations pour `x` (`x` étant utilisé en interne par le moteur graphique). Il est possible, et même assez facile, dans R d'écrire ses *propres* fonctions. Néanmoins cela dépasse du cadre du cours pour l'instant. Pour utiliser `give_n()` dans vos documents Quarto ou R Markdown, copiez simplement sa définition dans un chunk avant de l'utiliser comme c'est fait ici. Elle est aussi réutilisable plus loin dans le même Quarto ou R Markdown, une fois qu'elle est définie.
+[^03-visualisation-iii-3]: La fonction `give_n()` est une **fonction personnalisée** que nous avons écrite nous-mêmes. Elle positionne du texte `y =` 10% plus haut que le `max(x)`, et ce texte est `length(x)`, la longueur du vecteur qui correspond au nombre d'observations pour `x` (`x` étant utilisé en interne par le moteur graphique). Il est possible, et même assez facile, dans R d'écrire ses *propres* fonctions. Néanmoins cela dépasse du cadre du cours pour l'instant. Pour utiliser `give_n()` dans vos documents Quarto ou R Markdown, copiez simplement sa définition dans un chunk avant de l'utiliser comme c'est fait ici. Elle est aussi réutilisable plus loin dans le même Quarto ou R Markdown, une fois qu'elle est définie.
 
 ```{r boxplot2, fig.cap="Taille de copépodes pour différents groupes taxonomiques (le nombre d'observations est indiqué au dessus de chaque boite)."}
 give_n <- function(x)
@@ -629,7 +629,7 @@ chart(data = tooth_growth, len ~ supp %fill=% dose) +
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A04Lb_boxplot", title = "Boites de dispersion", toc = "Boites de dispersion")`
+`r learnr("A03Lb_boxplot", title = "Boites de dispersion", toc = "Boites de dispersion")`
 
 ##### Pour en savoir plus {.unnumbered}
 
@@ -697,11 +697,11 @@ Il existe d'autres fonctions permettant de combiner plusieurs graphiques comme [
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A04Lc_comp_fig", title = "Graphiques composés", toc = "Graphiques composés")`
+`r learnr("A03Lc_comp_fig", title = "Graphiques composés", toc = "Graphiques composés")`
 
-```{r assign_A04Ia_graphe_avance, echo=FALSE, results='asis'}
+```{r assign_A03Ia_graphe_avance, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("A04Ia_graphe_avance", part = NULL,
+  assignment("A03Ia_graphe_avance", part = NULL,
     url = "https://github.com/BioDataScience-Course/A04Ia_graphe_avance",
     course.ids = c(
       'S-BIOG-006' = !"A04Ia_{YY}M_graphe-avance"),
@@ -790,21 +790,21 @@ ggplot(data = urchin, mapping = aes(x = weight, y = height, col = origin)) +
 
 En comparant les Figs. \@ref(fig:chart-example) et \@ref(fig:ggplot2-example) (en faisant abstraction des instructions R utilisées pour l'instant), plusieurs éléments sautent immédiatement aux yeux :
 
--   Le thème par défaut de {ggplot2} est très reconnaissable avec un quadrillage blanc sur fond gris clair. On aime ou on n'aime pas, mais il est évident que (1) ce n'est pas une présentation "standard" d'un graphique scientifique, et (2) le thème tord un peu le cou à une règle importante pour réaliser un graphique de qualité : **minimiser la quantité d'"encre" nécessaire pour représenter un graphique**, autrement dit, plus le graphique est simple et sobre, mieux c'est. Le thème par défaut de `chart()` respecte mieux tout ceci[^04-visualisation-iii-4].
+-   Le thème par défaut de {ggplot2} est très reconnaissable avec un quadrillage blanc sur fond gris clair. On aime ou on n'aime pas, mais il est évident que (1) ce n'est pas une présentation "standard" d'un graphique scientifique, et (2) le thème tord un peu le cou à une règle importante pour réaliser un graphique de qualité : **minimiser la quantité d'"encre" nécessaire pour représenter un graphique**, autrement dit, plus le graphique est simple et sobre, mieux c'est. Le thème par défaut de `chart()` respecte mieux tout ceci[^03-visualisation-iii-4].
 
 -   La taille des caractères est légèrement plus grande dans la Fig. \@ref(fig:chart-example) réalisée avec `chart()` (surtout pour les nombres sur les axes). Le manque de lisibilité des parties textuelles dans un graphique est un défaut fréquent, dépendant de la résolution et de la taille de reproduction du graphique dans le document final. Le choix de `chart()` recule un peu ce risque.
 
 -   `chart()` est capable d'aller lire les métadonnées (libellés en français et unités des variables) et les utilise automatiquement pour proposer des libellés corrects et complets des axes par défaut. `ggplot()` ne peut pas le faire, et il faut utiliser la fonction `labs()` pour l'indiquer manuellement.
 
-[^04-visualisation-iii-4]: Notez que plusieurs thèmes existent dans **ggplot2**. Il est facile d'en changer et de les personnaliser... mais c'est toujours appréciable d'avoir un rendu impeccable dès le premier essai.
+[^03-visualisation-iii-4]: Notez que plusieurs thèmes existent dans **ggplot2**. Il est facile d'en changer et de les personnaliser... mais c'est toujours appréciable d'avoir un rendu impeccable dès le premier essai.
 
 ```{block, type='info'}
 De manière générale, par rapport à `ggplot()`, `chart()` a été conçu pour produire le graphique le plus proche d'un rendu final impeccable avec tous les paramètres par défaut.
 ```
 
-Quelques règles simples vous permettent de passer des **instructions** `ggplot()` à `chart()` et *vice versa*[^04-visualisation-iii-5] :
+Quelques règles simples vous permettent de passer des **instructions** `ggplot()` à `chart()` et *vice versa*[^03-visualisation-iii-5] :
 
-[^04-visualisation-iii-5]: Étant donné l'abondante littérature écrite sur {ggplot2}, il est utile de pouvoir convertir des exemples {ggplot2} en graphiques `chart()`, si vous êtes convaincu par cette nouvelle interface.
+[^03-visualisation-iii-5]: Étant donné l'abondante littérature écrite sur {ggplot2}, il est utile de pouvoir convertir des exemples {ggplot2} en graphiques `chart()`, si vous êtes convaincu par cette nouvelle interface.
 
 1.  On peut toujours remplacer `ggplot()` par `chart()` dans les instructions R (à condition que le package {chart} soit chargé bien sûr, par exemple via `SciViews::R`). Dans ce cas, le thème par défaut diffère, et le libellé automatique des axes (non disponible avec `ggplot()`) est activé.
 
@@ -981,9 +981,9 @@ Tout au long des quatre premiers modules, vous avez appris à utiliser R et RStu
 
 ##### À vous de jouer ! {.unnumbered}
 
-```{r assign_A04Ca_charts, echo=FALSE, results='asis'}
+```{r assign_A03Ca_charts, echo=FALSE, results='asis'}
 if (exists("challenge"))
-  challenge("A04Ca_charts", part = NULL,
+  challenge("A03Ca_charts", part = NULL,
     url = "https://github.com/BioDataScience-Course/A04Ca_charts",
     course.ids = c(
       'S-BIOG-006' = !"A04Ca_{YY}M_charts"),
@@ -1008,10 +1008,10 @@ Vous pouvez soumettre vos résultats pendant une période de temps précise via 
 
 ## Récapitulatif des exercices
 
-Ce module 4 vous a permis de réaliser et de découvrir de nouveaux graphiques. Vous savez maintenant réaliser des graphiques en barres, des graphiques en camembert et des boites de dispersion. Vous êtes aussi capable de réaliser des graphiques composés. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
+Ce module 3 vous a permis de réaliser et de découvrir de nouveaux graphiques. Vous savez maintenant réaliser des graphiques en barres, des graphiques en camembert et des boites de dispersion. Vous êtes aussi capable de réaliser des graphiques composés. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 
 ##### Progression {.unnumbered}
 
-`r launch_report("04", height = 800)`
+`r launch_report("03", height = 800)`

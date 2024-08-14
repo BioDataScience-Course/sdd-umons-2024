@@ -30,9 +30,9 @@ Les Belges, c'est connu, apprécient la bière. Mais ils ne sont pas les seuls, 
 
 Pour la petite histoire, Gosset a travaillé pour une certaine brasserie irlandaise du nom de Guinness au début du 20^e^ siècle. C'est en étudiant la variabilité de sa bière d'un cru à l'autre que Gosset a découvert la façon dont la moyenne d'un échantillon se distribue. Il a pu dériver une formulation mathématique de cette distribution, la **distribution *t* de Student**, et à partir de là, nous verrons que de nombreuses applications en découlent. Nous pourrons, par exemple, dire si deux moyennes diffèrent **significativement** l'une de l'autre ou pas.
 
-Mais au fait, pourquoi, cette distribution porte-t-elle le nom de "Student" ? Visionnez la vidéo suivante (malheureusement en anglais) pour le découvrir[^09-moyenne-1].
+Mais au fait, pourquoi, cette distribution porte-t-elle le nom de "Student" ? Visionnez la vidéo suivante (malheureusement en anglais) pour le découvrir[^08-moyenne-1].
 
-[^09-moyenne-1]: Vous pouvez activer les sous-titres en anglais à partir de la barre de boutons en bas de la vidéo pour vous aider à comprendre l'histoire.
+[^08-moyenne-1]: Vous pouvez activer les sous-titres en anglais à partir de la barre de boutons en bas de la vidéo pour vous aider à comprendre l'histoire.
 
 ```{r, echo=FALSE}
 vembedr::embed_youtube("GFzCIA9kppM", width = 770, height = 433)
@@ -60,13 +60,13 @@ Nous utiliserons également l'écart type, noté $\sigma_x$ pour la population e
   (\#eq:sd)
 \end{equation}
 ```
-À noter que $s^2$ est également appelée la **variance**[^09-moyenne-2].
+À noter que $s^2$ est également appelée la **variance**[^08-moyenne-2].
 
-[^09-moyenne-2]: L'équation proposée est, en fait, valable pour un échantillon et est calculée comme tel par R à l'aide des fonctions `sd()` pour l'écart type ou `var()` pour la variance. Pour la population ou pour un échantillon de taille très grande, voire infinie, nous pourrions plutôt diviser par $n$ au lieu de $n - 1$, ... mais puisque $n$ est très grand, cela ne change pas grand-chose au final.
+[^08-moyenne-2]: L'équation proposée est, en fait, valable pour un échantillon et est calculée comme tel par R à l'aide des fonctions `sd()` pour l'écart type ou `var()` pour la variance. Pour la population ou pour un échantillon de taille très grande, voire infinie, nous pourrions plutôt diviser par $n$ au lieu de $n - 1$, ... mais puisque $n$ est très grand, cela ne change pas grand-chose au final.
 
-En fait, ce qui nous intéresse, ce n'est pas vraiment la moyenne de l'échantillon, mais celle de la population que l'on notera $\mu$[^09-moyenne-3].
+En fait, ce qui nous intéresse, ce n'est pas vraiment la moyenne de l'échantillon, mais celle de la population que l'on notera $\mu$[^08-moyenne-3].
 
-[^09-moyenne-3]: Notez que les lettres latines sont utilisées pour se référer aux variables et aux descripteurs statistiques telles que la moyenne pour l'échantillon, alors que les paramètres équivalents de la population, qui sont inconnus, sont représentés par des lettres grecques en statistiques.
+[^08-moyenne-3]: Notez que les lettres latines sont utilisées pour se référer aux variables et aux descripteurs statistiques telles que la moyenne pour l'échantillon, alors que les paramètres équivalents de la population, qui sont inconnus, sont représentés par des lettres grecques en statistiques.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -87,9 +87,9 @@ Dans ce cas-ci, nous obtenons une moyenne de 7,8. Ce n'est pas égal à 8. Le ha
 mean(rnorm(9, mean = 8, sd = 2))
 ```
 
-Cette fois-ci, nous obtenons une moyenne de 8,7. Nous savons que la moyenne $\mu$ qui nous intéresse est très probablement différente de la moyenne de notre échantillon, **mais de combien ?** Pour le déterminer, nous devons définir comment la moyenne de l'échantillon varie d'un échantillon à l'autre, c'est ce qu'on appelle la **distribution d'échantillonnage**. Nous pouvons le déterminer expérimentalement en échantillonnant un grand nombre de fois. On appelle cela une **métaexpérience.** En pratique, c'est difficile à faire, mais avec notre ordinateur et le générateur de nombres pseudo-aléatoires de R, pas de problèmes. Donc, comment se distribue la moyenne entre ... disons dix mille échantillons différents de neuf individus tirés de la même population[^09-moyenne-4] ?
+Cette fois-ci, nous obtenons une moyenne de 8,7. Nous savons que la moyenne $\mu$ qui nous intéresse est très probablement différente de la moyenne de notre échantillon, **mais de combien ?** Pour le déterminer, nous devons définir comment la moyenne de l'échantillon varie d'un échantillon à l'autre, c'est ce qu'on appelle la **distribution d'échantillonnage**. Nous pouvons le déterminer expérimentalement en échantillonnant un grand nombre de fois. On appelle cela une **métaexpérience.** En pratique, c'est difficile à faire, mais avec notre ordinateur et le générateur de nombres pseudo-aléatoires de R, pas de problèmes. Donc, comment se distribue la moyenne entre ... disons dix mille échantillons différents de neuf individus tirés de la même population[^08-moyenne-4] ?
 
-[^09-moyenne-4]: Nous utilisons pour ce faire une boucle `for` dans R qui réitère un calcul sur chaque élément d'un vecteur, ici, une séquence 1, 2, 3, ..., 10000 obtenue à l'aide de l'instruction `1:10000`.
+[^08-moyenne-4]: Nous utilisons pour ce faire une boucle `for` dans R qui réitère un calcul sur chaque élément d'un vecteur, ici, une séquence 1, 2, 3, ..., 10000 obtenue à l'aide de l'instruction `1:10000`.
 
 ```{r}
 means_n9 <- numeric(10000) # Vecteur de 10000 valeurs
@@ -238,9 +238,9 @@ chart(dists) +
   annotate("text", x = 6.5, y = 0.02, label = "5%", col = "red")
 ```
 
-Nous pouvons voir sur la Fig. \@ref(fig:tdistri1) que la distribution *t* de Student est plus resserrée en son centre, mais plus étalée aux extrémités que la distribution normale de même moyenne et écart type[^09-moyenne-5]. Néanmoins, elle est d'autant plus proche d'une normale que les degrés de liberté sont grands. On dit qu'elle converge vers une normale lorsque $ddl \longrightarrow \infty$. En pratique, pour des degrés de liberté égaux ou supérieurs à 30, nous pourrons considérer que les deux distributions sont pratiquement confondues.
+Nous pouvons voir sur la Fig. \@ref(fig:tdistri1) que la distribution *t* de Student est plus resserrée en son centre, mais plus étalée aux extrémités que la distribution normale de même moyenne et écart type[^08-moyenne-5]. Néanmoins, elle est d'autant plus proche d'une normale que les degrés de liberté sont grands. On dit qu'elle converge vers une normale lorsque $ddl \longrightarrow \infty$. En pratique, pour des degrés de liberté égaux ou supérieurs à 30, nous pourrons considérer que les deux distributions sont pratiquement confondues.
 
-[^09-moyenne-5]: Rappelez-vous que pour la distribution normale, le second paramètre est la variance et non l'écart type ce qui correspond à (2/3)\^2 = 0,44.
+[^08-moyenne-5]: Rappelez-vous que pour la distribution normale, le second paramètre est la variance et non l'écart type ce qui correspond à (2/3)\^2 = 0,44.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -448,7 +448,7 @@ Nous allons également pouvoir utiliser la distribution *t* de Student comme dis
 
 Partons d'un exemple concret. Imaginez que vous êtes des biologistes ouest-australiens travaillant à Freemantle. Vous y étudiez le crabe *Leptographus variegatus* (Fabricius, 1793). C'est un crabe qui peut se trouver en populations abondantes sur les côtes rocheuses fortement battues. Il a un régime alimentaire partiellement détritivore et partiellement carnivore.
 
-![Crabe *Leptograpsus variegatus* par [Johnragla](https://commons.wikimedia.org/wiki/File:Purple_rock_crab_in_Aotea_Harbour_April_2013.jpg).](images/sdd1_09/Leptograpsus-variegatus.jpg)
+![Crabe *Leptograpsus variegatus* par [Johnragla](https://commons.wikimedia.org/wiki/File:Purple_rock_crab_in_Aotea_Harbour_April_2013.jpg).](images/sdd1_08/Leptograpsus-variegatus.jpg)
 
 Ce crabe est rapide et difficile à capturer... mais vous avez quand même réussi à en attraper et mesurer 200 d'entre eux, ce qui constitue un échantillon de taille raisonnable. Comme deux variétés co-existent, la variété bleue (`B`) et la variété orange (`O`) dans votre site d'étude, vous vous demandez si elles diffèrent d'un point de vue morphométrique. Naturellement, nous pouvons également supposer des différences entre mâles et femelles.
 
@@ -623,7 +623,7 @@ Vous pouvez également comparer les crabes bleus (`species = "B"`) avec les crab
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A09La_ttest", title = "Moyenne et test t de Student", toc = "Moyenne et test t de Student")`
+`r learnr("A08La_ttest", title = "Moyenne et test t de Student", toc = "Moyenne et test t de Student")`
 
 ## Variantes du test *t* de Student
 
@@ -631,9 +631,9 @@ Nous venons de voir ce qu'on appelle très précisément le **test *t* de Studen
 
 ### Variances inégales
 
-Dans le test précédent, nous avons supposé que les variances entre les valeurs $rear_F$ et $rear_M$ étaient égales, mais rien ne dit que cela soit le cas[^09-moyenne-6]. Si nous ne voulons pas de cette contrainte, une variante du test permet de comparer deux moyennes même en présence de variances inégales : le **test de Welch**. Il consiste à ajuster les degrés de liberté en cas de variances inégales. Il suffit de préciser `var.equal = FALSE`.
+Dans le test précédent, nous avons supposé que les variances entre les valeurs $rear_F$ et $rear_M$ étaient égales, mais rien ne dit que cela soit le cas[^08-moyenne-6]. Si nous ne voulons pas de cette contrainte, une variante du test permet de comparer deux moyennes même en présence de variances inégales : le **test de Welch**. Il consiste à ajuster les degrés de liberté en cas de variances inégales. Il suffit de préciser `var.equal = FALSE`.
 
-[^09-moyenne-6]: Il existe des tests pour le vérifier, comme le **test de Bartlett**, mais ce n'est pas le propos ici.
+[^08-moyenne-6]: Il existe des tests pour le vérifier, comme le **test de Bartlett**, mais ce n'est pas le propos ici.
 
 ```{r}
 t.test(data = crabs, rear ~ sex,
@@ -719,11 +719,11 @@ Ce test sera nécessairement unilatéral à droite, car des concentrations néga
 
 Dans le cas du test indépendant, nous comparons des *individus différents* dans les deux conditions. Le tableau de données se présente comme suit :
 
-![Un test *t* indépendant nécessite une variable numérique et une variable facteur à deux niveaux.](images/sdd1_09/t-test-independent.png)
+![Un test *t* indépendant nécessite une variable numérique et une variable facteur à deux niveaux.](images/sdd1_08/t-test-independent.png)
 
 Un autre cas de figure se présente si nous comparons des mesures réalisées sur les **mêmes** individus. Dans ce cas, le tableau de données se présente différemment :
 
-![Un test *t* apparié nécessite deux variables numériques mesurées sur les mêmes individus, donc les mêmes lignes dans un tableau cas par variables.](images/sdd1_09/t-tests-paired.png)
+![Un test *t* apparié nécessite deux variables numériques mesurées sur les mêmes individus, donc les mêmes lignes dans un tableau cas par variables.](images/sdd1_08/t-tests-paired.png)
 
 Par exemple, si nous voulons déterminer si la largeur de la carapace de *L. variegatus* diffère entre l'avant (variable `front`) et l'arrière, nous testerons (test bilatéral par défaut sans plus d'information) :
 
@@ -778,9 +778,9 @@ t.test(crabs$front, crabs$rear,
   alternative = "two.sided", conf.level = 0.95, paired = TRUE)
 ```
 
-Nous rejetons $H_0$, car la valeur *P* est inférieure à $\alpha$. Nous en concluons que le crabe *L. variegatus* a une carapace significativement plus large à l'avant qu'à l'arrière (t test apparié = 25,3, ddl = 199, valeur *P* \<\< 10^-3^). Naturellement, les variantes unilatérales à gauche et à droite existent aussi pour ce test. Par contre, la question des variances égales ou non ne se pose pas dans ce cas[^09-moyenne-7]. Notez que le test se limite à indiquer que la valeur *P* \< 2,2 . 10^-16^. Effectivement, notre calcul donne 3.7 . 10^-64^.
+Nous rejetons $H_0$, car la valeur *P* est inférieure à $\alpha$. Nous en concluons que le crabe *L. variegatus* a une carapace significativement plus large à l'avant qu'à l'arrière (t test apparié = 25,3, ddl = 199, valeur *P* \<\< 10^-3^). Naturellement, les variantes unilatérales à gauche et à droite existent aussi pour ce test. Par contre, la question des variances égales ou non ne se pose pas dans ce cas[^08-moyenne-7]. Notez que le test se limite à indiquer que la valeur *P* \< 2,2 . 10^-16^. Effectivement, notre calcul donne 3.7 . 10^-64^.
 
-[^09-moyenne-7]: Pouvez-vous expliquer pourquoi ? Réfléchissez, c'est assez évident.
+[^08-moyenne-7]: Pouvez-vous expliquer pourquoi ? Réfléchissez, c'est assez évident.
 
 ##### Conditions d'application {.unnumbered}
 
@@ -840,7 +840,7 @@ Comme exercice, interprétez ce test d'un point de vue statistique (rejet ou non
 
 Dans le cas du test *t* de Student univarié, nous comparons la moyenne d'une seule variable à une constante de référence. Le schéma suivant indique qu'une seule variable quantitative (`numeric`) est nécessaire.
 
-![](images/sdd1_09/t-tests-univariate.png)
+![](images/sdd1_08/t-tests-univariate.png)
 
 Le calcul est le même que dans le cas du test *t* apparié, avec l'étape de soustraction `x1 - x2` en moins. Par exemple dans le jeu de données `sleep2` nous pouvons nous demander si le médicament `med1` change la durée du sommeil. Les hypothèses sont les suivantes :
 
@@ -882,9 +882,9 @@ La valeur *P* est supérieure à $\alpha$. Nous ne rejetons pas $H_0$. Nous ne p
 
 `r h5p(91, height = 400, toc = "Variantes du test t de Student")`
 
-```{r assign_A09Ia_ttest, echo=FALSE, results='asis'}
+```{r assign_A08Ia_ttest, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("A09Ia_ttest", part = NULL,
+  assignment("A08Ia_ttest", part = NULL,
     url = "https://github.com/BioDataScience-Course/A09Ia_ttest",
     course.ids = c(
       'S-BIOG-027' = !"A09Ia_{YY}M_ttest"),
@@ -906,9 +906,9 @@ En fait, il existe un test similaire qui ne fait **aucune** hypothèse sur la di
 
 <!-- accessible à partir des "snippets" dans le menu `.hn` pour `hypothesis tests: nonparametric` -->
 
-Pour les données relatives à `med1` de `sleep2`, cela donne[^09-moyenne-8] :
+Pour les données relatives à `med1` de `sleep2`, cela donne[^08-moyenne-8] :
 
-[^09-moyenne-8]: Dans le cas d'un test de Wilcoxon apparié, on a $H_0: mediane_x = mediane_y$.
+[^08-moyenne-8]: Dans le cas d'un test de Wilcoxon apparié, on a $H_0: mediane_x = mediane_y$.
 
 -   $H_0: mediane_{med1} = 0$
 -   $H_1: mediane_{med1} \neq 0$
@@ -955,7 +955,7 @@ Mais au fait, c'est quoi la "puissance" d'un test d'hypothèse ? Considérons l
 -   Rejeter $H_0$ lorsque $H_0$ est vraie (erreur de première espèce $\alpha$ ou erreur de type I)
 -   Ne pas rejeter $H_0$ lorsque $H_0$ est fausse (erreur de seconde espèce $\beta$ ou erreur de type II)
 
-![](images/sdd1_09/type_I_and_II_error.jpg)
+![](images/sdd1_08/type_I_and_II_error.jpg)
 
 L'erreur de première espèce est associée au risque $\alpha$. L'erreur de seconde espèce est associée au risque $\beta$. Plus $\beta$ est petit, plus le test est puissant. La puissance est $1 - \beta$. La puissance d'un test peut se calculer à l'aide des fonctions `pwr.xxx()` du package {pwr}. Par exemple dans le test *t* univarié concernant `med1` nous ferons :
 
@@ -966,11 +966,11 @@ pwr::pwr.t.test(n = 10, d = 1.3, sig.level = 0.05,
 
 La puissance est de 0,954. Donc, $\beta$ vaut 1 - 0,954 = 0,046 ou pratiquement 5%. On a un test bien équilibré entre $\alpha$ et $\beta$, et de plus, $\beta$ nous concerne particulièrement puisqu'ici nous ne rejetons pas $H_0$.
 
-![Le système judiciaire des statistiques, par Hadley Wickham.](images/sdd1_09/statistical-justice.jpg)
+![Le système judiciaire des statistiques, par Hadley Wickham.](images/sdd1_08/statistical-justice.jpg)
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A09Lb_ttest_wmw", title = "Tests de Student et de Wilcoxon/Mann-Whitney", toc = "Tests de Student et de Wilcoxon/Mann-Whitney")`
+`r learnr("A08Lb_ttest_wmw", title = "Tests de Student et de Wilcoxon/Mann-Whitney", toc = "Tests de Student et de Wilcoxon/Mann-Whitney")`
 
 ## Représentation graphique
 
@@ -1100,9 +1100,9 @@ vembedr::embed_youtube("uIx2xvdwIIo", width = 770, height = 433)
 
 Appliquez vos nouvelles connaissances dans le projet GitHub Classroom de groupe que vous avez débuté au module précédent.
 
-```{r assign_A09Ga_human_health_II, echo=FALSE, results='asis'}
+```{r assign_A08Ga_human_health_II, echo=FALSE, results='asis'}
 if (exists("assignment2"))
-  assignment2("A08Ga_human_health", part = "II",
+  assignment2("A07Ga_human_health", part = "II",
     url = "https://github.com/BioDataScience-Course/A08Ga_human_health",
     course.ids = c(
       'S-BIOG-027' = !"A08Ga_{YY}M_human_health"),
@@ -1140,10 +1140,10 @@ if (exists("assignment2"))
 ```
 ## Récapitulatif des exercices
 
-Vous venez de terminer le module 9. Ce module vous a permis d'apprendre une grande partie des subtilités qui se cachent derrière la moyenne qui peut nous sembler si simple. Il nous a aussi inité aux tests de Student et de Wilcoxon-Mann-Withney. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
+Vous venez de terminer le module 8. Ce module vous a permis d'apprendre une grande partie des subtilités qui se cachent derrière la moyenne qui peut nous sembler si simple. Il nous a aussi inité aux tests de Student et de Wilcoxon-Mann-Withney. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 
 ##### Progression {.unnumbered}
 
-`r launch_report("09", height = 800)`
+`r launch_report("08", height = 800)`

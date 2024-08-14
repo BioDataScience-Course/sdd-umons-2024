@@ -26,9 +26,9 @@ Les tableaux de données sont principalement représentés sous deux formes : l
 
 Chaque individu est représenté en ligne et chaque variable en colonne par convention. En anglais, on parlera de [tidy data](https://www.jstatsoft.org/article/view/v059i10).
 
-Nous nous efforcerons de toujours créer un tableau de ce type pour nos données. La question à se poser est la suivante : est-ce que j'ai un seul et même individu statistique[^06-donnees-qualitatives-1] représenté sur *chaque* ligne du tableau ? Si la réponse est non, le tableau de données n'est **pas** correctement encodé.
+Nous nous efforcerons de toujours créer un tableau de ce type pour nos données. La question à se poser est la suivante : est-ce que j'ai un seul et même individu statistique[^05-donnees-qualitatives-1] représenté sur *chaque* ligne du tableau ? Si la réponse est non, le tableau de données n'est **pas** correctement encodé.
 
-[^06-donnees-qualitatives-1]: Un individu statistique n'est pas forcément la même chose qu'un individu biologique. En statistique, le cas ou l'individu est l'entité sur laquelle nous travaillons. Il peut s'agir d'un organe (partie d'un individu biologique) comme d'un ensemble d'organismes (une culture bactérienne ou la portée d'une souris par exemple, donc, plusieurs individus biologiques).
+[^05-donnees-qualitatives-1]: Un individu statistique n'est pas forcément la même chose qu'un individu biologique. En statistique, le cas ou l'individu est l'entité sur laquelle nous travaillons. Il peut s'agir d'un organe (partie d'un individu biologique) comme d'un ensemble d'organismes (une culture bactérienne ou la portée d'une souris par exemple, donc, plusieurs individus biologiques).
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -218,9 +218,9 @@ tabularise(timolol_table)
 
 La dernière version avec `tabularise()` ajoute des informations utiles comme les totaux par ligne, par colonne et général, ainsi que divers pourcentages. C'est ce type de sortie que nous privilégierons dans `SciViews::R`.
 
-Il est aussi possible de représenter *graphiquement* un tableau de contingence pour l'inclure dans une figure composée, éventuellement en le mélangeant à des graphiques[^06-donnees-qualitatives-2].
+Il est aussi possible de représenter *graphiquement* un tableau de contingence pour l'inclure dans une figure composée, éventuellement en le mélangeant à des graphiques[^05-donnees-qualitatives-2].
 
-[^06-donnees-qualitatives-2]: Utilisez cette option avec parcimonie. Il vaut toujours mieux représenter un tableau comme ... un tableau plutôt que comme une figure !
+[^05-donnees-qualitatives-2]: Utilisez cette option avec parcimonie. Il vaut toujours mieux représenter un tableau comme ... un tableau plutôt que comme une figure !
 
 ```{r}
 tab1 <- ggpubr::ggtexttable(head(biometry), rows = NULL)
@@ -235,9 +235,9 @@ Différentes fonctions dans R existent également pour convertir un tableau de c
 (timolol2 <- as_dtx(timolol_table))
 ```
 
-Si vous insistez, vous pouvez aussi obtenir un tableau cas par variables (mais celui-ci est très long et peu pratique à manipuler) à l'aide de la fonction "speedy" `suncount()` (ou la fonction "tidy" `uncount()`)[^06-donnees-qualitatives-3] :
+Si vous insistez, vous pouvez aussi obtenir un tableau cas par variables (mais celui-ci est très long et peu pratique à manipuler) à l'aide de la fonction "speedy" `suncount()` (ou la fonction "tidy" `uncount()`)[^05-donnees-qualitatives-3] :
 
-[^06-donnees-qualitatives-3]: Notez également que passer d'un tableau cas par variables à un tableau des fréquences d'occurrences se fait à l'aide de `scount()` ou `count()`.
+[^05-donnees-qualitatives-3]: Notez également que passer d'un tableau cas par variables à un tableau des fréquences d'occurrences se fait à l'aide de `scount()` ou `count()`.
 
 ```{r}
 suncount(timolol2, N)
@@ -329,7 +329,7 @@ Le dictionnaire des données est un outil important pour comprendre ce que conti
 
 Nos analyses statistiques seraient bien évidemment beaucoup plus simples si nous pouvions toujours mesurer tous les individus statistiques concernés par nos études. En fait, c'est presque toujours impossible, car les **populations** concernées sont souvent très larges, voire infinies. Nous devons donc mesurer un petit sous-ensemble de la population, ce que nous appelons un **échantillon** (*sample* en anglais) de taille finie déterminée (on parle de la **taille de l'échantillon** ou *sample size* en anglais). Le processus qui mène à la sélection des individus dans l'échantillon s'appelle l'**échantillonnage** (*sampling* en anglais). De cet échantillon, nous souhaitons malgré tout retirer un maximum d'information concernant la population d'origine. Cela s'appelle faire de l'**inférence** sur la population à partir de l'échantillon (*to infer* en anglais).
 
-![Population et échantillon.](images/sdd1_06/pop_sample.png)
+![Population et échantillon.](images/sdd1_05/pop_sample.png)
 
 ```{block, type='warning'}
 Faites attention à la signification des termes selon les disciplines. Par exemple, le terme **population** ne signifie pas la même chose pour un biologiste (ensemble des individus d'une même espèce pouvant se reproduire entre eux) et pour un statisticien (ensemble des valeurs que peut prendre une variable). Ainsi, la définition statistique du terme se réfère à un bien plus grand sous-ensemble en général. Par exemple, si nous étudions la souris *Mus musculus* Linné 1758, nous considérerons bien évidemment une population (ou une souche donnée pour les souris de laboratoire) en qualité de biologistes. Les statisticiens considéreront l'ensemble des souris qui existent, ont existé et existeront à l'avenir comme **la** population de souris.
@@ -396,9 +396,9 @@ sample(1:10, size = 6)
 
 L'échantillonnage aléatoire n'est pas la seule stratégie correcte. L'**échantillonnage stratifié** consiste à diviser la population en sous-populations identifiables facilement (par exemple, séparer la population en fonction du sexe, ou de l'âge, voire des deux simultanément). Ensuite, un échantillonnage aléatoire est réalisé à l'intérieur de chaque sous-population pour un nombre déterminé d'individus, souvent le même. Cette approche plus complexe est utile si les sous-populations sont **très mal balancées** (une sous-population possède bien plus d'individus qu'une autre).
 
-Par exemple, vous voulez comparer des prélèvements sanguins faits sur une population d'Européens hospitalisés dans le but de déterminer les critères qui permettent de diagnostiquer une infection nosocomiale[^06-donnees-qualitatives-4] rare. Les individus sont suivis en hôpital par définition et nous admettrons que l'on sait *a priori* s'ils sont atteints de la maladie ou non grâce à d'autres tests plus lourds et coûteux. La maladie est rare, heureusement. Sa prévalence n'est que de 1 cas sur 10.000.
+Par exemple, vous voulez comparer des prélèvements sanguins faits sur une population d'Européens hospitalisés dans le but de déterminer les critères qui permettent de diagnostiquer une infection nosocomiale[^05-donnees-qualitatives-4] rare. Les individus sont suivis en hôpital par définition et nous admettrons que l'on sait *a priori* s'ils sont atteints de la maladie ou non grâce à d'autres tests plus lourds et coûteux. La maladie est rare, heureusement. Sa prévalence n'est que de 1 cas sur 10.000.
 
-[^06-donnees-qualitatives-4]: Une infection nosocomiale est une infection contractée dans un hôpital.
+[^05-donnees-qualitatives-4]: Une infection nosocomiale est une infection contractée dans un hôpital.
 
 Dans ce cas, si vous effectuez un échantillonnage aléatoire de 100 patients ou même de 1.000 patients hospitalisés, vous avez toutes les chances de ne même pas inclure un seul patient atteint de l'infection dans votre échantillon ! Ici l'échantillonnage stratifié est utile. Il consiste à séparer les patients en deux sous-populations : ceux qui sont atteints et les autres. Ensuite, vous décidez, par exemple, d'analyser 50 prélèvements sanguins dans chacune des deux sous-populations. Vous échantillonnez alors 50 patients aléatoirement comme nous l'avons fait plus haut pour nos souris, mais à l'intérieur de chaque sous-population. Au final, votre échantillon contiendra alors 50 patients infectés et 50 autres qui ne le sont pas. Cet échantillon est également représentatif (sauf, bien sûr, concernant la prévalence de l'infection que nous ne pouvons plus calculer à partir de ce type d'échantillon).
 
@@ -450,9 +450,9 @@ De même, vous allez devoir attribuer un code **unique** à chaque individu mesu
 
 ### Respect de la vie privée
 
-Lors d'expérience sur des personnes, le respect de la vie privée **doit** être pris en compte[^06-donnees-qualitatives-5]. Le nom et le prénom, ou toute autre information permettant de retrouver les individus étudiés (adresse mail, numéro de sécurité sociale, etc.) **ne peuvent pas apparaître** dans la base de données consolidée. En outre, il vous faudra un **accord explicite** des personnes que vous voulez mesurer, et il faudra leur expliquer ce que vous faites, et **comment** les données seront ensuite utilisées. Une question se pose : comment pouvoir revenir vers les enregistrements liés à un individu en particulier (en cas d'erreur d'encodage par exemple) si les informations relatives directement à ces individus ne sont pas consignées dans le tableau final ? Réfléchissez à la façon dont vous vous y prendriez avant de lire la suite...
+Lors d'expérience sur des personnes, le respect de la vie privée **doit** être pris en compte[^05-donnees-qualitatives-5]. Le nom et le prénom, ou toute autre information permettant de retrouver les individus étudiés (adresse mail, numéro de sécurité sociale, etc.) **ne peuvent pas apparaître** dans la base de données consolidée. En outre, il vous faudra un **accord explicite** des personnes que vous voulez mesurer, et il faudra leur expliquer ce que vous faites, et **comment** les données seront ensuite utilisées. Une question se pose : comment pouvoir revenir vers les enregistrements liés à un individu en particulier (en cas d'erreur d'encodage par exemple) si les informations relatives directement à ces individus ne sont pas consignées dans le tableau final ? Réfléchissez à la façon dont vous vous y prendriez avant de lire la suite...
 
-[^06-donnees-qualitatives-5]: En Europe, les données numériques concernant les personnes sont soumises à des règles strictes édictées dans le [Règlement Général pour la Protection des Données](https://ec.europa.eu/info/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr_fr) ou **RGPD** en abrégé, en vigueur depuis le 25 mai 2018. Vous devez vous assurer de respecter ce règlement lors de la collecte et de l'utilisation de données relatives à des personnes. Pour les autres types de données, le droit d'auteur, une licence particulière ou des copyrights peuvent aussi limiter votre champ d'action. Renseignez-vous !
+[^05-donnees-qualitatives-5]: En Europe, les données numériques concernant les personnes sont soumises à des règles strictes édictées dans le [Règlement Général pour la Protection des Données](https://ec.europa.eu/info/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr_fr) ou **RGPD** en abrégé, en vigueur depuis le 25 mai 2018. Vous devez vous assurer de respecter ce règlement lors de la collecte et de l'utilisation de données relatives à des personnes. Pour les autres types de données, le droit d'auteur, une licence particulière ou des copyrights peuvent aussi limiter votre champ d'action. Renseignez-vous !
 
 Voici un petit tableau qui correspond à ce que vous ne pourrez **pas faire** (nom et prénom explicitement mentionnés dans le tableau) :
 
@@ -491,9 +491,9 @@ Il garde néanmoins les correspondances dans son carnet de laboratoire, au cas o
 
 **Vous allez maintenant encoder et analyser vos données relatives à l'étude de l'obésité.**
 
-```{r assign_A05Ga_biometry_II, echo=FALSE, results='asis'}
+```{r assign_A04Ga_biometry_II, echo=FALSE, results='asis'}
 if (exists("assignment2"))
-  assignment2("A05Ga_biometry", part = "II",
+  assignment2("A04Ga_biometry", part = "II",
     url = "https://github.com/BioDataScience-Course/A05Ga_biometry",
     course.ids = c(
       'S-BIOG-006' = !"A05Ga_{YY}M_biometry"),
@@ -556,9 +556,9 @@ L'aide-mémoire [Data tidying with tidyr](https://rstudio.github.io/cheatsheets/
 L'utilisation des fonction `spivot_longer()` et `spivot_wider()` de `SciViews::R` ou `pivot_longer()` et `pivot_wider()` du package {tidyr} est également décrite en détails dans [R for Data Science (2e)](https://r4ds.hadley.nz/data-tidy.html#sec-pivoting). 
 ```
 
-Prenons l'exemple d'un jeu de données provenant de l'article scientifique suivant : [Paleomicrobiology to investigate copper resistance in bacteria: isolation and description of *Cupriavidus necator* B9 in the soil of a medieval foundry](https://orbi.umons.ac.be/handle/20.500.12907/5748). L'article est basé sur l'analyse métagénomique de type "shotgun" de quatre communautés microbiennes (notées `c1`, `c4`, `c7` et `c10`, respectivement)[^06-donnees-qualitatives-6]. Il en résulte une longue liste de séquences que l'on peut attribuer à des règnes.
+Prenons l'exemple d'un jeu de données provenant de l'article scientifique suivant : [Paleomicrobiology to investigate copper resistance in bacteria: isolation and description of *Cupriavidus necator* B9 in the soil of a medieval foundry](https://orbi.umons.ac.be/handle/20.500.12907/5748). L'article est basé sur l'analyse métagénomique de type "shotgun" de quatre communautés microbiennes (notées `c1`, `c4`, `c7` et `c10`, respectivement)[^05-donnees-qualitatives-6]. Il en résulte une longue liste de séquences que l'on peut attribuer à des règnes.
 
-[^06-donnees-qualitatives-6]: Les analyses métagénomiques coûtent très cher. Il est souvent impossible de faire des répliquas. Un seul échantillon d'ADN a donc été séquencé ici pour chaque communauté.
+[^05-donnees-qualitatives-6]: Les analyses métagénomiques coûtent très cher. Il est souvent impossible de faire des répliquas. Un seul échantillon d'ADN a donc été séquencé ici pour chaque communauté.
 
 ```{r}
 shotgun_wide <- dtx(
@@ -596,9 +596,9 @@ Voici la logique derrière `pivot_longer()`, présentée sous forme d'une animat
 
 `r img("sdd1_06/pivot_longer_smaller.gif", caption = "'''pivot_longer()''' par [apreshill](https://github.com/apreshill/teachthat/blob/master/pivot/pivot_longer_smaller.gif).")`
 
-Vous conviendrez que le tableau nommé `shotgun_long` est moins compact et moins aisé à lire comparé à `shotgun_wide`. C'est une raison qui fait que beaucoup de scientifiques sont tentés d'utiliser le format large alors qu'ici il ne correspond **pas** à un tableau cas par variables correct, puisqu'il est impossible que les *mêmes* individus soient présents dans les différents lots (il s'agit de communautés microbiennes *indépendantes* les unes des autres). De plus, seul le format `shotgun_long` permet de produire des graphiques pertinents[^06-donnees-qualitatives-7].
+Vous conviendrez que le tableau nommé `shotgun_long` est moins compact et moins aisé à lire comparé à `shotgun_wide`. C'est une raison qui fait que beaucoup de scientifiques sont tentés d'utiliser le format large alors qu'ici il ne correspond **pas** à un tableau cas par variables correct, puisqu'il est impossible que les *mêmes* individus soient présents dans les différents lots (il s'agit de communautés microbiennes *indépendantes* les unes des autres). De plus, seul le format `shotgun_long` permet de produire des graphiques pertinents[^05-donnees-qualitatives-7].
 
-[^06-donnees-qualitatives-7]: Notez malgré tout que, à condition de bien en comprendre les implications, le format complémentaire peut se justifier dans une publication pour y présenter un tableau le plus lisible possible, ce qui est le cas ici. Mais pour les analyses, c'est le format qui correspond à un tableau cas par variables qui **doit** être utilisé.
+[^05-donnees-qualitatives-7]: Notez malgré tout que, à condition de bien en comprendre les implications, le format complémentaire peut se justifier dans une publication pour y présenter un tableau le plus lisible possible, ce qui est le cas ici. Mais pour les analyses, c'est le format qui correspond à un tableau cas par variables qui **doit** être utilisé.
 
 ```{r}
 chart(data = shotgun_long, sequences ~ batch %fill=% kingdom) +
@@ -655,7 +655,7 @@ rmarkdown::paged_table(crabs3)
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A06La_recombination", title = "Recombinaison de tableaux", toc = "Recombinaison de tableaux")`
+`r learnr("A05La_recombination", title = "Recombinaison de tableaux", toc = "Recombinaison de tableaux")`
 
 ## Traitements multi-tableaux
 
@@ -780,11 +780,11 @@ Il existe, en fait, plusieurs versions pour la fusion de tableaux, représentée
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A06Lb_multi_table", title = "Traitements multi-tableaux", toc = "Traitements multi-tableaux")`
+`r learnr("A05Lb_multi_table", title = "Traitements multi-tableaux", toc = "Traitements multi-tableaux")`
 
-```{r assign_A06Ia_belgium_demo, echo=FALSE, results='asis'}
+```{r assign_A05Ia_belgium_demo, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("A06Ia_belgium_demo", part = NULL,
+  assignment("A05Ia_belgium_demo", part = NULL,
     url = "https://github.com/BioDataScience-Course/A06Ia_belgium_demo",
     course.ids = c(
       'S-BIOG-006' = !"A06Ia_{YY}M_belgium_demo"),
@@ -806,10 +806,10 @@ if (exists("assignment"))
 
 ## Récapitulatif des exercices
 
-Vous venez de terminer le module 6 qui clôture la première partie du cours. Ce module vous a permis d'apprendre à présenter correctement des données (cas par variables ou tableau de contingence), à planifier vos mesures et préparer votre échantillonnage, à recombiner, remodeler et fusionner des tableaux. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
+Vous venez de terminer le module 5 qui clôture la première partie du cours. Ce module vous a permis d'apprendre à présenter correctement des données (cas par variables ou tableau de contingence), à planifier vos mesures et préparer votre échantillonnage, à recombiner, remodeler et fusionner des tableaux. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 
 ##### Progression {.unnumbered}
 
-`r launch_report("06", height = 800)`
+`r launch_report("05", height = 800)`
