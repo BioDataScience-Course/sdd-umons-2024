@@ -16,7 +16,7 @@ SciViews::R
 
 ##### Prérequis {.unnumbered}
 
-Le contenu du module \@ref(intro) doit être parfaitement maîtrisé. Il est également souhaitable, mais pas indispensable, de comprendre comment réaliser des graphiques dans R pour pouvoir comprendre le contenu de ce module.
+Le contenu du module \@ref(introvisu) doit être parfaitement maîtrisé. Il est également souhaitable, mais pas indispensable, de comprendre comment réaliser des graphiques dans R pour pouvoir comprendre le contenu de ce module.
 
 ## Importation des données
 

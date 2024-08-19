@@ -16,7 +16,7 @@ SciViews::R
 
 ##### Prérequis {.unnumbered}
 
-Assurez-vous de bien maîtriser les bases relatives à la représentation graphique abordées dans le module \@ref(visu1) et d'être à l'aise dans l'utilisation des outils logiciels (SciViews Box, RStudio, R Markdown, Git & GitHub).
+Assurez-vous de bien maîtriser les bases relatives à la représentation graphique abordées dans le module \@ref(visu2) et d'être à l'aise dans l'utilisation des outils logiciels (SciViews Box, RStudio, R Markdown, Git & GitHub).
 
 ## Graphique en barres
 

@@ -14,7 +14,13 @@ SciViews::R(lang = "fr")
 
 ##### Prérequis {.unnumbered}
 
-Tout comme pour le module \@ref(visu1), il est indispensable de maîtriser les outils comme R, RStudio, la SciViews Box (dans SaturnCloud), Git et GitHub. Ils ont tous été enseignés dans le module \@ref(intro). Ce module va vous permettre de découvrir de nouveaux graphiques à réaliser avec R. Vous devez donc maîtriser les instructions R qui permettent de réaliser un graphique.
+Le premier module de ce cours vous a permis de découvrir de nouveaux outils logiciels comme GitHub, Git, Markdown ou encore RStudio. Ces outils vont être employés tout au long de votre formation en science des données (et donc de ce cours). Il est indispensable de les maîtriser.
+
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(139, height = 270, toc = NULL)`
+
+Ce module va vous permettre de découvrir de nouveaux graphiques à réaliser avec R. Vous devez donc maîtriser les instructions R qui permettent de réaliser un graphique.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -30,7 +36,7 @@ La fin de ce module va traiter de la gestion des conflits dans GitHub. Vous deve
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(180, height = 270, toc = NULL)`
+`r h5p(256, height = 270, toc = NULL)`
 
 ## Histogramme
 
@@ -143,7 +149,7 @@ Comme vous pouvez le voir à la Fig. \@ref(fig:histo-classes), le changement du 
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r launch_shiny("https://sdd.umons.ac.be/A03Sa_histogram/", height = 500, delay = 10, toc = "Nombre de classes d'un histogramme")`
+`r launch_shiny("https://sdd.umons.ac.be/A02Sa_histogram/", height = 500, delay = 10, toc = "Nombre de classes d'un histogramme")`
 
 ##### Pièges et astuces {.unnumbered}
 
@@ -218,7 +224,7 @@ Vous découvrez sans doute que les graphiques réalisables avec R sont modulable
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A03La_univariate", title = "Graphiques univariés", toc = "Graphiques univariés")`
+`r learnr("A02La_univariate", title = "Graphiques univariés", toc = "Graphiques univariés")`
 
 **Note :** Ce tutoriel couvre l'ensemble de la matière de ce module. N'hésitez pas à le réaliser en parallèle de votre lecture.
 
@@ -372,6 +378,10 @@ En pratique, vous ne représenterez pas systématiquement tous ces types de grap
 -   Les [histogrammes à classes de largeurs variables](https://www.youtube.com/watch?v=IWyaMBV76EE).
 
 ## Travail collaboratif
+
+Dans le module précédent, vous avez travaillé seul sur un projet avec **Git** et **Github**. Vous avez débuté par réaliser une copie locale de projet nommé **clone** Vous avez ensuite réalisé des état de sauvegarde nommé **commit** de vos fichiers au sein d'un dépôt. Pour terminer vous avez réaliser une synchronisation de votre dépôt local avec votre dépot distant (sur Github) via un pull suivi d'un push
+
+Dans le module précédent, vous avez travaillé individuellement sur un projet en utilisant **Git** et **Github**. Vous avez commencé par créer une copie locale du projet. Cette action est un **clone**. Ensuite, vous avez effectué des sauvegardes de vos fichiers dans un dépôt, appelées **commit**. Pour finir, vous avez synchronisé votre dépôt local avec votre dépôt distant (sur Github) en effectuant un **pull** suivi d'un **push**.
 
 Si GitHub et Git permettent de travailler seul sur ses dépôts, ils sont prévu pour collaborer. En tant que scientifique, vous serez amené à collaborer abondamment à l'avenir.
 

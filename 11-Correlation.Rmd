@@ -14,7 +14,7 @@ SciViews::R("infer", "explore", lang = "fr")
 
 ##### Prérequis {.unnumbered}
 
-Ce module présente des descripteurs statistiques de l'association de deux variables, ainsi qu'un test d'hypothèse associé. Pour comprendre cette matière, il faut comprendre la logique derrière un test d'hypothèse vue au module \@ref(chi2). La seconde partie reviendra sur les représentations graphiques vues aux modules \@ref(visu1), \@ref(visu2) et \@ref(visu3) qui doivent être bien maîtrisé avant d'aborder cette section.
+Ce module présente des descripteurs statistiques de l'association de deux variables, ainsi qu'un test d'hypothèse associé. Pour comprendre cette matière, il faut comprendre la logique derrière un test d'hypothèse vue au module \@ref(chi2). La seconde partie reviendra sur les représentations graphiques vues aux modules \@ref(introvisu), \@ref(visu2) et \@ref(visu3) qui doivent être bien maîtrisé avant d'aborder cette section.
 
 ## Communication
 

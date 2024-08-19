@@ -23,7 +23,7 @@ SciViews::R("infer")
 
 ##### Prérequis {.unnumbered}
 
-Vous devez être à l'aise avec l'utilisation de R, RStudio et R Markdown. Vous avez appris à maîtriser ces outils dans les modules \@ref(intro) & \@ref(visu1).
+Vous devez être à l'aise avec l'utilisation de R, RStudio et R Markdown. Vous avez appris à maîtriser ces outils dans le module \@ref(introvisu).
 
 ## Probabilités {#proba}
 

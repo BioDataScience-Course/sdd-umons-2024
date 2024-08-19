@@ -92,9 +92,7 @@ Le graphique ci-dessous présente la variation de la hauteur du test en fonction
 
 Ce module va également vous faire utiliser des fonctions mathématiques. Vous devez maîtriser les notions suivantes : [les puissances](https://fr.khanacademy.org/math/algebra-basics/alg-basics-expressions-with-exponents), [les logarithmes, dont le logarithme népérien et les exponentielles](https://fr.khanacademy.org/math/algebra2/exponential-and-logarithmic-functions).
 
-## Introduction {#intro}
-
-### Le monde depuis 30 ans {#donnees}
+## Le monde depuis 30 ans {#donnees}
 
 ![La bibliothèque était pratiquement le seul lieu de détention du savoir, de l'information --et des données, en général-- avant le 21^ème^siècle.](images/sdd1_01/library.jpg)
 
@@ -125,7 +123,7 @@ Ce petit rappel historique et ces quelques informations concernant les données 
 
 `r h5p(136, height = 270, toc = "Définition de la science des données")`
 
-### Découverte des outils
+## Découverte des outils {#outils}
 
 À la fin de ce premier module, vous aurez réalisé votre première analyse complète en biologie. Nous avons cependant besoin d'outils (logiciels) pour y arriver.
 
@@ -133,7 +131,7 @@ La science des données requiert d'employer des outils performants que nous avon
 
 ![Les outils logiciels que vous apprendrez à utiliser dans ce cours vont littéralement vous transformer. Vos capacités d'analyse et de compréhension du vivant seront transcendées.](images/sdd1_01/before_after.png)
 
-#### GitHub
+### GitHub
 
 Pour bien débuter ce cours, vous avez été guidé pour créer un compte sur [GitHub](https://github.com). Il est temps de définir ce premier outil. GitHub est un réseau social permettant de sauvegarder vos projets sur le "Cloud", les partager et collaborer avec d'autres personnes. Les utilisateurs peuvent se regrouper sous une organisation afin de faciliter la collaboration. Ce réseau social a la particularité d'être centré sur les projets et utilise un gestionnaire de version de projet nommé [Git](https://git-scm.com/) (nous aborderons Git plus loin dans ce module). Ce nom provient de l'association "Git", le gestionnaire de version et "Hub" relatif au réseau.
 
@@ -163,11 +161,11 @@ Testez vos nouvelles connaissances en répondant à la question ci-dessous.
 
 GitHub n'est pas le seul réseau social centré sur Git. D'autres réseaux équivalents existent comme [Gitlab](https://about.gitlab.com) ou [Bitbucket](https://bitbucket.org). Cependant, nous utiliserons GitHub ensemble, sachant que les notions apprises ici seront réutilisables ailleurs.
 
-##### GitHub Classroom {#classroom}
+#### GitHub Classroom {#classroom}
 
 [**GitHub Classroom**](https://classroom.github.com) est une extension de GitHub qui facilite le travail dans le contexte d'exercices de niveau III ou de niveau IV (les projets individuels et en groupes) à réaliser dans le cadre d'un cours. Vous serez amené à modifier des dépôts issus de GitHub Classroom pour réaliser vos exercices. **Ces dépôts seront privés**. Seuls vous-mêmes et vos enseignants aurez accès à ces dépôts, mais vous pourrez aussi les rendre publics, si vous voulez *valoriser votre travail* de manière plus large.
 
-#### Markdown
+### Markdown
 
 Lorsque l'on rédige un document, on perd beaucoup de temps à décider de l'interligne, de choisir la taille et la police... On peut diviser en deux grandes étapes la rédaction d'un document. Il y a le fond et la forme. Nous vous proposons un outil pour booster votre **productivité** (et donc pour gagner du temps) avec Markdown. Dans un premier temps, on va s'intéresser uniquement au fond. Ensuite, on va déterminer comment le document sera mis en forme.
 
@@ -201,8 +199,6 @@ Consultez les liens [Mastering Markdown](https://guides.github.com/features/mast
 
 -   [Markdown](https://daringfireball.net/projects/markdown/). Explication en anglais de l'intérêt d'employer Markdown ainsi que la syntaxe à employer.
 
--   [Un guide pour bien commencer avec Markdown](https://blog.wax-o.com/2014/04/tutoriel-un-guide-pour-bien-commencer-avec-markdown/)
-
 -   [Comment écrire confortablement et professionnellement ? Le Markdown !](https://dolys.fr/forums/topic/comment-ecrire-confortablement-professionnellement-markdown/). Utilisation de Markdown afin de revenir à l'essence de la rédaction.
 
 ##### À vous de jouer ! {.unnumbered}
@@ -230,9 +226,9 @@ if (exists("assignment2"))
     clone = FALSE)
 ```
 
-Si vous souhaitez plus d'information sur GitHub Classroom, vous pouvez vous référer à l'Appendice \@ref(github-classroom). Après avoir réalisé cet exercice, vous serez plus aguerris dans l'utilisation des "issues" GitHub. À ce stade, vous pourrez rejoindre le dépôt dédié aux issues de ce cours présenté dans le préambule (voir [Issues](#issues)). C'est là que vous poserez vos "vraies" questions relatives à votre apprentissage de la science des données. **Attention ! Ne mélangez pas les deux dépôts. Celui de l'exercice n'est à utiliser que durant la première séance du module 1 et le dépôt A00Qa_22M_issues-a22 est celui où vous poserez vos "vraies" questions sur le cours tout au long de l'année (accessible via "Issues dans le bandeau supérieur des pages) !**
+Si vous souhaitez plus d'information sur GitHub Classroom, vous pouvez vous référer à l'Appendice \@ref(github-classroom). Après avoir réalisé cet exercice, vous serez plus aguerris dans l'utilisation des "issues" GitHub. À ce stade, vous pourrez rejoindre le dépôt dédié aux issues de ce cours présenté dans le préambule (voir [Issues](#issues)). C'est là que vous poserez vos "vraies" questions relatives à votre apprentissage de la science des données. **Attention ! Ne mélangez pas les deux dépôts. Celui de l'exercice n'est à utiliser que durant la première séance du module 1 et le dépôt A00Qa_24M_issues-a24 est celui où vous poserez vos "vraies" questions sur le cours tout au long de l'année (accessible via "Issues dans le bandeau supérieur des pages) !**
 
-#### Gestionnaire de version
+### Gestionnaire de version
 
 Nous avons jusqu'à présent utilisé la partie collaborative de GitHub. Nous allons maintenant nous intéresser à Git, le gestionnaire de version de projet utilisé par GitHub et par RStudio.
 
@@ -275,19 +271,19 @@ Dans quel fichier se trouve la dernière version de chaque personne ayant collab
 
 -   La meilleure combinaison pour **gérer ses versions et collaborer** : [Git](https://git-scm.com/) et [GitHub](https://github.com/). Ces outils sont plutôt considérés comme écrits par et pour des geeks. Cependant, ils permettent de gérer et de collaborer de manière efficace sur un même projet contenant du code ou non, et des interfaces facilitant leur utilisation apparaissent comme [GitHub Desktop](https://desktop.github.com), ou même, les [outils Git intégrés dans RStudio](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN).
 
-##### Git
+#### Git {#git1}
 
-La gestion des versions de vos documents est prise en charge par **Git**. Cet outil remplacera les nombreuses copies d'un même fichier par différents états de votre document ou dossier que l'on peut représenter schématiquement comme ci-dessous (chaque boule bleue représente une version enregistrée dans le système et les flèches indiquent d'où provient chaque version et où elle est utilisée ensuite) :
+La gestion des versions de vos documents est prise en charge par **Git**. Cet outil est puissant mais complexe. C’est pour cette raison que l’apprentissage de Git sera distillé sur plusieurs modules. Cette première section s’intéressera aux rudiments de Git. Cet outil remplacera les nombreuses copies d’un même fichier par différents états de votre document ou dossier, que l’on peut représenter schématiquement comme ci-dessous (chaque boule bleue représente une version enregistrée dans le système et les flèches indiquent d’où provient chaque version et où elle est utilisée ensuite) :
 
 ![Représentation de la gestion de fichiers via Git](images/sdd1_01/git1.png)
 
-Dans ce schéma simple, le flux est linéaire. Mais il est parfaitement possible de créer plusieurs **branches** différentes, et même de les fusionner plus tard comme on veut. Pour enregistrer une nouvelle version de votre document, vous réalisez un **commit** qui sera accompagné d'un message explicitant les modifications apportées. Git met de nombreux outils à disposition pour la gestion de ces différentes versions. Vous en utiliserez un certain nombre dans ce cours.
+Dans ce schéma, le flux est linéaire. Pour enregistrer une nouvelle version de votre document, vous réalisez un **commit** qui sera accompagné d'un message explicitant les modifications apportées.
 
 Ce gestionnaire Git peut être couplé à un hébergement sur le cloud, soit pour simplement faire un backup de nos projets, soit pour pouvoir échanger et collaborer. Nous utiliserons GitHub à cette fin dans le cours. Lorsque l'on travaille seul avec GitHub, l'évolution de notre projet ressemblera au schéma ci-dessous :
 
 ![Représentation des versions successives d'un projet avec GitHub.](images/sdd1_01/github.png)
 
-On réalise un envoi (**push**) lorsque l'on souhaite synchroniser nos changements locaux avec la version sur le "cloud". Plusieurs **commits** peuvent être envoyés avec un seul **push** sur le réseau, et c'est d'ailleurs généralement comme cela que l'on procède. L'inverse (rapatrier localement les changements que d'autres collaborateurs ont envoyés sur la version réseau de notre projet) s'appelle faire un **pull**. Par conséquent, synchroniser complètement notre dépôt GitHub avec la version locale consiste à faite les trois actions dans l'ordre : d'abord un **commit** pour créer un nouveau point d'enregistrement de l'état du système et y inclure tous les fichiers qui ont été modifiés, ensuite faire un **pull** pour rapatrier localement les changements qui ont été réalisés par d'autres ou par GitHub lui-même, et enfin, faire un **push** pour envoyer nos propres modifications dans notre projet GitHub. Les autres utilisateurs feront aussi **commit-pull-push** de leur côté. Quelquefois, des **conflits** apparaissent lorsque deux utilisateurs différents ont modifié la même partie d'un fichier. Nous apprendrons à gérer une telle situation. C'est plus facile à faire si on pense bien à faire un **pull** *avant* notre **push**, donc, faites les opérations toujours dans le même ordre.
+On réalise un envoi (**push**) lorsque l'on souhaite synchroniser nos changements locaux avec la version sur le "cloud". Plusieurs **commits** peuvent être envoyés avec un seul **push** sur le réseau, et c'est d'ailleurs généralement comme cela que l'on procède. L'inverse (rapatrier localement les changements que d'autres collaborateurs ont envoyés sur la version réseau de notre projet) s'appelle faire un **pull**. Par conséquent, synchroniser complètement notre dépôt GitHub avec la version locale consiste à faire les trois actions dans l'ordre : d'abord un **commit** pour créer un nouveau point d'enregistrement de l'état du système et y inclure tous les fichiers qui ont été modifiés, ensuite faire un **pull** pour rapatrier localement les changements qui ont été réalisés par d'autres ou par GitHub lui-même, et enfin, faire un **push** pour envoyer nos propres modifications dans notre projet GitHub. Les autres utilisateurs feront aussi **commit-pull-push** de leur côté. Quelquefois, des **conflits** apparaissent lorsque deux utilisateurs différents ont modifié la même partie d'un fichier. Nous apprendrons à gérer une telle situation. C'est plus facile à faire si on pense bien à faire un **pull** *avant* notre **push**, donc, faites les opérations toujours dans le même ordre.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -319,11 +315,7 @@ Vous venez d'apprendre le B-A-BA de la terminologie nécessaire à la bonne comp
 
 ```
 
-Ceci n'est qu'une explication très succincte. Vous trouverez plus de détails dans les liens ci-dessous et dans les Appendices. Il est, par exemple, possible de travailler sur une version en parallèle d'un dépôt original pour lequel vous n'avez pas de droits en écriture. Dans ce cas, il faudra faire une copie dans notre propre compte GitHub du dépôt. Cela s'appelle faire un **fork**. Il n'est pas possible de faire un **push** vers le dépôt d'origine puisque vous ne possédez pas les droits en écriture. Dans ce cas, vous ferez un **pull request**, suggérant ainsi à l'auteur d'origine que vous avez fait des modifications qui pourraient l'intéresser. Si c'est effectivement le cas, il pourra accepter votre **pull request** et intégrer vos suggestions dans le dépôt d'origine. Vous serez amenés à **forker** des dépôts GitHub lors de vos exercices, et vous effectuerez également un **pull request** lorsque vous serez suffisamment aguerris avec les autres techniques de gestion de vos projets sous Git et GitHub.
-
-##### À vous de jouer ! {.unnumbered}
-
-`r learnr("A01Lb_git", title = "Gestion de versions avec Git", toc = "Autoévaluation sur Git")`
+Ceci n'est qu'une explication très succincte. Vous trouverez plus de détails dans les liens ci-dessous et dans les modules suivants.
 
 ##### Pour en savoir plus {.unnumbered}
 
@@ -339,17 +331,22 @@ Ceci n'est qu'une explication très succincte. Vous trouverez plus de détails d
 
 -   [GitHub pour les nuls : pas de panique, lancez-vous !](https://www.christopheducamp.com/2013/12/15/github-pour-nuls-partie-1/). En français.
 
-#### SciViews Box
+### SciViews Box
 
-Dans ce cours, nous utilisons différents logiciels qui nécessitent une installation et une configuration en plusieurs étapes. Afin de vous économiser ces étapes fastidieuses, nous employons un système complètement préconfiguré : la **SciViews Box** pour laquelle une nouvelle version est préparée avant chaque nouvelle année académique. Il s'agit d'une **machine virtuelle**, un ordinateur complet, mais dématérialisé en quelque sorte. Nous utilisons l'une de ces deux formes :
+Dans ce cours, nous utilisons différents logiciels qui nécessitent une installation et une configuration en plusieurs étapes. Afin de vous économiser ces étapes fastidieuses, nous employons un système complètement préconfiguré : la **SciViews Box** pour laquelle une nouvelle version est préparée avant chaque nouvelle année académique. Il s'agit d'une **machine virtuelle**, un ordinateur complet, mais dématérialisé en quelque sorte. Nous utilisons un système fonctionnant sur le Cloud et nommé [**SaturnCloud**](https://saturncloud.io). SaturnCloud ne nécessite pas un ordinateur puissant pour fonctionner, mais il faut une bonne connexion Internet. Il faut aussi que le serveur distant soit disponible et offre les ressources suffisantes pour travailler.
+
+```{=html}
+<!--G.E. : je place ceci en commentaire vu que nous n'utilisons pas de système local pour le moment. 
+Nous utilisons l'une de ces deux formes :
 
 -   un système fonctionnant sur le Cloud et nommé [**SaturnCloud**](https://saturncloud.io),
 
 -   un système local installé sur votre ordinateur et utilisant [**Docker**](https://www.docker.com) ou [**Pacman**](https://archlinux.org/pacman/).
 
 SaturnCloud ne nécessite pas un ordinateur puissant pour fonctionner, mais il faut une bonne connexion Internet. Il faut aussi que le serveur distant soit disponible et offre les ressources suffisantes pour travailler. La version locale avec Docker ou Pacman ne sera utilisée que si nous rencontrons des problèmes avec SaturnCloud. Elle nécessite, en effet, un ordinateur plus puissant et beaucoup plus de place sur le disque pour l'installer.
-
-#### RStudio
+-->
+```
+### RStudio
 
 Il nous manque encore un outil afin de pouvoir réaliser la rédaction de nos rapports dans les meilleures conditions et pouvoir y intégrer des graphiques, des tableaux ou encore des analyses statistiques. Des éditeurs de texte classiques comme [Google Docs](https://www.google.com/intl/fr_be/docs/about/) ou [Microsoft Word](https://www.microsoft.com/fr-fr/microsoft-365/word) ne sont pas orientés vers la production de documents techniques ou scientifiques. Nous utiliserons donc un logiciel complet et optimisé pour produire de tels documents : [RStudio](https://www.rstudio.com/). Celui-ci s'appuie lui-même sur [R](http://www.r-project.org) qui est un langage taillé pour traiter des données, produire des graphiques et des tableaux et réaliser des analyses statistiques.
 
@@ -371,7 +368,7 @@ Des explications détaillées se trouvent dans l'annexe \@ref(rs) qui présente 
 
 -   [RStudio : sa vie, son œuvre, ses ressources](https://elementr.hypotheses.org/237). Une autre courte page en français qui présente RStudio.
 
-##### Projet RStudio
+#### Projet RStudio
 
 RStudio permet de gérer des projets efficacement. Un projet va regrouper l'ensemble des jeux de données, des blocs-notes, des rapports, des présentations, des scripts d'une analyse généralement en relation avec une ou plusieurs expériences ou observations réalisées sur le terrain ou en laboratoire.
 
@@ -417,41 +414,9 @@ Des explications plus détaillées sur les projets dans RStudio et la façon de 
 
 `r learnr("A01La_tools", title = "Vos outils logiciels", toc = "Autoévaluation sur les outils logiciels")`
 
-### Premier projet {#premier-projet}
+## R, les éléments de base
 
-Passons maintenant à la pratique. Démarrez votre SciViews box et affichez la fenêtre de RStudio maintenant (si vous ne l'avez pas encore installée, cliquez sur le bouton bleu **RStudio** en haut à droite de cette page pour voir les explications d'installation). RStudio permet de cloner directement un projet disponible sur GitHub en quelques étapes comme vous pouvez le voir ci-dessous.
-
-`r img("sdd1_01/clone.gif")`
-
-Des explications détaillées se trouvent dans l'annexe \@ref(github-clone) qui présente deux méthodes différentes pour cloner votre projet GitHub dans RStudio. Vous allez terminer ce premier module en réalisant votre premier projet individuel en science des données.
-
-##### À vous de jouer ! {.unnumbered}
-
-*Note : créez votre premier projet GitHub Classroom **individuel**. Lorsque votre projet est créé, faites un clone local de votre dépôt GitHub qui contient ce projet. Lisez le fichier 'README.md' afin de prendre connaissance des consignes relatives à ce projet.*
-
-```{r assign_A01Ia_21M_covid19, echo=FALSE, results='asis'}
-if (exists("assignment"))
-  assignment("A01Ia_covid19", part = NULL,
-    url = "https://github.com/BioDataScience-Course/A01Ia_covid19",
-    course.ids = c(
-      'S-BIOG-006' = !"A01Ia_{YY}M_covid19"),
-    course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/..."),
-    course.starts = c(
-      'S-BIOG-006' = !"{W[3]+5} 08:00:00"),
-    course.ends = c(
-      'S-BIOG-006' = !"{W[4]+1} 23:59:59"),
-    term = "Q1", level = 3,
-    toc = "Premier projet en science des données (covid19)")
-```
-
-Si vous souhaitez plus d'information sur Github Classroom, vous pouvez vous référer à l'Appendice \@ref(github-classroom).
-
-## Visualisation I {#visu1}
-
-### R, les éléments de base
-
-Dans la première partie de ce module, vous avez pu découvrir que le logiciel **R** allait être un outil central dans cette formation en science des données. Par exemple, vous avez édité votre premier document Quarto qui combine R (pour les calculs, les graphiques et les tables) avec du Markdown (pour le formatage du texte). Nous allons maintenant nous initier aux rudiments de l'utilisation de R.
+Dans la première partie de ce module, vous avez pu découvrir que le logiciel **R** allait être un outil central dans cette formation en science des données.
 
 ![](images/sdd1_01/Rlogo.png)
 
@@ -459,7 +424,7 @@ Dans la première partie de ce module, vous avez pu découvrir que le logiciel *
 
 ##### À vous de jouer ! {.unnumbered}
 
-Dans la première partie de ce module, vous avez réalisé un premier tutoriel qui contenait principalement des questions à choix multiples. Ces tutoriels servent aussi à vous entraîner à écrire des instructions en R. Avant de vous lancer dans ces exercices, consultez l'Appendice \@ref(learnr) pour apprendre à utiliser correctement ces tutoriels learnrs pour les questions relatives à du code R.
+Dans la première partie de ce module, vous avez réalisé un premier tutoriel qui contenait principalement des questions à choix multiples. Les tutoriels servent aussi à vous entraîner à écrire des instructions en R. Avant de vous lancer dans ces exercices, consultez l'Appendice \@ref(learnr) pour apprendre à utiliser correctement ces tutoriels learnrs pour les questions relatives à du code R.
 
 `r learnr("A01Lb_base", title = "Les bases de R", toc = "Notions de base de R")`
 
@@ -471,11 +436,11 @@ Vous venez de découvrir les assignations, les fonctions, le chaînage d'instruc
 
 `r h5p(156, height = 270, toc = "Sélection de la fonction adéquate")`
 
-### Nuage de points
+## Nuage de points {#nuagedepoints}
 
-Dès que vous commencez à maîtriser les principes de base de R, vous allez pouvoir réaliser assez rapidement de beaux graphiques. Par exemple, si vous souhaitez représenter une variable numérique en fonction d'une autre variable numérique, vous pouvez exprimer cela sous la forme d'une **formule**[^01-introduction-visualisations-i-1]
+Dès que vous commencez à maîtriser les principes de base de R, vous allez pouvoir réaliser assez rapidement de beaux graphiques. Par exemple, si vous souhaitez représenter une variable numérique en fonction d'une autre variable numérique, vous pouvez exprimer cela sous la forme d'une **formule**[^01-introduction-visualisation-i-1]
 
-[^01-introduction-visualisations-i-1]: Dans R, une **formule** permet de spécifier les variables avec lesquelles on souhaite travailler, et leur rôle. Par exemple ici, la variable *x* sur l'axe des abscisses et la variable *y* sur l'axe des ordonnées.
+[^01-introduction-visualisation-i-1]: Dans R, une **formule** permet de spécifier les variables avec lesquelles on souhaite travailler, et leur rôle. Par exemple ici, la variable *x* sur l'axe des abscisses et la variable *y* sur l'axe des ordonnées.
 
 $$y \sim x$$
 
@@ -539,7 +504,7 @@ La fonction `chart()` n'est pas accessible dans R de base, mais l'extension char
 
 `r h5p(155, height = 270, toc = "Les fonctions chart() et geom_point()")`
 
-#### Échelles de graphiques
+### Échelles de graphiques
 
 Vous devez être particulièrement vigilant lors de la réalisation d'un graphique en nuage de point sur l'étendue des valeurs présentées sur vos axes. Vous devez utiliser votre expertise de biologiste pour vous poser les deux questions suivantes :
 
@@ -570,17 +535,17 @@ Vous voyez que l'effet peut éventuellement être assez catastrophique. Faites d
 
 `r launch_shiny("https://sdd.umons.ac.be/A01Sa_limits/", height = 500, delay = 10, toc = "Étendue des axes d'un graphique")`
 
-#### Transformation des données
+### Transformation des données
 
-Vous avez la possibilité d'appliquer une transformation à vos données (il est même conseillé de le faire) pour qu'elles soient plus facilement analysables ensuite. Par exemple, il est possible d'utiliser des fonctions de puissance, racines, logarithmes, exponentielles[^01-introduction-visualisations-i-2] pour modifier l'apparence du nuage de points dans le but de le rendre plus linéaire. Il est, en effet, plus facile d'analyser statistiquement des données qui s'alignent le long d'une droite.
+Vous avez la possibilité d'appliquer une transformation à vos données (il est même conseillé de le faire) pour qu'elles soient plus facilement analysables ensuite. Par exemple, il est possible d'utiliser des fonctions de puissance, racines, logarithmes, exponentielles[^01-introduction-visualisation-i-2] pour modifier l'apparence du nuage de points dans le but de le rendre plus linéaire. Il est, en effet, plus facile d'analyser statistiquement des données qui s'alignent le long d'une droite.
 
-[^01-introduction-visualisations-i-2]: Pour les proportions (`prop`) ou les pourcentages (`perc`) (valeurs bornées entre 0 et 1 ou 0 et 100%) la transformation arc-sinus est souvent utilisée dans la littérature $prop′ = \arcsin \sqrt{prop}$ ou $perc′ = \arcsin \sqrt{perc / 100}$. Son usage est cependant soumis à la critique et tous les statisticiens ne sont pas d'accord au sujet de cette transformation.
+[^01-introduction-visualisation-i-2]: Pour les proportions (`prop`) ou les pourcentages (`perc`) (valeurs bornées entre 0 et 1 ou 0 et 100%) la transformation arc-sinus est souvent utilisée dans la littérature $prop′ = \arcsin \sqrt{prop}$ ou $perc′ = \arcsin \sqrt{perc / 100}$. Son usage est cependant soumis à la critique et tous les statisticiens ne sont pas d'accord au sujet de cette transformation.
 
 ##### À vous de jouer ! {.unnumbered}
 
 `r launch_shiny("https://sdd.umons.ac.be/A01Sb_transformation/", height = 500, delay = 10, toc = "Transformation des axes d'un graphique")`
 
-##### Pièges et astuces {.unnumbered}
+#### Pièges et astuces {.unnumbered}
 
 RStudio permet de récupérer rapidement des instructions à partir d'une banque de solutions toutes prêtes. Cela s'appelle des **snippets**. Vous avez une série de snippets disponibles dans la SciViews Box. Celui qui vous permet de réaliser un graphique en nuage de points s'appelle `.cbxy` (pour **c**hart -\> **b**ivariate -\> **xy**-plot). Entrez ce code et appuyez ensuite sur la tabulation dans un script R, et vous verrez le code remplacé par ceci dans la fenêtre d'édition :
 
@@ -593,13 +558,21 @@ Vous avez à votre disposition un ensemble de snippets que vous pouvez retrouver
 
 Prêtez une attention toute particulière à l'organisation d'un script R. En plus des instructions R, il contient aussi sous forme de commentaires, un titre, la date de la dernière mise à jour, le nom de l'auteur, et des sections qui organisent de façon claire le contenu du script. À ce sujet, vous trouverez des explications détaillées concernant l'utilisation des scripts R dans l'annexe \@ref(script).
 
+## Premier projet {#premier-projet}
+
+Passons maintenant à la pratique. Démarrez votre SciViews box et affichez la fenêtre de RStudio maintenant (si vous ne l'avez pas encore installée, cliquez sur le bouton bleu **RStudio** en haut à droite de cette page pour voir les explications d'installation). RStudio permet de cloner directement un projet disponible sur GitHub en quelques étapes comme vous pouvez le voir ci-dessous.
+
+`r img("sdd1_01/clone.gif")`
+
+Des explications détaillées se trouvent dans l'annexe \@ref(github-clone) qui présente deux méthodes différentes pour cloner votre projet GitHub dans RStudio. Vous allez terminer ce premier module en réalisant votre premier projet individuel en science des données.
+
 ##### À vous de jouer ! {.unnumbered}
 
 La première partie du projet suivant vous permettra de faire des graphiques en nuage de points en utilisant un script R.
 
-```{r assign_A02Ia_scatterplot_I, echo=FALSE, results='asis'}
+```{r assign_A01Ia_scatterplot_I, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("A02Ia_scatterplot", part = "I",
+  assignment("A01Ia_scatterplot", part = "I",
     url = "https://github.com/BioDataScience-Course/A02Ia_scatterplot",
     course.ids = c(
       'S-BIOG-006' = !"A02Ia_{YY}M_scatterplot"),
@@ -617,7 +590,7 @@ if (exists("assignment"))
 
 -   [Visualisation des données dans R for Data Science, 2e edition](https://r4ds.hadley.nz/data-visualize.html). Chapitre du livre portant sur la visualisation des données, en anglais.
 
-<!-- Plus accessible? -   [ggplot2 nuage de point](http://www.sthda.com/french/wiki/ggplot2-nuage-de-points-guide-de-d-marrage-rapide-logiciel-r-et-visualisation-de-donn-es#nuage-de-points-simples). Tutoriel en français portant sur l'utilisation d'un nuage de points avec le package {ggplot2} et la fonction `geom_point()`. -->
+-   [ggplot2 nuage de point](http://www.sthda.com/french/wiki/ggplot2-nuage-de-points-guide-de-d-marrage-rapide-logiciel-r-et-visualisation-de-donn-es). Tutoriel en français portant sur l'utilisation d'un nuage de points avec le package {ggplot2} et la fonction `geom_point()`.
 
 -   [Fundamentals of Data Visualization](http://serialmentor.com/dataviz/). Un livre en anglais sur les fondamentaux de la visualisation graphique.
 
@@ -625,11 +598,11 @@ if (exists("assignment"))
 
 -   [geom_point()](http://ggplot2.tidyverse.org/reference/geom_point.html). La fiche technique de la fonction `geom_point()` (en anglais).
 
-### Graphiques dans Quarto/R Markdown
+## Graphiques dans Quarto/R Markdown
 
-Un fichier [Quarto](https://quarto.org) a une extension `.qmd`[^01-introduction-visualisations-i-3]. Un fichier R Markdown est caractérisé par l'extension `.Rmd`. Ces deux formats sont très similaires, Quarto étant la version plus récente de R Markdown. Tous deux sont développés et maintenus par la même société (Posit). À partir d'ici, nous indiquerons Quarto/R Markdown lorsque la phrase s'applique indifféremment aux deux formats. Donc, Quarto/R Markdown permet de combiner le langage Markdown que vous avez déjà abordé au premier module avec du code R, tel que celui utilisé dans la première partie de ce module 2, voire du code dans d'autres langages comme Python, Julia, SQL... Ces zones contenant du code exécutable en R ou autre s'appellent des **chunks**, ou **morceaux** dans l'interface RStudio en français (mais nous utiliserons préférentiellement le terme anglais dans cet ouvrage).
+Un fichier [Quarto](https://quarto.org) a une extension `.qmd`[^01-introduction-visualisation-i-3]. Un fichier R Markdown est caractérisé par l'extension `.Rmd`. Ces deux formats sont très similaires, Quarto étant la version plus récente de R Markdown. Tous deux sont développés et maintenus par la même société (Posit). À partir d'ici, nous indiquerons Quarto/R Markdown lorsque la phrase s'applique indifféremment aux deux formats. Donc, Quarto/R Markdown permet de combiner le langage Markdown que vous avez déjà abordé au premier module avec du code R, tel que celui utilisé dans la première partie de ce module 2, voire du code dans d'autres langages comme Python, Julia, SQL... Ces zones contenant du code exécutable en R ou autre s'appellent des **chunks**, ou **morceaux** dans l'interface RStudio en français (mais nous utiliserons préférentiellement le terme anglais dans cet ouvrage).
 
-[^01-introduction-visualisations-i-3]: L'**extension d'un fichier** est un indicateur de son format à la fin de son nom, sous forme d'un point (.) suivi d'un sigle. Par exemple `.txt` caractérise un fichier texte, alors que `.png` indique qu'il s'agit d'une image au format PNG. Attention que les extensions sont parfois cachées (c'est systématique dans l'explorateur de fichiers de Windows avec la configuration par défaut, et c'est selon le fichier dans le Finder de MacOS. Sous Linux, et donc dans votre machine Saturn CLoud, l'extension est *toujours* affichée heureusement.
+[^01-introduction-visualisation-i-3]: L'**extension d'un fichier** est un indicateur de son format à la fin de son nom, sous forme d'un point (.) suivi d'un sigle. Par exemple `.txt` caractérise un fichier texte, alors que `.png` indique qu'il s'agit d'une image au format PNG. Attention que les extensions sont parfois cachées (c'est systématique dans l'explorateur de fichiers de Windows avec la configuration par défaut, et c'est selon le fichier dans le Finder de MacOS. Sous Linux, et donc dans votre machine Saturn Cloud, l'extension est *toujours* affichée heureusement.
 
 `r img("annexe_a2/rmd.gif")`
 
@@ -674,28 +647,6 @@ if (exists("assignment"))
       'S-BIOG-006' = !"{W[6]+1} 23:59:59"),
     term = "Q1", level = 3,
     toc = "Graphiques avec `urchin_bio` (partie II)")
-```
-
-<!-- GE : Proposition de passer ce projet à module 2  (nouvelle version)-->
-
-*Note : le travail ci-dessous est un **projet GitHub Classroom** par groupe. Vos enseignants vont définir les groupes, ainsi que la personne responsable de la mise en place d'une équipe (team) GitHub Classroom. Ensuite, vous accepterez le projet en entrant dans l'équipe qui vous a été désignée, à l'exclusion de toute autre en cliquant sur le lien. Enfin, clonez le dépôt dans votre machine virtuelle et vous aurez un nouveau projet RStudio* \@ref(rs-projet) *dans lequel vous pourrez travailler. Les instructions sont indiquées dans le fichier `README.md` à la racine de ce projet.*
-
-Vous allez vous exercer à la création et à l'interprétation de graphiques en nuage de points dans ce projet.
-
-```{r assign_A02Ga_analysis_I, echo=FALSE, results='asis'}
-if (exists("assignment2"))
-  assignment2("A02Ga_analysis", part = "I",
-    url = "https://github.com/BioDataScience-Course/A02Ga_analysis",
-    course.ids = c(
-      'S-BIOG-006' = !"A02Ga_{YY}M_analysis"),
-    course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/..."),
-    course.starts = c(
-      'S-BIOG-006' = !"{W[5]+5} 08:00:00"),
-    course.ends = c(
-      'S-BIOG-006' = !"{W[15]+2} 23:59:59"),
-    term = "Q1", level = 4, n = 4,
-    toc = "Analyse de données (partie I)")
 ```
 
 ##### Pour en savoir plus {.unnumbered}
