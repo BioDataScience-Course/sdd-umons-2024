@@ -4,9 +4,9 @@ learnitdown <- list(
   imgbaseurl =
     "https://filedn.com/lzGVgfOGxb6mHFQcRn9ueUb/sdd-umons", # The base URL for external (big) images
   shiny_imgdir = "images/shinyapps",   # The Shiny image directory (screenshots)
-  svbox = 2023,                        # The SciViews Box version used
-  rstudio = "start_rstudio2023.html",  # Run Rstudio from the box
-  package = "BioDataScience1",         # Associated package for the exercices
+  svbox = 2024,                        # The SciViews Box version used
+  rstudio = "start_rstudio2024.html",  # Run Rstudio from the box
+  package = "BioDataScience1",         # Associated package for the exercises
   institutions = "UMONS",              # Known institutions
   courses = c(
     "S-BIOG-006",                      # SDD1 Q1 Mons
@@ -18,11 +18,11 @@ learnitdown <- list(
     "Science des Données Biologiques I : inférence à l'UMONS" #,
     #"Bio-Informatique et Science des Données à Charleroi"
   ),
-  acad_year = "2023-2024",               # The academic year
-  YY = 23,                               # The academic year short id
-  W = as.Date("2023-09-10") + (0:37)*7,  # Sundays before each academic week
-  Q1 = as.Date("2023-09-10") + (0:15)*7, # There are 15 weeks at Q1
-  Q2 = as.Date("2024-02-04") + c(0:8, 11:16)*7 # Q2 starts 04/02 w22 but w30-31 are holidays
+  acad_year = "2024-2025",               # The academic year
+  YY = 24,                               # The academic year short id
+  W = as.Date("2024-09-08") + (0:37)*7,  # Sundays before each academic week
+  Q1 = as.Date("2024-09-08") + (0:15)*7, # There are 15 weeks at Q1
+  Q2 = as.Date("2025-02-02") + c(0:11, 14:16)*7 # Q2 starts 02/02 w22 but w33-34 are holidays
 )
 
 # We use glue() often for variables replacement from learnitdown, so, we
@@ -38,7 +38,7 @@ learnitdown <- list(
 
 # Examples:
 #!"svbox{svbox} is for academic year {acad_year}"
-#  -> svbox2023 is for academic year 2023-2024
+#  -> svbox2024 is for academic year 2024-2025
 #microbenchmark::microbenchmark(!TRUE, .Primitive('!')(TRUE), .Primitive('!'))
 
 # Unary + binary + is nice too, but it slows down additions!
@@ -62,7 +62,7 @@ learnitdown <- list(
 #}
 # Examples:
 #+"svbox{svbox} is for academic year {acad_year}"
-#  -> svbox2023 is for academic year 2023-2024
+#  -> svbox2024 is for academic year 2024-2025
 #+"svbox{svbox}" + " is for" + " academic year {acad_year}"
 #  -> same result
 # With the new R 4.0 character strings syntax:

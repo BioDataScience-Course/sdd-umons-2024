@@ -72,7 +72,7 @@ Le préambule de ce cours vous a également permis d'en apprendre davantage sur 
 
 `r learnr("A00La_discovery", title = "Découverte de learnr", toc = "Découverte des tutoriels de type learnr")`
 
-Vous pouvez aussi voir (ou revoir) [les dias de la présentation](https://github.com/BioDataScience-Course/sdd_lessons/raw/2023-2024/A00/presentations/A00Pa_intro.pdf) qui vous est faite en première séance.
+Vous pouvez aussi voir (ou revoir) [les dias de la présentation](https://github.com/BioDataScience-Course/sdd_lessons/raw/2024-2025/A00/presentations/A00Pa_intro.pdf) qui vous est faite en première séance.
 
 ##### À vous de jouer ! {.unnumbered}
 

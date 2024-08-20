@@ -139,7 +139,7 @@ Le cours de science des données I utilise une autre approche et se donne en cla
 
 ![](images/sdd1_00/organisation2.png)
 
-Une présentation de l'approche pédagogique du cours vous est faite en première séance. La présentation est disponible au format PDF [ici](https://github.com/BioDataScience-Course/sdd_lessons/raw/2023-2024/A00/presentations/A00Pa_intro.pdf).
+Une présentation de l'approche pédagogique du cours vous est faite en première séance. La présentation est disponible au format PDF [ici](https://github.com/BioDataScience-Course/sdd_lessons/raw/2024-2025/A00/presentations/A00Pa_intro.pdf).
 
 ### Quatre niveaux d'exercices {.unnumbered}
 
