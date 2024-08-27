@@ -975,6 +975,30 @@ coplot(data = urchin, height ~ weight | origin)
 
 -   [ggplot2 comparé aux graphiques R de base](https://flowingdata.com/2016/03/22/comparing-ggplot2-and-r-base-graphics/). Un point de vue différent d'un utilisateur habitué aux graphiques R de base (en anglais).
 
+## Travail collaboratif II
+
+GitHub est une plateforme collaborative. C'est dans ce sens que GitHub a été développé. L'un de ses objectifs est de fournir tous les outils pour permettre le travail en collaboration. GitHub comprend plus de 100 millions de dépôts. Vous vous doutez bien que vous n'avez pas la possibilité de cloner un dépôt, de l'éditer et d'y ajouter vos modifications via un push sur un projet de sociétés comme [Meta](https://github.com/facebook), [Microsoft](https://github.com/microsoft) ou encore [Google](https://github.com/google). Il en est de même pour une grande partie des dépôts hébergés sur notre organisation [BioDataScience-Course](https://github.com/BioDataScience-Course).
+
+Il y a deux grandes possibilités. Soit vous intégrez une équipe afin de travailler sur un projet commun. Il faut dans ce cas ajouter l'utilisateur au projet. Néanmoins, être ajouté à un projet ne signifie pas que l'on peut faire ce que l'on veut sur un projet. Il y a 5 rôles allant de l'accès en lecture, ce qui signifie que l'on peut voir la progression d'un projet et interagir dans les issues, en passant par le droit en écriture, et pour finir, le niveau le plus élevé est l'administrateur de projet qui peut aller jusqu'à supprimer le projet de GitHub.
+
+Par exemple, vous n'avez pas le droit administrateur sur vos dépôts d'exercice. Cela nous assure que, par mégarde, vous ne supprimiez vos projets.
+
+La seconde possibilité est de contribuer sur un projet en partant d'une copie de ce dernier. Pour dupliquer un dépôt existant sur GitHub, on va réaliser un fork. Ce fork peut soit être réalisé directement sur votre compte ou bien au sein d'une organisation. Vous pouvez nommé autrement le projet. Vous avez tous les droits sur votre copie.
+
+Par exemple, lorsque vous réalisez un exercice N3 ou N4, GitHub Classroom réalise un fork pour vous. Il part d'un dépôt de référence sur lequel vous n'avez pas le droit en écriture et réalise une copie hébergée sur l'organisation [BioDataScience-Course](https://github.com/BioDataScience-Course).
+
+### Projet commun
+
+Utilisons le projet [Z03Ga_00M_commun_project](https://github.com/BioDataScience-Course/Z03Ga_00M_common-project) sur lequel arthurpeeters travaille. Suite à des échanges avec oliviamaes, ils vont collaborer ensemble sur un projet commun. Pour ce faire, Arthur doit lui donner accès à son dépôt. Pour cela, il se rend dans son dépôt, puis va dans `Settings` puis `Collaborators and teams`. Il clique sur `add people` et sélectionne son collaborateur (dans notre cas oliviamaes). Il définit le rôle d'Olivia puis l'ajoute comme collaboratrice.
+
+`r img("sdd1_03/gh_add_people.gif")`
+
+Olivia a à présent la possibilité de réaliser des push sur ce dépôt. Olivia peut cloner le projet en local sur son ordinateur pour y travailler en parallèle avec Arthur. Afin de limiter les conflits, il est néanmoins conseillé d'organiser la répartition du travail comme présenté dans le module précédent.
+
+```{block, type='warning'}
+Si, lors de votre premier push vous avez un message d'erreur indiquant que vous n'avez pas la permission en écriture sur ce dépôt, il y a des chances pour que vous ayez cloné un dépôt qui n'est pas le vôtre, ou pour lequel vous n'êtes pas collaborateur (par exemple, un template de BioDataScience-Course). Faites toujours attention avant de cloner un dépôt et vérifiez vos droits dessus. Sinon, vous pouvez toujours forker un dépôt public appartenant à quelqu'un d'autre, et cloner ensuite votre fork...
+```
+
 ## Challenge
 
 Tout au long des quatre premiers modules, vous avez appris à utiliser R et RStudio, à écrire des documents en R Markdown, à utiliser git et GitHub... Vous avez également appris à réaliser des graphiques clairs qui présentent visuellement l'information contenue dans des jeux de données. Il est maintenant temps de faire un bilan de tout cela sous une forme ludique : un **challenge de rapidité pour la réalisation de graphiques.** Vous vous confronterez entre vous de manière individuelle pour déterminer celui ou celle qui arrivera à reproduire fidèlement le plus de graphiques possible.
