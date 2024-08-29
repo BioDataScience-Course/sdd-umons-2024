@@ -999,6 +999,38 @@ Olivia a à présent la possibilité de réaliser des push sur ce dépôt. Olivi
 Si, lors de votre premier push vous avez un message d'erreur indiquant que vous n'avez pas la permission en écriture sur ce dépôt, il y a des chances pour que vous ayez cloné un dépôt qui n'est pas le vôtre, ou pour lequel vous n'êtes pas collaborateur (par exemple, un template de BioDataScience-Course). Faites toujours attention avant de cloner un dépôt et vérifiez vos droits dessus. Sinon, vous pouvez toujours forker un dépôt public appartenant à quelqu'un d'autre, et cloner ensuite votre fork...
 ```
 
+### Projet extérieur
+
+Comme mentionné précédemment, il est possible de contribuer à des projets publics même si vous n’avez pas le droit de réaliser des modifications directement sur ces derniers. Pour ce faire, il faut réaliser un **fork** du projet (flèches grisâtres). Un fork est une copie sur GitHub d’un projet également hébergé sur GitHub. Ce nouveau projet peut être renommé comme vous le souhaitez ou garder le même nom. Il s’agit de votre projet. Vous avez par conséquent bien plus de droits sur ce dernier. Vous pouvez, par exemple, réaliser des commits, des pulls et des pushs.
+
+![](images/sdd1_03/gh_pullrequest1.png)
+
+Enfin, il est possible de réaliser une **pull request** (flèche verte), c’est-à-dire de proposer d’intégrer vos modifications au dépôt parent. La fusion de vos ajouts avec le projet parent est réalisée par l’auteur du dépôt parent. Cette fusion est un **merge**. Cette manière de travailler est saine. Les commits sont attribués à chaque auteur. Il est possible de retrouver l’auteur de chaque commit.
+
+![](images/sdd1_03/gh_pullrequest2.png)
+
+Ce nouveau projet garde un lien avec le projet parent. Cela permet de synchroniser votre dépôt avec le dépôt parent afin de bénéficier de toutes les mises à jour de ce dernier.
+
+Un projet parent et un projet forké sont présentés afin d'illustrer le fork. Ils sont disponibles via les liens suivants : [Z03Gb_00M_forked-project-oliviamaes](https://github.com/BioDataScience-Course/Z03Gb_00M_forked-project-oliviamaes/tree/main) et [Z03Gb_00M_forked-project-arthurpeeters](https://github.com/BioDataScience-Course/Z03Gb_00M_forked-project-arthurpeeters/tree/main).
+
+![](images/sdd1_03/gh_fork.png)
+
+On observe que le projet a été forké lorsque le projet n'avait que 2 commits, alors qu'à présent il en a plus.
+
+### Branches de git
+
+Le gestionnaire de version git peut être envisage comme une arborescence de branche. Par défaut votre dépôt à une branche qui se nomme `main` (avant 2020, les branches par défaut se nommait `master`). Dans le cadre de nos cours, nous travaillerons sur la branche `main` uniquement.
+
+Les branches comme `branche 1` ou `branche 2` sur la figure ci-dessous ont pour objectif de réaliser des essais. Tous les commits en vert ou en orange ne sont pas réalisé sur la branche principale qui est `main`. Cela signifie que la branche main n'est pas affectée.
+
+Vous pouvez observer que l'on part d'un commit d'un branche dans notre cas la branche `main`
+
+![](images/sdd1_03/git_branch1.png)
+
+Une branche peut être abandonnée comme la branche 1 ou encore fusionnée avec la branche principale comme la branche 2.
+
+![](images/sdd1_03/git_branch2.png)
+
 ## Challenge
 
 Tout au long des quatre premiers modules, vous avez appris à utiliser R et RStudio, à écrire des documents en R Markdown, à utiliser git et GitHub... Vous avez également appris à réaliser des graphiques clairs qui présentent visuellement l'information contenue dans des jeux de données. Il est maintenant temps de faire un bilan de tout cela sous une forme ludique : un **challenge de rapidité pour la réalisation de graphiques.** Vous vous confronterez entre vous de manière individuelle pour déterminer celui ou celle qui arrivera à reproduire fidèlement le plus de graphiques possible.
