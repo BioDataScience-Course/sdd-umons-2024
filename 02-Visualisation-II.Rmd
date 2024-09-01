@@ -379,65 +379,74 @@ En pratique, vous ne représenterez pas systématiquement tous ces types de grap
 
 ## Travail collaboratif
 
-Dans le module précédent, vous avez travaillé seul sur un projet avec **Git** et **Github**. Vous avez débuté par réaliser une copie locale de projet nommé **clone** Vous avez ensuite réalisé des état de sauvegarde nommé **commit** de vos fichiers au sein d'un dépôt. Pour terminer vous avez réaliser une synchronisation de votre dépôt local avec votre dépot distant (sur Github) via un pull suivi d'un push
+Dans le module précédent, vous avez travaillé seul sur un projet en utilisant **git** et **GitHub**. Vous avez commencé par créer une copie locale du projet, appelée **clone**. Ensuite, vous avez effectué des sauvegardes de vos fichiers au sein d'un dépôt, appelées **commit**. Pour finir, vous avez synchronisé votre dépôt local avec votre dépôt distant (sur GitHub) via un **pull** suivi d'un **push**.
 
-Dans le module précédent, vous avez travaillé individuellement sur un projet en utilisant **Git** et **Github**. Vous avez commencé par créer une copie locale du projet. Cette action est un **clone**. Ensuite, vous avez effectué des sauvegardes de vos fichiers dans un dépôt, appelées **commit**. Pour finir, vous avez synchronisé votre dépôt local avec votre dépôt distant (sur Github) en effectuant un **pull** suivi d'un **push**.
+Bien que GitHub et git permettent de travailler seul sur ses dépôts, ils sont conçus pour la collaboration. En tant qu'étudiant et futur scientifique, vous allez devoir collaborer abondamment à l'avenir. Il est donc indispensable de savoir utiliser des outils professionnels de collaboration.
 
-Si GitHub et Git permettent de travailler seul sur ses dépôts, ils sont prévu pour collaborer. En tant que scientifique, vous serez amené à collaborer abondamment à l'avenir.
+La répartition réfléchie des différentes tâches d'un projet est un élément clé dans un travail collaboratif. Vous pourriez être tenté de diviser le travail via des échanges de mails ou encore via tout autre système de discussion instantanée, grand public ou professionnel. Le risque est de ne plus retrouver ces échanges. GitHub a la solution pour vous avec les **issues**. Ces dernières sont liées au dépôt sur lequel vous travaillez. Il est donc simple de retrouver les échanges importants sur un projet.
 
-### Ajout d'un collaborateur
+### Issues
 
-Partons directement d'un cas pratique entre deux chercheurs. [Marie](https://github.com/MarieHuart93) prend contact avec [Guyliann](https://github.com/GuyliannEngels) afin de collaborer sur un projet lié à la [biométrie humaine](https://github.com/MarieHuart93/biometry). Guyliann accepte volontiers de l'aider. Cependant, Marie doit lui donner accès à son dépôt. Pour cela, elle se rend dans son dépôt, puis va dans `Settings` puis `Manage access` et enfin, ajoute un collaborateur en cliquant sur `Invite a collaborator`.
+Une issue est une zone de discussion attachée à votre dépôt GitHub **pour y discuter de questions techniques et scientifiques strictement en relation avec ce dépôt**. Les issues sont accessibles dans l'entête des dépôts comme le montre l'image ci-dessous.
 
-`r img("sdd1_03/add_collaborators.gif")`
+![](images/sdd1_02/gh_issues.png)
 
-Guyliann reçoit un mail pour accepter ou non de collaborer. S'il accepte, il obtient alors des droits en écriture sur le dépôt de Marie, ce qui lui permettra de réaliser des "pushes". Il peut maintenant cloner le projet en local sur son ordinateur pour y travailler en parallèle avec Marie.
+Rédiger correctement une issue nécessite une réflexion et prend du temps. Une question claire permet une réponse précise de la part des collaborateurs, ce qui représente un gain de temps important. Il ne s'agit pas d'un système de chat comme Discord ou Messenger... Vos "memes" et autres gifs animés pour exprimer vos émotions n'y ont pas leur place. De même, des échanges du genre : "tu es là ?", "oui... tu travailles sur quoi ?", "sur le premier graphique, mais sinon, je me cure les ongles, kiss kiss" n'ont absolument pas leur place dans les issues ! Vous avez un dépôt GitHub qui regroupe toutes les bonnes pratiques pour rédiger une issue : [sdd_issues](https://github.com/BioDataScience-Course/sdd_issues)
 
-```{block, type='warning'}
-Si, lors de votre premier push vous avez un message d'erreur indiquant que vous n'avez pas la permission en écriture sur ce dépôt, il y a des chances pour que vous ayez cloné un dépôt qui n'est pas le vôtre, ou pour lequel vous n'êtes pas collaborateur (par exemple, un template de BioDataScience-Course). Faites toujours attention avant de cloner un dépôt et vérifiez vos droits dessus. Sinon, vous pouvez toujours forker un dépôt public appartenant à quelqu'un d'autre, et cloner ensuite votre fork... mais cela est une autre histoire.
-```
+La rédaction d'une question sous la forme d'une Issue se décompose en quatre étapes :
 
-Les deux collaborateurs vont pouvoir travailler sur les mêmes documents et progresser ensemble dans l'analyse du jeu de données sur la biométrie humaine. En cliquant sur le dernier "commit" réalisé, on peut retrouver la succession des commits qui ont été faits jusqu'ici (historique).
+1.  Choix d'un titre court qui résume la question
+2.  Rédaction de la question en respectant la syntaxe Markdown
+3.  Ajout de labels, de personnes assignées...
+4.  Soumission de l'issue via le bouton "Submit new issue"
 
-`r img("sdd1_03/github_collaboration.gif")`
+Consultez le document suivant pour tout connaitre de la création d'une [issue](https://github.com/BioDataScience-Course/sdd_issues/blob/main/docs/new_issue.md)
 
-Jusqu'à présent, les deux scientifiques ont échangé par mail. Cependant, Il est possible d'être plus efficace et d'utiliser les **"issues"** dans le dépôt même pour cela. Vous avez appris à utiliser les issues depuis le chapitre 1 du cours. Dans le dépôt d'exemple, cela se présentera comme ci-dessous.
+![](images/sdd1_02/gh_issues1.png)
 
-`r img("sdd1_03/github_issues.gif")`
+Rappelez-vous qu'une issue doit être **fermée** lorsque le sujet de cette dernière a été débattu et le problème résolu. Ouvrez une issue différente pour *chaque* problème.
 
-**Petit rappel :** une issue est une zone de discussion attachée à votre dépôt GitHub... **pour y discuter de questions techniques et scientifiques strictement en relation avec ce dépôt**. Il ne s'agit pas d'un système de chat comme Discord, messenger... Vos "memes", et autres gifs animés pour y exprimer vos émotions n'y ont pas leur place. De même des échanges du genre : "tu es là?", "oui... tu travailles sur quoi?", "sur le premier graphique, mais sinon, je me cure les ongles, kiss kiss" n'ont pas du tout leur place dans les issues !
+Pour accéder encore plus facilement aux issues dans vos projets de groupes, utilisez l'addins dédié
 
-![](images/sdd1_02/github_issues1.png)
-
-Rappelez-vous aussi qu'une issue doit être **fermée** lorsque le sujet de cette dernière a été débattu et le problème résolu. Ouvrez une issue différente pour *chaque* problème.
+![](images/sdd1_02/addins.png)
 
 *GitHub met à votre disposition plusieurs outils pour améliorer l'efficacité d'un travail en équipe. Dans les issues vous pouvez ajouter des labels à vos questions par exemple. Il existe également dans la section Projects un outil de planification de projets.*
 
+![](images/sdd1_02/gh_projects.png)
+
 ### Gestion de conflit
 
-La collaboration entre plusieurs personnes mène inévitablement à la gestion de conflits. N'ayez pas peur des conflits (au sens de GitHub, en tous cas). Il suffit de les gérer correctement, ce que nous allons apprendre ici.
+Malgré la répartition des tâches, la collaboration entre plusieurs personnes sur un projet commun mène à des conflits. C'est-à-dire les mêmes parties de documents au sein d'un projet qui sont modifiées par deux membres du groupe. Ne redoutez pas les conflits (dans le contexte de GitHub, du moins). Leur gestion appropriée est une compétence que nous allons développer ici.
 
-Imaginons que nos deux collaborateurs réalisent une modification du document `biometry_note.Rmd` *en même temps* et *sur la même partie* du document.
+Prenons un cas concret entre des collaborateurs qui étudient deux populations de *Paracentrotus lividus* (Lamarck, 1816). Les collaborateurs sont [oliviaMaes](https://github.com/oliviamaes), [arthurpeeters](https://github.com/arthurpeeters) et [GuyliannEngels](https://github.com/GuyliannEngels). Le projet est disponible. Consultez y par exemple les différents commits afin de suivre l'évolution du projet.
 
-`r h5p(175, height = 270, toc = "Deux versions d'un même fichier")`
+Les Arthur et Olivia ont édité la même section d'un document.
 
-Que va-t-il se passer selon vous ? Lequel des deux collaborateurs va-t-il avoir le droit d'écraser le contenu de l'autre ? GitHub n'est pas capable de décider quelle version est la meilleure. Il va donc demander au dernier collaborateur qui réalise son "push" de gérer ce conflit lui-même.
+`r h5p(257, height = 270, toc = "Deux versions d'un même fichier")`
 
-`r img("sdd1_03/conflit1.gif")`
+Que va-t-il se passer selon vous ? Lequel des deux collaborateurs va-t-il avoir le droit d’écraser le contenu de l’autre ? GitHub n’est pas capable de décider quelle version est la meilleure. Il va donc demander au dernier collaborateur qui souhaite ajouter ces modifications avec le suite d'instruction, **commit -\> pull -\> push**, de gérer ce conflit lui-même.
 
-On peut voir que lorsque le push est réalisé, une erreur apparaît. Il faut d'abord réaliser un "pull" afin de récupérer la dernière version présente sur GitHub.
+`r img("sdd1_02/gestion_conflit.gif")`
 
-`r h5p(176, height = 270, toc = "Résolution d'un conflit")`
+Cette animation montre l'importance de toujours bien lire le message renvoyé par git. Lors du pull, il précise qu'il y a un conflit à gérer dans le fichier urchin_notebook.Qmd.
+
+`r h5p(258, height = 270, toc = "Résolution d'un conflit")`
 
 Vous pouvez ensuite vous rendre dans chaque fichier problématique pour retrouver la ou les zones de conflit (utiliser l'outil de recherche avec l'icône loupe dans l'éditeur RStudio et recherchez par exemple `<<<<<`).
 
-`r h5p(177, height = 270, toc = "Résolution d'un conflit (suite)")`
+`r h5p(259, height = 270, toc = "Résolution d'un conflit (suite)")`
 
-La résolution du conflit se fait en éditant le fichier. Vous devez choisir la partie qui vous semble la plus pertinente et effacer tout le reste, y compris les balises ajoutées par GitHub.
+La résolution du conflit se fait en éditant le fichier. Vous devez choisir la partie qui vous semble la plus pertinente et effacer tout le reste, y compris les balises ajoutées par GitHub. Terminez par enregistrer votre fichier.
 
-`r img("sdd1_03/conflit2.gif")`
+![](images/sdd1_02/conflit.png)
 
-La gestion du conflit se termine par la réalisation d'un "commit" avec un message qui indique la résolution du ou des conflits, suivi par un "pull" pour vérifier qu'il n'y a plus de problèmes, et enfin un "push" qui synchronise votre version locale avec GitHub. Votre ou vos collaborateurs doivent ensuite faire un "pull" de leur côté pour se synchroniser à leur tour.
+La gestion du conflit se termine par la réalisation d'un "commit" avec un message qui indique la résolution du ou des conflits, suivi par un "pull" pour vérifier qu'il n'y a plus de problèmes, et enfin un "push" qui synchronise votre version locale avec GitHub.
+
+![](images/sdd1_02/conflit2.png)
+
+Votre ou vos collaborateurs doivent ensuite faire un "pull" de leur côté pour se synchroniser à leur tour. Nous vous conseillons à chaque fois que vous ouvrez un projet pour y contribuer de réaliser un pull afin de récupérer toutes les modifications réalisées par les autres membres du groupes.
+
+`r img("sdd1_02/gestion_conflit2.gif")`
 
 ```{block, type='note'}
 Lorsque vous vous lancez dans un projet ou revenez vers lui, il faut toujours faire un "pull" avant de commencer à travailler pour vous assurer que votre copie locale du projet est bien synchronisée avec la dernière version en ligne sur GitHub. C'est d'autant plus important lorsque le dépôt a plusieurs collaborateurs, car il faut traiter immédiatement les conflits et ne surtout pas les laisser s'accumuler.
