@@ -317,9 +317,9 @@ Nous constatons que la valeur du $\chi^2_{obs}$ dépend de l'effectif. Sa valeur
 ```{r assign_A07Ia_pea, echo=FALSE, results='asis'}
 if (exists("assignment"))
   assignment("A07Ia_pea", part = NULL,
-    url = "https://github.com/BioDataScience-Course/A08Ia_pea",
+    url = "https://github.com/BioDataScience-Course/A07Ia_pea",
     course.ids = c(
-      'S-BIOG-027' = !"A08Ia_{YY}M_pea"),
+      'S-BIOG-027' = !"A07Ia_{YY}M_pea"),
     course.urls = c(
       'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
@@ -426,7 +426,7 @@ chisq.test(timolol_table, correct = FALSE)
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A08Lb_chi2b", title = "Test Chi2 d'indépendance", toc = "test Chi2 d'indépendance")`
+`r learnr("A07Lc_chi2b", title = "Test Chi2 d'indépendance", toc = "test Chi2 d'indépendance")`
 
 #### Autres tests Chi^2^
 
@@ -582,9 +582,9 @@ Les **métriques** sont des variables issues de calculs plus complexes et qui vi
 ```{r assign_A07Ga_human_health_I, echo=FALSE, results='asis'}
 if (exists("assignment2"))
   assignment2("A07Ga_human_health", part = "I",
-    url = "https://github.com/BioDataScience-Course/A08Ga_human_health",
+    url = "https://github.com/BioDataScience-Course/A07Ga_human_health",
     course.ids = c(
-      'S-BIOG-027' = !"A08Ga_{YY}M_human_health"),
+      'S-BIOG-027' = !"A07Ga_{YY}M_human_health"),
     course.urls = c(
       'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(

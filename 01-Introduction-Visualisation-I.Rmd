@@ -573,9 +573,9 @@ La première partie du projet suivant vous permettra de faire des graphiques en 
 ```{r assign_A01Ia_scatterplot_I, echo=FALSE, results='asis'}
 if (exists("assignment"))
   assignment("A01Ia_scatterplot", part = "I",
-    url = "https://github.com/BioDataScience-Course/A02Ia_scatterplot",
+    url = "https://github.com/BioDataScience-Course/A01Ia_scatterplot",
     course.ids = c(
-      'S-BIOG-006' = !"A02Ia_{YY}M_scatterplot"),
+      'S-BIOG-006' = !"A01Ia_{YY}M_scatterplot"),
     course.urls = c(
       'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(
@@ -636,9 +636,9 @@ Vous allez maintenant manipuler un document **Quarto** pour réaliser des graphi
 ```{r assign_A01Ia_scatterplot_II, echo=FALSE, results='asis'}
 if (exists("assignment"))
   assignment("A01Ia_scatterplot", part = "II",
-    url = "https://github.com/BioDataScience-Course/A02Ia_scatterplot",
+    url = "https://github.com/BioDataScience-Course/A01Ia_scatterplot",
     course.ids = c(
-      'S-BIOG-006' = !"A02Ia_{YY}M_scatterplot"),
+      'S-BIOG-006' = !"A01Ia_{YY}M_scatterplot"),
     course.urls = c(
       'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(

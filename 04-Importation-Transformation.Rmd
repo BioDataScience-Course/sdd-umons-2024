@@ -162,7 +162,7 @@ coral <- read("../data/coral.rds")
 
     Si le travail de préparation des données est lourd (et donc, prends beaucoup de temps) il peut être avantageux d'enregistrer localement la version **nettoyée** de vos données plutôt que la version originale. Mais alors, indiquez-le explicitement.
 
-```{block, type = 'warning'}
+```{block, type='warning'}
 Faites toujours la distinction entre **données brutes** et **données nettoyées**. Ne les mélangez jamais et documentez toujours de manière reproductible le processus qui mène des unes aux autres ! C'est tout aussi important que de garder un lien vers la source originale des données dans votre code et d'utiliser toujours des chemins relatifs vers vos fichiers pour une analyse portable et reproductible.
 
 Nous vous conseillons de placer la version brute des données dans le sous-dossier `data/raw` et la version nettoyée dans le sous-dossier `data` de votre projet RStudio. Ainsi, la structure des dossiers est elle-même très suggestive.
@@ -1025,9 +1025,9 @@ En `SciViews::R` nous utilisons `%>.%` pour relier les différentes étapes d'un
 ```{r assign_A04Ia_transformation, echo=FALSE, results='asis'}
 if (exists("assignment"))
   assignment("A04Ia_transformation", part = NULL,
-    url = "https://github.com/BioDataScience-Course/A05Ia_transformation",
+    url = "https://github.com/BioDataScience-Course/A04Ia_transformation",
     course.ids = c(
-      'S-BIOG-006' = !"A05Ia_{YY}M_transformation"),
+      'S-BIOG-006' = !"A04Ia_{YY}M_transformation"),
     course.urls = c(
       'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(
@@ -1058,9 +1058,9 @@ Consignez vos résultats dans un document R Markdown avec une explication de vos
 ```{r assign_A04Ga_biometry_I, echo=FALSE, results='asis'}
 if (exists("assignment2"))
   assignment2("A04Ga_biometry", part = "I",
-    url = "https://github.com/BioDataScience-Course/A05Ga_biometry",
+    url = "https://github.com/BioDataScience-Course/A04Ga_biometry",
     course.ids = c(
-      'S-BIOG-006' = !"A05Ga_{YY}M_biometry"),
+      'S-BIOG-006' = !"A04Ga_{YY}M_biometry"),
     course.urls = c(
       'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(

@@ -284,9 +284,9 @@ Ici, nous utilisons donc la fonction `geom_density()`.
 ```{r assign_A02Ia_distributions, echo=FALSE, results='asis'}
 if (exists("assignment"))
   assignment("A02Ia_distributions", part = NULL,
-    url = "https://github.com/BioDataScience-Course/A03Ia_distributions",
+    url = "https://github.com/BioDataScience-Course/A02Ia_distributions",
     course.ids = c(
-      'S-BIOG-006' = !"A03Ia_{YY}M_distributions"),
+      'S-BIOG-006' = !"A02Ia_{YY}M_distributions"),
     course.urls = c(
       'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(
@@ -448,6 +448,8 @@ Lorsque vous avez terminé de travailler dans un projet. Il est conseillé de fa
 ##### À vous de jouer ! {.unnumbered}
 
 Complétez votre projet de groupe en y ajoutant des graphiques de distribution et en les interprétant.
+
+<!-- TODO: on n'a plus A02Ga_analysis_I -> ??? -->
 
 ```{r assign_A02Ga_analysis_II, echo=FALSE, results='asis'}
 if (exists("assignment2"))

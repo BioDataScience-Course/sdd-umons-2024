@@ -223,9 +223,9 @@ Les conditions d'application sont les mêmes que pour l'ANOVA à deux facteurs s
 ```{r assign_A10Ia_anova2_I, echo=FALSE, results='asis'}
 if (exists("assignment"))
   assignment("A10Ia_anova2", part = "I",
-    url = "https://github.com/BioDataScience-Course/A11Ia_anova2",
+    url = "https://github.com/BioDataScience-Course/A10Ia_anova2",
     course.ids = c(
-      'S-BIOG-027' = !"A11Ia_{YY}M_anova2"),
+      'S-BIOG-027' = !"A10Ia_{YY}M_anova2"),
     course.urls = c(
       'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
@@ -528,9 +528,9 @@ L'analyse des résidus (indispensable) n'est pas reproduite ici. Elle reste la m
 ```{r assign_A10Ia_anova2_II, echo=FALSE, results='asis'}
 if (exists("assignment"))
   assignment("A10Ia_anova2", part = "II",
-    url = "https://github.com/BioDataScience-Course/A11Ia_anova2",
+    url = "https://github.com/BioDataScience-Course/A10Ia_anova2",
     course.ids = c(
-      'S-BIOG-027' = !"A11Ia_{YY}M_anova2"),
+      'S-BIOG-027' = !"A10Ia_{YY}M_anova2"),
     course.urls = c(
       'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
@@ -999,9 +999,9 @@ Pour finir, il parait que les Belges sont forts en autodérision. La caricature 
 ```{r assign_A10Ga_human_health_IV, echo=FALSE, results='asis'}
 if (exists("assignment2"))
   assignment2("A07Ga_human_health", part = "IV",
-    url = "https://github.com/BioDataScience-Course/A08Ga_human_health",
+    url = "https://github.com/BioDataScience-Course/A07Ga_human_health",
     course.ids = c(
-      'S-BIOG-027' = !"A08Ga_{YY}M_human_health"),
+      'S-BIOG-027' = !"A07Ga_{YY}M_human_health"),
     course.urls = c(
       'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(

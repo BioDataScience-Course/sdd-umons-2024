@@ -721,7 +721,7 @@ qpois(p = 1/4, lambda = 3)
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A07Lb_distri", title = "Lois de distributions", toc = "Lois de distributions")`
+`r learnr("A06Lb_distri", title = "Lois de distributions", toc = "Lois de distributions")`
 
 ## Distribution normale
 
@@ -1291,9 +1291,9 @@ Même remarque concernant les ex aequo et valeur *p* très similaire ici à cell
 ```{r assign_A06Ia_correlation_I, echo=FALSE, results='asis'}
 if (exists("assignment"))
   assignment("A06Ia_correlation", part = "I",
-    url = "https://github.com/BioDataScience-Course/A12Ia_correlation",
+    url = "https://github.com/BioDataScience-Course/A06Ia_correlation",
     course.ids = c(
-      'S-BIOG-027' = !"A12Ia_{YY}M_correlation"),
+      'S-BIOG-027' = !"A06Ia_{YY}M_correlation"),
     course.urls = c(
       'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
