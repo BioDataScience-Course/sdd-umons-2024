@@ -515,7 +515,7 @@ if (exists("assignment"))
     toc = "ANOVA (effet de l'acidification)")
 ```
 
-## Test de Kruskal-Wallis
+## Test de Kruskal-Wallis {#kruskal}
 
 Les conditions d'application de l'ANOVA sont assez restrictives, en particulier l'homoscédasticité et le normalité des résidus. Dans notre exemple, nous avons pu stabiliser la variance par une transformation puissance cinq, mais la distribution des résidus n'est pas optimale. Nous pouvons tout aussi bien décider de nous orienter vers la version non paramétrique équivalente : le **test de Kruskal-Wallis**.
 

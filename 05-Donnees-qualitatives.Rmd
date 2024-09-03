@@ -100,7 +100,6 @@ Ici, les labels utilisés dans la colonne "individu" suggère que l'expérience 
 
 --->
 ```
-
 ```{block, type='note'}
 Avant toute analyse, vérifier le type de tableau de données que vous avez à disposition. Le point de départ le plus courant et le plus sûr est le **tableau cas par variables**. Rappellez-vous bien que la question à se poser pour vérifier si le tableau est bien présenté est : "a-t-on une et une seule ligne dans le tableau pour chaque individu statistique ?" Si ce n'est pas le cas, il faut remanier le tableau avant de commencer son analyse.
 ```
@@ -326,7 +325,7 @@ Le dictionnaire des données est un outil important pour comprendre ce que conti
 
 `r h5p(53, height = 270, toc = "Données et métadonnées")`
 
-## Population et échantillonnage
+## Population et échantillonnage {#population}
 
 Nos analyses statistiques seraient bien évidemment beaucoup plus simples si nous pouvions toujours mesurer tous les individus statistiques concernés par nos études. En fait, c'est presque toujours impossible, car les **populations** concernées sont souvent très larges, voire infinies. Nous devons donc mesurer un petit sous-ensemble de la population, ce que nous appelons un **échantillon** (*sample* en anglais) de taille finie déterminée (on parle de la **taille de l'échantillon** ou *sample size* en anglais). Le processus qui mène à la sélection des individus dans l'échantillon s'appelle l'**échantillonnage** (*sampling* en anglais). De cet échantillon, nous souhaitons malgré tout retirer un maximum d'information concernant la population d'origine. Cela s'appelle faire de l'**inférence** sur la population à partir de l'échantillon (*to infer* en anglais).
 
@@ -443,7 +442,6 @@ La figure ci-dessous illustre de manière visuelle la différence qu'il y a entr
 ![](images/sdd1_06/targets.png)
 ---->
 ```
-
 ### Codification des données
 
 Afin d'éviter que divers collaborateurs encodent différemment une information similaire, vous allez devoir préciser très clairement comment encoder les différentes variables de votre jeu de données. Par exemple pour une variable `genre`, est-ce que vous indiquez `homme` / `femme`, ou `h` / `f`, ou encore `H` / `F` ?

@@ -10,60 +10,265 @@ Dans ce module, nous entrons dans le monde de l'inférence statistique et des te
 
 ##### Objectifs {.unnumbered}
 
--   Appréhender des lois de distributions statistiques et leurs utilisations pratiques (distribution normale, log-normale)
+-   Appréhender des lois de distributions statistiques et leurs utilisations pratiques (distribution binomiale, ,log-normale)
 
--   Appréhender l'inférence statistique
+-   Comprendre les détails d'un test d'hypothèse
 
--   Être capable d'effectuer un échantillonnage correctement
-
--   Comprendre ce qu'est un test d'hypothèse
-
--   Connaitre la distribution Chi^2^ et les tests d'hypothèses basés sur cette distribution
+-   Connaitre la distribution Chi^2^ et les tests d'hypothèses basés sur cette distribution.
 
 ##### Prérequis {.unnumbered}
 
 Les probabilités et lois de distributions statistiques vues au module \@ref(proba) doivent être comprises avant d'attaquer cette section.
 
-## Distributions continues {#distri2}
+## Distribution binomiale
 
-## Test Chi carré {#chi2}
+Partons d'un exemple pratique pour découvrir la distribution binomiale. La [mucoviscidose](http://www.muco.be/fr/mucoviscidose/maladie-génétique) est, dans la population européenne, la plus fréquente des maladies génétiques héréditaires. Elle se caractérise par un mucus dans les voies respiratoires anormalement épais qui est à l'origine de diverses complications. L'altération d'une protéine CFTR est à l'origine de cette maladie. Comme le gène qui code pour cette protéine est récessif, il faut que les deux allèles soient porteurs simultanément de la mutation pour que la maladie apparaisse. Parmi des familles de six enfants dont le père et la mère normaux sont tous deux porteurs hétérozygotes du gène altéré, quelle est la probabilité d'obtenir 0, 1, 2, ..., 6 enfants atteints de mucoviscidose ?
 
-### Échantillonnage
+### Épreuve de Bernoulli
 
-Nous avons déjà abordé cette question dans le chapitre 6. Si nous pouvions mesurer **tous** les individus d'une population à chaque fois, nous n'aurions pas besoin des statistiques. Mais ce n'est pratiquement jamais possible. Tout d'abord, le nombre d'individus est potentiellement très grand. Le travail nécessaire risque alors d'être démesuré. Afin de limiter les mesures à un nombre raisonnable de cas, nous effectuons un **échantillonnage** qui consiste à prélever un petit sous-ensemble de taille $N$ donné depuis la population de départ. Il existe différentes stratégies d'échantillonnage, que nous avons déjà abordées.
+La **distribution binomiale** est une loi de distribution discrète qui répond à ce genre de question. Ses conditions d'applications sont :
 
-##### À vous de jouer ! {.unnumbered}
+-   résultats binaires (deux évènements disjoints possibles uniquement ; l'un sera nommé "succès" et l'autre "échec" par convention),
+-   essais indépendants (les probabilités ne changent pas d'un essai à l'autre),
+-   *n*, le nombre d'essais totaux, est fixé à l'avance,
+-   probabilité du "succès" *p* constante (probabilité de l'"échec" = 1 - *p*).
 
-`r h5p(81, height = 400, toc = "Méthode d'échantillonnage")`
+Les conditions particulières de cette situation sont appelées **épreuve de Bernoulli**. Mathématiquement, nous l'écrirons comme suit. Soit une variable aléatoire $Y$ qui comptabilise le nombre de succès, la probabilité d'obtenir $j$ succès parmi $n$ essais est :
 
-Nous n'avons pas forcément accès à tous les individus d'une population. Dans ce cas, nous devons la limiter à un sous-ensemble raisonnable. Par exemple, il est impossible de mesurer *toutes* les souris. Par contre, nous pouvons décider d'étudier la ou les souches de souris disponibles dans l'animalerie, ou chez nos fournisseurs.
+$$P(Y=j)= C^j_n \times p^j \times (1-p)^{n-j}$$
 
-Quoi qu'il en soit, l'échantillon n'est qu'un petit sous-ensemble, si possible sélectionné par un mécanisme faisant intervenir le hasard. Donc, deux échantillons issus de la même population ont une très forte probabilité d'être différents l'un de l'autre. Il en va également de même des statistiques calculées sur ces échantillons, comme les effectifs observés pour chaque niveau de variables qualitatives ou les valeurs moyennes pour les variables quantitatives, par exemple. **Cette variabilité d'un échantillon à l'autre ne nous intéresse pas, car elle n'apporte pas d'information sur la population elle-même.** Ce qui nous intéresse, c'est d'estimer au mieux les grandeurs (effectifs par niveaux, moyennes, etc.) qui caractérisent la population toute entière.
+Le **coefficient binomial** $C^j_n$ vaut[^07-distributions-chi2-1] : $$C^j_n = \frac{n!}{j!(n-j)!}$$
 
-```{block, type='note'}
-L'estimation de paramètres d'une population par le biais de calculs sur un échantillon représentatif issu de cette population s'appelle l'**inférence statistique**. Rappelez-vous le schéma qui relie population et échantillon via l'échantillonnage d'une part, et l'inférence d'autre part.
+[^07-distributions-chi2-1]: Le factoriel d'un nombre $n$, noté $n!$ est $1 \times 2 \times 3 \times ... \times n$, avec $0! = 1$.
 
-![](images/sdd1_08/inference.png)
+$C^j_n$ représente le nombre de combinaisons possibles pour obtenir $j$ succès parmi $n$ essais réalisés dans un ordre quelconque. Nous pourrons aussi écrire :
 
+$$Y \sim B(n,p)$$
+
+Notre exemple de la mucoviscidose au sein d'une famille dont les parents sont tous deux hétérozygotes rentre parfaitement dans le cadre de l'épreuve de Bernoulli avec *n* = 6 et *p*, la probabilité du succès, c'est-à-dire, d'avoir un enfant qui ne développe pas la maladie, de 3/4 ou 0.75 : $Y \sim B(6, 0.75)$.
+
+### Calculs et graphiques
+
+Les calculs sur base d'une distribution binomiale sont assez similaires à ceux de la distribution uniforme dans R, en remplaçant `unif` par `binom` dans le nom des fonctions p/q/r/d. Sinon, la fonction `dist_binomial(size = 6, prob = 0.75)` la crée. Puisqu'il s'agit d'une distribution discrète, un petit nombre d'évènements possibles existent. Il est assez facile de créer une table qui reprend l'ensemble des probabilités possibles :
+
+```{r}
+(binom_table <- dtx(succès = 0:6,
+  probabilité = dbinom(0:6, size = 6, prob = 0.75)))
+```
+
+La représentation graphique donne la Fig. \@ref(fig:binom).
+
+```{r binom, echo=FALSE, fig.cap="Probabilité d'avoir *j* enfants sains parmi 6 dans des familles dont les deux parents sont porteurs hétérozygotes du gène de la mucoviscidose."}
+#dtx(Quantile = 0:6, Probabilité = dbinom(0:6, size = 6, prob = 0.75)) %>.%
+#  chart(., Probabilité ~ Quantile) +
+#  geom_bar(stat = "identity", width = 0.05)
+bi <- dist_binomial(size = 6, prob = 0.75)
+chart(bi) +
+  ylab("Densité de probabilité")
+```
+
+La situation la plus probable est donc d'avoir cinq enfants sains sur six. Nous pouvons aussi observer que, lorsque $p$ s'éloigne de 0.5, les probabilités à l'extrême opposé tendent assez rapidement vers zéro (ici, la probabilité de n'avoir qu'un seul, ou aucun enfant sain). La distribution binomiale trouve de très nombreuses applications en biologie, en écologie, en génétique et dans d'autres disciplines. Elle permet même de représenter vos chances de réussite à l'examen de science des données biologiques ! Voici, pour finir, l'allure d'une distribution binomiale pour laquelle la probabilité du succès est égale à la probabilité d'échec (0.5). Cette distribution est symétrique.
+
+```{r binom2, echo=FALSE, fig.cap="Probabilité d'avoir des garçons parmi une fratrie de 6 enfants (si le sexe ratio de 1:1)."}
+#dtx(Quantile = 0:6, Probabilité = dbinom(0:6, size = 6, prob = 0.5)) %>.%
+#  chart(., Probabilité ~ Quantile) +
+#  geom_bar(stat = "identity", width = 0.05)
+chart(dist_binomial(size = 6, prob = 0.5)) +
+  ylab("Densité de probabilité")
+```
+
+## Distribution de Poisson
+
+Maintenant, nous pouvons poser la question autrement. Prenons un couple sain au hasard en Belgique, quelle est la probabilité que ce couple transmette la mucoviscidose à leur descendance ? Ne considérons pas ici les personnes elles-mêmes atteintes de la maladie qui prendront certainement des précautions particulières. Sachant qu'une personne sur 20 est porteuse du gène défectueux (hétérozygote) dans la population saine belge, la probabilité de former un couple doublement hétérozygote qui pourrait transmettre la maladie est de[^07-distributions-chi2-2] :
+
+[^07-distributions-chi2-2]: Comme il y a la même proportion d'hommes et de femmes porteurs, nous avons 1/20 des hommes et 1/20 des femmes qui sont porteurs. Nous formons des couples au hasard en piochant un homme dans la population masculine et une femme dans la population féminine de manière indépendante. Dans ce cas, nous obtenons un couple double porteur à une fréquence de 1/20 \* 1/20 = 1/400.
+
+```{r}
+1/20 * 1/20
+```
+
+... soit un couple sur 400. Donc, globalement, les probabilités d'avoir des enfants sains sont beaucoup plus grandes que 0.75 si nous incluons tous les couples belges de parents sains porteurs ou non. Cette probabilité est de[^07-distributions-chi2-3] :
+
+[^07-distributions-chi2-3]: Sur 400 couples, 399 ont une probabilité d'engendrer des enfants sains (porteurs hétérozygotes ou non porteurs confondus) de 100%. À cela il faut ajouter un couple sur 400 qui aura une probabilité de 75% de faire des enfants non atteints, car non homozygotes.
+
+```{r}
+(399 * 1 + 1 * 0.75) / 400
+```
+
+Pour un couple au hasard sans connaissance *a priori* du fait que les parents soient porteurs ou non, la probabilité d'avoir un enfant atteint de la mucoviscidose est heureusement très, très faible, mais non nulle (de l'ordre de 1/1600 = 0,000625 = 1 - 0.999375). Si nous considérons maintenant une population suffisamment grande pour pouvoir espérer y trouver "statistiquement" une personne atteinte de mucoviscidose, nous pourrions décider d'étudier un échantillon aléatoire de 1600 enfants belges. La distribution binomiale requiert alors le calcul de $C^j_n$ sur base de $n = 1600$, ce qui revient à devoir calculer le factoriel de 1600 :
+
+```{r}
+factorial(1)
+factorial(10)
+factorial(100)
+factorial(1600)
+```
+
+Or, le factoriel est un nombre qui grandit très, très vite. Déjà le factoriel de 100 est un nombre à 157 chiffres. Nous voyons que R est incapable de calculer précisément le factoriel de 1000. Ce nombre est supérieur au plus grand nombre que l'ordinateur peut représenter pour un **double** en R (`r .Machine$double.xmax`). Donc, nous sommes incapables de répondre à la question à l'aide de la loi binomiale à cause du passage nécessaire par un calcul du factoriel de très grands nombres.
+
+### Évènements rares
+
+La **distribution de Poisson** permet d'obtenir la réponse à la question posée parce qu'elle effectue le calcul différemment. Cette distribution discrète a un seul paramètre $\lambda$ qui représente le nombre moyen de cas rares que l'on observe dans un échantillon donné, ou sur un laps de temps fixé à l'avance. Cette distribution est **asymétrique pour de faibles** $\lambda$. Les conditions d'application sont :
+
+-   résultat binaire,
+-   essais indépendants (les probabilités ne changent pas d'un essai à l'autre),
+-   taille d'échantillon ou laps de temps que le phénomène est observé fixe,
+-   probabilité d'observation de l'évènement $\lambda$ faible.
+
+Pour une variable $Y \sim P(\lambda)$, nous pouvons calculer la probabilité que $Y = 0$, $Y = 1$, ... de la façon suivante :
+
+$$P(Y=0) = e^{-\lambda}$$
+
+et
+
+$$P(Y=k) = P(Y=k-1) \times \frac{\lambda}{k}$$
+
+Le calcul se réalise de proche en proche en partant de la probabilité de ne jamais observer l'évènement. Comme l'évènement est rare, la probabilité tend très rapidement vers une valeur extrêmement faible. Seul le calcul des quelques premiers termes est donc nécessaire. À titre d'exercice, faites le calcul pour notre exemple d'un échantillon de la population belge, avec $\lambda = 1$ comme paramètre. La densité de probabilité pour cette distribution est représentée à la Fig. \@ref(fig:poisson).
+
+```{r poisson, echo=FALSE, fig.cap="Probabilité d'occurence de mucoviscidose dans un échantillon aléatoire de 1600 belges."}
+#dtx(Quantile = 0:8, Probabilité = dpois(0:8, lambda = 1)) %>.%
+#  chart(., Probabilité ~ Quantile) +
+#  geom_bar(stat = "identity", width = 0.05)
+P <- dist_poisson(lambda = 1)
+chart(P, xlim = c(0, 8))
+```
+
+### Loi de Poisson dans R
+
+Vous utilisez le suffixe `pois` pour les fonctions p/q/r/d relatives à la distribution de Poisson et `dist_poisson()` permet de la créer sous forme d'objet **distribution**. Il n'y a qu'un seul paramètre : `lambda =`.
+
+```{r}
+P <- dist_poisson(lambda = 3)
+P
+quantile(P, p = 1/4)
+qpois(p = 1/4, lambda = 3)
 ```
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(82, height = 400, toc = "Inférence statistique")`
+`r learnr("A06Lb_distri", title = "Lois de distributions", toc = "Lois de distributions")`
 
-##### Travail préliminaire {.unnumbered}
+## Distribution log-normale
 
-Avant de vous lancer dans l'inférence statistique, assurez-vous d'avoir effectué soigneusement les trois étapes suivantes :
+La loi log-normale est utilisée pour représenter la distribution d'une variable aléatoire qui résulte de la multiplication d'un grand nombre de petits effets indépendants entre eux. C'est le cas en biologie et en chimie, par exemple, la taille d'un animal, la concentration d'une molécule en solution, la température d'un matériau, etc. Ces variables sont définies uniquement pour des valeurs nulles ou positives. Une taille et une concentration négatives ne sont pas possibles. De même pour une température en dessous du zéro absolu (attention, dans ce cas, la température doit être mesurée en Kelvin).
 
-1.  Vous comprenez bien la question posée, en termes biologiques. Vous connaissez ou vous vous êtes documenté sur l'état de l'art en la matière (bibliographie). Que sait-on déjà du phénomène étudié ? Quels sont les aspects encore inconnus ou à l'état de simples hypothèses ?
+### Transformée log
 
-2.  Vous avez vérifié que la façon dont les mesures ont été prises permettra effectivement de répondre à la question posée. *En particulier, vous avez vérifié que l'échantillonnage a été réalisé dans les règles pour qu'il soit représentatif de la population étudiée.* En outre, vous cernez clairement quelle est la population effectivement étudiée. C'est important pour éviter plus tard de surgénéraliser les résultats obtenus (les attribuer à une population plus large que celle effectivement étudiée).
+La distribution log-normale devient normale lorsque nous transformons la variable en son logarithme. Donc, si :
 
-3.  Vous avez effectué une analyse exploratoire des données. Vous avez représenté les données à l'aide de graphiques appropriés et vous avez interprété ces graphiques afin de comprendre ce que le jeu de données contient. Vous avez également résumé les données sous forme de tableaux synthétiques et vous avez, si nécessaire, remanié et nettoyé vos données.
+$$X \sim log{\text -}N(0, 0.5)$$
+
+alors :
+
+$$log(X) \sim N(0, 0.5)$$
+
+Par facilité, on défini ses deux paramètres de manière relative à la moyenne $\mu$ et à la variance $\sigma^2$ qu'a la distribution normale obtenue après transformation logarithmique. Voici à quoi ressemble la densité de probabilité de cette distribution (Fig \@ref(fig:lognormal)). C'est une distribution asymétrique qui démarre du quantile zéro et est asymptotique à droite en $+\infty$.
+
+```{r lognormal, echo=FALSE, fig.cap="Un exemple de distribution log-normale."}
+# Log-Normal distribution (density probability) with parameters:
+#.mul <- 0; .sl <- 0.5 #  .mul and .sl(sigma) in log scale
+#.col <- 1; .add <- FALSE # Plot parameters
+#.x <- seq(0, qlnorm(0.999, meanlog = .mul, sdlog = .sl), l = 1000) # Quantiles
+#.d <- function(x) dlnorm(x, meanlog = .mul, sdlog = .sl) # Density function
+#.q <- function(p) qlnorm(p, meanlog = .mul, sdlog = .sl) # Quantile for lower-tail prob
+#.label <- bquote(logN(.(.mul), .(.sl))) # Curve parameters
+
+#chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
+#  geom_hline(yintercept = 0, col = "gray") +
+#  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
+#  geom_line() +
+#  xlab("Quantile") +
+#  ylab("Densité de probabilité")
+chart(dist_lognormal(mu = 0, sigma = 0.5), xlim = c(0, 4)) +
+  ylab("Densité de probabilité")
+```
+
+### Fonction dans R pour la log-normale
+
+Les fonctions p/q/r/d relatives à la distribution log-normale dans R utilisent le suffixe `lnorm`. Le calcul de probabilités se fait à l'aide de `plnorm()`, les quantiles se déterminent à partir de `qlnorm()` et un échantillon pseudo-aléatoire se calcule en utilisant `rlnorm()`. Un objet **distribution** contenant une loi log-normale se crée à l'aide de `dist_lognormal()`. Ses arguments sont toujours `mu =` et `sigma =`, mais pour les fonctions p/q/r/d, les arguments correspondants sont `meanlog =`, et `sdlog =`.
+
+```{r}
+lN1 <- dist_lognormal(mu = 1, sigma = 0.5) # Arguments mu =, sigma =
+lN1 # Attention: lN(mu, variance) 0.5^2 = 0.25
+quantile(lN1, p = 0.95)
+qlnorm(p = 0.95, meanlog = 1, sdlog = 0.5) # Nom des arguments meanlog= / sdlog=
+```
+
+## Graphique quantile-quantile
+
+Il n'est pas toujours facile de déterminer quelle est la loi de distribution qui correspond le mieux à la population étudiée. Par contre, une comparaison est possible entre une **distribution observée** (sur base d'un échantillon, donc, d'un jeu de données) et une **distribution théorique** (sur base d'une loi théorique). Nous pouvons calculer les quantiles d'un échantillon via une méthode similaire à celle que nous avons employée pour calculer les quartiles et tracer la boite de dispersion dans le module \@ref(visu3).
+
+```{block, type='note'}
+Un **quantile** divise des données quantitatives en deux sous-groupes de telle manière que le groupe contenant les observations plus petites que ce quantile représente un effectif équivalent à la fraction considérée. Donc, un quantile 10% correspondra à la valeur qui sépare le jeu de données en 10% des observations les plus petites et 90% des observations les plus grandes.
+```
+
+Ce quantile dit **observé** est comparable au quantile dit **théorique** que nous pouvons calculer sur base d'une probabilité équivalente à la fraction considérée. Prenons un exemple simple pour fixer les idées. Dans les données relatives au plancton, nous avons 50 œufs allongés mesurés. Nous nous demandons si leur taille mesurée ici par la surface (variable `area`) de la particule à l'image suit une distribution log-normale. Dans ce cas, il est plus facile de transformer les données en logarithme et de comparer les valeurs ainsi recalculées à une distribution normale.
+
+```{r}
+read("zooplankton", package = "data.io") %>.%
+  sfilter(., class == "Egg_elongated") %>.%
+  smutate(., log_area = log10(area)) %>.%
+  sselect(., area, log_area) ->
+  eggs
+summary(eggs)
+```
+
+```{r}
+chart(data = eggs, ~ area) +
+  geom_histogram(bins = 12)
+```
+
+Sur base de l'histogramme, nous voyons bien que la distribution est soit unimodale et asymétrique, soit bimodale. L'histogramme des données transformées log devrait être plus symétrique si les données originelles suivent bien une distribution log-normale unimodale.
+
+```{r}
+chart(data = eggs, ~ log_area) +
+  geom_histogram(bins = 12)
+```
+
+C'est légèrement mieux, mais la distribution ne parait pas parfaitement symétrique, voire peut-être encore bimodale (pas flagrant toutefois). L'histogramme est un bon outil pour visualiser globalement une distribution, mais le **graphique quantile-quantile** offre une représentation plus précise pour *comparer* deux distributions. Comme nous avons 50 observations à disposition, nous pouvons calculer les quantiles tous les 2% à l'aide de la fonction `quantile()`. De même, nous pouvons utiliser `qnorm()` pour calculer les quantiles théoriques selon une distribution normale réduite. Cela donne :
+
+```{r}
+(probas <- seq(from = 0.02, to = 0.98, by = 0.02))
+# Quantiles observés dans l'échantillon
+q_obs <- quantile(eggs$log_area, probs = probas)
+# quantiles theoriques selon la distribution normale réduite
+q_theo <- qnorm(probas, mean = 0, sd = 1)
+qq <- dtx(q_obs = q_obs, q_theo = q_theo)
+qq
+```
+
+Si les deux distributions sont compatibles, nous devrions avoir une proportionnalité entre les quantiles théoriques et les quantiles observés. Cela devrait donc se marquer par un **alignement** des points sur un graphique des quantiles observés en fonction des quantiles théoriques (Fig. \@ref(fig:qqplot1)).
+
+```{r qqplot1, fig.cap="Graphique quantile-quantile construit à la main."}
+chart(data = qq, q_obs ~ q_theo) +
+  geom_point() +
+  labs(x = "Quantiles théoriques", y = "Quantiles observés")
+```
+
+Cet alignement n'est pas flagrant. Le graphique proposé par la fonction `car::qqPlot()` (Fig. \@ref(fig:qqplot2)) est le même, mais il ajoute différents éléments qui aident à l'interprétation :
+
+1.  Une droite (ligne continue bleue) selon laquelle les points devraient s'aligner en cas de concordance parfaite entre les deux distributions
+2.  Une **enveloppe de confiance** (lignes pointillées bleues) qui tient compte de la variabilité aléatoire d'un échantillon à l'autre pour inclure une enveloppe de tolérance avec une fiabilité de 95%. Cela signifie que 95% des points doivent, en principe, se trouver à l'intérieur de l'enveloppe.
+3.  Une individualisation des points les plus suspects éventuels, en indiquant le numéro de la ligne dans le jeu de donnée de chaque point suspect.
+
+```{r qqplot2, results='hide', fig.cap="Graphique quantile-quantile comparant le log(area) en fonction d'une distribution normale obtenu à l'aide de `car::qqPlot()`."}
+car::qqPlot(eggs[["log_area"]], distribution = "norm",
+  envelope = 0.95, col = "Black", ylab = "log(area [mm^2])")
+```
+
+##### Interprétation {.unnumbered}
+
+Si quasiment tous les points sont compris dans l'enveloppe de confiance à 95%, le graphique indique que les deux distributions ne sont pas fondamentalement différentes. Ici les points correspondants aux valeurs les plus élevées sortent de l'enveloppe pour un certain nombre d'entre eux d'affilée, et les points 11 et 30 sont considérés comme suspects. Ceci indique que les effectifs observés dans l'échantillon sont plus nombreux en queue droite de distribution que ce que la distribution normale prédit en théorie. Ceci confirme l'impression de distribution asymétrique et/ou bimodale. Il est probable qu'on ait au moins deux types d'œufs allongés différents dans l'échantillon, avec le second type moins nombreux, mais représenté par des œufs plus gros, ce qui enfle la partie droite de la distribution.
+
+##### À vous de jouer ! {.unnumbered}
+
+`r learnr("A07La_distri2", title = "Lois de distributions (suite)", toc = "Lois de distributions (suite)")`
+
+## Test Chi carré {#chi2}
 
 ### Test d'hypothèse
 
-Le test d'hypothèse ou test statistique est l'outil le plus simple pour répondre à une question par l'inférence statistique. Il s'agit ici de réduire la question à sa plus simple expression en la réduisant à deux **hypothèses** contradictoires (en gros, la réponse à la question est soit "oui", soit "non" et rien d'autre).
+Reprenons l'élément principal de test d'hypothèse. Il permet de réaliser de l'inférence statistique. Il s'agit ici de réduire la question à sa plus simple expression en la réduisant à deux **hypothèses** contradictoires (en gros, la réponse à la question est soit "oui", soit "non" et rien d'autre).
 
 -   L'**hypothèse nulle**, notée $H_0$ est l'affirmation de base ou de référence que l'on cherchera à réfuter,
 -   L'**hypothèse alternative**, notée $H_1$ ou $H_a$ représente une autre affirmation qui doit nécessairement être vraie si $H_0$ est fausse.
@@ -76,7 +281,7 @@ Les deux hypothèses ne sont pas symétriques. Notre intention est de **rejeter*
 
 #### Becs croisés des sapins
 
-Tout cela reste très abstrait. Prenons un exemple concret simple. Le bec-croisé des sapins *Loxia curvirostra* Linné 1758 est un passereau qui a la particularité d'avoir un bec dont les deux parties se croisent, ce qui donne un outil particulièrement adapté pour extraire les graines de conifères dont il se nourrit.
+Le bec-croisé des sapins *Loxia curvirostra* Linné 1758 est un passereau qui a la particularité d'avoir un bec dont les deux parties se croisent, ce qui donne un outil particulièrement adapté pour extraire les graines de conifères dont il se nourrit.
 
 ![Bec-croisés des sapins mâles montrant les deux variétés (bec croisé à gauche ou à droite). Photo : Elaine R. Wilson (license CC BY-SA 3.0).](images/sdd1_07/red-crossbills-male.jpg)
 
@@ -133,7 +338,7 @@ Le premier argument donné à `chisq.test()` est le tableau de contingence à un
 
 <!-- Ce fragment de code est disponible dans les snippets à partir du menu `hypothesis test : contingency` ou `.hc` (test Chi^2^ univarié). -->
 
-L'exécution de ce code nous donne un court rapport avec :
+L'exécution de ce code nous donne un rapport avec :
 
 -   Un titre qui précise le test d'hypothèse effectué (test $\chi^2$ avec des probabilités sous $H_0$ fournies via l'argument `p =`)
 
@@ -143,8 +348,6 @@ L'exécution de ce code nous donne un court rapport avec :
 
     -   Si la valeur *P* est inférieure à $\alpha$, nous rejetons l'hypothèse $H_0$, considérée comme trop peu probable,
     -   Si la valeur *P* est supérieure ou égale à $\alpha$, nous ne rejetons pas $H_0$, et considérons que notre échantillon ne nous permet pas de considérer cette hypothèse nulle comme suffisamment improbable (soit elle est effectivement correcte, soit l'effectif $N$ de notre échantillon est insuffisant pour démontrer qu'elle ne l'est pas au seuil $\alpha$ choisi).
-
-Souvent en biologie, on choisi $\alpha$ = 5%, mais dans les cas où nous souhaitons avoir plus de "certitude" dans notre réponse, nous pouvons aussi choisir un seuil plus restrictif de 1%, voire de 0,1%. Encore une fois, les explications sont détaillées ci-dessous.
 
 ###### Explications détaillées {.unnumbered}
 
@@ -171,17 +374,17 @@ $$\chi^2_\mathrm{obs} = \sum_{i=1}^n\frac{(a_i - \alpha_i)^2}{\alpha_i}$$
 
 Notez que cette statistique vaut zéro lorsque tous les $a_i$ sont strictement égaux aux $\alpha_i$. Dans tous les autres cas, des termes positifs (le carré de différences est toujours une valeur positive) apparaissent. Donc la statistique $\chi^2$ est d'autant plus grande que les observations s'éloignent de la théorie.
 
-Calculons $\chi^2_\mathrm{obs}$ dans notre cas[^07-distributions-chi2-1] :
+Calculons $\chi^2_\mathrm{obs}$ dans notre cas[^07-distributions-chi2-4] :
 
-[^07-distributions-chi2-1]: Faites également le calcul manuellement à la calculatrice pour vérifier que vous avez bien compris.
+[^07-distributions-chi2-4]: Faites également le calcul manuellement à la calculatrice pour vérifier que vous avez bien compris.
 
 ```{r}
 (chi2_obs <- sum((crossbill_tab - alpha_i)^2 / alpha_i))
 ```
 
-Pour répondre à la question, il nous faut une loi de distribution statistique qui permette d'associer une probabilité au quantile $\chi^2_\mathrm{obs}$ sous $H_0$. C'est là que le statisticien Karl Pearson vient à notre secours. Il a, en effet, modélisé la distribution statistique du $\chi^2$. La loi du même nom admet un seul paramètre, les **degrés de liberté** (ddl) qui sont égaux au nombre de niveaux de la variable facteur étudiée $n$ moins un. Ici, ddl = 2 - 1 = 1. La Fig. \@ref(fig:chi2plot) représente la densité de probabilité d'une loi $\chi^2$ typique[^07-distributions-chi2-2]. C'est une distribution qui démarre à zéro, passe par un maximum et est asymptotique horizontale à $+\infty$.
+Pour répondre à la question, il nous faut une loi de distribution statistique qui permette d'associer une probabilité au quantile $\chi^2_\mathrm{obs}$ sous $H_0$. C'est là que le statisticien Karl Pearson vient à notre secours. Il a, en effet, modélisé la distribution statistique du $\chi^2$. La loi du même nom admet un seul paramètre, les **degrés de liberté** (ddl) qui sont égaux au nombre de niveaux de la variable facteur étudiée $n$ moins un. Ici, ddl = 2 - 1 = 1. La Fig. \@ref(fig:chi2plot) représente la densité de probabilité d'une loi $\chi^2$ typique[^07-distributions-chi2-5]. C'est une distribution qui démarre à zéro, passe par un maximum et est asymptotique horizontale à $+\infty$.
 
-[^07-distributions-chi2-2]: Les fonctions qui permettent les calculs relatifs à la distribution $\chi^2$ dans R sont `<x>chisq()`. Leur utilisation est similaire à celle des distributions vues au module \@ref(proba).
+[^07-distributions-chi2-5]: Les fonctions qui permettent les calculs relatifs à la distribution $\chi^2$ dans R sont `<x>chisq()`. Leur utilisation est similaire à celle des distributions vues au module \@ref(proba).
 
 <!-- , et les snippets correspondants dans la SciViews Box sont disponibles à partir de `.ic` -->
 
@@ -298,9 +501,9 @@ Dans notre exemple, nous pouvons donc rejeter $H_0$ et nous dirons que **la prob
 ```
 ### Effet de l'effectif étudié
 
-En inférence, la qualité des données (échantillons *représentatifs*) est importante, mais la quantité aussi. **Plus vous pourrez mesurer d'individus, mieux c'est.** Par contre, dès que la taille de l'échantillon (ici, l'effectif total mesuré $N$) est suffisante pour rejeter $H_0$, vous n'avez plus besoin d'augmenter la taille de votre échantillon[^07-distributions-chi2-3]. Voyons l'effet de la taille de l'échantillon sur l'étude des becs-croisés des sapins. Nous n'avons pas besoin d'un effectif plus grand que celui mesuré, car nous rejetons $H_0$ ici. Qu'aurait donné notre test $\chi^2$, par contre, si l'auteur avait mesuré disons 10 fois moins d'oiseaux, les proportions restant par ailleurs identiques entre becs-croisés à gauche et à droite ?
+En inférence, la qualité des données (échantillons *représentatifs*) est importante, mais la quantité aussi. **Plus vous pourrez mesurer d'individus, mieux c'est.** Par contre, dès que la taille de l'échantillon (ici, l'effectif total mesuré $N$) est suffisante pour rejeter $H_0$, vous n'avez plus besoin d'augmenter la taille de votre échantillon[^07-distributions-chi2-6]. Voyons l'effet de la taille de l'échantillon sur l'étude des becs-croisés des sapins. Nous n'avons pas besoin d'un effectif plus grand que celui mesuré, car nous rejetons $H_0$ ici. Qu'aurait donné notre test $\chi^2$, par contre, si l'auteur avait mesuré disons 10 fois moins d'oiseaux, les proportions restant par ailleurs identiques entre becs-croisés à gauche et à droite ?
 
-[^07-distributions-chi2-3]: Attention ! Vous devez fixer la taille de l'échantillon dès le départ *a priori*. Vous ne pouvez pas accumuler des données jusqu'à obtenir un rejet de $H_0$, sans quoi votre analyse sera biaisée.
+[^07-distributions-chi2-6]: Attention ! Vous devez fixer la taille de l'échantillon dès le départ *a priori*. Vous ne pouvez pas accumuler des données jusqu'à obtenir un rejet de $H_0$, sans quoi votre analyse sera biaisée.
 
 ```{r}
 # Proportions équivalentes, mais échantillon 10x plus petit
@@ -541,9 +744,9 @@ crabs %>.%
     ylab("Ratio largeur arrière/longueur")
 ```
 
-Notre métrique `rear_length` est naturellement ultra-simple. Elle ne permet pas de différencier *tous* les mâles de *toutes* les femelles, mais la séparation est déjà bien meilleure qu'en utilisant soit `rear` soit `length` seuls. À l'aide de techniques statistiques que vous étudierez au [cours de science des données biologiques II](https://wp.sciviews.org/sdd-umons2/?iframe=wp.sciviews.org/sdd-umons2-2024/lm.html) l'an prochain, nous pouvons montrer qu'une meilleure métrique (on parle encore d'indice) pour séparer les mâles des femelles est en réalité : `rear / (0.3 * length + 2.4)`[^07-distributions-chi2-4]. La séparation entre les sexes n'est pas totale, mais s'en rapproche fortement, surtout pour la variété orange.
+Notre métrique `rear_length` est naturellement ultra-simple. Elle ne permet pas de différencier *tous* les mâles de *toutes* les femelles, mais la séparation est déjà bien meilleure qu'en utilisant soit `rear` soit `length` seuls. À l'aide de techniques statistiques que vous étudierez au [cours de science des données biologiques II](https://wp.sciviews.org/sdd-umons2/?iframe=wp.sciviews.org/sdd-umons2-2024/lm.html) l'an prochain, nous pouvons montrer qu'une meilleure métrique (on parle encore d'indice) pour séparer les mâles des femelles est en réalité : `rear / (0.3 * length + 2.4)`[^07-distributions-chi2-7]. La séparation entre les sexes n'est pas totale, mais s'en rapproche fortement, surtout pour la variété orange.
 
-[^07-distributions-chi2-4]: Pour le lecteur plus avancé, il s'agit en fait de la droite de régression ajustée dans le nuage de points.
+[^07-distributions-chi2-7]: Pour le lecteur plus avancé, il s'agit en fait de la droite de régression ajustée dans le nuage de points.
 
 ```{r}
 crabs %>.%

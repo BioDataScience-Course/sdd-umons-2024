@@ -898,7 +898,7 @@ if (exists("assignment"))
     toc = "Tests de Student - adaptation d'algues")
 ```
 
-## Test de Wilcoxon
+## Test de Wilcoxon {#wilcox}
 
 Nous avons vu que le test *t* de Student se réfère à une distribution qui n'est exacte que si la population de départ est normale. Même si le théorème central limite permet encore d'utiliser le test dans le cas contraire lorsque *n* est grand, tous les cas ne sont pas rencontrés. Si *n* est petit et que l'on soupçonne une distribution non normale (pensez au graphique quantile-quantile pour visualiser la distribution, mais si *n* est très petit, il ne sera pas non plus d'une grande utilité) que faire ?
 
