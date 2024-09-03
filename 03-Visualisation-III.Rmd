@@ -702,9 +702,9 @@ Il existe d'autres fonctions permettant de combiner plusieurs graphiques comme [
 ```{r assign_A03Ia_graphe_avance, echo=FALSE, results='asis'}
 if (exists("assignment"))
   assignment("A03Ia_graphe_avance", part = NULL,
-    url = "https://github.com/BioDataScience-Course/A04Ia_graphe_avance",
+    url = "https://github.com/BioDataScience-Course/A03Ia_graphe_avance",
     course.ids = c(
-      'S-BIOG-006' = !"A04Ia_{YY}M_graphe-avance"),
+      'S-BIOG-006' = !"A03Ia_{YY}M_graphe-avance"),
     course.urls = c(
       'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(
@@ -853,6 +853,8 @@ Pour vous exercer à réaliser des graphiques `chart()`/`ggplot()`, lancez votre
 ##### À vous de jouer ! {.unnumbered}
 
 Complétez votre projet de groupe en réalisant des graphiques de distribution pertinents.
+
+<!-- TODO: on n'a plus A02Ga_analysis_I -> le II deviendrait I et le III deviendrait II ??? -->
 
 ```{r assign_A02Ga_analysis_III, echo=FALSE, results='asis'}
 if (exists("assignment2"))
@@ -1054,9 +1056,9 @@ Tout au long des quatre premiers modules, vous avez appris à utiliser R et RStu
 ```{r assign_A03Ca_charts, echo=FALSE, results='asis'}
 if (exists("challenge"))
   challenge("A03Ca_charts", part = NULL,
-    url = "https://github.com/BioDataScience-Course/A04Ca_charts",
+    url = "https://github.com/BioDataScience-Course/A03Ca_charts",
     course.ids = c(
-      'S-BIOG-006' = !"A04Ca_{YY}M_charts"),
+      'S-BIOG-006' = !"A03Ca_{YY}M_charts"),
     course.urls = c(
       'S-BIOG-006' = "https://classroom.github.com/a/..."),
     course.starts = c(
@@ -1073,7 +1075,7 @@ Vous n'êtes pas correctement enregistré pour ce cours. Vous ne pouvez pas part
 ::: {.S-BIOG-006 .S-BIOG-027}
 Vous pouvez soumettre vos résultats pendant une période de temps précise via l'application ci-dessous :
 
-`r launch_shiny("https://sdd.umons.ac.be/A04Ca_charts/", height = 800, delay = 20, toc = NULL, alt1 = "*Cliquez pour visualiser le classement.*", alt2 = "*Cliquez pour visualiser le classement.*")`
+`r launch_shiny("https://sdd.umons.ac.be/A03Ca_charts/", height = 800, delay = 20, toc = NULL, alt1 = "*Cliquez pour visualiser le classement.*", alt2 = "*Cliquez pour visualiser le classement.*")`
 :::
 
 ## Récapitulatif des exercices

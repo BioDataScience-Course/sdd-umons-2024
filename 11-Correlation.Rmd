@@ -346,16 +346,18 @@ if (exists("assignment"))
 
 ## Challenge
 
-Tout au long des modules 7 à 12, vous avez appris à réaliser des tests d'hypothèses avec R et RStudio. Il est maintenant temps de faire un bilan de vos capacités à écrire le code R pour reproduire de tels tests dans un **challenge de rapidité pour la réalisation de tests d'hypothèses.** Vous vous confronterez entre vous de manière individuelle pour déterminer celui ou celle qui arrivera à reproduire fidèlement le plus d'analyses possible.
+<!-- TODO: place this in module 10 -->
+
+Tout au long des modules 7 à 10, vous avez appris à réaliser des tests d'hypothèses avec R et RStudio. Il est maintenant temps de faire un bilan de vos capacités à écrire le code R pour reproduire de tels tests dans un **challenge de rapidité pour la réalisation de tests d'hypothèses.** Vous vous confronterez entre vous de manière individuelle pour déterminer celui ou celle qui arrivera à reproduire fidèlement le plus d'analyses possible.
 
 ##### À vous de jouer ! {.unnumbered}
 
-```{r assign_A12Ca_infer, echo=FALSE, results='asis'}
+```{r assign_A10Ca_infer, echo=FALSE, results='asis'}
 if (exists("challenge"))
-  challenge("A12Ca_infer", part = NULL,
-    url = "https://github.com/BioDataScience-Course/A12Ca_infer",
+  challenge("A10Ca_infer", part = NULL,
+    url = "https://github.com/BioDataScience-Course/A10Ca_infer",
     course.ids = c(
-      'S-BIOG-027' = !"A12Ca_{YY}M_infer"),
+      'S-BIOG-027' = !"A10Ca_{YY}M_infer"),
     course.urls = c(
       'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
@@ -372,12 +374,12 @@ Vous n'êtes pas correctement enregistré pour ce cours. Vous ne pouvez pas part
 ::: {.S-BIOG-006 .S-BIOG-027}
 Vous pouvez soumettre vos résultats pendant une période de temps précise via l'application ci-dessous :
 
-`r launch_shiny("https://sdd.umons.ac.be/A12Ca_infer/", height = 800, delay = 20, toc = NULL, alt1 = "*Cliquez pour visualiser le classement.*", alt2 = "*Cliquez pour visualiser le classement.*")`
+`r launch_shiny("https://sdd.umons.ac.be/A10Ca_infer/", height = 800, delay = 20, toc = NULL, alt1 = "*Cliquez pour visualiser le classement.*", alt2 = "*Cliquez pour visualiser le classement.*")`
 :::
 
 ## Récapitulatif des exercices
 
-Vous venez de terminer le module 12. Ce module vous a permis d'apprendre une grande partie des subtilités qui se cachent derrière l'association de variables. Il vous a également permis de vous initier à la critique statistique Bravo ! Vous êtes arrivé à la fin du premier cours de Science des données 1.
+Vous venez de terminer le module 11. Ce module vous a permis d'apprendre une grande partie des subtilités qui se cachent derrière l'association de variables. Il vous a également permis de vous initier à la critique statistique Bravo ! Vous êtes arrivé à la fin du premier cours de Science des données 1.
 
 ![](images/sdd1_12/rstudio_joke.jpg)
 
@@ -387,4 +389,4 @@ Pour évaluer votre compréhension de ce dernier, vous aviez les exercices suiva
 
 ##### Progression {.unnumbered}
 
-`r launch_report("12", height = 800)`
+`r launch_report("11", height = 800)`

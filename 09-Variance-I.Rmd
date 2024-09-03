@@ -151,7 +151,7 @@ Avec l'indice $j = 1 .. k$ populations et l'indice $i = 1 .. n$ observations du 
 
 Le graphique à la Fig. \@ref(fig:anova1) représente une situation typique à trois sous-populations.
 
-```{r anova1, echo = FALSE, fig.cap="Décomposition de la variance dans un cas à trois populations A, B et C fictives."}
+```{r anova1, echo=FALSE, fig.cap="Décomposition de la variance dans un cas à trois populations A, B et C fictives."}
 dat <- dtx(Population = c("A", "A", "A", "B", "B", "B", "C", "C", "C"),
   Réponse = c(2.2, 2.4, 3.3, 4.9, 5.2, 6.1, 4.3, 6.4, 6.5))
 means <- c(mean(dat$Réponse), tapply(dat$Réponse, dat$Population, mean))
@@ -502,9 +502,9 @@ Les conditions d'application pour le test post hoc de Tukey sont les mêmes que 
 ```{r assign_A09Ia_acidification_effect, echo=FALSE, results='asis'}
 if (exists("assignment"))
   assignment("A09Ia_acidification_effect", part = NULL,
-    url = "https://github.com/BioDataScience-Course/A10Ia_acidification_effect",
+    url = "https://github.com/BioDataScience-Course/A09Ia_acidification_effect",
     course.ids = c(
-      'S-BIOG-027' = !"A10Ia_{YY}M_acidification_effect"),
+      'S-BIOG-027' = !"A09Ia_{YY}M_acidification_effect"),
     course.urls = c(
       'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
@@ -590,9 +590,9 @@ Appliquez vos nouvelles connaissances dans le projet de groupe que vous avez dé
 ```{r assign_A09Ga_human_health_III, echo=FALSE, results='asis'}
 if (exists("assignment2"))
   assignment2("A07Ga_human_health", part = "III",
-    url = "https://github.com/BioDataScience-Course/A08Ga_human_health",
+    url = "https://github.com/BioDataScience-Course/A07Ga_human_health",
     course.ids = c(
-      'S-BIOG-027' = !"A08Ga_{YY}M_human_health"),
+      'S-BIOG-027' = !"A07Ga_{YY}M_human_health"),
     course.urls = c(
       'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(

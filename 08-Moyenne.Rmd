@@ -885,9 +885,9 @@ La valeur *P* est supérieure à $\alpha$. Nous ne rejetons pas $H_0$. Nous ne p
 ```{r assign_A08Ia_ttest, echo=FALSE, results='asis'}
 if (exists("assignment"))
   assignment("A08Ia_ttest", part = NULL,
-    url = "https://github.com/BioDataScience-Course/A09Ia_ttest",
+    url = "https://github.com/BioDataScience-Course/A08Ia_ttest",
     course.ids = c(
-      'S-BIOG-027' = !"A09Ia_{YY}M_ttest"),
+      'S-BIOG-027' = !"A08Ia_{YY}M_ttest"),
     course.urls = c(
       'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
@@ -1103,9 +1103,9 @@ Appliquez vos nouvelles connaissances dans le projet GitHub Classroom de groupe 
 ```{r assign_A08Ga_human_health_II, echo=FALSE, results='asis'}
 if (exists("assignment2"))
   assignment2("A07Ga_human_health", part = "II",
-    url = "https://github.com/BioDataScience-Course/A08Ga_human_health",
+    url = "https://github.com/BioDataScience-Course/A07Ga_human_health",
     course.ids = c(
-      'S-BIOG-027' = !"A08Ga_{YY}M_human_health"),
+      'S-BIOG-027' = !"A07Ga_{YY}M_human_health"),
     course.urls = c(
       'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
