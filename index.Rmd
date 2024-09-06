@@ -147,10 +147,10 @@ Une présentation de l'approche pédagogique du cours vous est faite durant la s
 
 Quatre niveaux d'exercices de difficultés croissantes vous seront proposés.
 
--   niveau I : découverte des notions dans des exercices rapides et ciblés intégrés au sein du cours en ligne.
+-   niveau I : découverir les notions dans des exercices rapides et ciblés intégrés au sein du cours en ligne.
 -   niveau II : appliquer les notions vues dans des exercices sous la forme de tutoriel cadré
 -   niveau III : transférer les notions dans des projets individuels guidés sur des données biologiques
--   niveau IV : Créer/réaliser des analyses sur des projets de groupe libre sur des données biologiques nouvelles grâce aux notions vues
+-   niveau IV : créer/réaliser des analyses dans des projets de groupe libres sur des données biologiques nouvelles grâce aux notions vues
 
 Chaque type d'exercice est associé à un outil présenté dans le matériel pédagogique.
 
@@ -158,7 +158,7 @@ Chaque type d'exercice est associé à un outil présenté dans le matériel pé
 
 Toutes vos réponses sont collectées et utilisées afin de construire la note finale. Il n'est donc plus nécessaire de passer un examen classique en session d'examen. Tous ces exercices prouvent que vous avez acquis ou non les acquis d'apprentissage de ce cours. Cependant, vous aurez des **interrogations** classiques régulières sur la matière vue jusque là.
 
-Votre progression au sein des exercices de chaque module est mise à votre disposition à la fin de chaque module ou bien depuis Moodle.
+Votre progression au sein des exercices est mise à votre disposition à la fin de chaque module, ainsi que depuis Moodle.
 
 ```{block, type='warning'}
 Les notes des exercices plus faciles de niveau 1, 2 et 3 sont comptabilisées séparément des exercices plus difficiles de niveau 4, des challenges et des interrogations, avec une pondération également en faveur de ces derniers. **Votre objectif est donc de bien vous préparer et de réussir vos projets de niveau 4, challenges et interrogations en présentiel.** Les exercices faciles vous aident à bien vous préparer. **Faites-les sérieusement, c'est dans votre intérêt.**
@@ -168,7 +168,7 @@ L'évaluation est **continue** tout au long de l'année. Il n'y a pas d'examen e
 
 ### Plan du cours {.unnumbered}
 
-Le plan du cours est une forme de contrat entre les étudiants et les encadrants. Ce document structure les attentes de vos encadrants. Veuillez consulter ce document attentivement.
+Le plan du cours est une forme de contrat entre les étudiants et les enseignants. Ce document structure les attentes de vos encadrants. Veuillez consulter ce document attentivement.
 
 -   [Plan du cours de Science des données biologiques I : années 2024-2025](https://github.com/BioDataScience-Course/BioDataScience-Common/tree/2024-2025/docs/plan_de_cours/sdd1_plan_cours_2024-2025.pdf)
 
@@ -242,7 +242,7 @@ Vous pouvez aussi directement créer une issue depuis RStudio. Voyez le fichier 
 
 -   Les **challenges** sont des exercices qui se font obligatoirement en séance sous forme de jeux, type compétition entre vous ou contre la montre. *Ils nécessitent d'être au point dans la manipulation du logiciel pour l'analyse de données biologiques en pratique.*
 
--   Les **interrogations** sont des contrôles classiques en présentiel sur feuille de papier ou sur ordinateur et limités à 30, 45 ou 60 minutes. *Réussir implique que vous ayez assimilé toute la matière vue jusque là.* Prévoyez entre une demi et une journée et demie pour l"étude et la révision avant cette date, selon votre rythme de travail.
+-   Les **interrogations** sont des contrôles classiques en présentiel sur feuille de papier ou sur ordinateur et limités à 30, 45 ou 60 minutes. *Réussir implique que vous ayez assimilé toute la matière vue jusque là.* Prévoyez entre une demi et une journée et demie pour l'étude et la révision avant cette date, selon votre rythme de travail.
 
 -   Les **séances en présentiel** sont généralement réparties sur une semaine avec **deux heures le lundi et quatre heures le vendredi**, sauf quand l'horaire impose une autre configuration.
     *   La **première séance de deux heures du lundi** est consacrée aux questions/réponses sur la matière et aux courtes explications en classe. Le projet individuel de niveau 1 est débuté. *Les étudiants doivent étudier la matière pour l'interrogation ou le challenge* et préparer leur seconde série de questions pour la séance suivante.
