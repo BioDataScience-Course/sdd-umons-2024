@@ -3,7 +3,7 @@
 # Probabilités, distributions I & corrélation {#probacorr}
 
 ```{r setup, include=FALSE, echo=FALSE, message=FALSE, results='hide'}
-SciViews::R("infer")
+SciViews::R("infer", lang = "fr")
 #library(BioDataScience1)
 ```
 
@@ -11,13 +11,15 @@ SciViews::R("infer")
 
 -   Comprendre et être capable de calculer des probabilités
 
--   Appréhender des lois de distributions statistiques et leurs utilisations pratiques (distribution uniforme, binomiale, Poisson)
+-   Appréhender des lois de distributions statistiques et leurs utilisations pratiques (distribution uniforme, normale)
 
 -   Comprendre les différents niveaux d'association de deux variables numériques
 
 -   Connaître et savoir utiliser les coefficients de corrélation de Pearson, de Spearman, et de Kendall
 
 -   Pouvoir manipuler des matrices de corrélation et des corrélogrammes. Utiliser également la matrice de nuages de points comme représentation graphique complémentaire
+
+-   Appréhender les premiers éléments concernant les test d'hypothèses
 
 -   Maîtriser le test de corrélation
 
@@ -311,9 +313,7 @@ Il s'agit d'évènements successifs **non indépendants**. En effet, le retrait 
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A06La_proba", title = "Probabilités", toc = "Calculs des probabilités")`
-
-## Lois de distributions
+`r learnr("A06La_proba", title = "Probabilités", toc = "Calculs des probabilités")` \## Lois de distributions
 
 Étant donné que les sciences des données reposent sur un nombre (si possible important) de répétitions d'une mesure -des réplicats-, il est possible de déterminer à quelle fréquence un évènement *E* se produit de manière expérimentale. La **probabilité observée** est quantifiable sur base d'un échantillon comme nous venons de le voir dans la section précédente. La **probabilité théorique** est connue si le mécanisme sous-jacent est parfaitement connu. Donc, en situation réelle, seule la probabilité observée est accessible, et ce n'est qu'une approximation de la "vraie" valeur, ou **valeur théorique**. Cependant, dans des situations particulières, les statisticiens ont calculé les probabilités théoriques. Ce sont des **lois de distributions**. Elles associent une probabilité théorique à chaque évènement possible.
 
@@ -595,134 +595,6 @@ chart$cumulative(U) +
   geom_funfill(fun = cdfun(U), from = 1, to = 3)
 ```
 
-## Distribution binomiale
-
-Partons d'un exemple pratique pour découvrir la distribution binomiale. La [mucoviscidose](http://www.muco.be/fr/mucoviscidose/maladie-génétique) est, dans la population européenne, la plus fréquente des maladies génétiques héréditaires. Elle se caractérise par un mucus dans les voies respiratoires anormalement épais qui est à l'origine de diverses complications. L'altération d'une protéine CFTR est à l'origine de cette maladie. Comme le gène qui code pour cette protéine est récessif, il faut que les deux allèles soient porteurs simultanément de la mutation pour que la maladie apparaisse. Parmi des familles de six enfants dont le père et la mère normaux sont tous deux porteurs hétérozygotes du gène altéré, quelle est la probabilité d'obtenir 0, 1, 2, ..., 6 enfants atteints de mucoviscidose ?
-
-### Épreuve de Bernoulli
-
-La **distribution binomiale** est une loi de distribution discrète qui répond à ce genre de question. Ses conditions d'applications sont :
-
--   résultats binaires (deux évènements disjoints possibles uniquement ; l'un sera nommé "succès" et l'autre "échec" par convention),
--   essais indépendants (les probabilités ne changent pas d'un essai à l'autre),
--   *n*, le nombre d'essais totaux, est fixé à l'avance,
--   probabilité du "succès" *p* constante (probabilité de l'"échec" = 1 - *p*).
-
-Les conditions particulières de cette situation sont appelées **épreuve de Bernoulli**. Mathématiquement, nous l'écrirons comme suit. Soit une variable aléatoire $Y$ qui comptabilise le nombre de succès, la probabilité d'obtenir $j$ succès parmi $n$ essais est :
-
-$$P(Y=j)= C^j_n \times p^j \times (1-p)^{n-j}$$
-
-Le **coefficient binomial** $C^j_n$ vaut[^06-probabilites-correlation-2] : $$C^j_n = \frac{n!}{j!(n-j)!}$$
-
-[^06-probabilites-correlation-2]: Le factoriel d'un nombre $n$, noté $n!$ est $1 \times 2 \times 3 \times ... \times n$, avec $0! = 1$.
-
-$C^j_n$ représente le nombre de combinaisons possibles pour obtenir $j$ succès parmi $n$ essais réalisés dans un ordre quelconque. Nous pourrons aussi écrire :
-
-$$Y \sim B(n,p)$$
-
-Notre exemple de la mucoviscidose au sein d'une famille dont les parents sont tous deux hétérozygotes rentre parfaitement dans le cadre de l'épreuve de Bernoulli avec *n* = 6 et *p*, la probabilité du succès, c'est-à-dire, d'avoir un enfant qui ne développe pas la maladie, de 3/4 ou 0.75 : $Y \sim B(6, 0.75)$.
-
-### Calculs et graphiques
-
-Les calculs sur base d'une distribution binomiale sont assez similaires à ceux de la distribution uniforme dans R, en remplaçant `unif` par `binom` dans le nom des fonctions p/q/r/d. Sinon, la fonction `dist_binomial(size = 6, prob = 0.75)` la crée. Puisqu'il s'agit d'une distribution discrète, un petit nombre d'évènements possibles existent. Il est assez facile de créer une table qui reprend l'ensemble des probabilités possibles :
-
-```{r}
-(binom_table <- dtx(succès = 0:6,
-  probabilité = dbinom(0:6, size = 6, prob = 0.75)))
-```
-
-La représentation graphique donne la Fig. \@ref(fig:binom).
-
-```{r binom, echo=FALSE, fig.cap="Probabilité d'avoir *j* enfants sains parmi 6 dans des familles dont les deux parents sont porteurs hétérozygotes du gène de la mucoviscidose."}
-#dtx(Quantile = 0:6, Probabilité = dbinom(0:6, size = 6, prob = 0.75)) %>.%
-#  chart(., Probabilité ~ Quantile) +
-#  geom_bar(stat = "identity", width = 0.05)
-bi <- dist_binomial(size = 6, prob = 0.75)
-chart(bi) +
-  ylab("Densité de probabilité")
-```
-
-La situation la plus probable est donc d'avoir cinq enfants sains sur six. Nous pouvons aussi observer que, lorsque $p$ s'éloigne de 0.5, les probabilités à l'extrême opposé tendent assez rapidement vers zéro (ici, la probabilité de n'avoir qu'un seul, ou aucun enfant sain). La distribution binomiale trouve de très nombreuses applications en biologie, en écologie, en génétique et dans d'autres disciplines. Elle permet même de représenter vos chances de réussite à l'examen de science des données biologiques ! Voici, pour finir, l'allure d'une distribution binomiale pour laquelle la probabilité du succès est égale à la probabilité d'échec (0.5). Cette distribution est symétrique.
-
-```{r binom2, echo=FALSE, fig.cap="Probabilité d'avoir des garçons parmi une fratrie de 6 enfants (si le sexe ratio de 1:1)."}
-#dtx(Quantile = 0:6, Probabilité = dbinom(0:6, size = 6, prob = 0.5)) %>.%
-#  chart(., Probabilité ~ Quantile) +
-#  geom_bar(stat = "identity", width = 0.05)
-chart(dist_binomial(size = 6, prob = 0.5)) +
-  ylab("Densité de probabilité")
-```
-
-## Distribution de Poisson
-
-Maintenant, nous pouvons poser la question autrement. Prenons un couple sain au hasard en Belgique, quelle est la probabilité que ce couple transmette la mucoviscidose à leur descendance ? Ne considérons pas ici les personnes elles-mêmes atteintes de la maladie qui prendront certainement des précautions particulières. Sachant qu'une personne sur 20 est porteuse du gène défectueux (hétérozygote) dans la population saine belge, la probabilité de former un couple doublement hétérozygote qui pourrait transmettre la maladie est de[^06-probabilites-correlation-3] :
-
-[^06-probabilites-correlation-3]: Comme il y a la même proportion d'hommes et de femmes porteurs, nous avons 1/20 des hommes et 1/20 des femmes qui sont porteurs. Nous formons des couples au hasard en piochant un homme dans la population masculine et une femme dans la population féminine de manière indépendante. Dans ce cas, nous obtenons un couple double porteur à une fréquence de 1/20 \* 1/20 = 1/400.
-
-```{r}
-1/20 * 1/20
-```
-
-... soit un couple sur 400. Donc, globalement, les probabilités d'avoir des enfants sains sont beaucoup plus grandes que 0.75 si nous incluons tous les couples belges de parents sains porteurs ou non. Cette probabilité est de[^06-probabilites-correlation-4] :
-
-[^06-probabilites-correlation-4]: Sur 400 couples, 399 ont une probabilité d'engendrer des enfants sains (porteurs hétérozygotes ou non porteurs confondus) de 100%. À cela il faut ajouter un couple sur 400 qui aura une probabilité de 75% de faire des enfants non atteints, car non homozygotes.
-
-```{r}
-(399 * 1 + 1 * 0.75) / 400
-```
-
-Pour un couple au hasard sans connaissance *a priori* du fait que les parents soient porteurs ou non, la probabilité d'avoir un enfant atteint de la mucoviscidose est heureusement très, très faible, mais non nulle (de l'ordre de 1/1600 = 0,000625 = 1 - 0.999375). Si nous considérons maintenant une population suffisamment grande pour pouvoir espérer y trouver "statistiquement" une personne atteinte de mucoviscidose, nous pourrions décider d'étudier un échantillon aléatoire de 1600 enfants belges. La distribution binomiale requiert alors le calcul de $C^j_n$ sur base de $n = 1600$, ce qui revient à devoir calculer le factoriel de 1600 :
-
-```{r}
-factorial(1)
-factorial(10)
-factorial(100)
-factorial(1600)
-```
-
-Or, le factoriel est un nombre qui grandit très, très vite. Déjà le factoriel de 100 est un nombre à 157 chiffres. Nous voyons que R est incapable de calculer précisément le factoriel de 1000. Ce nombre est supérieur au plus grand nombre que l'ordinateur peut représenter pour un **double** en R (`r .Machine$double.xmax`). Donc, nous sommes incapables de répondre à la question à l'aide de la loi binomiale à cause du passage nécessaire par un calcul du factoriel de très grands nombres.
-
-### Évènements rares
-
-La **distribution de Poisson** permet d'obtenir la réponse à la question posée parce qu'elle effectue le calcul différemment. Cette distribution discrète a un seul paramètre $\lambda$ qui représente le nombre moyen de cas rares que l'on observe dans un échantillon donné, ou sur un laps de temps fixé à l'avance. Cette distribution est **asymétrique pour de faibles** $\lambda$. Les conditions d'application sont :
-
--   résultat binaire,
--   essais indépendants (les probabilités ne changent pas d'un essai à l'autre),
--   taille d'échantillon ou laps de temps que le phénomène est observé fixe,
--   probabilité d'observation de l'évènement $\lambda$ faible.
-
-Pour une variable $Y \sim P(\lambda)$, nous pouvons calculer la probabilité que $Y = 0$, $Y = 1$, ... de la façon suivante :
-
-$$P(Y=0) = e^{-\lambda}$$
-
-et
-
-$$P(Y=k) = P(Y=k-1) \times \frac{\lambda}{k}$$
-
-Le calcul se réalise de proche en proche en partant de la probabilité de ne jamais observer l'évènement. Comme l'évènement est rare, la probabilité tend très rapidement vers une valeur extrêmement faible. Seul le calcul des quelques premiers termes est donc nécessaire. À titre d'exercice, faites le calcul pour notre exemple d'un échantillon de la population belge, avec $\lambda = 1$ comme paramètre. La densité de probabilité pour cette distribution est représentée à la Fig. \@ref(fig:poisson).
-
-```{r poisson, echo=FALSE, fig.cap="Probabilité d'occurence de mucoviscidose dans un échantillon aléatoire de 1600 belges."}
-#dtx(Quantile = 0:8, Probabilité = dpois(0:8, lambda = 1)) %>.%
-#  chart(., Probabilité ~ Quantile) +
-#  geom_bar(stat = "identity", width = 0.05)
-P <- dist_poisson(lambda = 1)
-chart(P, xlim = c(0, 8))
-```
-
-### Loi de Poisson dans R
-
-Vous utilisez le suffixe `pois` pour les fonctions p/q/r/d relatives à la distribution de Poisson et `dist_poisson()` permet de la créer sous forme d'objet **distribution**. Il n'y a qu'un seul paramètre : `lambda =`.
-
-```{r}
-P <- dist_poisson(lambda = 3)
-P
-quantile(P, p = 1/4)
-qpois(p = 1/4, lambda = 3)
-```
-
-##### À vous de jouer ! {.unnumbered}
-
-`r learnr("A06Lb_distri", title = "Lois de distributions", toc = "Lois de distributions")`
-
 ## Distribution normale
 
 La vidéo suivante vous permettra de récapituler certaines notions étudiées jusqu'ici concernant les types de variables et vous introduira la loi de distribution normale ou distribution de Gauss ou encore, gaussienne.
@@ -766,7 +638,7 @@ Pour une variable aléatoire $Y$ qui suit une distribution normale avec une moye
 
 $$Y \sim N(\mu, \sigma^2)$$
 
-À noter que l'on rencontre aussi profois la notation utilisant l'écart type ou lieu de la variance, donc $Y \sim N(\mu, \sigma)$.
+À noter que l'on rencontre aussi parfois la notation utilisant l'écart type ou lieu de la variance, donc $Y \sim N(\mu, \sigma)$.
 
 ### Loi normale réduite
 
@@ -836,125 +708,15 @@ Une des raisons pour lesquelles la distribution normale est très répandue est 
 vembedr::embed_youtube("4dhm2QAA2x4", width = 770, height = 433)
 ```
 
-## Distribution log-normale
-
-La loi log-normale est utilisée pour représenter la distribution d'une variable aléatoire qui résulte de la multiplication d'un grand nombre de petits effets indépendants entre eux. C'est le cas en biologie et en chimie, par exemple, la taille d'un animal, la concentration d'une molécule en solution, la température d'un matériau, etc. Ces variables sont définies uniquement pour des valeurs nulles ou positives. Une taille et une concentration négatives ne sont pas possibles. De même pour une température en dessous du zéro absolu (attention, dans ce cas, la température doit être mesurée en Kelvin).
-
-### Transformée log
-
-La distribution log-normale devient normale lorsque nous transformons la variable en son logarithme. Donc, si :
-
-$$X \sim log{\text -}N(0, 0.5)$$
-
-alors :
-
-$$log(X) \sim N(0, 0.5)$$
-
-Par facilité, on défini ses deux paramètres de manière relative à la moyenne $\mu$ et à la variance $\sigma^2$ qu'a la distribution normale obtenue après transformation logarithmique. Voici à quoi ressemble la densité de probabilité de cette distribution (Fig \@ref(fig:lognormal)). C'est une distribution asymétrique qui démarre du quantile zéro et est asymptotique à droite en $+\infty$.
-
-```{r lognormal, echo=FALSE, fig.cap="Un exemple de distribution log-normale."}
-# Log-Normal distribution (density probability) with parameters:
-#.mul <- 0; .sl <- 0.5 #  .mul and .sl(sigma) in log scale
-#.col <- 1; .add <- FALSE # Plot parameters
-#.x <- seq(0, qlnorm(0.999, meanlog = .mul, sdlog = .sl), l = 1000) # Quantiles
-#.d <- function(x) dlnorm(x, meanlog = .mul, sdlog = .sl) # Density function
-#.q <- function(p) qlnorm(p, meanlog = .mul, sdlog = .sl) # Quantile for lower-tail prob
-#.label <- bquote(logN(.(.mul), .(.sl))) # Curve parameters
-
-#chart(data = dtx(Quantiles = .x, Prob = .d(.x)), Prob ~ Quantiles) +
-#  geom_hline(yintercept = 0, col = "gray") +
-#  geom_ribbon(aes(x = .x, ymin = 0, ymax = .d(.x)), fill = "gray", alpha = 0.2) +
-#  geom_line() +
-#  xlab("Quantile") +
-#  ylab("Densité de probabilité")
-chart(dist_lognormal(mu = 0, sigma = 0.5), xlim = c(0, 4)) +
-  ylab("Densité de probabilité")
-```
-
-### Fonction dans R pour la log-normale
-
-Les fonctions p/q/r/d relatives à la distribution log-normale dans R utilisent le suffixe `lnorm`. Le calcul de probabilités se fait à l'aide de `plnorm()`, les quantiles se déterminent à partir de `qlnorm()` et un échantillon pseudo-aléatoire se calcule en utilisant `rlnorm()`. Un objet **distribution** contenant une loi log-normale se crée à l'aide de `dist_lognormal()`. Ses arguments sont toujours `mu =` et `sigma =`, mais pour les fonctions p/q/r/d, les arguments correspondants sont `meanlog =`, et `sdlog =`.
-
-```{r}
-lN1 <- dist_lognormal(mu = 1, sigma = 0.5) # Arguments mu =, sigma =
-lN1 # Attention: lN(mu, variance) 0.5^2 = 0.25
-quantile(lN1, p = 0.95)
-qlnorm(p = 0.95, meanlog = 1, sdlog = 0.5) # Nom des arguments meanlog= / sdlog=
-```
-
-## Graphique quantile-quantile
-
-Il n'est pas toujours facile de déterminer quelle est la loi de distribution qui correspond le mieux à la population étudiée. Par contre, une comparaison est possible entre une **distribution observée** (sur base d'un échantillon, donc, d'un jeu de données) et une **distribution théorique** (sur base d'une loi théorique). Nous pouvons calculer les quantiles d'un échantillon via une méthode similaire à celle que nous avons employée pour calculer les quartiles et tracer la boite de dispersion dans le module \@ref(visu3).
-
-```{block, type='note'}
-Un **quantile** divise des données quantitatives en deux sous-groupes de telle manière que le groupe contenant les observations plus petites que ce quantile représente un effectif équivalent à la fraction considérée. Donc, un quantile 10% correspondra à la valeur qui sépare le jeu de données en 10% des observations les plus petites et 90% des observations les plus grandes.
-```
-
-Ce quantile dit **observé** est comparable au quantile dit **théorique** que nous pouvons calculer sur base d'une probabilité équivalente à la fraction considérée. Prenons un exemple simple pour fixer les idées. Dans les données relatives au plancton, nous avons 50 œufs allongés mesurés. Nous nous demandons si leur taille mesurée ici par la surface (variable `area`) de la particule à l'image suit une distribution log-normale. Dans ce cas, il est plus facile de transformer les données en logarithme et de comparer les valeurs ainsi recalculées à une distribution normale.
-
-```{r}
-read("zooplankton", package = "data.io") %>.%
-  sfilter(., class == "Egg_elongated") %>.%
-  smutate(., log_area = log10(area)) %>.%
-  sselect(., area, log_area) ->
-  eggs
-summary(eggs)
-```
-
-```{r}
-chart(data = eggs, ~ area) +
-  geom_histogram(bins = 12)
-```
-
-Sur base de l'histogramme, nous voyons bien que la distribution est soit unimodale et asymétrique, soit bimodale. L'histogramme des données transformées log devrait être plus symétrique si les données originelles suivent bien une distribution log-normale unimodale.
-
-```{r}
-chart(data = eggs, ~ log_area) +
-  geom_histogram(bins = 12)
-```
-
-C'est légèrement mieux, mais la distribution ne parait pas parfaitement symétrique, voire peut-être encore bimodale (pas flagrant toutefois). L'histogramme est un bon outil pour visualiser globalement une distribution, mais le **graphique quantile-quantile** offre une représentation plus précise pour *comparer* deux distributions. Comme nous avons 50 observations à disposition, nous pouvons calculer les quantiles tous les 2% à l'aide de la fonction `quantile()`. De même, nous pouvons utiliser `qnorm()` pour calculer les quantiles théoriques selon une distribution normale réduite. Cela donne :
-
-```{r}
-(probas <- seq(from = 0.02, to = 0.98, by = 0.02))
-# Quantiles observés dans l'échantillon
-q_obs <- quantile(eggs$log_area, probs = probas)
-# quantiles theoriques selon la distribution normale réduite
-q_theo <- qnorm(probas, mean = 0, sd = 1)
-qq <- dtx(q_obs = q_obs, q_theo = q_theo)
-qq
-```
-
-Si les deux distributions sont compatibles, nous devrions avoir une proportionnalité entre les quantiles théoriques et les quantiles observés. Cela devrait donc se marquer par un **alignement** des points sur un graphique des quantiles observés en fonction des quantiles théoriques (Fig. \@ref(fig:qqplot1)).
-
-```{r qqplot1, fig.cap="Graphique quantile-quantile construit à la main."}
-chart(data = qq, q_obs ~ q_theo) +
-  geom_point() +
-  labs(x = "Quantiles théoriques", y = "Quantiles observés")
-```
-
-Cet alignement n'est pas flagrant. Le graphique proposé par la fonction `car::qqPlot()` (Fig. \@ref(fig:qqplot2)) est le même, mais il ajoute différents éléments qui aident à l'interprétation :
-
-1.  Une droite (ligne continue bleue) selon laquelle les points devraient s'aligner en cas de concordance parfaite entre les deux distributions
-2.  Une **enveloppe de confiance** (lignes pointillées bleues) qui tient compte de la variabilité aléatoire d'un échantillon à l'autre pour inclure une enveloppe de tolérance avec une fiabilité de 95%. Cela signifie que 95% des points doivent, en principe, se trouver à l'intérieur de l'enveloppe.
-3.  Une individualisation des points les plus suspects éventuels, en indiquant le numéro de la ligne dans le jeu de donnée de chaque point suspect.
-
-```{r qqplot2, results='hide', fig.cap="Graphique quantile-quantile comparant le log(area) en fonction d'une distribution normale obtenu à l'aide de `car::qqPlot()`."}
-car::qqPlot(eggs[["log_area"]], distribution = "norm",
-  envelope = 0.95, col = "Black", ylab = "log(area [mm^2])")
-```
-
-##### Interprétation {.unnumbered}
-
-Si quasiment tous les points sont compris dans l'enveloppe de confiance à 95%, le graphique indique que les deux distributions ne sont pas fondamentalement différentes. Ici les points correspondants aux valeurs les plus élevées sortent de l'enveloppe pour un certain nombre d'entre eux d'affilée, et les points 11 et 30 sont considérés comme suspects. Ceci indique que les effectifs observés dans l'échantillon sont plus nombreux en queue droite de distribution que ce que la distribution normale prédit en théorie. Ceci confirme l'impression de distribution asymétrique et/ou bimodale. Il est probable qu'on ait au moins deux types d'œufs allongés différents dans l'échantillon, avec le second type moins nombreux, mais représenté par des œufs plus gros, ce qui enfle la partie droite de la distribution.
-
-##### À vous de jouer ! {.unnumbered}
-
-`r learnr("A07La_distri2", title = "Lois de distributions (suite)", toc = "Lois de distributions (suite)")`
-
 ## Corrélation
 
 ### Association de deux variables
+
+Nous pouvons décrire une variable numérique à l'aide de plusieurs descripteurs comme la moyenne par exemple
+
+$$\bar{x}=\sum_{i=1}^n{\frac{x_i}{n}}$$
+
+où $x$ est une variable quantitative (donc **numeric** dans R) et $n$ est la taille de l'échantillon, c'est à dire, le nombre d'individus mesurés. On notera $\bar{x}$ la moyenne de $x$, que l'on prononcera "x barre". Nous avons abordé la différence entre un échantillon et une population dans la section \@ref(population). Soyez sur de maîtriser la différence avant de continuer de lire cette section.
 
 Nous pouvons décrire l'étendue d'une variable numérique à l'aide de la **variance** qui, pour rappel, est la somme des écarts à la moyenne divisée par le nombre de degrés de liberté (*n* dans le cas d'une population et *n* - 1 dans le cas d'un échantillon).
 
@@ -1165,9 +927,9 @@ fvar(ans_y)
 fsd(ans_y)
 ```
 
-À nouveau, c'est les mêmes valeurs pour les quatre séries, aux arrondis près. Que donnent les coefficients de corrélation[^06-probabilites-correlation-5] ?
+À nouveau, c'est les mêmes valeurs pour les quatre séries, aux arrondis près. Que donnent les coefficients de corrélation[^06-probabilites-correlation-2] ?
 
-[^06-probabilites-correlation-5]: Ici, nous croisons les *x* et les *y*, et extrayons la diagonale de ce tableau qui correspond aux coefficients entre *x1* et *y1*, entre *x2* et *y2*, entre *x3* et *y3* et entre *x4* et *y4*, respectivement.
+[^06-probabilites-correlation-2]: Ici, nous croisons les *x* et les *y*, et extrayons la diagonale de ce tableau qui correspond aux coefficients entre *x1* et *y1*, entre *x2* et *y2*, entre *x3* et *y3* et entre *x4* et *y4*, respectivement.
 
 ```{r}
 diag(correlation(ans_x, ans_y))
@@ -1223,7 +985,7 @@ Le coefficient de corrélation de Pearson représente une corrélation **linéai
 
 -   Le $\rho$ de Spearman est le même calcul que le coefficient de Pearson, mais appliqué sur les données préalablement transformées en rangs. Sa valeur vaudra +1 ou -1 lorsque les points s'alignent parfaitement le long de n'importe quelle fonction monotone croissante ou décroissante.
 
--   Le $\tau$ de Kendall utilise un calcul selon la même logique que les tests de Wilcoxon ou de Kruskal-Wallis. Nous allons ici compter le nombre de paires concordantes $n_c$ définies par $x_i < x_j\ \mathrm{et}\ y_i < y_j$, ou $x_i > x_j\ \mathrm{et}\ y_i > y_j$. Nous compterons aussi le nombre de paires discordantes $n_d$ telles que $x_i < x_j\ \mathrm{et}\ y_i > y_j$, ou $x_i > x_j\ \mathrm{et}\ y_i < y_j$. Enfin, si $x_i = x_j\ \mathrm{et}\ y_i = y_j$, la paire n'est pas comptabilisée. Nous avons alors pour un échantillon de *n* observations des variables numériques *x* et *y* :
+-   Le $\tau$ de Kendall utilise un calcul selon la même logique que les tests de Wilcoxon ou de Kruskal-Wallis que nous découvrirons dans les prochains modules \ref(wilcox) et \ref(kruskal). Nous allons ici compter le nombre de paires concordantes $n_c$ définies par $x_i < x_j\ \mathrm{et}\ y_i < y_j$, ou $x_i > x_j\ \mathrm{et}\ y_i > y_j$. Nous compterons aussi le nombre de paires discordantes $n_d$ telles que $x_i < x_j\ \mathrm{et}\ y_i > y_j$, ou $x_i > x_j\ \mathrm{et}\ y_i < y_j$. Enfin, si $x_i = x_j\ \mathrm{et}\ y_i = y_j$, la paire n'est pas comptabilisée. Nous avons alors pour un échantillon de *n* observations des variables numériques *x* et *y* :
 
 $$\tau_{x,y} = \frac{n_c - n_d}{\frac{1}{2} \cdot n \cdot (n - 1)}$$
 
@@ -1245,42 +1007,119 @@ correlation(trees) # Équivalent à method = "pearson"
 
 Les valeurs obtenues diffèrent, mais les tendances restent similaires ici. Les différences sont d'autant plus importantes que le nuage de points est curvilinéaire. À vous de bien choisir votre coefficient en fonction de ce que vous recherchez, une association linéaire (Pearson) ou pas (Spearman, le plus utilisé, ou Kendall éventuellement).
 
-#### Test de corrélation
+## Test de corrélation
 
-C'est bien beau de pouvoir quantifier une corrélation, mais à partir de quand est-elle *significative* ? En d'autres termes, nous voudrions déterminer si l'allongement du nuage de points peut être fortuit (par le biais de l'échantillonnage aléatoire) ou non. Il existe un test d'hypothèse qui répond à cette question, avec une version pour chacun des trois coefficients de corrélation, *r* de Pearson, $\rho$ de Spearman, et $\tau$ de Kendall. Pour *r* de Pearson, nous aurons les hypothèses suivantes :
+C'est bien beau de pouvoir quantifier une corrélation, mais à partir de quand est-elle *significative*  au sens statistique du terme? En d'autres termes, nous voudrions déterminer si l'allongement du nuage de points peut être fortuit (par le biais de l'échantillonnage aléatoire) ou non. Il existe un test d'hypothèse qui répond à cette question. La section suivante présente traite de l'échantillonnage, du travail préliminaire ainsi que la définition d'un test d'hypothèse.
+
+### Échantillonnage
+
+Nous avons déjà abordé cette question dans le chapitre 5. Si nous pouvions mesurer **tous** les individus d'une population à chaque fois, nous n'aurions pas besoin des statistiques. Mais ce n'est pratiquement jamais possible. Tout d'abord, le nombre d'individus est potentiellement très grand. Le travail nécessaire risque alors d'être démesuré. Afin de limiter les mesures à un nombre raisonnable de cas, nous effectuons un **échantillonnage** qui consiste à prélever un petit sous-ensemble de taille $N$ donné depuis la population de départ. Il existe différentes stratégies d'échantillonnage, que nous avons déjà abordées.
+
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(81, height = 400, toc = "Méthode d'échantillonnage")`
+
+Nous n'avons pas forcément accès à tous les individus d'une population. Dans ce cas, nous devons la limiter à un sous-ensemble raisonnable. Par exemple, il est impossible de mesurer *toutes* les souris. Par contre, nous pouvons décider d'étudier la ou les souches de souris disponibles dans l'animalerie, ou chez nos fournisseurs.
+
+Quoi qu'il en soit, l'échantillon n'est qu'un petit sous-ensemble, si possible sélectionné par un mécanisme faisant intervenir le hasard. Donc, deux échantillons issus de la même population ont une très forte probabilité d'être différents l'un de l'autre. Il en va également de même des statistiques calculées sur ces échantillons, comme les effectifs observés pour chaque niveau de variables qualitatives ou les valeurs moyennes pour les variables quantitatives, par exemple. **Cette variabilité d'un échantillon à l'autre ne nous intéresse pas, car elle n'apporte pas d'information sur la population elle-même.** Ce qui nous intéresse, c'est d'estimer au mieux les grandeurs (effectifs par niveaux, moyennes, etc.) qui caractérisent la population toute entière.
+
+```{block, type='note'}
+L'estimation de paramètres d'une population par le biais de calculs sur un échantillon représentatif issu de cette population s'appelle l'**inférence statistique**. Rappelez-vous le schéma qui relie population et échantillon via l'échantillonnage d'une part, et l'inférence d'autre part.
+
+![](images/sdd1_06/inference.png)
+
+```
+
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(82, height = 400, toc = "Inférence statistique")`
+
+##### Travail préliminaire {.unnumbered}
+
+Avant de vous lancer dans l'inférence statistique, assurez-vous d'avoir effectué soigneusement les trois étapes suivantes :
+
+1.  Vous comprenez bien la question posée, en termes biologiques. Vous connaissez ou vous vous êtes documenté sur l'état de l'art en la matière (bibliographie). Que sait-on déjà du phénomène étudié ? Quels sont les aspects encore inconnus ou à l'état de simples hypothèses ?
+
+2.  Vous avez vérifié que la façon dont les mesures ont été prises permettra effectivement de répondre à la question posée. *En particulier, vous avez vérifié que l'échantillonnage a été réalisé dans les règles pour qu'il soit représentatif de la population étudiée.* En outre, vous cernez clairement quelle est la population effectivement étudiée. C'est important pour éviter plus tard de surgénéraliser les résultats obtenus (les attribuer à une population plus large que celle effectivement étudiée).
+
+3.  Vous avez effectué une analyse exploratoire des données. Vous avez représenté les données à l'aide de graphiques appropriés et vous avez interprété ces graphiques afin de comprendre ce que le jeu de données contient. Vous avez également résumé les données sous forme de tableaux synthétiques et vous avez, si nécessaire, remanié et nettoyé vos données.
+
+### Test d'hypothèse
+
+Le test d'hypothèse ou test statistique est l'outil le plus simple pour répondre à une question par l'inférence statistique. Il s'agit ici de réduire la question à sa plus simple expression en la réduisant à deux **hypothèses** contradictoires (en gros, la réponse à la question est soit "oui", soit "non" et rien d'autre).
+
+-   L'**hypothèse nulle**, notée $H_0$ est l'affirmation de base ou de référence que l'on cherchera à réfuter,
+-   L'**hypothèse alternative**, notée $H_1$ ou $H_a$ représente une autre affirmation qui doit nécessairement être vraie si $H_0$ est fausse.
+
+Les deux hypothèses ne sont pas symétriques. Notre intention est de **rejeter** $H_0$. Dans ce cas, nous pourrons considérer que $H_1$ est vraie avec un certain degré de certitude que nous pourrons également quantifier. Si nous n'y arrivons pas, nous dirons que nous ne pouvons pas rejeter $H_0$, mais nous ne pourrons jamais dire que nous l'**acceptons,** car dans ce cas, deux explications resteront possibles : (1) $H_0$ est effectivement vraie, ou (2) $H_0$ est fausse mais nous n'avons pas *assez* de données à disposition pour le démontrer avec le niveau de certitude recherché.
+
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(83, height = 400, toc = "Hypothèse nulle")`
+
+Revenons à notre réflexion qui a initié la réalisation d'un test d'hypothèse. À partir de quand une corrélation entre deux variables est-elle significative ? Il existe un test d'hypothèse qui répond à cette question, avec une version pour chacun des trois coefficients de corrélation : *r* de Pearson, $\rho$ de Spearman et $\tau$ de Kendall. Pour *r* de Pearson, nous aurons les hypothèses suivantes :
 
 -   $H_0\ :\ r = 0$
 -   $H_1\ :\ r \neq 0$
 
-Il existe aussi des variantes unilatérales à gauche ($H_1\ :\ r < 0$) ou à droite ($H_1\ :\ r > 0$) dans le cas où nous aurions des indications que l'association ne peut qu'être de type proportionnalité inverse ou directe, respectivement.
+Il existe aussi des variantes unilatérales à gauche ($H_1\ :\ r < 0$, dans *r* `less`) ou à droite ($H_1\ :\ r > 0$, dans *r* `greater`) dans le cas où nous aurions des indications que l'association ne peut qu'être de type proportionnalité inverse ou directe, respectivement.
 
-Prenons l'exemple de *r* pour les deux variables les plus corrélées dans `trees` : `diameter` et `volume`. Notez la forme particulière de la formule à utiliser. Comme les deux variables sont sur le même pied d'égalité, il n'y a pas de raison d'en placer une à gauche du signe `~` dans la formule. On l'écrit alors `~ var1 + var2`. Choisissons notre seuil $\alpha$ à 5% avant d'effectuer le test, ensuite, considérons un test unilatéral à droite avec `alternative = "greater"` puisque le volume de bois ne peut qu'augmenter avec le diamètre de l'arbre (relation inverse non crédible ici).
+Prenons l'exemple de *r* pour les deux variables les plus corrélées dans `trees` : `diameter` et `volume`. Notez la forme particulière de la formule à utiliser. Comme les deux variables sont sur le même pied d'égalité, il n'y a pas de raison d'en placer une à gauche du signe `~` dans la formule. On l'écrit alors `~ var1 + var2`.
 
 ```{r}
 cor.test(data = trees, ~ diameter + volume, alternative = "greater")
 ```
 
-Comme la valeur *p* est inférieure à $\alpha$, nous pouvons rejeter $H_0$ et conclure que le coefficient de corrélation entre le diamètre et le volume est significativement positif au seuil $\alpha$ de 5% (*r* = 0.967, ddl = 29, valeur *p* \<\< 0.001). On s'en doutait avec un coefficient aussi proche de 1. Mais qu'en est-il pour l'association entre le diamètre et la hauteur ?
+L'exécution de ce code nous donne un rapport avec :
+
+-   Un titre qui précise le test d'hypothèse effectué (test de corrélation de Pearson avec des probabilités sous $H_0$)
+
+-   Les variables employées pour ce test
+
+-   L'hypothèse alternative du test
+
+-   La dernière ligne donne la valeur précise de la corrélation entre les deux variables
+
+-   Le résultat du test se trouve au niveau de la valeur de *P* à la troisième ligne. L'interprétation se fait en fonction de la valeur *P*. En fonction d'un seuil choisi avant de faire le test, et appelé seuil $\alpha$. La décision est prise comme suit :
+
+    -   Si la valeur *P* est inférieure à $\alpha$, nous rejetons l'hypothèse $H_0$, considérée comme trop peu probable,
+    -   Si la valeur *P* est supérieure ou égale à $\alpha$, nous ne rejetons pas $H_0$, et considérons que notre échantillon ne nous permet pas de considérer cette hypothèse nulle comme suffisamment improbable (soit elle est effectivement correcte, soit l'effectif $N$ de notre échantillon est insuffisant pour démontrer qu'elle ne l'est pas au seuil $\alpha$ choisi).
+
+Souvent en biologie, on choisi $\alpha$ = 5%, mais dans les cas où nous souhaitons avoir plus de "certitude" dans notre réponse, nous pouvons aussi choisir un seuil plus restrictif de 1%, voire de 0,1%. Encore une fois, les explications sont détaillées ci-dessous.
+
+Prenons la valeur courante en biologie afin d'intepréter ce test. Le test réalisé est un test unilatéral à droite avec `alternative = "greater"` puisque le volume de bois ne peut qu'augmenter avec le diamètre de l'arbre (relation inverse non crédible ici).
+
+On peut utiliser la fonction tabularise() afin d'obtenir un tableau bien formaté pour un carnet de notes.
 
 ```{r}
-cor.test(data = trees, ~ diameter + height, alternative = "greater")
+cor.test(data = trees, ~ diameter + volume, alternative = "greater") |> tabularise()
+```
+
+Comme la valeur *p* est inférieure à $\alpha$, nous pouvons rejeter $H_0$ et conclure que le coefficient de corrélation entre le diamètre et le volume est significativement positif au seuil $\alpha$ de 5% (*r* = 0.967, ddl = 29, valeur *p* \<\< 0.001).
+
+On s'en doutait avec un coefficient aussi proche de 1. Mais qu'en est-il pour l'association entre le diamètre et la hauteur ?
+
+```{r}
+cor.test(data = trees, ~ diameter + height, alternative = "greater") |> tabularise()
 ```
 
 Elle est, elle aussi, significative au seuil $\alpha$ de 5%. La valeur *p* vaut ici un peu plus de 0,1%. Que donnerait un test de Spearman sur ces mêmes variables ?
 
 ```{r}
 cor.test(data = trees, ~ diameter + height,
-  alternative = "greater", method = "spearman")
+  alternative = "greater", method = "spearman") |> tabularise()
 ```
 
 Le test nous avertit qu'en présence d'ex aequo, le calcul n'est qu'approchant. Ici aussi, nous rejetons $H_0$. Enfin, pour comparaison (en pratique, on ne fait pas systématiquement tous les tests, mais on choisit celui qui est le plus adéquat), que donnerait un test de Kendall ?
 
 ```{r}
 cor.test(data = trees, ~ diameter + height,
-  alternative = "greater", method = "kendall")
+  alternative = "greater", method = "kendall") |> tabularise()
 ```
 
 Même remarque concernant les ex aequo et valeur *p* très similaire ici à celle du test de Spearman.
+
+Nous venons de réaliser nos premiers tests d'hypothèses. Dans les prochains modules, nous approfondirons la compréhension des tests d'hypothèses.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -1348,7 +1187,7 @@ if (exists("assignment2"))
 ```
 ## Récapitulatif des exercices
 
-Vous venez de terminer le module 6. Ce module vous a permis d'apprendre les bases des probabilités et les principales lois de distribution. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
+Vous venez de terminer le module 6. Ce module vous a permis d'apprendre les bases des probabilités, de découvrir les premières lois de distributions, la corrélation et les premiers éléments concernant les tests d'hypothèse. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 

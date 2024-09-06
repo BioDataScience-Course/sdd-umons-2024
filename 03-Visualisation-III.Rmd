@@ -1033,6 +1033,20 @@ Une branche peut être abandonnée comme la branche 1 ou encore fusionnée avec 
 
 ![](images/sdd1_03/git_branch2.png)
 
+## Critique graphique
+
+La réalisation de graphiques n'est pas une tâche aisée. En effet, un "mauvais" graphique peut mener à une interprétation erronée. Quelquefois, il s'agit de triche manifeste, mais la plupart du temps, c'est par ignorance. Développer un **esprit critique** est important pour pouvoir démasquer ces diverses situations et ne pas tomber soi-même dans les pièges les plus grossiers. Plus loin dans ce cours, nous reparlerons de l'esprit critique avec toute une série d'erreurs liées à la mauvaise interprétation statistique.
+
+![](images/sdd1_03/graph-upside-down.jpg)
+
+Le développement de votre esprit critique va être long. Pour chaque graphique que vous analyserez, posez-vous au minimum les questions suivantes :
+
+-   Les graphiques sont-ils adéquats par rapport à ce qui doit être montré ?
+-   Les axes sont-ils placés correctement, et sont-ils bien libellés ?
+-   Le graphique respecte-t-il les conventions ?
+-   Les unités sont-elles correctes ?
+-   Les grandeurs observées sont-elles plausibles ? Vous pouvez vous rapporter à des éléments connus et comparer. Par exemple, si l'on vous dit qu'une souris adulte pèse 1g, est-ce plausible ou non ? Faites une recherche sur le Web, ou un raisonnement du genre : une souris est constituée principalement d'eau. Un gramme d'eau occupe un volume de 1 cm^3^. Le volume de la souris adulte est-il supérieur, égal ou inférieur à un cube de 1 cm de côté ?
+
 ## Challenge
 
 Tout au long des quatre premiers modules, vous avez appris à utiliser R et RStudio, à écrire des documents en R Markdown, à utiliser git et GitHub... Vous avez également appris à réaliser des graphiques clairs qui présentent visuellement l'information contenue dans des jeux de données. Il est maintenant temps de faire un bilan de tout cela sous une forme ludique : un **challenge de rapidité pour la réalisation de graphiques.** Vous vous confronterez entre vous de manière individuelle pour déterminer celui ou celle qui arrivera à reproduire fidèlement le plus de graphiques possible.

@@ -93,7 +93,7 @@ Les statistiques ont mauvaise presse auprès de certaines personnes qui pensent 
 Dans la littérature scientifique et tout autour de nous, nous pouvons trouver des exemples de mauvais usages des statistiques (application *erronée* de méthodes statistiques). Quelquefois, il s'agit de triche manifeste, mais la plupart du temps c'est par ignorance. Développer un **esprit critique** statistique est important pour pouvoir démasquer ces diverses situations et ne pas tomber soi-même dans les pièges les plus grossiers.
 ```
 
-![](images/sdd1_12/graph-upside-down.jpg)
+![](images/sdd1_03/graph-upside-down.jpg)
 
 Voici quelques conseils qui vous aideront à développer votre esprit critique statistique.
 
