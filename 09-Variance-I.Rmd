@@ -625,7 +625,7 @@ if (exists("assignment2"))
 ```
 ## Récapitulatif des exercices
 
-Vous venez de terminer le module 10. Ce module vous a permis d'apprendre une grande partie des subtilités qui se cachent derrière l'analyse de variance. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
+Vous venez de terminer le module 9. Ce module vous a permis d'apprendre une grande partie des subtilités qui se cachent derrière l'analyse de variance. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 

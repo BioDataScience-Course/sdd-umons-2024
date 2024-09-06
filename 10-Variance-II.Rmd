@@ -1035,7 +1035,7 @@ if (exists("assignment2"))
 ```
 ## Récapitulatif des exercices
 
-À l'issue de ce module 11 vous avez appris à utiliser l'ANOVA à deux facteurs sous différentes formes, vous avez aussi approfondi votre maîtrise de R à travers l'indiçage et les principaux styles syntaxiques de R. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
+À l'issue de ce module 10 vous avez appris à utiliser l'ANOVA à deux facteurs sous différentes formes, vous avez aussi approfondi votre maîtrise de R à travers l'indiçage et les principaux styles syntaxiques de R. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 
