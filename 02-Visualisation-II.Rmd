@@ -412,7 +412,33 @@ Pour accéder encore plus facilement aux issues dans vos projets de groupes, uti
 
 *GitHub met à votre disposition plusieurs outils pour améliorer l'efficacité d'un travail en équipe. Dans les issues vous pouvez ajouter des labels à vos questions par exemple. Il existe également dans la section Projects un outil de planification de projets.*
 
-![](images/sdd1_02/gh_projects.png)
+![](images/sdd1_02/gh_projects.png) \### Git
+
+La gestion des versions de vos documents est prise en charge par **Git**. Cet outil est puissant mais complexe. C’est pour cette raison que l’apprentissage de Git sera distillé sur plusieurs modules. Cette première section s’intéressera aux rudiments de Git. Cet outil remplacera les nombreuses copies d’un même fichier par différents états de votre document ou dossier, que l’on peut représenter schématiquement comme ci-dessous (chaque boule bleue représente une version enregistrée dans le système et les flèches indiquent d’où provient chaque version et où elle est utilisée ensuite) :
+
+![Représentation de la gestion de fichiers via Git](images/sdd1_01/git1.png)
+
+Dans ce schéma, le flux est linéaire. Pour enregistrer une nouvelle version de votre document, vous réalisez un **commit** qui sera accompagné d'un message explicitant les modifications apportées.
+
+Ce gestionnaire Git peut être couplé à un hébergement sur le cloud, soit pour simplement faire un backup de nos projets, soit pour pouvoir échanger et collaborer. Nous utiliserons GitHub à cette fin dans le cours. Lorsque l'on travaille seul avec GitHub, l'évolution de notre projet ressemblera au schéma ci-dessous :
+
+![Représentation des versions successives d'un projet avec GitHub.](images/sdd1_01/github.png)
+
+On réalise un envoi (**push**) lorsque l'on souhaite synchroniser nos changements locaux avec la version sur le "cloud". Plusieurs **commits** peuvent être envoyés avec un seul **push** sur le réseau, et c'est d'ailleurs généralement comme cela que l'on procède. L'inverse (rapatrier localement les changements que d'autres collaborateurs ont envoyés sur la version réseau de notre projet) s'appelle faire un **pull**. Par conséquent, synchroniser complètement notre dépôt GitHub avec la version locale consiste à faire les trois actions dans l'ordre : d'abord un **commit** pour créer un nouveau point d'enregistrement de l'état du système et y inclure tous les fichiers qui ont été modifiés, ensuite faire un **pull** pour rapatrier localement les changements qui ont été réalisés par d'autres ou par GitHub lui-même, et enfin, faire un **push** pour envoyer nos propres modifications dans notre projet GitHub. Les autres utilisateurs feront aussi **commit-pull-push** de leur côté. Quelquefois, des **conflits** apparaissent lorsque deux utilisateurs différents ont modifié la même partie d'un fichier. Nous apprendrons à gérer une telle situation. C'est plus facile à faire si on pense bien à faire un **pull** *avant* notre **push**, donc, faites les opérations toujours dans le même ordre.
+
+##### À vous de jouer ! {.unnumbered}
+
+*Note : l'image suivante est interactive. Il vous est maintenant demandé de cliquer dessus pour indiquer quelles flèches représentent une action particulière dans le schéma présenté.*
+
+`r h5p(146, height = 270, toc = "GitHub : repérer les pushs")`
+
+L'avantage principal de **GitHub** ne réside pas vraiment dans la possibilité de réaliser une sauvegarde en ligne, mais plutôt dans la possibilité de collaborer avec d'autres personnes présentes sur ce réseau comme l'illustre la figure ci-dessous. Deux scientifiques (les versions locales sur leurs ordinateurs respectifs sont indiquées en bleu pour l'un et en vert pour l'autre) collaborent sur un même projet que l'on appelle un **dépôt** (**repository** en anglais) lorsqu'il est en ligne. Le premier chercheur (boules bleues) initie le dépôt et réalise un **push** pour rendre son travail accessible sur le réseau (les versions GitHub sont représentées par des boules orange). Son collaborateur (boules vertes) **clone** ensuite le dépôt sur son ordinateur afin de pouvoir y travailler. Après avoir fait des changements, il réalise également un **push** sur le réseau. Le premier scientifique, avant de travailler à nouveau sur le projet, devra donc réaliser un **pull** afin d'obtenir en local l'ensemble des modifications fournies par son ou ses collaborateurs. Après ses propres modifications, il devra ensuite effectuer à nouveau un **push**.
+
+##### À vous de jouer ! {.unnumbered}
+
+*Pour être certain que vous ayez bien compris, encore une image interactive à cliquer...*
+
+`r h5p(147, height = 270, toc = "GitHub : repérer les pulls")`
 
 ### Gestion de conflit
 
