@@ -8,21 +8,13 @@ SciViews::R
 
 ##### Objectifs {.unnumbered}
 
--   Se familiariser avec les outils de base (SciViews Box, RStudio, Markdown, Git, GitHub).
+-   Se familiariser avec les outils de base (SciViews Box, RStudio, logiciel R](<https://www.r-project.org>) [@R-base], GitHub, Git).
 
--   Maîtriser la terminologie particulière liée à Git (un système de gestion de versions de vos documents que nous utiliserons intensivement ensuite).
-
--   Réaliser son premier document écrit en Markdown, un système de formatage de texte et repérer les différentes sections d'un fichier R Markdown (entête YAML, zones Markdown et chunks de code).
-
--   Découvrir ce que l'on peut faire avec le [logiciel R](https://www.r-project.org) [@R-base]
+-   Réaliser son premier document écrit en Quarto/R Markdown [@R-rmarkdown] (entête YAML, zones Markdown et chunks de code).
 
 -   Être capable de réaliser différentes variantes d'un graphique en nuage de points dans R avec la fonction `chart()`
 
--   Découvrir le format Quarto/R Markdown [@R-rmarkdown] et la recherche reproductible
-
 -   Intégrer ensuite des graphiques dans un rapport et y décrire ce que vous observez
-
-##### Prérequis {.unnumbered}
 
 ```{block, type='note'}
 
@@ -31,6 +23,8 @@ Les liens cliquables qui vous sont proposés dans ce cours ont été sélectionn
 **Cliquez sur ces liens**
 
 ```
+
+##### Prérequis {.unnumbered}
 
 La section suivante est repliée. Il s'agit d'une section optionnelle néanmoins indispensable pour réaliser les exercices de ce cours qui vont être réalisés sur un ordinateur.
 
@@ -307,7 +301,7 @@ Prêtez une attention toute particulière à l'organisation d'un script R. En pl
 
 ## Premier projet {#premier-projet}
 
-Passons maintenant à la pratique. Vous allez réaliser votre premier projet.
+Passons maintenant à la pratique. Lisez la suite de ce module. Nous réaliserons le projet sur le nuage de points ensemble en présentiel.
 
 ### GitHub Classroom {#classroom}
 
@@ -316,6 +310,14 @@ Passons maintenant à la pratique. Vous allez réaliser votre premier projet.
 GitHub Classroom facilite le travail dans le contexte d'exercices de niveau III ou de niveau IV (les projets individuels et en groupes) à réaliser dans le cadre d'un cours. Vous serez amené à modifier des projets issus de GitHub Classroom pour réaliser vos exercices.
 
 **Vos projets seront privés**. Seuls vous-mêmes et vos enseignants aurez accès à ces projets, mais vous pourrez aussi les rendre publics, si vous voulez *valoriser votre travail* de manière plus large.
+
+L'illustration ci-dessous vous montre la boîte d'information qui vous permet d'initier votre projet. Cette boîte se trouve à la fin du module 1. Soyez vigilant quant à la date limite pour terminer le projet.
+
+![](images/sdd1_01/gh_classroom.png)
+
+Attention, si vous n’êtes pas reconnu, vous ne pourrez pas initier votre projet et vous serez renvoyé vers une page comme celle ci-dessous. Vous pourrez accéder à votre projet en vérifiant votre identification.
+
+![](images/sdd1_01/gh_classroom2.png)
 
 ### GitHub
 
@@ -347,14 +349,6 @@ Testez vos nouvelles connaissances en répondant à la question ci-dessous.
 
 GitHub n'est pas le seul réseau social centré sur Git. D'autres réseaux équivalents existent comme [Gitlab](https://about.gitlab.com) ou [Bitbucket](https://bitbucket.org). Cependant, nous utiliserons GitHub ensemble, sachant que les notions apprises ici seront réutilisables ailleurs.
 
-```{=html}
-<!--G.E 
-1° le lien dans le cours github classroom, 
-2°création de votre projet sur github explication breve sur github
-3° Copie en local de votre projet dans SV Box, il faut donc connaitre le clone
-4°
--->
-```
 ### Projet RStudio
 
 Démarrez votre SciViews box et affichez la fenêtre de RStudio maintenant (si vous ne l'avez pas encore installée, cliquez sur le bouton bleu **RStudio** en haut à droite de cette page pour voir les explications d'installation). RStudio permet de cloner (faire un copie locale sur votre ordinateur) directement un projet disponible sur GitHub en quelques étapes comme vous pouvez le voir ci-dessous.
@@ -407,7 +401,7 @@ Le fichier urchin_notebook s'ouvre dans la zone d'édition. Le nom de l'auteur y
 
 Chaque bouton offre des fonctionnalités de git. Nous allons en découvrir une partie dans ce premier module.
 
-![](images/sdd1_01/git_tab.png)
+![](images/sdd1_01/git_tab.png){width="50%"}
 
 Les deux premiers boutons, `Diff` et `Commit`, ouvrent la même nouvelle fenêtre destinée à l'utilisation de Git.
 
@@ -577,6 +571,67 @@ if (exists("assignment"))
     term = "Q1", level = 3,
     toc = "Graphiques avec `urchin_bio`")
 ```
+
+### Rechercher de l'aide
+
+**Cette section est en cours de construction**
+
+Dans le cadre de ce cours, vous allez vous poser de nombreuses questions. Ces questions pourront porter sur l'utilisation des logiciels, sur la théorie statistique derrière un concept ou encore sur l'utilisation d'une fonction particulière. Cette section va vous donner des pistes afin de trouver de l'aide par vous-mêmes ou en faisant appel à la communauté.
+
+Il est indispensable d'apprendre à rechercher de l'information de qualité afin de répondre à ces questions.
+
+#### Pages d'aide
+
+Concernant les fonctions dans R, des pages d'aide sont associées à chacune d'elles. Pour les lire, utilisez l'opérateur `?` suivi du nom de la fonction. Dans RStudio, la page d'aide apparaît dans l'onglet **Aide**. Dans RStudio, il est encore bien plus facile de placer le curseur sur le nom de la fonction dans le code et d'appuyer sur la touche `F1` pour faire apparaître sa page d'aide.
+
+```{r, eval=FALSE, echo=TRUE}
+?mean
+```
+
+Voici le début de la page d'aide proposée concernant la fonction mean()
+
+![](images/sdd1_01/mean1.png){width="50%"}
+
+Une page d'aide est en anglais et bien souvent technique. Dans certain cas, la page d'aide ne va pas être suffisante afin de vous permettre de répondre à votre interrogation.
+
+#### Chatbot
+
+Un chatbot vous est mis à votre disposition dans le cadre de ce cours.
+
+<!-- Ajouter une explication sur l'addins -->
+
+![](images/sdd1_01/mean2.png){width="50%"}
+
+#### Recherches sur internet
+
+#### Appel à la communauté
+
+````{=html}
+<!--TODO Ajouter des infos sur comment rechercher de l'aide
+
+1. help à la console 
+
+En lisant **la page d'aide de la fonction**. Pour cela, utilisez l'opérateur `?` suivi du nom de la fonction. Dans RStudio, la page d'aide apparaît dans l'onglet **Aide** ou \*Help\*\* (selon que l'interface de RStudio soit en français ou en anglais, voir copie d'écran ci-dessous).
+
+```{r, eval=FALSE, echo=TRUE}
+?mean
+```
+
+<center>![](images/help_mean.png)</center>
+
+2. Help avec rstudio 
+
+Dans RStudio, il est encore bien plus facile de placer le curseur sur le nom de la fonction dans le code et d'appuyer sur la touche `F1` pour faire apparaître sa page d'aide.
+
+3. Help dans la fenêtre du bas, puis expliquer 
+
+4. Chatbot Addins
+
+5. Faire une issue 
+-->
+````
+
+Il y a plusieurs solutions afin de trouver de l'aide sur R pour nos cours.
 
 ## Récapitulatif des exercices
 

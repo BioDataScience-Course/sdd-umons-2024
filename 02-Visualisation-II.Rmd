@@ -40,6 +40,14 @@ La fin de ce module va traiter de la gestion des conflits dans GitHub. Vous deve
 
 ## Histogramme
 
+Avant de vous relancer dans votre découverte de ce nouveau type de graphiques. Lancez-vous dans une première analyse concrète de données biologiques via un learnR.
+
+`r learnr("A01Lc_progression", title = "Progression R", toc = "Progression en R")`
+
+([BioDataScience1](https://github.com/BioDataScience-Course/BioDataScience1) est un package R spécialement développé pour ce cours et qui est préinstallé dans votre SciViews Box).
+
+`r h5p(156, height = 270, toc = "Sélection de la fonction adéquate")`
+
 Vous souhaitez visualiser l'étalement de vos données sur un axe (on parle de **distribution**[^02-visualisation-ii-1] en statistique) pour l'une des variables étudiées. L'histogramme est l'un des graphiques qui vous apportent cette information de manière visuelle. Il représente sous forme de barres un découpage en plusieurs **classes**[^02-visualisation-ii-2] d'une variable numérique.
 
 [^02-visualisation-ii-1]: La **distribution** des données en statistique se réfère à la fréquence avec laquelle les différentes valeurs d'une variable s'observent.
