@@ -102,6 +102,36 @@ Le préambule de ce cours vous a également permis d'en apprendre davantage sur 
 
 Vous pouvez aussi voir (ou revoir) [les dias de la présentation](https://github.com/BioDataScience-Course/sdd_lessons/raw/2024-2025/A00/presentations/A00Pa_intro.pdf) qui vous est faite en première séance.
 
+```{=html}
+<!--
+## Le monde depuis 30 ans {#donnees}
+
+![La bibliothèque était pratiquement le seul lieu de détention du savoir, de l'information --et des données, en général-- avant le 21^ème^siècle.](images/sdd1_01/library.jpg)
+
+Il y a 30 ans, pas d'Internet (ou un embryon d'Internet disponible uniquement pour quelques privilégiés dans les universités et l'armée américaine), pas de smartphone. Essayez d'imaginer ce que serait votre vie aujourd'hui si ces outils qui font partie de votre quotidien n'existaient pas. L'évolution technologique est en marche, à un rythme toujours plus rapide.
+
+-   Les révolutions industrielles :
+
+    -   1770 (1756) révolution 1 : mécanisation
+    -   1870 révolution 2 : maîtrise de l'énergie
+    -   1970 (1979) révolution 3 : informatique
+    -   1990 révolution 4 : Internet (1990 Web, 1992 ISOC = Internet society, 1993 = premier navigateur Web)
+    -   2000 révolution 5 : numérique. GAFA = Google - Apple - Facebook - Amazon + Microsoft = GAFAM aux USA et BATX en Chine = Baidu - Alibaba - Tencent - Xiaomi. Aussi NATU = Netflix - Airbnb - Tesla - Uber.
+    -   2010 révolution 6 : NBIC = nanotechnologies - biotechnologies - informatique - sciences cognitives.
+    -   2020  : l'ordinateur est toujours plus puissant, l'intelligence artificielle toujours plus présente. Les métiers changent parce que les machines remplacent l'homme pour différentes tâches ("ubérisation").
+    -   2030 = transhumanisme ? Ordinateur plus puissant que l'homme et le remplacera probablement dans de nombreuses tâches.
+
+-   Valeur estimée des données et informations mises à disposition par les utilisateurs d'Internet : 1000 milliards de dollars par an (écrivez ce nombre en chiffres pour vous donner une meilleure idée de ce que cela représente) !
+
+-   En 2020, quantité d'information ajoutée sur Internet : 1000 milliards de milliards par semaine (écrivez ce nombre en chiffres également).
+
+-   Comparaison de puissance de traitement du cerveau humain *versus* un ordinateur : 89 milliards de neurones et travail en multitâche d'un côté, contre 2 milliards de transistors pour un travail essentiellement monotâche pour le petit carré de silicium. Il faut bien avouer que c'est difficile à comparer (combien de transistors équivalent à un neurone ?). Une étude a montré en 2017 que l'un des cinq ordinateurs les plus puissants du moment a été capable de simuler le fonctionnement d'environ 1% du cerveau humain en une seconde. Il lui a fallu 40 minutes de calcul pour y arriver. Intel (l'un des principaux constructeurs de processeurs) estimait il y a à peine quelques années que l'évolution permettrait d'égaler le cerveau humain en termes de vitesse de traitement vers 2020... On a dépassé cette date, l'intelligence artificielle est partout autour de nous, mais ne nous remplace pas encore (heureusement !). De plus, la consommation électrique d'un supercalculateur se mesure en mégawatts, alors que le cerveau humain consomme 12-13W seulement, soit un ordre de grandeur d'un million de fois moins !
+
+-   Aujourd'hui et encore plus à l'avenir, le cerveau humain et le (super)-ordinateur constitué par une constellation de machines mondialement interconnectées se complètement merveilleusement bien. La quantité d'information disponible est telle que sans l'ordinateur, nous ne pouvons pas la valoriser... mais le cerveau humain est et reste le chef d'orchestre qui décide, qui dirige la façon dont ces données sont valorisées. Ce chef d'orchestre a un nom : le **scientifique des données**.
+
+Ce petit rappel historique et ces quelques informations concernant les données vous donnent d'une part un aperçu de **la vitesse à laquelle notre monde change**, et d'autre part ils vous montrent que le monde dans lequel nous vivons est **de plus en plus inondé d'information**. Vous pouvez maintenant imaginer l'importance d'avoir des outils performants afin d'appréhender les données dont le nombre croît de manière exponentielle. Nous consacrerons la majeure partie de ce premier module à découvrir les outils informatiques qui vont nous permettre d'analyser nos données biologiques.
+-->
+```
 ## Découverte des outils {#outils}
 
 L'information est partout et en quantité inimaginable. Pour ne citer qu'une valeur, en 2020, la quantité d'information ajoutée chaque semaine sur Internet était de 1000 milliards de milliards. Afin de traiter même une toute petite partie de ces données en lien avec la biologie, vous devrez être un scientifique des données capable d'employer toute une série d'outils (logiciels).
@@ -329,7 +359,7 @@ Découvrons un projet qui s'intéresse à la manipulation de tableau de données
 
 *Cliquez sur les symboles **+** pour découvrir les éléments importants d'un projet sur GitHub*
 
-`r h5p(141, height = 270, toc = "Le projet dplyr sur GitHub")`
+`r h5p(141, height = 270, toc = "Le projet dplyr dans GitHub")`
 
 Ce projet héberge une multitude de fichiers que vous ne devez pas comprendre pour le moment ;). 7112 "commits" y ont été réalisés (au moment où la capture d'écran a été faite : le projet a évolué depuis et les nombres cités ne sont certainement plus d'actualité par rapport au site aujourd'hui). Pour le moment, retenez qu'un "commit" est un état de sauvegarde du projet. Ce projet traite de la manipulation de données. Un site Web lui est associé \<dplyr.tidyverse.org\>. Un grand nombre de contributeurs ont participé à ce projet (plus de 240). Un fichier `README.md` sert de page de présentation.
 
@@ -594,44 +624,60 @@ Voici le début de la page d'aide proposée concernant la fonction mean()
 
 Une page d'aide est en anglais et bien souvent technique. Dans certain cas, la page d'aide ne va pas être suffisante afin de vous permettre de répondre à votre interrogation.
 
-#### Chatbot
+#### Chatbot SciViews
 
-Un chatbot vous est mis à votre disposition dans le cadre de ce cours.
+Le chatbot SciViews est un grand modèle de langage, plus connu sous sa dénomination anglaise de LLM ou encore de *large language model*. Derrière ChatGPT, Perplexity, Copilot et Gemini se cachent des LLM. Le chatbot est disponible via les addins dans RStudio afin de répondre à vos questions. Il vous est mis à disposition dans le cadre de ce cours, qui traite du langage R, des statistiques et de la science des données.
 
 <!-- Ajouter une explication sur l'addins -->
 
+Ces réponses apparaîtront comme une page d'aide dans RStudio.
+
 ![](images/sdd1_01/mean2.png){width="50%"}
+
+```{block, type='warning'}
+Attention, les LLM peuvent halluciner. Une hallucination est une réponse qui semble plausible mais qui est en réalité incorrecte. Cela peut se produire lorsqu'il y a des lacunes dans les données d'entraînement du modèle ou qu'une question posée est ambiguë.
+
+Soyez toujours critique face à l'information proposée par ce chatbot.
+```
 
 #### Recherches sur internet
 
-#### Appel à la communauté
+Sur Internet, il est possible de trouver des centaines, voire des milliers d'articles de blog, des tutoriels, des aides-mémoires et des manuels en ligne en lien avec R et tout ce qui l'entoure. Les ressources sont principalement en anglais, mais on peut en trouver en français. Il est impératif de bien utiliser les moteurs de recherche pour trouver rapidement une information de qualité. Cela nécessite de poser la bonne question. Une recherche sur Internet est un excellent complément à la réponse d'un chatbot afin de valider l'information.
 
-````{=html}
-<!--TODO Ajouter des infos sur comment rechercher de l'aide
+Voici quelques propositions :
 
-1. help à la console 
+-   Un blog en ligne : <https://www.r-bloggers.com/>
+-   Des aides-mémoires : <https://rstudio.github.io/cheatsheets/>
+-   Sites web :
+    -   Une documentation collaborative sur R : <https://book.utilitr.org/>
+    -   STDAH : <http://www.sthda.com/french/wiki/wiki.php>
+-   Des ouvrages en ligne :
+    -   R for Data Science : <https://r4ds.hadley.nz/>
+    -   Introduction à R et au tidyverse : <https://juba.github.io/tidyverse/>
 
-En lisant **la page d'aide de la fonction**. Pour cela, utilisez l'opérateur `?` suivi du nom de la fonction. Dans RStudio, la page d'aide apparaît dans l'onglet **Aide** ou \*Help\*\* (selon que l'interface de RStudio soit en français ou en anglais, voir copie d'écran ci-dessous).
+Le manuel suivant propose une section détaillée sur où trouver de l'aide : <https://larmarange.github.io/analyse-R/ou-trouver-de-l-aide.html>
 
-```{r, eval=FALSE, echo=TRUE}
-?mean
+```{block, type='note'}
+Généralement, les informations que vous allez retrouver devront être modifiées afin de s'adapter à votre problématique ou à la consigne de l'exercice auquel vous répondez.
 ```
 
-<center>![](images/help_mean.png)</center>
+#### Appel à la communauté
 
-2. Help avec rstudio 
+Néanmoins, si vous ne trouvez pas la réponse à votre question malgré une recherhce dans les apge d'aide de R, l'utilisation du chatbot et une bonne recherche sur l'Internet. Il vous reste la possibilité de faire appel à la communauté.
 
-Dans RStudio, il est encore bien plus facile de placer le curseur sur le nom de la fonction dans le code et d'appuyer sur la touche `F1` pour faire apparaître sa page d'aide.
+Pour tous les étudiants du cours de Sciences des données I, un espace d'échange est disponible pour poser des questions entre les membres du cours de Science des données I, vous pouvez y accéder en utilisant l'addins depuis RStudio. En trois étape, vous posez simplement votre question.
 
-3. Help dans la fenêtre du bas, puis expliquer 
+1.  Depuis RStudio, je clique sur l'addin qui se trouve dans le menu déroulant `Addins`
+2.  Une fenêtre s'ouvre pour vous rediriger vers l'espace de discussion.
+3.  Vous posez votre question.
 
-4. Chatbot Addins
+![](images/sdd1_01/issues.png)
 
-5. Faire une issue 
--->
-````
+Vous pouvez également accéder à cet espace de discussion depuis le site du cours.
 
-Il y a plusieurs solutions afin de trouver de l'aide sur R pour nos cours.
+![](images/sdd1_01/issues_access.png)
+
+Il est possible de faire appel à une communauté bien plus grande mais nous en resterons là pour ce premier module
 
 ## Récapitulatif des exercices
 
