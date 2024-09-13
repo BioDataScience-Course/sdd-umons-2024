@@ -40,9 +40,11 @@ La fin de ce module va traiter de la gestion des conflits dans GitHub. Vous deve
 
 ## Histogramme
 
+##### À vous de jouer ! {.unnumbered}
+
 Avant de vous relancer dans votre découverte de ce nouveau type de graphiques. Lancez-vous dans une première analyse concrète de données biologiques via un learnR.
 
-`r learnr("A01Lc_progression", title = "Progression R", toc = "Progression en R")`
+`r learnr("A02La_progression", title = "Progression R", toc = "Progression en R")`
 
 ([BioDataScience1](https://github.com/BioDataScience-Course/BioDataScience1) est un package R spécialement développé pour ce cours et qui est préinstallé dans votre SciViews Box).
 
@@ -232,7 +234,7 @@ Vous découvrez sans doute que les graphiques réalisables avec R sont modulable
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A02La_univariate", title = "Graphiques univariés", toc = "Graphiques univariés")`
+`r learnr("A02Lb_univariate", title = "Graphiques univariés", toc = "Graphiques univariés")`
 
 **Note :** Ce tutoriel couvre l'ensemble de la matière de ce module. N'hésitez pas à le réaliser en parallèle de votre lecture.
 
@@ -420,19 +422,17 @@ Pour accéder encore plus facilement aux issues dans vos projets de groupes, uti
 
 *GitHub met à votre disposition plusieurs outils pour améliorer l'efficacité d'un travail en équipe. Dans les issues vous pouvez ajouter des labels à vos questions par exemple. Il existe également dans la section Projects un outil de planification de projets.*
 
-![](images/sdd1_02/gh_projects.png) \### Git
+![](images/sdd1_02/gh_projects.png)
 
-La gestion des versions de vos documents est prise en charge par **Git**. Cet outil est puissant mais complexe. C’est pour cette raison que l’apprentissage de Git sera distillé sur plusieurs modules. Cette première section s’intéressera aux rudiments de Git. Cet outil remplacera les nombreuses copies d’un même fichier par différents états de votre document ou dossier, que l’on peut représenter schématiquement comme ci-dessous (chaque boule bleue représente une version enregistrée dans le système et les flèches indiquent d’où provient chaque version et où elle est utilisée ensuite) :
+### Git
 
-![Représentation de la gestion de fichiers via Git](images/sdd1_01/git1.png)
-
-Dans ce schéma, le flux est linéaire. Pour enregistrer une nouvelle version de votre document, vous réalisez un **commit** qui sera accompagné d'un message explicitant les modifications apportées.
+**Git** est un outil puissant mais complexe. Dans le premier module, nous étions arrivé à la vision schématique suivante. (chaque boule bleue représente un **commit** soit une version enregistrée dans le système et les flèches indiquent d’où provient chaque version et où elle est utilisée ensuite) :
 
 Ce gestionnaire Git peut être couplé à un hébergement sur le cloud, soit pour simplement faire un backup de nos projets, soit pour pouvoir échanger et collaborer. Nous utiliserons GitHub à cette fin dans le cours. Lorsque l'on travaille seul avec GitHub, l'évolution de notre projet ressemblera au schéma ci-dessous :
 
 ![Représentation des versions successives d'un projet avec GitHub.](images/sdd1_01/github.png)
 
-On réalise un envoi (**push**) lorsque l'on souhaite synchroniser nos changements locaux avec la version sur le "cloud". Plusieurs **commits** peuvent être envoyés avec un seul **push** sur le réseau, et c'est d'ailleurs généralement comme cela que l'on procède. L'inverse (rapatrier localement les changements que d'autres collaborateurs ont envoyés sur la version réseau de notre projet) s'appelle faire un **pull**. Par conséquent, synchroniser complètement notre dépôt GitHub avec la version locale consiste à faire les trois actions dans l'ordre : d'abord un **commit** pour créer un nouveau point d'enregistrement de l'état du système et y inclure tous les fichiers qui ont été modifiés, ensuite faire un **pull** pour rapatrier localement les changements qui ont été réalisés par d'autres ou par GitHub lui-même, et enfin, faire un **push** pour envoyer nos propres modifications dans notre projet GitHub. Les autres utilisateurs feront aussi **commit-pull-push** de leur côté. Quelquefois, des **conflits** apparaissent lorsque deux utilisateurs différents ont modifié la même partie d'un fichier. Nous apprendrons à gérer une telle situation. C'est plus facile à faire si on pense bien à faire un **pull** *avant* notre **push**, donc, faites les opérations toujours dans le même ordre.
+On réalise un envoi (**push**) lorsque l'on souhaite synchroniser nos changements locaux avec la version sur le "cloud". Plusieurs **commits** peuvent être envoyés avec un seul **push** sur le réseau, et c'est d'ailleurs généralement comme cela que l'on procède. L'inverse (rapatrier localement les changements que d'autres collaborateurs ont envoyés sur la version réseau de notre projet) s'appelle faire un **pull**. Par conséquent, synchroniser complètement notre dépôt GitHub avec la version locale consiste à faire les trois actions dans l'ordre : d'abord un **commit** pour créer un nouveau point d'enregistrement de l'état du système et y inclure tous les fichiers qui ont été modifiés, ensuite faire un **pull** pour rapatrier localement les changements qui ont été réalisés par d'autres ou par GitHub lui-même, et enfin, faire un **push** pour envoyer nos propres modifications dans notre projet GitHub. Les autres utilisateurs feront aussi **commit-pull-push** de leur côté.
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -447,6 +447,10 @@ L'avantage principal de **GitHub** ne réside pas vraiment dans la possibilité 
 *Pour être certain que vous ayez bien compris, encore une image interactive à cliquer...*
 
 `r h5p(147, height = 270, toc = "GitHub : repérer les pulls")`
+
+##### À vous de jouer ! {.unnumbered}
+
+`r learnr("A02Lc_git", title = "Gestion de versions avec git", toc = "Autoévaluation sur git")`
 
 ### Gestion de conflit
 
