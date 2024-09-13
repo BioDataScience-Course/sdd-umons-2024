@@ -96,6 +96,10 @@ Le préambule de ce cours vous a également permis d'en apprendre davantage sur 
 
 ##### À vous de jouer ! {.unnumbered}
 
+`r h5p(135, height = 270, toc = NULL)`
+
+##### À vous de jouer ! {.unnumbered}
+
 *Note : les tutoriels learnrs vous permettent d'autoévaluer l'acquis de connaissances et de compétences. Dans le cours, ils sont marqués d'une icône en forme de toque verte. Ils s'exécutent directement dans RStudio à l'intérieur de la SciViews Box. Vous copiez l'instruction `BioDataScience1::run("A00La_discovery")` et la collez dans l'onglet Console de RStudio. Ensuite, vous validez la commande en cliquant sur la touche \<entrée\> et le tutoriel doit se lancer. Vous pouvez ouvrir ensuite le tutoriel dans sa propre fenêtre plus spacieuse en cliquant sur le second bouton de la barre d'outils en forme de petite fenêtre avec une flèche blanche.*
 
 `r learnr("A00La_discovery", title = "Découverte de learnr", toc = "Découverte des tutoriels de type learnr")`
@@ -203,7 +207,7 @@ Dans la section précédente, vous avez pu découvrir que le logiciel **R** alla
 
 Au tout début de ce premier module, vous avez lancé votre premier tutoriel nommé "A00La_discovery" qui traitait de la découverte des learnr. Il était composé de questions à choix multiples et de zones de code R. Vous l'avez utilisé comme une calculatrice. Cependant, R est bien plus puissant qu'une calculatrice. Les tutoriels servent aussi à vous entraîner à écrire des instructions en R. Avant de vous lancer dans ces exercices, consultez l'Appendice \@ref(learnr) pour apprendre à utiliser correctement ces tutoriels learnrs pour les questions relatives à du code R.
 
-`r learnr("A01Lb_base", title = "Les bases de R", toc = "Notions de base de R")`
+`r learnr("A01La_base", title = "Les bases de R", toc = "Notions de base de R")`
 
 Vous venez de découvrir les assignations, les fonctions, le chaînage d'instructions... Lancez-vous à présent dans une première analyse concrète de données biologiques.
 
@@ -271,7 +275,7 @@ La fonction `chart()` n'est pas accessible dans R de base, mais l'extension char
 
 *Autoévaluez maintenant vos acquis avec le tutoriel learnr suivant.*
 
-`r learnr("A01Ld_scatterplot", title = "Nuage de points", toc = "Graphiques en nuages de points")`
+`r learnr("A01Lb_scatterplot", title = "Nuage de points", toc = "Graphiques en nuages de points")`
 
 `r h5p(155, height = 270, toc = "Les fonctions chart() et geom_point()")`
 
