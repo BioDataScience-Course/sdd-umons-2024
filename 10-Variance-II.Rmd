@@ -1033,9 +1033,48 @@ if (exists("assignment2"))
     toc = "Biométrie de l'oursin violet, part V")
 -->
 ```
+
+## Challenge
+
+<!-- TODO: place this in module 10 -->
+
+Tout au long des modules 7 à 10, vous avez appris à réaliser des tests d'hypothèses avec R et RStudio. Il est maintenant temps de faire un bilan de vos capacités à écrire le code R pour reproduire de tels tests dans un **challenge de rapidité pour la réalisation de tests d'hypothèses.** Vous vous confronterez entre vous de manière individuelle pour déterminer celui ou celle qui arrivera à reproduire fidèlement le plus d'analyses possible.
+
+##### À vous de jouer ! {.unnumbered}
+
+```{r assign_A10Ca_infer, echo=FALSE, results='asis'}
+if (exists("challenge"))
+  challenge("A10Ca_infer", part = NULL,
+    url = "https://github.com/BioDataScience-Course/A10Ca_infer",
+    course.ids = c(
+      'S-BIOG-027' = !"A10Ca_{YY}M_infer"),
+    course.urls = c(
+      'S-BIOG-027' = "https://classroom.github.com/a/..."),
+    course.starts = c(
+      'S-BIOG-027' = !"{W[35]+5} 10:00:00"),
+    course.ends = c(
+      'S-BIOG-027' = !"{W[35]+5} 13:00:00"),
+    toc = "Challenge tests d'hypothèses")
+```
+
+::: nocourse
+Vous n'êtes pas correctement enregistré pour ce cours. Vous ne pouvez pas participer à ce challenge. Si vous êtes étudiant•e de l'UMONS, vérifiez que vous vous êtes bien enregistré•e via Moodle...
+:::
+
+::: {.S-BIOG-006 .S-BIOG-027}
+Vous pouvez soumettre vos résultats pendant une période de temps précise via l'application ci-dessous :
+
+`r launch_shiny("https://sdd.umons.ac.be/A10Ca_infer/", height = 800, delay = 20, toc = NULL, alt1 = "*Cliquez pour visualiser le classement.*", alt2 = "*Cliquez pour visualiser le classement.*")`
+:::
+
+
 ## Récapitulatif des exercices
 
-À l'issue de ce module 10 vous avez appris à utiliser l'ANOVA à deux facteurs sous différentes formes, vous avez aussi approfondi votre maîtrise de R à travers l'indiçage et les principaux styles syntaxiques de R. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
+À l'issue de ce module 10 vous avez appris à utiliser l'ANOVA à deux facteurs sous différentes formes, vous avez aussi approfondi votre maîtrise de R à travers l'indiçage et les principaux styles syntaxiques de R.
+
+![](images/sdd1_12/rstudio_joke.jpg)
+
+Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 

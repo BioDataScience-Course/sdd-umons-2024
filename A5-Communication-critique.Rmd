@@ -4,27 +4,15 @@
 SciViews::R("infer", "explore", lang = "fr")
 ```
 
-##### Objectifs {.unnumbered}
-
--   Développer son esprit critique face à des analyses statistiques et des graphiques
-
--   Réaliser une présentation de ses données attractive à partir de R Markdown ou Quarto.
-
--   Être capable de discerner les erreurs principales qui se rencontrent dans les graphiques (et ne pas les faire soi-même)
-
-##### Prérequis {.unnumbered}
-
-Ce module présente des descripteurs statistiques de l'association de deux variables, ainsi qu'un test d'hypothèse associé. Pour comprendre cette matière, il faut comprendre la logique derrière un test d'hypothèse vue au module \@ref(chi2). La seconde partie reviendra sur les représentations graphiques vues aux modules \@ref(introvisu), \@ref(visu2) et \@ref(visu3) qui doivent être bien maîtrisé avant d'aborder cette section.
-
 ## Communication
 
 Savoir communiquer ses résultats est vital en science des données. Ce n'est pas si facile, car il faut pouvoir simplifier les analyses et utiliser au mieux les visuels (c'est-à-dire, les graphiques) pour raconter une histoire qui soit à la fois captivante et compréhensible. **Communiquer le fruit de ses recherches de la meilleure façon qui soit pour que les non-initiés puissent le comprendre fait partie du bagage indispensable du scientifique des données**.
 
 ![](images/sdd1_12/data-scientist-useful.jpg)
 
-Hans Rosling était sans nul doute l'un des plus doués pour communiquer des résultats statistiques. La vidéo suivante est un peu longue (20min) et en anglais, mais elle en vaut vraiment la peine[^11-correlation-1]. De plus, il explique à quel point il est important de partager et de rassembler les données dans de grandes bases de données, et ensuite d'en tirer des études *utiles* pour l'humanité. C'est l'avenir des sciences des données, y compris en biologie, qu'il est en train de prédire là à l'époque où il a tourné cette vidéo.
+Hans Rosling était sans nul doute l'un des plus doués pour communiquer des résultats statistiques. La vidéo suivante est un peu longue (20min) et en anglais, mais elle en vaut vraiment la peine[^a5-communication-critique-1]. De plus, il explique à quel point il est important de partager et de rassembler les données dans de grandes bases de données, et ensuite d'en tirer des études *utiles* pour l'humanité. C'est l'avenir des sciences des données, y compris en biologie, qu'il est en train de prédire là à l'époque où il a tourné cette vidéo.
 
-[^11-correlation-1]: Vous pouvez activer les sous-titres en anglais via la barre de boutons en bas de la vidéo.
+[^a5-communication-critique-1]: Vous pouvez activer les sous-titres en anglais via la barre de boutons en bas de la vidéo.
 
 ```{r, echo=FALSE}
 vembedr::embed_youtube("hVimVzgtD6w", width = 770, height = 433)
@@ -52,9 +40,9 @@ Les deux formats Web par défaut sont **ioslides** et **Slidy** pour R Markdown 
 
 ![](images/sdd1_12/r-markdown-pres3.png)
 
-Une troisième option est de compiler un document PDF de présentation en passant par le package **Beamer** sous LaTeX. L'avantage est que c'est lisible partout. L'inconvénient : seul du *contenu statique* est accepté (pas de gifs animés, pas de vidéos ou difficilement directement dans la présentation). Sinon, les possibilités de personnalisation sont immenses[^11-correlation-2].
+Une troisième option est de compiler un document PDF de présentation en passant par le package **Beamer** sous LaTeX. L'avantage est que c'est lisible partout. L'inconvénient : seul du *contenu statique* est accepté (pas de gifs animés, pas de vidéos ou difficilement directement dans la présentation). Sinon, les possibilités de personnalisation sont immenses[^a5-communication-critique-2].
 
-[^11-correlation-2]: Toutes nos présentations dans le cadre du cours sont au format R Markdown/Beamer avec un template UMONS/SDD fortement personnalisé.
+[^a5-communication-critique-2]: Toutes nos présentations dans le cadre du cours sont au format R Markdown/Beamer avec un template UMONS/SDD fortement personnalisé.
 
 Avec le format **Beamer**, vous voyez le PDF résultant dans une fenêtre séparée. Cette fenêtre ne permet pas de lancer la présentation. Il vous faut l'ouvrir dans un lecteur PDF séparé qui offre cette fonctionnalité (Acrobat Reader, Mac Preview, SumatraPDF sous Windows, eVince sous Linux ...) pour visionner votre présentation confortablement.
 
@@ -64,7 +52,7 @@ La quatrième option est de compiler un document au format **PowerPoint**. Il n'
 
 ![](images/sdd1_12/r-markdown-pres6.png)
 
-Les cinq formats **ioslides**, **Slidy**, **Reveal JS**, **Beamer** et **PowerPoint** sont parfaitement intégrés à RStudio, avec un menu contextuel dans le bouton `Knit` ou `Render` qui permet de passer facilement de l'un à l'autre pour autant que vous n'utilisez pas des balises spécifiques à l'un de ces quatre formats.
+Les cinq formats **ioslides**, **Slidy**, **Reveal JS**, **Beamer** et **PowerPoint** sont parfaitement intégrés à RStudio, avec un menu contextuel dans le bouton `Knit` (`Tricoter`) ou `Render` (`Rendu`) qui permet de passer facilement de l'un à l'autre pour autant que vous n'utilisez pas des balises spécifiques à l'un de ces quatre formats.
 
 ![](images/sdd1_12/r-markdown-pres4.png)
 
@@ -81,6 +69,7 @@ Quel type de présentation R Markdown ou Quarto choisir au final ? Toute cette 
 
 **Note : il est indispensable de pouvoir synthétiser un travail complexe. Dans votre carrière de chercheur, vous serez souvent confronté à devoir réaliser des présentations. Réalisez une présentation de maximum cinq diapositives dans le format de votre souhait.** -->
 ```
+
 ## Critique statistique
 
 `r img("sdd1_12/cars-travolta.gif")`
@@ -324,6 +313,8 @@ Par le plus grand des hasards, le numéro 8 est sorti 6 fois en 7 tirages succes
 
 ***Vous est-il arrivé de jouer la suite 1, 2, 3, 4, 5, 6, 7, 8 au lotto (ou rempliriez-vous une grille avec ces nombres si vous deviez y jouer) ? Pourquoi ?***
 
+````{=html}
+<!--
 ------------------------------------------------------------------------
 
 ##### À vous de jouer ! {.unnumbered}
@@ -344,49 +335,5 @@ if (exists("assignment"))
     toc = "Critique statistique")
 ```
 
-## Challenge
-
-<!-- TODO: place this in module 10 -->
-
-Tout au long des modules 7 à 10, vous avez appris à réaliser des tests d'hypothèses avec R et RStudio. Il est maintenant temps de faire un bilan de vos capacités à écrire le code R pour reproduire de tels tests dans un **challenge de rapidité pour la réalisation de tests d'hypothèses.** Vous vous confronterez entre vous de manière individuelle pour déterminer celui ou celle qui arrivera à reproduire fidèlement le plus d'analyses possible.
-
-##### À vous de jouer ! {.unnumbered}
-
-```{r assign_A10Ca_infer, echo=FALSE, results='asis'}
-if (exists("challenge"))
-  challenge("A10Ca_infer", part = NULL,
-    url = "https://github.com/BioDataScience-Course/A10Ca_infer",
-    course.ids = c(
-      'S-BIOG-027' = !"A10Ca_{YY}M_infer"),
-    course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/..."),
-    course.starts = c(
-      'S-BIOG-027' = !"{W[35]+5} 10:00:00"),
-    course.ends = c(
-      'S-BIOG-027' = !"{W[35]+5} 13:00:00"),
-    toc = "Challenge tests d'hypothèses")
-```
-
-::: nocourse
-Vous n'êtes pas correctement enregistré pour ce cours. Vous ne pouvez pas participer à ce challenge. Si vous êtes étudiant•e de l'UMONS, vérifiez que vous vous êtes bien enregistré•e via Moodle...
-:::
-
-::: {.S-BIOG-006 .S-BIOG-027}
-Vous pouvez soumettre vos résultats pendant une période de temps précise via l'application ci-dessous :
-
-`r launch_shiny("https://sdd.umons.ac.be/A10Ca_infer/", height = 800, delay = 20, toc = NULL, alt1 = "*Cliquez pour visualiser le classement.*", alt2 = "*Cliquez pour visualiser le classement.*")`
-:::
-
-## Récapitulatif des exercices
-
-Vous venez de terminer le module 11. Ce module vous a permis d'apprendre une grande partie des subtilités qui se cachent derrière l'association de variables. Il vous a également permis de vous initier à la critique statistique Bravo ! Vous êtes arrivé à la fin du premier cours de Science des données 1.
-
-![](images/sdd1_12/rstudio_joke.jpg)
-
-Pour évaluer votre compréhension de ce dernier, vous aviez les exercices suivants à réaliser :
-
-`r show_ex_toc()`
-
-##### Progression {.unnumbered}
-
-`r launch_report("11", height = 800)`
+-->
+````
