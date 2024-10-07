@@ -311,9 +311,9 @@ if (exists("assignment"))
     course.urls = c(
       'S-BIOG-006' = "https://classroom.github.com/a/HSj-nDoy"),
     course.starts = c(
-      'S-BIOG-006' = !"{W[7]+1} 10:00:00"),
+      'S-BIOG-006' = !"{W[5]+1} 13:00:00"),
     course.ends = c(
-      'S-BIOG-006' = !"{W[8]+1} 23:59:59"),
+      'S-BIOG-006' = !"{W[6]+1} 23:59:59"),
     term = "Q1", level = 3,
     toc = "Graphiques de distribution des données")
 ```
@@ -507,20 +507,20 @@ Lorsque vous avez terminé de travailler dans un projet. Il est conseillé de fa
 
 Complétez votre projet de groupe en y ajoutant des graphiques de distribution et en les interprétant.
 
-```{r assign_A02Ga_analysis, echo=FALSE, results='asis'}
+```{r assign_A02Ga_analysis_I, echo=FALSE, results='asis'}
 if (exists("assignment2"))
-  assignment2("A02Ga_analysis", part = NULL,
+  assignment2("A02Ga_analysis", part = "I",
     url = "https://github.com/BioDataScience-Course/A02Ga_analysis",
     course.ids = c(
       'S-BIOG-006' = !"A02Ga_{YY}M_analysis"),
     course.urls = c(
       'S-BIOG-006' = "https://classroom.github.com/a/oDqM6on_"),
     course.starts = c(
-      'S-BIOG-006' = !"{W[5]+1} 09:00:00"),
+      'S-BIOG-006' = !"{W[5]+5} 09:00:00"),
     course.ends = c(
       'S-BIOG-006' = !"{W[15]+2} 23:59:59"),
     term = "Q1", level = 4, n = 4,
-    toc = "Analyse de données (par groupe de 4)")
+    toc = "Analyse de données (partie I, par groupe de 4)")
 ```
 
 ## Récapitulatif des exercices
