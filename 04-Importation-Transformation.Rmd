@@ -12,7 +12,7 @@ SciViews::R
 
 -   Être capable de convertir des variables d'un type à l'autre, y compris par l'utilisation du découpage en classes pour passer de variable quantitative à qualitative.
 
--   Comprendre comment remanier des variables, filtrer un tableau et le résumer afin d'en extraire l'information importante.
+-   Comprendre comment remanier des variables, filtrer un tableau et le résumer pour en extraire l'information importante.
 
 ##### Prérequis {.unnumbered}
 
@@ -20,7 +20,7 @@ Le contenu du module \@ref(introvisu) doit être parfaitement maîtrisé. Il est
 
 ## Importation des données
 
-Il est possible d'encoder des très petits jeux de données dans R. La fonction `dtx_rows()` permet de le faire facilement. Notez que les noms des colonnes du tableau sont à rentrer sous forme de **formules** (`~var`), que chaque entrée est séparée par une virgule, et que les chaînes de caractères sont entourées de guillemets. Les espaces sont optionnels et peuvent être utilisés pour aligner les données afin que le tout soit plus lisible. Des commentaires peuvent être utilisés éventuellement en fin de ligne (un dièse `#` suivi du commentaire).
+Il est possible d'encoder de très petits jeux de données directement dans R. La fonction `dtx_rows()` permet de le faire facilement. Notez que les noms des colonnes du tableau sont à rentrer sous forme de **formules** (`~var`), que chaque entrée est séparée par une virgule, et que les chaînes de caractères sont entourées de guillemets. Les espaces sont optionnels et peuvent être utilisés pour aligner les données afin que le tout soit plus lisible. Des commentaires peuvent être utilisés éventuellement en fin de ligne (un dièse `#` suivi du commentaire).
 
 ```{r}
 small_dataset <- dtx_rows(
@@ -28,9 +28,9 @@ small_dataset <- dtx_rows(
    "control",   0.5,     18.35,
    "control",   1.0,     26.43, # This value needs to be double-checked
    "control",   2.0,     51.08,
-    "test"  ,   0.5,     10.29,
-    "test"  ,   1.0,     19.92,
-    "test"  ,   2.0,     41.06)
+   "test"   ,   0.5,     10.29,
+   "test"   ,   1.0,     19.92,
+   "test"   ,   2.0,     41.06)
 # Print the table
 small_dataset
 ```
@@ -39,14 +39,14 @@ Dans la plupart des cas, vous utiliserez ou collecterez des données stockées d
 
 [^04-importation-transformation-1]: R permet également d'interroger des bases de données spécialisées, mais nous n'aborderons ce sujet spécifique qu'au cours de Science des Données Biologiques II en dernière année de Bachelier.
 
-```{r}
+```{r, warning=FALSE}
 biometry <- read("biometry", package = "BioDataScience", lang = "fr")
 tabularise$headtail(biometry)
 ```
 
-Le jeu de données `biometry` est disponible dans le package R {BioDataScience} indiqué dans l'argument `package =`. Dans ce cas, il ne faut pas spécifier de chemin d'accès au fichier : R sait où le trouver tout seul. Il est également spécifié ici que la langue souhaitée est le français avec l'argument `lang = "fr"`. Le résultat de l'importation est assigné à la variable `biometry`(mais elle pourrait tout aussi bien porter un autre nom). Pour finir, visualisez le résultat de l'importation, ici en faisant un tableau des premières et dernières lignes avec `tabularise$headtail()`.
+Le jeu de données `biometry` est disponible dans le package R {BioDataScience} indiqué dans l'argument `package =`. Dans ce cas, il ne faut pas spécifier de chemin d'accès au fichier : R sait où le trouver tout seul. Il est également spécifié ici que la langue souhaitée est le français avec l'argument `lang = "fr"`. Le résultat de l'importation est assigné à la variable `biometry` (mais elle pourrait tout aussi bien porter un autre nom). Pour finir, visualisez le résultat de l'importation, ici en faisant un tableau des premières et dernières lignes avec `tabularise$headtail()`.
 
-```{block, type = 'note'}
+```{block2, type='note'}
 **Visualisez toujours votre tableau de données juste après l'importation pour vérifier que l'opération s'est bien déroulée.** Vérifiez que les différentes colonnes ont été importées au bon format. Vous pouvez ouvrir l'onglet **Environnement** de RStudio et cliquer sur la petite icône bleue devant le nom de l'objet pour voir de quoi il est composé. *En particulier*,
 
 - Les données numériques sont-elle bien comprises par R comme des nombres (`<num>`, `<dbl>` ou `<int>`) ?
@@ -74,7 +74,7 @@ Par la suite, vous allez apprendre à importer vos données depuis différentes 
 
 ### Données sur le disque
 
-Lorsque l'extension du fichier reflète le format des données, il vous suffit juste d'indiquer le chemin d'accès au fichier dans `read()`, en utilisant préférentiellement un chemin relatif. La plupart du temps, cela suffira pour importer correctement les données.
+Lorsque l'extension du fichier reflète le format des données, il vous suffit juste d'indiquer le chemin d'accès au fichier dans `read()`, en utilisant préférentiellement un chemin relatif. La plupart du temps, cela suffit pour importer correctement les données.
 
 ```{block, type='warning'}
 **Très important :** le chemin d'accès à votre fichier peut s'écrire de manière absolue (chemin partant de la racine d'un disque sous Windows ou de la hiérarchie de dossiers sous macOS ou Linux) ou bien de manière relative (par rapport au dossier courant, la plupart du temps, le dossier du projet dans RStudio). **Vous devez autant que possible employer des chemins relatifs** pour que votre projet soit **portable**. Si vous avez du mal à déterminer le chemin relatif par rapport à vos données, le snippet `filerelchoose` vous sera très utile :
@@ -84,7 +84,7 @@ Lorsque l'extension du fichier reflète le format des données, il vous suffit j
 2. Utilisez le snippet `filerelchoose` que vous activez dans une zone de code R (dans un script R, ou à l'intérieur d'un chunk dans un document Quarto/R Markdown). Entrez `file`, attendez que le menu contextuel de complétion apparaisse, sélectionnez `filerelchoose` dans la liste et tapez `Entrée`. Une boite de dialogue de sélection de fichier apparaît. Sélectionnez le fichier qui vous intéresse et ... `file` est **remplacé par le chemin relatif vers votre fichier** dans l'éditeur.
 ```
 
-Les explications détaillées concernant l'organisation de vos projets dans RStudio pour qu'ils soient portables, la gestion des chemins d'accès aux fichiers et les chemins relatifs sont détaillés dans l'annexe \@ref(prise), à la section \@ref(rs-projet). **C'est le moment de vérifier que vous avez bien compris et assimilé son contenu.**
+Les explications détaillées concernant l'organisation de vos projets dans RStudio pour qu'ils soient portables, ainsi que la gestion des chemins d'accès aux fichiers et les chemins relatifs sont détaillés dans l'annexe \@ref(prise), à la section \@ref(rs-projet). **C'est le moment de vérifier que vous avez bien compris et assimilé son contenu.**
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -94,19 +94,19 @@ Les explications détaillées concernant l'organisation de vos projets dans RStu
 
 -   Si l'extension est incorrecte, vous pouvez forcer un format de fichier particulier à l'importation en l'indiquant dans l'appel à `read()` comme `read$<ext>()`. Par exemple, pour forcer l'importation d'un fichier de type "comma-separated-values" pour un fichier qui se nommerait `my_data.txt` et qui se situe dans le répertoire courant, vous écrirez `read$csv("my_data.txt")`.
 
--   Si les données ne sont pas importées correctement, cela signifie que les arguments d'importation par défaut ne sont pas adaptés. Les arguments à spécifier sont différents d'un format à l'autre. Voyez d'abord la fonction appelée en interne par `read()`dans le tableau obtenu via `getOption("read_write")`. Par exemple, pour un fichier `xlsx`, il s'agit de la fonction `readxl::read_excel()` qui est utilisée. Ensuite, voyez l'aide de cette dernière fonction pour en découvrir les différents arguments (`?readxl::read_excel`). Là, vous pourrez découvrir l'argument `sheet =` qui indique la feuille à importer depuis le fichier (première feuille par défaut), ou `range =` qui indique la plage de données dans la feuille à utiliser (par défaut, depuis la cellule A1 en haut à gauche jusqu'à la fin du tableau). Donc, si votre fichier `my_data.xlsx` contient les feuilles `sheet1`, `sheet2` et `sheet3`, et que les données qui vous intéressent sont dans la plage `C5:E34` de `sheet2`, vous pourrez écrire : `read("my_data.xlsx", sheet = "sheet2", range = "C5:E34")`.
+-   Si les données ne sont pas importées correctement, cela signifie que les arguments d'importation par défaut ne sont pas adaptés. Les arguments à spécifier sont différents d'un format à l'autre. Voyez d'abord la fonction appelée en interne par `read()`dans le tableau obtenu grâce à `getOption("read_write")`. Par exemple, pour un fichier `xlsx`, il s'agit de la fonction `readxl::read_excel()` qui est utilisée. Ensuite, voyez l'aide de cette dernière fonction pour en découvrir les différents arguments (`?readxl::read_excel`). Là, vous pourrez découvrir l'argument `sheet =` qui indique la feuille à importer depuis le fichier (première feuille par défaut), ou `range =` qui indique la plage de données dans la feuille à utiliser (par défaut, depuis la cellule A1 en haut à gauche jusqu'à la fin du tableau). Donc, si votre fichier `my_data.xlsx` contient les feuilles `sheet1`, `sheet2` et `sheet3`, et que les données qui vous intéressent sont dans la plage `C5:E34` de `sheet2`, vous pourrez écrire : `read("my_data.xlsx", sheet = "sheet2", range = "C5:E34")`.
 
 ### Données depuis Internet
 
 Il existe différents logiciels qui permettent d'éditer des jeux de données en ligne et de les partager sur le Net. [Google Sheets](https://www.google.com/intl/fr_BE/sheets/about/) est l'un d'entre eux, tout comme [Excel Online](https://office.live.com/start/Excel.aspx). Des stockages spécifiques pour les données scientifiques existent aussi comme [Figshare](https://figshare.com) ou [Zenodo](https://zenodo.org). Ces sites permettent de partager facilement des jeux de données sur Internet.
 
-```{block, type = 'info'}
+```{block2, type='info'}
 La science est de plus en plus ouverte, et les pratiques de **données ouvertes** (*Open Data*) de plus en plus fréquentes et même imposées par des programmes de recherche comme les [programmes européens](https://europa.eu/european-union/documents-publications/open-data_fr) ou le [FNRS](https://www.recherchescientifique.be/index.php?id=1628) en Belgique. Vous serez donc certainement amenés à accéder à des données depuis des dépôts spécialisés sur Internet.
 
 Concentrez-vous sur les outils spécifiques à la gestion de ce type de données. il s'agit, en effet, d'une compétence clé qu'un bon scientifique des données se doit de maîtriser parfaitement. En recherchant à chaque fois la meilleure façon d'accéder à des données sur Internet, vous développerez cette compétence progressivement par la pratique... et **vous pourrez faire valoir un atout encore rare mais apprécié lors d'un entretien d'embauche plus tard.**
 ```
 
-Voici un exemple de feuille de données Google Sheets : <https://docs.google.com/spreadsheets/d/1iEuGrMk4IcCkq7gMNzy04DkSaPeWH35Psb0E56KEQMw>. Il est possible d'importer ce genre de données **directement** depuis R, mais il faut d'abord déterminer l'[URL à utiliser pour obtenir les données](https://www.labnol.org/internet/direct-links-for-google-drive/28356/) dans un format reconnu. Dans le cas de Google Sheets, il suffit d'indiquer que l'on souhaite exporter les données au format CSV en rajoutant `/export?format=csv` à la fin de l'URL.
+Voici un exemple de feuille de données Google Sheets : <https://docs.google.com/spreadsheets/d/1iEuGrMk4IcCkq7gMNzy04DkSaPeWH35Psb0E56KEQMw>. Il est possible d'importer ce genre de données **directement** dans R, mais il faut d'abord déterminer l'[URL à utiliser pour obtenir les données](https://www.labnol.org/internet/direct-links-for-google-drive/28356/) dans un format reconnu. Dans le cas de Google Sheets, il suffit d'indiquer que l'on souhaite exporter les données au format CSV en rajoutant `/export?format=csv` à la fin de l'URL.
 
 Cette URL est très longue. Elle est peu pratique et par ailleurs, elle a toujours la même structure : `"https://docs.google.com/spreadsheets/d/{id}/export?format=csv"` avec `{id}` qui est l'identifiant unique de la feuille Google Sheets (ici `1iEuGrMk4IcCkq7gMNzy04DkSaPeWH35Psb0E56KEQMw`). Vous pouvez indiquer explicitement ceci dans votre code et profiter des capacités de remplacement de texte dans des chaînes de caractères de la fonction `glue::glue()` pour effectuer un travail impeccable.
 
@@ -118,12 +118,12 @@ coral_data_id <- "1iEuGrMk4IcCkq7gMNzy04DkSaPeWH35Psb0E56KEQMw"
 
 Vous n'aurez alors plus qu'à lire les données depuis cette URL. N'oubliez pas non plus de spécifier à `read()` que les données sont à lire au format CSV en utilisant `read$csv()` :
 
-```{r}
+```{r, warning=FALSE}
 coral <- read$csv(coral_url)
 tabularise$headtail(coral)
 ```
 
-Lorsque vous travaillez sur des données issues d'une source externe, et donc susceptibles d'être modifiées ou même pire, de disparaître. Il est préférable d'enregistrer une **copie locale** de ces données dans votre projet (dans le sous-dossier `data` de préférence). Si vous voulez enregistrer une copie locale du fichier **non modifié** téléchargé depuis Internet, vous l'indiquez dans l'argument `cache_file =` de `read()` (pensez à utiliser autant que possible un chemin relatif). Ainsi, le code suivant ne téléchargera le fichier depuis Internet qu'une seule fois et en sauvera automatiquement une copie dans `data/coral.csv`. Ensuite, les exécutions suivantes du même code liront les données depuis la version du jeu de données sauvée en local dans `data/coral.csv`.
+Lorsque vous travaillez sur des données issues d'une source externe, et donc susceptibles d'être modifiées ou même pire, de disparaître. Il est préférable d'enregistrer une **copie locale** de ces données dans votre projet (dans le sous-dossier `data` de préférence). Si vous voulez enregistrer une copie locale du fichier **non modifié** téléchargé depuis Internet, vous l'indiquez dans l'argument `cache_file =` de `read()` (pensez à utiliser autant que possible un chemin relatif). Ainsi, le code suivant ne téléchargera le fichier depuis Internet qu'une seule fois et en sauvera automatiquement une copie dans `data/coral.csv`. Ensuite, les exécutions suivantes du même code liront les données depuis la version du jeu de données sauvé en local dans `data/coral.csv`.
 
 ```{r, eval=FALSE}
 (coral <- read$csv(coral_url, cache_file = "data/coral.csv"))
@@ -271,9 +271,9 @@ Lors de la réalisation de graphiques dans les modules précédents, vous avez c
 (biometry <- read("biometry", package = "BioDataScience", lang = "fr"))
 ```
 
-La Figure \@ref(fig:two-boxplots) montre deux boites de dispersion parallèles différentes. Laquelle de ces deux représentations est incorrecte et pourquoi ?
+La Figure \@ref(fig:two-boxplots) montre deux boites à moustaches parallèles différentes. Laquelle de ces deux représentations est incorrecte et pourquoi ?
 
-```{r two-boxplots, fig.cap="Boites de dispersion parallèles de la taille (`height`) en fonction de A. une variable qualitative (`gender`) et B. une variable quantitative (`weight`) et couleur en fonction de gender`"}
+```{r two-boxplots, fig.cap="Boites à moustaches parallèles de la taille (`height`) en fonction de A. une variable qualitative (`gender`) et B. une variable quantitative (`weight`) et couleur en fonction de gender`"}
 a <- chart(biometry, height ~ gender %fill=% gender) +
   geom_boxplot() 
 
@@ -283,7 +283,7 @@ b <- chart(biometry, height ~ weight %fill=% gender) +
 combine_charts(list(a, b), common.legend = TRUE)
 ```
 
-C'est la Figure \@ref(fig:two-boxplots)B qui tente de représenter une variable quantitative numérique `height`sous forme de boites de dispersion parallèles (correct), mais en fonction d'une variable de découpage en sous-ensemble (`weight`) qui est elle-même une variable quantitative, ... alors qu'une variable qualitative telle que `gender` aurait dû être utilisée (comme dans la Fig. \@ref(fig:two-boxplots)A). Dans le cas présent, R a bien voulu réaliser le graphique (avec juste un petit message d'avertissement), mais comment l'interpréter ? Dans d'autres situations, il vous renverra purement et simplement un message d'erreur.
+C'est la Figure \@ref(fig:two-boxplots)B qui est incorrecte car elle tente de représenter une variable quantitative numérique `height`sous forme de boites à moustaches parallèles en fonction d'une variable de découpage en sous-ensemble (`weight`) qui est elle-même une variable quantitative, ... alors qu'une variable qualitative telle que `gender` aurait dû être utilisée pour ce découpage (comme dans la Fig. \@ref(fig:two-boxplots)A). Dans le cas présent, R a bien voulu réaliser le graphique (avec juste un petit message d'avertissement), mais comment l'interpréter ? Dans d'autres situations, il vous renverra purement et simplement un message d'erreur.
 
 Les jeux de données, lorsqu'ils sont bien encodés (**tableaux "cas par variables"**, en anglais on parlera de [tidy data](http://vita.had.co.nz/papers/tidy-data.html)), sont en fait un ensemble de variables en colonnes mesurées sur un ensemble d'individus en lignes. Vous avez à votre disposition plusieurs *types* de variables pour personnaliser le jeu de données. Deux catégories principales de variables existent, chacune avec deux sous-catégories :
 
@@ -334,7 +334,7 @@ floor(x)
 
 Le traitement diffère selon le nombre de valeurs différentes rencontrées dans le jeu de données. Si une variable numérique contient en réalité un petit nombre de valeurs différentes, il suffit de convertir la *classe* de l'objet de **numeric** vers **factor** ou **ordered** pour obtenir une variable qualitative. Un exemple concret l'illustre ci-dessous. Si, par contre, le nombre de valeurs différentes est important (dizaines ou plus) alors il va falloir créer des regroupements. C'est le **découpage en classes** abordé plus loin.
 
-Voici un jeu de données qui étudie l'allongement des dents chez le cobaye en fonction de la supplémentation alimentaire en acide ascorbique.
+Voici un jeu de données qui étudie l'allongement des dents chez le cobaye (cochon d'Inde) en fonction de la supplémentation alimentaire en acide ascorbique.
 
 ```{r}
 tooth <- read("ToothGrowth", package = "datasets", lang = "fr")
@@ -348,10 +348,10 @@ skimr::skim(tooth)
 
 La variable dose est encodée sous forme numérique alors que cette dernière ne contient que trois niveaux différents et devra être le plus souvent traitée comme une **variable qualitative ordonnée à trois niveaux. Vous devrez donc probablement réencoder cette variable en variable facteur.**
 
-```{block, type = 'note'}
-Ce n'est pas le caractère quantitatif ou qualitatif du mécanisme sous-jacent mesuré qui détermine si la variable est quantitative ou qualitative, mais d'autres critères comme la précision avec laquelle la mesure a été effectuée. Par exemple, un anémomètre mesure la vitesse du vent sous forme de variable **quantitative** alors qu'une échelle approximative de type `vent nul`, `vent faible`, `vent moyen`, `vent fort` ou `tempête` basée sur l'observation des rides ou des vagues à la surface de la mer pourrait éventuellement convenir pour mesurer le même phénomène si une grande précision n'est pas nécessaire. Mais dans ce cas, la variable devra être traitée comme une variable **qualitative**.
+```{block2, type='note'}
+Ce n'est pas le caractère quantitatif ou qualitatif du mécanisme sous-jacent mesuré qui détermine si la variable est quantitative ou qualitative, mais d'autres critères comme la précision avec laquelle la mesure a été effectuée. Par exemple, un anémomètre mesure la vitesse du vent sous forme de variable **quantitative** alors qu'une échelle approximative de type `vent nul`, `vent faible`, `vent moyen`, `vent fort` ou `tempête` basée sur l'observation des rides ou des vagues à la surface de la mer pourrait éventuellement convenir pour mesurer le même phénomène si une grande précision n'est pas nécessaire. Mais dans ce cas, la variable devra être traitée comme une variable **qualitative** ordonnée.
 
-De même, un plan expérimental qui réduit volontairement les valeurs fixées dans une expérience, comme ici les doses journalières d'acide ascorbique, fera aussi basculer la variable en **qualitative**, et ce, quelle que soit la précision avec laquelle les valeurs sont mesurées par ailleurs. Un découpage en classes aura aussi le même effet de transformer une variable quantitative en variable qualitative ordonnée.
+De même, un plan expérimental qui réduit volontairement les valeurs fixées dans une expérience, comme ici les doses journalières d'acide ascorbique, fera aussi basculer la variable en **qualitative**, et ce, quelle que soit la précision avec laquelle les valeurs sont mesurées par ailleurs. Un découpage en classes (voir ci-dessous) aura aussi le même effet de transformer une variable quantitative en variable qualitative ordonnée.
 ```
 
 Indiquons à présent explicitement à R que la variable `dose` doit être considérée comme qualitative :
@@ -362,7 +362,7 @@ tooth$dose <- as.factor(tooth$dose)
 skimr::skim(tooth)
 ```
 
-Vous pouvez (et devez !) cependant aller encore plus loin car la variable est en réalité qualitative **ordonnée**, et doit être représentée par un objet "facteur ordonné" (**ordered**) plutôt que **factor**. Il y a en effet, une progression dans les doses administrées. Lors de la conversion, R considère les différents niveaux par **ordre alphabétique** par défaut. Ici cela convient, mais ce n'est pas toujours le cas. Il vaut donc mieux spécifier explicitement l'*ordre* des niveaux dans l'argument optionnel `levels =`. Cela donne :
+Vous pouvez (et devez !) cependant aller encore plus loin, car la variable est en réalité qualitative **ordonnée**, et doit être représentée par un objet "facteur ordonné" (**ordered**) plutôt que **factor**. Il y a en effet, une progression dans les doses administrées. Lors de la conversion, R considère les différents niveaux par **ordre alphabétique** par défaut. Ici cela convient, mais ce n'est pas toujours le cas. Il vaut donc mieux spécifier explicitement l'*ordre* des niveaux dans l'argument optionnel `levels =`. Cela donne :
 
 ```{r}
 tooth$dose <- ordered(tooth$dose, levels = c(0.5, 1, 2))
@@ -374,7 +374,7 @@ Les fonctions `as.factor()` ou `factor()` et `as.ordered()` ou `ordered()` effec
 
 ### Découpage en classes
 
-La conversion d'une variable quantitative à qualitative doit souvent passer par une réduction des niveaux en rassemblant les valeurs proches dans des **classes**. Vous avez déjà utilisé de manière implicite le découpage en classes lorsque vous avez réalisé des histogrammes. Si les histogrammes sont bi- ou multimodaux, un découpage se justifie. Par exemple, le jeu de données portant sur la biométrie humaine est typique d'un cas de distribution bimodale. En fait, ce sont des étudiants (ayant tous une vingtaine d'années) qui ont réalisé ces mesures. La plupart ont choisi de s'inclure dans l'échantillon, d'où un premier mode vers une vingtaine d'années. Ensuite, ils ont pu mesurer d'autres personnes, éventuellement dans leur entourage. Beaucoup ont demandé à leurs parents, ce qui résulte en un second mode vers la cinquantaine[^04-importation-transformation-3]. Donc, la distribution bimodale résulte plus de l'échantillonnage en lui-même que d'une réalité démographique ! Cela ne change cependant rien pour l'exercice.
+La conversion d'une variable quantitative en une variable qualitative doit souvent passer par une réduction des niveaux en rassemblant les valeurs proches dans des **classes**. Vous avez déjà utilisé de manière implicite le découpage en classes lorsque vous avez réalisé des histogrammes. Si les histogrammes sont bi- ou multimodaux, un découpage se justifie. Par exemple, le jeu de données portant sur la biométrie humaine est typique d'un cas de distribution bimodale. En fait, ce sont des étudiants (ayant tous une vingtaine d'années) qui ont réalisé ces mesures. La plupart ont choisi de s'inclure dans l'échantillon, d'où un premier mode vers une vingtaine d'années. Ensuite, ils ont pu mesurer d'autres personnes, éventuellement dans leur entourage. Beaucoup ont demandé à leurs parents, ce qui résulte en un second mode vers la cinquantaine[^04-importation-transformation-3]. Donc, la distribution bimodale résulte plus de l'échantillonnage en lui-même que d'une réalité démographique ! Cela ne change cependant rien pour l'exercice.
 
 [^04-importation-transformation-3]: Notez que ceci ne constitue **pas** un échantillonnage correct par rapport à la population générale du Hainaut pour plusieurs raisons. (1) toutes les tranches d'âges ne sont échantillonnées de manière équivalente pour les raisons évoquées, (2) des liens génétiques existent au sein des familles, ce qui résulte en une **non indépendance** des observations entre elles, et (3) seule une sous-population constituée de personnes fréquentant l'université et de leur entourage a été échantillonnée. Cependant, dans le cadre de l'exercice, nous accepterons ces biais, tout en étant conscients qu'ils existent.
 
@@ -421,7 +421,7 @@ str(df)
 skimr::skim(df)
 ```
 
-```{block, type = 'warning'}
+```{block2, type='warning'}
 Les différents niveaux des variables **factor** ou **ordered** sont et doivent rester entièrement de votre responsabilité. Certains aspects anciens de R essayent de gérer cela pour vous, mais ces fonctions ou options (`StringsAsFactor =` par exemple) tendent heureusement à être remplacées par des versions moins assertives. De même, les niveaux ne sont **pas** réduits lorsque vous filtrez un tableau pour ne retenir que certains niveaux. Vous devez indiquer explicitement ensuite que vous voulez éliminer les niveaux vides du tableau avec la fonction `droplevels()`.
 ```
 
@@ -502,9 +502,9 @@ urchin2 <- sselect(urchin, origin, height, skeleton)
 head(urchin2)
 ```
 
-Vous voyez que vous obtenez ici un `data.table` qui ne contient plus que trois colonnes.
+Vous voyez que vous obtenez ici une `data.table` qui ne contient plus que trois colonnes.
 
-À noter que la façon de sélectionner des colonnes dans un **data.frame** en R de base se fait différemment. R de base utilise l'opérateur `[` dans lequel vous spécifiez les lignes à conserver d'abord, puis, séparé par une virgule, les colonnes à conserver. Si vous n'indiquez rien devant la virgule vous conservez toutes les lignes, et si vous n'indiquez rien derrière la virgule vous conservez toutes les colonnes. Donc `urchin[ , ]` conservera le tableau entier. La sélection se fail à l'aide de nombre entries qui indiquent l'**index** des lignes ou des colonnes à conserver. Si ce sont des nombres négatives, ces lignes ou colonnes sont enlevées. Par exemple pour conserver les colonnes 1 et 3 de `urchin`, on écrira en R de base :
+À noter que la façon de sélectionner des colonnes dans un **data.frame** en R de base se fait différemment. R de base utilise l'opérateur `[` dans lequel vous spécifiez les lignes à conserver d'abord, puis, séparé par une virgule, les colonnes à conserver. Si vous n'indiquez rien devant la virgule vous conservez toutes les lignes, et si vous n'indiquez rien derrière la virgule vous conservez toutes les colonnes. Donc `urchin[ , ]` conservera le tableau entier. La sélection se fait à l'aide de nombre entiers qui indiquent l'**index** des lignes ou des colonnes à conserver. Si ce sont des nombres négatifs, ces lignes ou colonnes sont enlevées. Par exemple pour conserver les colonnes 1 et 3 de `urchin`, on écrira en R de base :
 
 ```{r}
 urchin2 <- urchin[, c(1, 3)]
@@ -532,7 +532,7 @@ Ces fonctions ont toutes un comportement commun et sont conçues pour travailler
 
 -   le **data.frame** est l'objet de R de base,
 -   le **tibble** est un data.frame particulier implémenté dans le tidyverse, et
--   le **data.table** est implémenté dans le package {data.table} et permet de réaliser des remaniements de tableaux plus rapidement que les deux précédents.
+-   la **data.table** est implémentée dans le package {data.table} et permet de réaliser des remaniements de tableaux plus rapidement que les deux précédents.
 
 Dans `SciViews::R`, l'objet **data.table** est utilisé par défaut. Les fonctions speedy sont écrites pour utiliser cet objet de manière native. Il existe une surcouche des fonctions tidy dans le package {dtplyr} qui fonctionne aussi sur des objets de classe `data.table`.
 
@@ -546,14 +546,14 @@ head(urchin2)
 Attention : la fonction `sselect()` n'est pas toujours utilisable pour remplacer la fonction `select()`. Par exemple, l'instruction `contains()` est utile pour sélectionner les variables dont le nom contient une chaîne de caractères. Mais cette forme n'est pas comprise par `sselect()`.
 
 ```{r}
-urchin3 %<-% select(urchin, origin, contains("weight"))
+urchin3 <- select(urchin, origin, contains("weight"))
 head(urchin3)
 ```
 
 Idem pour `ends_with()` et d'autres opérateurs du genre rassemblés dans la page d'aide `?select_helpers` :
 
 ```{r}
-urchin4 %<-% select(urchin, ends_with("ht"))
+urchin4 <- select(urchin, ends_with("ht"))
 head(urchin4)
 ```
 
@@ -607,7 +607,7 @@ urchin_sub3 <- sfilter(urchin2, height > 20 & origin == "Farm")
 rmarkdown::paged_table(urchin_sub3)
 ```
 
-Avec des variables facteurs composées de nombreux niveaux comme on peut en retrouver dans le jeu de données `zooplankton` du package {data.io}, vous pouvez être amené à sélectionner plusieurs niveaux au sein de cette variable. L'opérateur `%in%` permet d'indiquer que nous souhaitons garder tous les niveaux qui sont dans une liste. Il n'existe pas d'opérateur `%not_in%`, mais il suffit d'inverser le résultat en précédent l'instruction de `!` pour obtenir cet effet. Par exemple, `!letters %in% c("a", "d", "f")` conserve toutes les lettres *sauf* a, d et f. L'opérateur `!` est d'ailleurs utilisable avec toutes les comparaisons pour en inverser les effets. Ainsi, `!x == 1` est équivalent à `x != 1`.
+Avec des variables facteurs composées de nombreux niveaux comme on peut en retrouver dans le jeu de données `zooplankton` du package {data.io}, vous pouvez être amené à sélectionner plusieurs niveaux. L'opérateur `%in%` permet d'indiquer que nous souhaitons garder tous les niveaux qui sont dans une liste. Il n'existe pas d'opérateur `%not_in%`, mais il suffit d'inverser le résultat en précédent l'instruction de `!` pour obtenir cet effet. Par exemple, `!letters %in% c("a", "d", "f")` conserve toutes les lettres *sauf* a, d et f. L'opérateur `!` est d'ailleurs utilisable avec toutes les comparaisons pour en inverser les effets. Ainsi, `!x == 1` est équivalent à `x != 1`.
 
 ```{r}
 zooplankton <- read("zooplankton", package = "data.io", lang  = "FR")
@@ -747,7 +747,7 @@ Si vous voulez résumer vos données (calcul de la moyenne, médiane, etc.), vou
 
 Si vous utilisez les fonctions speedy (commençant par un "s"), il est conseillé d'utiliser les fonction "fstat" (commençant par un "f") pour les calculs des moyennes, médianes, écarts types... Donc `fmean()`, `fmedian()`, `fsd()`... La combinaison des deux permet des accélérations substantielles des calculs. Cela ne vous apparaîtra pas avec les petits jeux de données utilisés au cours, mais lorsque vous traiterez des gros tableaux, le gain de vitesse peut être de dix fois, voire plus encore.
 
-```{r}
+```{r, warning=FALSE}
 tooth <- read("ToothGrowth", package = "datasets", lang = "fr")
 tooth_summary <- ssummarise(tooth,
   "moyenne" = fmean(len), 
@@ -761,9 +761,9 @@ tooth_summary <- ssummarise(tooth,
 tabularise(tooth_summary, auto.labs = FALSE)
 ```
 
-Voici les mêmes calculs, mais effectués séparément pour les deux types de supplémentations alimentaires. Pour se faire, nous allons **combiner** deux étapes en une : un `(s)group_by()` suivi d'un `(s)summarise()` (en fait, imbriqué dans ...).
+Voici les mêmes calculs, mais effectués séparément pour les deux types de supplémentations alimentaires. Pour ce faire, nous allons **combiner** deux étapes en une : un `(s)group_by()` suivi d'un `(s)summarise()` (en fait, imbriqué dans ...).
 
-```{r}
+```{r, warning=FALSE}
 tooth_summary2 <- ssummarise(sgroup_by(tooth, supp),
   "moyenne" = fmean(len), 
   "minimum" = fmin(len), 
@@ -775,9 +775,9 @@ tabularise(tooth_summary2, auto.labs = FALSE)
 
 ##### Pièges et astuces {.unnumbered}
 
--   Tout comme lors de réalisation d'une boite de dispersion, vous devez être particulièrement vigilant au nombre d'observation par sous-groupe. Pensez toujours à ajoutez à chaque tableau de résumé des données, le nombre d'observations par sous-groupe grâce à la fonction `fn()`.
+-   Tout comme lors de réalisation d'une boite à moustaches, vous devez être particulièrement vigilant au nombre d'observation par sous-groupe. Pensez toujours à ajoutez à chaque tableau de résumé des données, le nombre d'observations par sous-groupe grâce à la fonction `fn()`.
 
-```{r}
+```{r, warning=FALSE}
 tooth_summary2 <- ssummarise(sgroup_by(tooth, supp),
   "moyenne" = fmean(len), 
   "minimum" = fmin(len), 
@@ -791,7 +791,7 @@ tabularise(tooth_summary2, auto.labs = FALSE)
 
 Si vous souhaitez connaitre le nombre d'observations **non manquantes** dans votre jeu de données, utilisez `fnobs()` au lieu de `fn()`. Vous pouvez naturellement utiliser les deux simultanément.
 
-```{r}
+```{r, warning=FALSE}
 urchin_skeleton_summary <- ssummarise(sgroup_by(urchin, origin),
   "moyenne" = fmean(skeleton, na.rm = TRUE),
   "n"       = fn(skeleton),    # Nombre total de cas
@@ -805,7 +805,7 @@ Dans le cas présent, le nombre d'observations utilisable est nettement inférie
 
 Les fonctions `fn()` et `fnobs()` ne sont pas définies dans le tidyverse. Ce sont des fonctions d'une autre famille appelée dans `SciViews::R` des fonctions "fstat". Dans tidyverse, on vous fera utiliser la fonction `n()` sans argument qui est l'équivalent de `fn()`. Il n'y a pas d'équivalent direct de `fnobs()` et il faut ruser avec du code comme `sum(!is.na(skeleton))` pour obtenir ce résultat, ce qui n'est pas pratique. **La fonction `n()` n"est pas utilisable avec les fonctions speedy, et d'une manière générale, préférez-lui `fn()` qui est plus logique et qui fonctionne partout.**
 
--   `summarise()` calcule ses variables dans le même environnement que le tableau de départ. Donc, si vous utiliser des noms de colonnes qui existent déjà, elles seraient écrasées par le résultat du calcul. Avec un **data.table**, ceci n'est pas permis (le code fonctionnera pourtant dans un autre contexte avec un **data.frame**, c'est pourquoi nous convertissons d'abord `tooth` avec `as_dtf()`). Voici un exemple concret :
+-   `summarise()` calcule ses variables dans le même environnement que le tableau de départ. Donc, si vous utiliser des noms de colonnes qui existent déjà, elles seraient écrasées par le résultat du calcul. Avec une **data.table**, ceci n'est pas permis (le code fonctionnera pourtant dans un autre contexte avec un **data.frame**, c'est pourquoi nous convertissons d'abord `tooth` avec `as_dtf()`). Voici un exemple concret :
 
 ```{r}
 tooth_summary3 <- summarise(as_dtf(tooth),
@@ -874,7 +874,7 @@ ssummarise(sgroup_by(iris, species),
   across(sepal_length:petal_width, fmean, na.rm = TRUE))
 ```
 
-C'est déjà mieux, même si c'est moins lisible quant à ce que l'on veut obtenir comme tableau final. Dans le package {collapse}, et dans `SciViews::R` qui utilise ce package, il y a des fonctions de remplacement de `mean()`, `median()`, ... qui offrent plusieurs avantages. Ce sont les fonctions "fstat" que nous avons déjà utilisées. Nous allons maintenant détailler un peu plus ces fonctions.
+C'est déjà mieux, même si c'est moins lisible quant à ce que l'on veut obtenir comme tableau final. Dans le package {collapse}, et dans `SciViews::R` qui utilise ce package, il y a des fonctions de remplacement de `mean()`, `median()`... qui offrent plusieurs avantages. Ce sont les fonctions "fstat" que nous avons déjà utilisées. Nous allons maintenant détailler un peu plus ces fonctions.
 
 Souvent, vous pourrez utiliser `fmean()` à la place de `mean()`, mais son comportement et ses possibilités sont très différentes :
 
@@ -944,7 +944,7 @@ Différents opérateurs de chaînage existent dans R. Le [Tidyverse](https://www
 biometry <- read("biometry", package = "BioDataScience", lang = "fr")
 ```
 
-Vous vous intéressez à l'indice de masse corporelle ou IMC (*BMI* en anglais) des individus de moins de 25 ans. Vous souhaitez représenter la moyenne, la médiane et le nombre d'observations de manière séparée pour les hommes et les femmes. Pour obtenir ces résultats vous devez :
+Vous vous intéressez à l'indice de masse corporelle ou IMC (*BMI* en anglais) des individus de moins de 25 ans. Vous souhaitez représenter la moyenne, la médiane et le nombre d'observations de manière séparée pour les hommes et les femmes. Pour obtenir ces résultats, vous devez :
 
 -   calculer le BMI,
 -   filtrer le tableau pour ne retenir que les individus de moins de 25 ans,
@@ -1029,7 +1029,7 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-006' = !"A04Ia_{YY}M_transformation"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/..."),
+      'S-BIOG-006' = "https://classroom.github.com/a/-_PWUcb4"),
     course.starts = c(
       'S-BIOG-006' = !"{W[12]+1} 13:00:00"),
     course.ends = c(
@@ -1043,7 +1043,7 @@ if (exists("assignment"))
 - Afin d'appliquer vos nouvelles connaissances, un challenge vous est proposé afin d'améliorer vos compétences en remaniement de données. 
 
 ```{block, type='bdd'}
-Réalisez dans le projet sur le zooplankton les exercices suivants\ :
+Réalisez dans le projet sur le zooplancton les exercices suivants :
   
   <https://github.com/BioDataScience-Course/sdd_lesson/blob/2019-2020/sdd1_05/exercises/sdd1_05_zooplankton.md>
   
@@ -1053,7 +1053,7 @@ Consignez vos résultats dans un document R Markdown avec une explication de vos
 ---->
 ````
 
-**Vous allez maintenant planifier la récolte et collecter des données relatives à l'étude de l'obésité afin de préparer le travail du module 6.**
+**Vous allez maintenant planifier la récolte et collecter des données relatives à l'étude de l'obésité afin de préparer le travail du module 5.**
 
 ```{r assign_A04Ga_biometry_I, echo=FALSE, results='asis'}
 if (exists("assignment2"))
@@ -1062,7 +1062,7 @@ if (exists("assignment2"))
     course.ids = c(
       'S-BIOG-006' = !"A04Ga_{YY}M_biometry"),
     course.urls = c(
-      'S-BIOG-006' = "https://classroom.github.com/a/..."),
+      'S-BIOG-006' = "https://classroom.github.com/a/e4e8IxBu"),
     course.starts = c(
       'S-BIOG-006' = !"{W[12]+5} 08:00:00"),
     course.ends = c(
