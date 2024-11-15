@@ -1059,9 +1059,9 @@ if (exists("challenge"))
     course.urls = c(
       'S-BIOG-006' = "https://classroom.github.com/a/2zwrzeng"),
     course.starts = c(
-      'S-BIOG-006' = !"{W[10]+5} 08:45:00"),
+      'S-BIOG-006' = !"{W[10]+5} 09:45:00"),
     course.ends = c(
-      'S-BIOG-006' = !"{W[10]+5} 10:30:00"),
+      'S-BIOG-006' = !"{W[10]+5} 11:30:00"),
     toc = "Challenge graphiques")
 ```
 
