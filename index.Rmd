@@ -221,16 +221,16 @@ Vous pouvez aussi directement créer une issue depuis RStudio. Voyez le fichier 
 | 1 Intro. & visu. I | `r !"{W[3]+1}"`         | `r !"{W[4]+3}"`  |                            |                      | **`r !"{W[4]+1}"`**  |
 | 2 Visu. II         | `r !"{W[5]+1}"`         | `r !"{W[6]+1}"`  | **début `r !"{W[5]+5}"`**  |                      | **`r !"{W[5]+5}"`**  |
 | *(remédiation)*    | `r !"{W[6]+1}"`         | `r !"{W[6]+1}"`  |                            |                      |                      |
-| 4 Visu. III        | `r !"{W[10]+2}"`        | `r !"{W[11]+1}"` | **continue...**            | **`r !"{W[10]+5}"`** |                      |
-| 5 Trait. I         | `r !"{W[12]+1}"`        | `r !"{W[13]+1}"` | **continue...**            |                      | **`r !"{W[12]+5}"`** |
-| 6 Trait. II        | `r !"{W[14]+1}"`        | `r !"{W[15]+1}"` | **fin `r !"{W[15]+2}"`**   |                      | **`r !"{W[14]+5}"`** |
+| 3 Visu. III        | `r !"{W[10]+2}"`        | `r !"{W[11]+1}"` | **continue...**            | **`r !"{W[10]+5}"`** |                      |
+| 4 Trait. I         | `r !"{W[12]+1}"`        | `r !"{W[13]+1}"` | **continue...**            |                      | **`r !"{W[12]+5}"`** |
+| 5 Trait. II        | `r !"{W[14]+1}"`        | `r !"{W[15]+1}"` | **fin `r !"{W[15]+2}"`**   |                      | **`r !"{W[14]+5}"`** |
 | **Quadri 2**       |                         |                  |                            |                      |                      |
-| 7 Proba. & corrél. | `r !"{W[23]+1}"`        | `r !"{W[24]+1}"` | **début `r !"{W[23]+5}"`** |                      | **`r !"{W[23]+5}"`** |
-| 8 Chi\^2\^         | `r !"{W[25]+1}"`        | `r !"{W[26]+1}"` | **continue...**            |                      | **`r !"{W[25]+5}"`** |
-| 9 Moyenne          | `r !"{W[27]+1}"`        | `r !"{W[28]+1}"` | **continue...**            |                      | **`r !"{W[27]+5}"`** |
-| 10 Var. I          | `r !"{W[29]+1}"`        | `r !"{W[30]+1}"` | **continue...**            |                      | **`r !"{W[29]+5}"`** |
+| 6 Proba. & corrél. | `r !"{W[23]+1}"`        | `r !"{W[24]+1}"` | **début `r !"{W[23]+5}"`** |                      | **`r !"{W[23]+5}"`** |
+| 7 Chi^2^         | `r !"{W[25]+1}"`        | `r !"{W[26]+1}"` | **continue...**            |                      | **`r !"{W[25]+5}"`** |
+| 8 Moyenne          | `r !"{W[27]+1}"`        | `r !"{W[28]+1}"` | **continue...**            |                      | **`r !"{W[27]+5}"`** |
+| 9  Var. I          | `r !"{W[29]+1}"`        | `r !"{W[30]+1}"` | **continue...**            |                      | **`r !"{W[29]+5}"`** |
 | *(remédiation)*    | `r !"{W[33]+1}"`        |                  |                            |                      |                      |
-| 11 Var. II         | `r !"{W[35]+1}"`        | `r !"{W[36]+1}"` | **fin `r !"{W[36]+2}"`**   | **`r !"{W[35]+5}"`** |                      |
+| 10 Var. II         | `r !"{W[35]+1}"`        | `r !"{W[36]+1}"` | **fin `r !"{W[36]+2}"`**   | **`r !"{W[35]+5}"`** |                      |
 
 : Dates importantes pour les activités de science des données biologiques I (à 23:59:59 pour les fins de projets N3 ou N4, à l'heure de la séance en présentiel pour les autres dates).
 
