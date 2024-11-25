@@ -26,7 +26,7 @@ Les tableaux de données sont principalement représentés sous deux formes : l
 
 Chaque individu est représenté en ligne et chaque variable en colonne par convention. En anglais, on parlera de [tidy data](https://www.jstatsoft.org/article/view/v059i10).
 
-Nous nous efforcerons de toujours créer un tableau de ce type pour nos données. La question à se poser est la suivante : est-ce que j'ai un seul et même individu statistique[^05-donnees-qualitatives-1] représenté sur *chaque* ligne du tableau ? Si la réponse est non, le tableau de données n'est **pas** correctement encodé.
+Nous nous efforcerons de toujours créer un tableau de ce type pour nos données. La question à se poser est la suivante : est-ce que j'ai un seul et même individu statistique[^05-donnees-qualitatives-1] représenté à *chaque* ligne du tableau ? Si la réponse est non, le tableau de données n'est **pas** correctement encodé.
 
 [^05-donnees-qualitatives-1]: Un individu statistique n'est pas forcément la même chose qu'un individu biologique. En statistique, le cas ou l'individu est l'entité sur laquelle nous travaillons. Il peut s'agir d'un organe (partie d'un individu biologique) comme d'un ensemble d'organismes (une culture bactérienne ou la portée d'une souris par exemple, donc, plusieurs individus biologiques).
 
@@ -50,6 +50,7 @@ Nous nous efforcerons de toujours créer un tableau de ce type pour nos données
 Nous notons immédiatement que ce *n'est pas* un tableau correctement présenté en cas par variable. En effet, un même individu ne peut appartenir simultanément aux hamsters et aux cobayes. Il s'agit forcément d'individus différents mesurés. Nous n'avons donc pas respecté ici la règle de "une ligne = un individu". D'ailleurs, nous avons plus de hamsters mesurés ici que de cobayes, ce qui se marque par un déséquilibre dans le remplissage du tableau... qui doit aussi être un signal d'alarme (à moins qu'il n'y ait des valeurs manquantes).
 ----->
 ```
+
 *Considérez ce second tableau de données concernant également la taille adulte mesurée en cm de deux espèces de petits rongeurs :*
 
 `r h5p(48, height = 270, toc = "Tableau cas par variables 2")`
@@ -73,6 +74,7 @@ Une présentation correcte de ces données consiste à utiliser une colonne "tai
 Ce dernier tableau est moins compact et plus "verbeux" que le présenter (il faut répéter "hamster" ou "cobaye" plusieurs fois dans la première colonne). Pour cette raison, un novice ou un encodeur ignorant les règles élémentaires des sciences des données est souvent amené, de bonne fois, à adopter la présentation qui semble la plus compacte, **mais ce n'est pas toujours la plus pertinente\ !** Heureusement, dons R le outils existent pour passer d'une forme à l'autre facilement.
 ---->
 ```
+
 *Considérez maintenant ce troisième exemple fictif avec le résultat d'un test enregistré avant et après un traitement censé améliorer le résultat du test :*
 
 `r h5p(49, height = 270, toc = "Tableau cas par variables 3")`
@@ -100,8 +102,9 @@ Ici, les labels utilisés dans la colonne "individu" suggère que l'expérience 
 
 --->
 ```
+
 ```{block, type='note'}
-Avant toute analyse, vérifier le type de tableau de données que vous avez à disposition. Le point de départ le plus courant et le plus sûr est le **tableau cas par variables**. Rappellez-vous bien que la question à se poser pour vérifier si le tableau est bien présenté est : "a-t-on une et une seule ligne dans le tableau pour chaque individu statistique ?" Si ce n'est pas le cas, il faut remanier le tableau avant de commencer son analyse.
+Avant toute analyse, vérifier le type de tableau de données que vous avez à disposition. Le point de départ le plus courant et le plus sûr est le **tableau cas par variables**. Rappelez-vous bien que la question à se poser pour vérifier si le tableau est correctement présenté est : "a-t-on une et une seule ligne dans le tableau pour chaque individu statistique ?" Si ce n'est pas le cas, il faut remanier le tableau avant de commencer son analyse.
 ```
 
 Les tableaux de données que vous avez traités jusqu'à présent étaient tous des tableaux **cas par variables**. Chaque ligne représentait un *individu statistique* sur qui une ou plusieurs *variables* (en colonnes) étaient mesurées.
@@ -138,7 +141,7 @@ La seconde approche est plus naturelle, mais la première permet d'utiliser dive
 1:10
 ```
 
--   Répétition d'un vecteur cinq fois (le "L" après 5 indique que c'est un entier, mais il est ici facultatif) :
+-   Répétition d'un vecteur cinq fois (le "L" après 5 indique que c'est un entier, mais il est ici facultatif) :
 
 ```{r}
 rep(c("a", "b", "c"), 5L)
@@ -211,7 +214,7 @@ knitr::kable(timolol_table,
   caption = "Exemple de table de contingence à double entrée.")
 ```
 
-```{r tbl-timolol}
+```{r tbl-timolol, warning=FALSE}
 #| tbl-cap: Exemple de table de contingence à double entrée.
 tabularise(timolol_table)
 ```
@@ -262,7 +265,7 @@ Exemple de métadonnées :
 -   Nom de l'opérateur en charge de la mesure
 -   ...
 
-Vous avez pu vous apercevoir que la fonction `read()` permet d'ajouter certaines métadonnées comme les unités aux variables d'un jeu de données. Cependant, il n'est pas toujours possible de rajouter les métadonnées dans un tableau sous forme électronique, mais il faut toujours les consigner dans un **cahier de laboratoire**, et ensuite les **retranscrire dans le rapport**. La fonction `labelise()` vous permet de rajouter le **label** et les **unités** de mesure pour vos différentes variables directement dans le tableau. Par exemple, voici l'encodage direct d'un petit jeu de données qui mesure la distance du saut (`jump`) en cm de grenouilles-taureaux *Lithobates catesbeianus* (Shaw 1802) en fonction de leur masse (`weight`) en g pour cinq individus différents (`ind`). Vous pouvez annoter ce data frame de la façon suivante :
+Vous avez pu vous apercevoir que la fonction `read()` permet d'ajouter certaines métadonnées comme les unités aux variables d'un jeu de données. Cependant, il n'est pas toujours possible de rajouter les métadonnées dans un tableau sous forme électronique, mais il faut toujours les consigner dans un **cahier de laboratoire**, et ensuite les **retranscrire dans le rapport**. La fonction `labelise()` vous permet de rajouter le **label** et les **unités** de mesure pour vos différentes variables directement dans le tableau. Par exemple, voici l'encodage direct d'un petit jeu de données qui mesure la distance du saut (`jump`) en cm de grenouilles-taureaux *Lithobates catesbeianus* (Shaw 1802) en fonction de leur masse (`weight`) en g pour cinq individus différents (`ind`). Vous pouvez annoter ce tableau de la façon suivante :
 
 ```{r}
 frog <- dtx_rows(
@@ -343,7 +346,7 @@ La **variabilité** tant au niveau de la population que de l'échantillon provie
 
 2.  Les **erreurs de mesure**.
 
-Ces deux facteurs se cumulent pour contribuer à disperser les valeurs d'un individu à l'autre. Nous n'avons que peu de prise sur la variabilité individuelle, mais nous pouvons parfois réduire les erreurs de mesure si cela s'avère souhaitable en utilisant un appareil de mesure plus précis. Quoi qu'il en soit, plus la variabilité est importante, plus la taille de l'échantillon devra également être grande pour conserver une bonne **"représentativité"** de la population statistique.
+Ces deux sources de variabilité se cumulent pour contribuer à disperser les valeurs d'un individu à l'autre. Nous n'avons que peu de prise sur la variabilité individuelle, mais nous pouvons parfois réduire les erreurs de mesure si cela s'avère souhaitable en utilisant un appareil de mesure plus précis. Quoi qu'il en soit, plus la variabilité est importante, plus la taille de l'échantillon devra également être grande pour conserver une bonne **"représentativité"** de la population statistique.
 
 Du point de vue de la notation mathématique, nous utiliserons une lettre latine majuscule en italique pour représenter une variable, par exemple, *X*. La taille de l'échantillon est souvent notée *n*. Les observations individuelles de la variable *X* pour les *n* individus de l'échantillon seront alors notées avec une lettre minuscule en italique assortie d'un indice compris entre 1 et *n*, donc, *x~i~* de manière générale avec l'indice *i* variant de 1 à *n*. Ainsi, *x*~5~ représente la cinquième observation pour la variable *X* dans notre échantillon, et *x~n~* est la dernière observation. Quelquefois, l'indice *i* est omis et vous pourrez aussi lire *x* simplement.
 
@@ -356,7 +359,7 @@ Un échantillon représentatif n'est pas facile à obtenir et il faut respecter 
 La meilleure façon d'obtenir un échantillon représentatif est de réaliser un **échantillonnage aléatoire**. Dans ce cas, chaque individu de la population doit avoir la même chance d'être sélectionné dans l'échantillon. Nous parlons aussi d'échantillonnage au hasard. Vous devez bien réfléchir au **processus** qui va mener à la sélection des individus dans l'échantillon. Celui-ci doit comporter une étape qui fait intervenir le hasard.
 
 ```{block, type='error'}
-"Choisir au hasard" ses individus en les prélevant au petit bonheur la chance en fonction de son humeur n'est **pas** une bonne approche. En effet, notre main qui saisira les individus à inclure dans l'échantillon aura tendance à prélever ceux qui sont plus facile à attraper ou plus proches, par exemple. Il peut s'agir d'individus moins vigoureux, moins réactifs, ou au contraire, moins peureux... Du coup, nous n'étudierions qu'une fraction de la population qui correspond à une caractéristique particulière (ceux qui sont faibles et peu réactifs, par exemple)
+"Choisir au hasard" ses individus en les prélevant au petit bonheur la chance en fonction de son humeur n'est **pas** une bonne approche. En effet, notre main qui saisira les individus à inclure dans l'échantillon aura tendance à prélever ceux qui sont plus facile à attraper ou plus proches, par exemple. Il peut s'agir d'individus moins vigoureux, moins réactifs, ou au contraire, moins peureux... Du coup, nous n'étudierions qu'une fraction de la population qui correspond à une caractéristique particulière (ceux qui sont faibles et peu réactifs, par exemple).
 
 Une bonne sélection aléatoire **doit** faire intervenir le hasard (tirage au sort dans une urne, pile ou face, jet de dés, ou génération de nombres dits "pseudo-aléatoires" à l'aide d'un ordinateur). Par exemple, si vous avez un élevage de souris dans votre laboratoire, et que vous considérez cet élevage comme votre population, vous pouvez réaliser deux groupes (témoin et traitement) de cinq souris chacun de plusieurs façons :
   
@@ -378,7 +381,7 @@ sample(1:213, size = 5)
 sample(1:213, size = 5)
 ```
 
-Ici, la sélection aléatoire (en réalité, on parle de "pseudo-aléatoire" pour ces nombres générés par un algorithme, mais qui ont des propriétés très similaires au hasard pur) nous indique que nous devrons aller chercher les souris n°15, 12, 102, 136 et 42 dans notre élevage pour notre groupe témoin, et les souris n°187, 108, 211, 68 et 49 pour le groupe traitement.
+Ici, la sélection aléatoire (en réalité, on parle de "pseudo-aléatoire" pour ces nombres générés par un algorithme, mais qui ont des propriétés très similaires au hasard pur) nous indique que nous devrons aller chercher les souris n°15, 12, 102, 136 et 42 dans notre élevage pour notre groupe témoin, et les souris n°187, 108, 211, 68 et 49 pour le groupe traitement. Attention qu'ici, il se peut que, par le biais du hasard,, la même souris soit tirée de chaque côté. Dans ce cas, tirez une autre souris au hasard pour un des traitements.
 
 Dans le cas où un échantillonnage doit se faire **avec replacement** (l'équivalent de replacer une boule dans l'urne à chaque tirage au sort), nous pouvons indiquer l'argument `replace = TRUE` dans `sample()`. Donc, quelque chose comme `sample(0:9, size = 50, replace = TRUE)` pour échantillon les chiffres 0 à 9 au hasard cinquante fois avec remise (à chaque tirage chaque chiffre a même chance d'être tiré).
 
@@ -404,7 +407,7 @@ Dans ce cas, si vous effectuez un échantillonnage aléatoire de 100 patients ou
 
 ## Acquisition de données
 
-Dans le module \@ref(import), vous avez pris connaissance des types de variable et venez d'apprendre comment encoder différents types de tableaux de données et leur associer les indispensables métadonnées. Cependant, la première étape avant d'acquérir des données est de planifier correctement son expérience. La Science des Données est intimement liée à la démarche scientifique et intervient dans toutes les étapes depuis la caractérisation de la question et le planning de l'expérience jusqu'à la diffusion des résultats. Plus en détail, cela correspond à :
+Dans le module \@ref(import), vous avez pris connaissance des types de variable et venez d'apprendre comment encoder différents types de tableaux de données et leur associer les indispensables métadonnées. Cependant, la première étape avant d'acquérir des données est de planifier correctement son expérience. La science des données est intimement liée à la démarche scientifique et intervient dans toutes les étapes depuis la caractérisation de la question et le planning de l'expérience jusqu'à la diffusion des résultats. Plus en détail, cela correspond à :
 
 -   Définir une question (objectif)
 -   Réaliser une recherche bibliographique sur la thématique
@@ -442,6 +445,7 @@ La figure ci-dessous illustre de manière visuelle la différence qu'il y a entr
 ![](images/sdd1_06/targets.png)
 ---->
 ```
+
 ### Codification des données
 
 Afin d'éviter que divers collaborateurs encodent différemment une information similaire, vous allez devoir préciser très clairement comment encoder les différentes variables de votre jeu de données. Par exemple pour une variable `genre`, est-ce que vous indiquez `homme` / `femme`, ou `h` / `f`, ou encore `H` / `F` ?
@@ -519,6 +523,7 @@ if (exists("assignment2"))
 ![`gather()` versus `spread()` par [gadenbuie](https://github.com/gadenbuie/tidyexplain/blob/master/images/tidyr-spread-gather.gif).](images/sdd1_06/tidyr-spread-gather.gif)
 ---->
 ```
+
 Le **format long** d'un tableau de données correspond à un encodage en un minimum de colonnes, les données étant réparties sur un plus grand nombre de lignes en comparaison du **format large** qui regroupe les données dans plusieurs colonnes successives. Voici un exemple fictif d'un jeu de données au format long :
 
 ```{r, echo=FALSE}
@@ -543,7 +548,7 @@ as_dtx(tribble(
 ))
 ```
 
-Dans le format large, les différents niveaux de la variable facteur `treatment` deviennent autant de colonnes (donc de variables) séparées, et la variable d'origine n'existe plus de manière explicite. Ces deux tableaux contiennent la même information. Bien évidemment, un seul de ces formats est un *tableau cas par variables correct*. Le format long sera le bon si toutes les mesures sont réalisées sur des individus différents. Par contre, le format large sera correct, si les différentes mesures ont été faites à chaque fois sur les *mêmes* individus (dans le cas présent, *un seul* mâle et *une seule* femelle auraient alors été mesurés dans les trois situations).
+Dans le format large, les différents niveaux de la variable facteur `treatment` deviennent autant de colonnes (donc de variables) séparées, et la variable d'origine n'existe plus de manière explicite. Ces deux tableaux contiennent la même information. Bien évidemment, un seul de ces formats est un *tableau cas par variables correct*. Le format long sera le bon si toutes les mesures sont réalisées sur des individus différents. Par contre, le format large sera correct si les différentes mesures ont été faites à chaque fois sur les *mêmes* individus (dans le cas présent, *un seul* mâle et *une seule* femelle auraient alors été mesurés dans les trois situations).
 
 ```{block, type='note'}
 C'est la règle qui veut qu'**une ligne corresponde à un et un seul individu statistique** dans un tableau cas par variables qui permet de décider si le format long ou le format large est celui qui est correctement encodé. 
@@ -559,7 +564,7 @@ L'utilisation des fonction `spivot_longer()` et `spivot_wider()` de `SciViews::R
 
 Prenons l'exemple d'un jeu de données provenant de l'article scientifique suivant : [Paleomicrobiology to investigate copper resistance in bacteria: isolation and description of *Cupriavidus necator* B9 in the soil of a medieval foundry](https://orbi.umons.ac.be/handle/20.500.12907/5748). L'article est basé sur l'analyse métagénomique de type "shotgun" de quatre communautés microbiennes (notées `c1`, `c4`, `c7` et `c10`, respectivement)[^05-donnees-qualitatives-6]. Il en résulte une longue liste de séquences que l'on peut attribuer à des règnes.
 
-[^05-donnees-qualitatives-6]: Les analyses métagénomiques coûtent très cher. Il est souvent impossible de faire des répliquas. Un seul échantillon d'ADN a donc été séquencé ici pour chaque communauté.
+[^05-donnees-qualitatives-6]: Les analyses métagénomiques coûtent très cher. Il est souvent impossible de faire des réplicas. Un seul échantillon d'ADN a donc été séquencé ici pour chaque communauté.
 
 ```{r}
 shotgun_wide <- dtx(
@@ -699,7 +704,7 @@ physico2 <- dtx(
 rmarkdown::paged_table(physico2)
 ```
 
-L'empilement des deux tableaux de données en un seul se fait via la fonction tidy `bind_rows()` ou la fonction speedy `sbind_rows()` lorsque les tableaux contiennent les mêmes variables présentées exactement dans le même ordre comme ici :
+L'empilement des deux tableaux de données en un seul se fait en utilisant la fonction tidy `bind_rows()` ou la fonction speedy `sbind_rows()` lorsque les tableaux contiennent les mêmes variables présentées exactement dans le même ordre comme ici :
 
 ```{r}
 physico <- sbind_rows(physico1, physico2)
