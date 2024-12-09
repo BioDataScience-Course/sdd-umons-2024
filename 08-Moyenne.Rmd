@@ -803,7 +803,7 @@ Faites très attention à l'encodage des données. Il vous faut un tableau cas p
 
 ```{r}
 sleep <- read("sleep", package = "datasets")
-rmarkdown::paged_table(sleep)
+DT::datatable(sleep)
 ```
 
 Nous avons `extra`, le nombre d'heures supplémentaires de sommeil suite à l'administration de médicaments, soit le `1`, soit le `2`. Le tableau se présente comme pour effectuer un test *t* indépendant (une variable numérique `extra` et une variable facteur à deux niveaux `group`). Cependant, regardez aussi la variable `ID` qui est l'identifiant de la personne testée. **Vous constatez que les mêmes identifiants** reviennent parmi les deux groupes. C'est en réalité un design apparié, mais mal encodé. Nous allons d'abord restructurer ce tableau correctement avant d'appliquer le test adéquat.
@@ -811,7 +811,7 @@ Nous avons `extra`, le nombre d'heures supplémentaires de sommeil suite à l'ad
 ```{r}
 sleep2 <- spivot_wider(sleep, names_from = group, values_from = extra)
 names(sleep2) <- c("id", "med1", "med2")
-rmarkdown::paged_table(sleep2)
+DT::datatable(sleep2)
 ```
 
 Dans `sleep2` nous avons un véritable tableau cas par variable, c'est-à-dire, une ligne par individu. Nous avons alors deux variables numériques `med1` et `med2` mesurées sur les mêmes individus. Le test apparié suivant est correct. Un test indépendant effectué sur `sleep` aurait été **incorrect** !

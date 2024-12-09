@@ -472,7 +472,7 @@ Ces outils provenant du package {dplyr} et de {collapse} et {svBase} pour les ve
 
 ```{r}
 urchin <- read("urchin_bio", package = "data.io", lang = "fr")
-rmarkdown::paged_table(urchin)
+urchin
 ```
 
 ### `select()`/`sselect()`
@@ -588,7 +588,7 @@ En version speedy, vous utiliserez `sfilter()` pour indiquer les *lignes* de vot
 ```{r, echo=TRUE}
 # Tous les oursins sauf ceux issus de la pêche
 urchin_sub1 <- sfilter(urchin2, origin != "Fishery")
-rmarkdown::paged_table(urchin_sub1)
+urchin_sub1
 ```
 
 Vous pouvez aussi utiliser une variable numérique pour filtrer les données. Les comparaisons précédentes sont toujours applicables, sauf que cette fois vous faites porter la comparaison par rapport à une constante (ou par rapport à une autre variable numérique) et comme nous l'avons déjà expliqué, vous ne l'indiquez **pas** entre guillemets.
@@ -596,7 +596,7 @@ Vous pouvez aussi utiliser une variable numérique pour filtrer les données. Le
 ```{r}
 # Oursins plus hauts que 20mm
 urchin_sub2 <- sfilter(urchin2, height > 20)
-rmarkdown::paged_table(urchin_sub2)
+urchin_sub2
 ```
 
 Vous pouvez combiner différentes comparaisons avec les opérateurs "et" (`&`) et "ou" (`|`) :
@@ -604,7 +604,7 @@ Vous pouvez combiner différentes comparaisons avec les opérateurs "et" (`&`) e
 ```{r}
 # Oursins plus hauts que 20 mm ET issus d'élevage ("Farm")
 urchin_sub3 <- sfilter(urchin2, height > 20 & origin == "Farm") 
-rmarkdown::paged_table(urchin_sub3)
+urchin_sub3
 ```
 
 Avec des variables facteurs composées de nombreux niveaux comme on peut en retrouver dans le jeu de données `zooplankton` du package {data.io}, vous pouvez être amené à sélectionner plusieurs niveaux. L'opérateur `%in%` permet d'indiquer que nous souhaitons garder tous les niveaux qui sont dans une liste. Il n'existe pas d'opérateur `%not_in%`, mais il suffit d'inverser le résultat en précédent l'instruction de `!` pour obtenir cet effet. Par exemple, `!letters %in% c("a", "d", "f")` conserve toutes les lettres *sauf* a, d et f. L'opérateur `!` est d'ailleurs utilisable avec toutes les comparaisons pour en inverser les effets. Ainsi, `!x == 1` est équivalent à `x != 1`.
@@ -614,14 +614,14 @@ zooplankton <- read("zooplankton", package = "data.io", lang  = "FR")
 # Garde uniquement les copépodes (correspondant à 4 groupes distincts)
 copepoda <- sfilter(zooplankton,
   class %in% c("Calanoïde", "Cyclopoïde",  "Harpacticoïde", "Poecilostomatoïde"))
-rmarkdown::paged_table(sselect(copepoda, ecd:perimeter, class))
+sselect(copepoda, ecd:perimeter, class)
 ```
 
 Enfin, la détection et l'élimination de lignes contenant des valeurs manquantes (encodées comme `NA`) est spéciale. En effet, vous ne pouvez pas écrire quelque chose comme `x == NA` car ceci se lit comme "x est égale à ... je ne sais pas quoi", ce qui renvoie à son tour `NA` pour toutes les comparaisons quelles qu'elles soient. Vous pouvez utiliser la fonction spécialement prévue pour ce test `is.na()`. Ainsi, `is.na(x)` effectue en réalité ce que vous voulez. Il peut être utilisé à l'intérieur de `filter()` ou `sfilter()`. Par exemple pour conserver toutes les lignes n'ayant pas de valeurs manquantes pour `skeleton`, vous écrirez `sfilter(urchin2, !is.na(skeleton))`. Vous noterez tout de même que ce n'est pas des plus lisibles. Il existe une fonction spécialement prévue pour débarrasser les tableaux des lignes contenant des valeurs manquantes : `drop_na()` ou `sdrop_na()`. Si vous spécifier des noms de colonnes (facultatifs), la fonction ira rechercher les valeurs manquantes uniquement dans ces colonnes-là, sinon, elle scrutera tout le tableau (mais faites très attention à ne pas utiliser inconsidérément cette fonction sans spécifier les colonnes : éliminer des individus sur base de valeurs manquantes dans des colonnes que vous n'utilisez pas ensuite est idiot).
 
 ```{r}
 urchin_sub4 <- sdrop_na(urchin)
-rmarkdown::paged_table(urchin_sub4)
+urchin_sub4
 ```
 
 Pour terminer le filtrage des lignes de vos tableaux, il est utile d'être aussi capable de le faire en R de base. Nous avons déjà étudié l'opérateur `[` qui extrait un sous-ensemble d'un **data.frame** et nous avons dit que son premier argument sélectionne les lignes. Nous pouvons y indiquer aussi un vecteur de valeurs logiques issues d'une comparaison. Ainsi, l'équivalent en R de base de `urchin_sub2 <- sfilter(urchin2, height > 20)` est :
@@ -673,7 +673,7 @@ urchin <- smutate(urchin,
   sum_skel  =  lantern + spines + test, 
   ratio     = sum_skel / skeleton,
   skeleton2 = skeleton^2)
-rmarkdown::paged_table(sselect(urchin, skeleton:spines, sum_skel:skeleton2))
+sselect(urchin, skeleton:spines, sum_skel:skeleton2)
 ```
 
 -   les fonctions mathématiques :
@@ -688,7 +688,7 @@ rmarkdown::paged_table(sselect(urchin, skeleton:spines, sum_skel:skeleton2))
 urchin <- smutate(urchin,
   skeleton_log  = log(skeleton), 
   skeleton_sqrt = sqrt(skeleton))
-rmarkdown::paged_table(sselect(urchin, skeleton, skeleton_log, skeleton_sqrt))
+sselect(urchin, skeleton, skeleton_log, skeleton_sqrt)
 ```
 
 La fonction tidy `transmute()` ou `stransmute()` effectue la même opération, mais en plus, elle laisse tomber les variables d'origine pour ne garder *que* les nouvelles variables calculées.
@@ -697,7 +697,7 @@ En R de base, le calcul d'une nouvelle variable se fait comme ceci :
 
 ```{r, echo=TRUE}
 urchin$log_skeleton <- log(urchin$skeleton)
-rmarkdown::paged_table(sselect(urchin, skeleton, log_skeleton))
+sselect(urchin, skeleton, log_skeleton)
 ```
 
 Remarquez encore une fois que vous devez qualifier complètement le nom de la variable à calculer, en indiquant le nom du jeu de données et le nom de la variable comme `urchin$skeleton`. Si vous voulez éliminer une variable du jeu de données en R de base, vous lui assignez `NULL` :

@@ -575,7 +575,7 @@ shotgun_wide <- dtx(
   c7      = c( 143314, 7103244, 71111, 5181, 907, 1600886, 14423),
   c10     = c(272541, 15966053, 150918, 15303, 2688, 3268646, 35024))
 
-rmarkdown::paged_table(shotgun_wide)
+shotgun_wide
 ```
 
 Ce tableau est clair et lisible... seulement, est-il correctement encodé en cas par variables d'après vous ? Quelle que soit la réponse à cette question, il est toujours possible de passer de ce format large à un format long dans R de la façon suivante :
@@ -584,7 +584,7 @@ Ce tableau est clair et lisible... seulement, est-il correctement encodé en cas
 shotgun_long <- spivot_longer(shotgun_wide, cols = c(c1, c4, c7, c10),
   names_to = "batch", values_to = "sequences")
 
-rmarkdown::paged_table(shotgun_long)
+DT::datatable(shotgun_long)
 ```
 
 L'argument `cols =` est assez flexible. Toutes les formes ci-dessous permettent d'obtenir le même résultat (ici, nous passons sur la fonction tidy `pivot_longer()` équivalente).
@@ -627,7 +627,7 @@ Pour passer du format long au format large (traitement inverse à `(s)pivot_long
 shotgun_wide2 <- spivot_wider(shotgun_long,
   names_from  = batch, values_from = sequences) 
 
-rmarkdown::paged_table(shotgun_wide2)
+DT::datatable(shotgun_wide2)
 ```
 
 ### Recombinaison de variables
@@ -642,21 +642,21 @@ Partons, par exemple, du jeu de données sur la biométrie des crabes du package
 
 ```{r}
 crabs <- read("crabs", package = "MASS", lang = "fr")
-rmarkdown::paged_table(crabs)
+DT::datatable(crabs)
 ```
 
 Les fonctions `sunite()` ou `unite()` permettent de combiner facilement les colonnes `sex` et `species` comme montré dans l'exemple ci-dessous. N'hésitez pas à faire appel à la page d'aide de la fonction via `?unite` pour vous guider.
 
 ```{r}
 crabs2 <- sunite(crabs, col = "sp_sex", species, sex, sep = "_")
-rmarkdown::paged_table(crabs2)
+DT::datatable(crabs2)
 ```
 
 Les fonctions complémentaires à `(s)unite()` sont `sseparate()` et `separate()`. Elles permettent de séparer une variable en deux ou plusieurs colonnes. Donc, pour retrouver un tableau similaire à celui d'origine, nous pourrons faire :
 
 ```{r}
 crabs3 <- sseparate(crabs2, col = "sp_sex", into = c("species", "sex"), sep = "_")
-rmarkdown::paged_table(crabs3)
+DT::datatable(crabs3)
 ```
 
 ##### À vous de jouer ! {.unnumbered}
@@ -688,7 +688,7 @@ physico1 <- dtx(
   salinity    = c(34.0, 35.3, 33.9, 35.1, 34.0, 35.2, 33.9, 35.1),
   oxygen      = c(7.98, 8.00, 7.98, 7.98, 7.99, 7.86, 7.89, 7.98),
   temperature = c(24.6, 24.4, 25.1, 24.7, 24.9, 24.7, 25.0, 24.6))
-rmarkdown::paged_table(physico1)
+DT::datatable(physico1)
 ```
 
 Voici le second tableau :
@@ -701,14 +701,14 @@ physico2 <- dtx(
   salinity    = c(33.8, 35.0, 33.9, 35.1),
   oxygen      = c(7.96, 8.01, 7.90, 8.00),
   temperature = c(25.0, 24.6, 24.0, 24.0))
-rmarkdown::paged_table(physico2)
+DT::datatable(physico2)
 ```
 
 L'empilement des deux tableaux de données en un seul se fait en utilisant la fonction tidy `bind_rows()` ou la fonction speedy `sbind_rows()` lorsque les tableaux contiennent les mêmes variables présentées exactement dans le même ordre comme ici :
 
 ```{r}
 physico <- sbind_rows(physico1, physico2)
-rmarkdown::paged_table(physico)
+DT::datatable(physico)
 ```
 
 ### Empilement à droite
@@ -723,14 +723,14 @@ nutrients <- dtx(
               2.441, 0.372, 2.438, 0.388, 2.445, 0.390),
   no3     = c(1.145, 0.104, 0.447, 0.066, 0.439, 0.093,
               0.477, 0.167, 0.443, 0.593, 0.450, 0.125))
-rmarkdown::paged_table(nutrients)
+DT::datatable(nutrients)
 ```
 
 Vous devez être très vigilant lors de l'utilisation de, `bind_cols()` ou `sbind_cols()` car ces fonctions combinent vos tableaux sans s'assurer que vos lignes soient alignées convenablement !
 
 ```{r}
 oceano <- sbind_cols(nutrients, physico)
-rmarkdown::paged_table(oceano)
+DT::datatable(oceano)
 ```
 
 Qu'observez-vous (outre que la fonction a remanié les noms des colonnes dupliquées) ?
@@ -739,14 +739,14 @@ Effectivement nos deux tableaux de données n'ont pas les lignes dans le même o
 
 ```{r}
 nutrients2 <- sarrange(nutrients, student, sample)
-rmarkdown::paged_table(nutrients2)
+DT::datatable(nutrients2)
 ```
 
 Le tableau `nutrients2` a maintenant les données présentées dans le même ordre (en lignes) que le tableau `physico`. Nous pouvons donc rassembler ces deux tableaux à l'aide de `sbind_cols()` :
 
 ```{r}
 oceano <- sbind_cols(nutrients2, physico)
-rmarkdown::paged_table(oceano)
+DT::datatable(oceano)
 ```
 
 Après vérification de l'adéquation des lignes communes (sample et student), nous n'aurons plus besoin des colonnes `sample...5` et `student...6`. La vérification automatique à l'aide de code R et l'élimination de ces variables du tableau `oceano` vous sont laissées comme exercice...
@@ -757,13 +757,13 @@ La fusion fera intervenir une ou plusieurs colonnes communes des deux tableaux p
 
 ```{r}
 oceano <- sfull_join(nutrients, physico, by = c("student", "sample"))
-rmarkdown::paged_table(oceano)
+DT::datatable(oceano)
 ```
 
 Observez bien ce dernier tableau. Les données initiales ont été *retriées* avant d'être fusionnées pour que les données correspondent. Comparez au tableau `nutrients` d'origine réimprimé ci-dessous :
 
 ```{r}
-rmarkdown::paged_table(nutrients)
+DT::datatable(nutrients)
 ```
 
 Il existe, en fait, plusieurs versions pour la fusion de tableaux, représentées par une série de fonctions tidy `XXX_join()` ou speedy `sXXX_join()`. Lorsque les lignes entre les deux tableaux fusionnés correspondent parfaitement comme dans l'exemple traité ici, les différentes variantes ont le même effet. Mais lorsque des lignes diffèrent, les variantes ont leur importance :
