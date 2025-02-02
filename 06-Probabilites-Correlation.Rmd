@@ -19,7 +19,7 @@ SciViews::R("infer", lang = "fr")
 
 -   Pouvoir manipuler des matrices de corrélation et des corrélogrammes. Utiliser également la matrice de nuages de points comme représentation graphique complémentaire
 
--   Appréhender les premiers éléments concernant les test d'hypothèses
+-   Appréhender les premiers éléments concernant les tests d'hypothèses
 
 -   Maîtriser le test de corrélation
 
@@ -29,7 +29,7 @@ Vous devez être à l'aise avec l'utilisation de R, RStudio et R Markdown. Vous 
 
 ## Probabilités {#proba}
 
-La vidéo suivante vous introduit la notion de probabilité et le calcul de probabilités d'une manière plaisante à partir d'un jeu de hasard proposé par un petit chat à ses amis...
+La vidéo suivante vous introduit la notion de **probabilité** et le calcul de probabilité qu'un **évènement** se produise d'une manière plaisante à partir d'un jeu de hasard proposé par un petit chat à ses amis...
 
 ```{r, echo=FALSE}
 vembedr::embed_youtube("5TtwG_LR0iY", width = 770, height = 433)
@@ -45,10 +45,10 @@ $$0 \leq \mathrm{P}(E) \leq 1$$
 
 ### Dépistage
 
-Voyons tout de suite une application en biologie et en médecine : le dépistage d'une maladie qui touche 8% de la population. Le test de dépistage mis en place détecte la maladie dans 95% des cas lorsque la personne testée en est atteinte. De plus, le test se trompe dans 10% des cas pour les personnes saines. Comment connaître le risque d'être malade si on est diagnostiqué positif par ce test ?
+Voyons tout de suite une application en biologie et en médecine : le dépistage d'une maladie qui touche 8% de la population. Le test de dépistage mis en place détecte la maladie dans 95% des cas lorsque la personne testée en est atteinte. Par contre, pour des personnes saines, le test se trompe dans 10% des cas. Comment connaître le risque d'être malade si on est diagnostiqué positif par ce test ?
 
 ```{block, type='note'}
-Notons d'emblée que les deux évènements "malade" et "sain" sont les seuls possibles. A un moment donné, une personne a la maladie ou ne l'a pas. De plus il n'est pas possible que ces deux évènements se produisent simultanément pour la même personne. Nous parlons alors d'**évènements disjoints**.
+Notons d'emblée que les deux évènements "malade" et "sain" sont les seuls possibles. À un moment donné, une personne a la maladie ou ne l'a pas. De plus il n'est pas possible que ces deux évènements se produisent simultanément pour la même personne. Nous parlons alors d'**évènements disjoints**.
 ```
 
 Pour résoudre ce problème, nous devons d'abord apprendre à *combiner* des probabilités. Il s'agit de calculer la probabilité que deux évènements **successifs** se produisent, sachant la probabilité de chacun des deux (la personne tombe malade ou non *et puis* se fait tester). Deux situations sont possibles :
@@ -85,7 +85,11 @@ Nous pouvons maintenant déterminer la probabilité que le test soit positif dan
 (p_healthy_positive <- 0.92 * 0.10)
 ```
 
-Bon, il nous reste à combiner les probabilités que le test soit positif, que la personne soit saine ou malade. Mais comment faire ? Ici, nous n'avons pas affaire à des évènements successifs, mais à des évènements mutuellement exclusifs : des **évènements disjoints**. Pour déterminer si l'un parmi deux évènements disjoints se produit, il suffit d'**additionner leurs probabilités respectives**. Nous pouvons maintenant déterminer la probabilité que le test soit positif, quelle que soit la personne testée :
+Bon, il nous reste à combiner les probabilités que le test soit positif, que la personne soit saine ou malade. Mais comment faire ? Ici, nous n'avons pas affaire à des évènements successifs, mais à des évènements mutuellement exclusifs : des **évènements disjoints**. Pour déterminer si l'un parmi deux évènements disjoints se produit, il suffit d'**additionner leurs probabilités respectives**.
+
+$$\mathrm{P}(positif) = \mathrm{P}(positif|sain\ ou\ positif|malade) = \mathrm{P}(positif|sain) + \mathrm{P}(positif|malade)$$
+
+Nous pouvons maintenant déterminer la probabilité que le test soit positif, quelle que soit la personne testée :
 
 ```{r}
 # Probabilité que le test soit positif 
@@ -143,7 +147,7 @@ Ouf ! Dans ce cas-ci le test positif est correct dans 97,4% des cas. Mais qu'en
 (0.008 * 0.95) / (0.992 * 0.10 + 0.008 * 0.95)
 ```
 
-Dans ce cas, un test positif n'aura effectivement détecté un malade que dans ... 7,1% des cas ! Les 92,9% autres cas positifs seront en fait des personnes saines.
+Dans ce cas, un test positif n'aura effectivement détecté un malade que dans ... 7,1% des cas ! Les 92,9% autres cas positifs seront en fait des personnes saines, donc, des faux positifs.
 
 Comme nous pouvons le constater ici, le calcul des probabilités est relativement simple. Mais en même temps, les résultats obtenus peuvent être complètement **contre-intuitifs**. D'où l'intérêt de faire ce genre de calcul !
 
@@ -155,11 +159,11 @@ Comme nous pouvons le constater ici, le calcul des probabilités est relativemen
 
 Il se peut que tout cela vous paraisse très (trop) abstrait. Vous comprenez peut-être mieux les concepts lorsqu'ils sont présentés de manière plus imagée. Dans ce cas, la méthode alternative de résolution des calculs de probabilités via les **arbres de probabilités** devrait vous aider. Le principe consiste à représenter un arbre constitué de nœuds (des faits qui peuvent se produire). De ces nœuds, vous représentez autant de branches (des segments de droites) que d'évènements possibles. La figure suivante est l'arbre des probabilités correspondant au cas du dépistage de la maladie qui touche 8% de la population.
 
-![Arbre de probabilités permettant de déterminer la probabilité d'avoir un résultat positif au test.](images/sdd1_07/probtree.png)
+![Arbre de probabilités permettant de déterminer la probabilité d'avoir un résultat positif au test.](images/sdd1_06/probtree.png)
 
 Du premier nœud nous avons deux branches menant aux deux évènements "malade" et "sain". Chacune de ces deux situations est un nouveau nœud d'où deux autres évènements sont possibles à chaque fois (deux fois deux nouvelles branches) : un test "positif", ou un test "négatif". Les nœuds terminaux (les "négatifs" et "positifs" ici) sont aussi appelés les feuilles de l'arbre. L'arbre reprend donc tous les cas possibles depuis le nœud de départ (sa racine), jusqu'aux feuilles.
 
-L'étape suivante consiste à aller indiquer le long des branches les probabilités associées à chaque évènement : 0.08 pour "malade", 0.95 pour un dépistage "positif" si la personne est malade (notre fameuse probabilité conditionnelle $\mathrm{P}(positif|malade)$), etc. À ce stade, une petite vérification peut être faite. La somme des probabilités aux feuilles doit toujours valoir un, et il en est de même de la somme de toutes les branches issues d'un même nœud.
+L'étape suivante consiste à aller indiquer le long des branches les probabilités associées à chaque évènement : 0.08 pour "malade", 0.95 pour un dépistage "positif" si la personne est malade (notre probabilité conditionnelle $\mathrm{P}(positif|malade)$), etc. À ce stade, une petite vérification peut être faite. La somme des probabilités aux feuilles doit toujours valoir un, et il en est de même de la somme de toutes les branches issues d'un même nœud.
 
 Le calcul se fait ensuite comme suit. Nous repérons tous les cas qui nous intéressent. Ici, il s'agit de toutes les branches qui mènent à un test "positif". Le calcul des probabilités se fait en **multipliant les probabilités lorsque nous passons d'un nœud à l'autre le long d'une branche et en additionnant les probabilités ainsi calculées au niveau des feuilles terminales de l'arbre.** Donc, le cas patient "malade" -\> test "positif" correspond à 0.08 \* 0.95 = 0.076. Le cas patient "sain" -\> test "positif" correspond à 0.92 \* 0.10 = 0.092. Enfin, nous sommons les probabilités ainsi calculées pour les feuilles de l'arbre qui nous intéressent, soit 0.076 + 0.092 = 0.168. *Et voilà ! Nous avons résolu le problème. La probabilité d'avoir un résultat positif avec le test de dépistage dans une population dont 8% sont atteints de la maladie est de 16.8%.*
 
@@ -300,7 +304,7 @@ Dans une population de 100 personnes dont les proportions des différents groupe
 -   Quelle est la probabilité d'obtenir un échantillon de trois individus du groupe B issus de cette population ?
 
 ```{block, type='note'}
-En statistique, nous appelons cela un **tirage au sort sans remise**. Le résultat est très différent si le premier individu tiré au hasard était remis dans la population et pouvait être éventuellement pris à nouveau au second ou troisième tirage (**tirage au sort avec remise**). Notez aussi que, pour une population de taille infinie ou très grande, les deux types de tirage au sort sont équivalents à celui **avec** remise car enlever un individu d'une population infinie ne change pas fondamentalement son effectif, donc les probabilités ultérieures.
+En statistique, nous appelons cela un **tirage au sort sans remise**. Le résultat est très différent si le premier individu tiré au hasard était remis dans la population et pouvait être éventuellement pris à nouveau au second ou troisième tirage (**tirage au sort avec remise**). Notez aussi que, pour une population de taille infinie ou très grande, les deux types de tirage au sort sont équivalents à celui **avec** remise, car enlever un individu d'une population infinie ne change pas fondamentalement son effectif, donc les probabilités ultérieures.
 ```
 
 Cette question doit s'écrire à l'aide de probabilités conditionnelles : $\mathrm{P}(B\, et\, B\, et\, B) = \mathrm{P}(B)\ et\ \mathrm{P}(B|B)\ et\ \mathrm{P}(B|2B)$ ($\mathrm{P}(B|2B)$ correspond à la probabilité conditionnelle d'obtenir B si les deux individus précédents déjà récupérés sont eux aussi tous les deux du groupe B). Donc :
@@ -313,9 +317,12 @@ Il s'agit d'évènements successifs **non indépendants**. En effet, le retrait 
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A06La_proba", title = "Probabilités", toc = "Calculs des probabilités")` \## Lois de distributions
+`r learnr("A06La_proba", title = "Probabilités", toc = "Calculs des probabilités")` 
 
-Étant donné que les sciences des données reposent sur un nombre (si possible important) de répétitions d'une mesure -des réplicats-, il est possible de déterminer à quelle fréquence un évènement *E* se produit de manière expérimentale. La **probabilité observée** est quantifiable sur base d'un échantillon comme nous venons de le voir dans la section précédente. La **probabilité théorique** est connue si le mécanisme sous-jacent est parfaitement connu. Donc, en situation réelle, seule la probabilité observée est accessible, et ce n'est qu'une approximation de la "vraie" valeur, ou **valeur théorique**. Cependant, dans des situations particulières, les statisticiens ont calculé les probabilités théoriques. Ce sont des **lois de distributions**. Elles associent une probabilité théorique à chaque évènement possible.
+
+## Lois de distributions
+
+Étant donné que la science des données repose sur un nombre (si possible important) de répétitions d'une mesure -des réplicats-, il est possible de déterminer à quelle fréquence un évènement *E* se produit de manière expérimentale. La **probabilité observée** est quantifiable sur base d'un échantillon comme nous venons de le voir dans la section précédente. La **probabilité théorique** est connue si le mécanisme sous-jacent est parfaitement connu. Donc, en situation réelle, seule la probabilité observée est accessible, et ce n'est qu'une approximation de la "vraie" valeur, ou **probabilité théorique**. Cependant, dans des situations particulières, les statisticiens ont calculé les probabilités théoriques. Ce sont des **lois de distributions**. Elles associent une probabilité théorique à chaque évènement possible.
 
 ```{block, type='info'}
 La comparaison des probabilités théoriques et observées constitue l’un des piliers des statistiques. Le raisonnement est le suivant : si les probabilités observées sont suffisamment proches des probabilités théoriques, alors, nous pouvons considérer que les évènements sont générés selon un mécanisme identique ou proche de celui qui est à la base de la loi de distribution théorique correspondante.
@@ -425,7 +432,7 @@ La distribution $U(0, 1)$ est particulière et est appelée **distribution unifo
 
 ### Quantiles vers probabilités
 
-L'**aire sous la courbe** représente une probabilité associée à l'intervalle considéré pour les quantiles qui bornent l'aire calculée. Concrètement, quelle est la probabilité que *X*, le temps d'attente pour observer un insecte butineur, soit compris entre 2 et 2.5 min ? Nous pouvons répondre en calculant l'aire sous la courbe entre les quantiles 2 et 2.5 (représentée par l'aire en rouge à la Fig. \@ref(fig:unif3)).
+L'**aire sous la courbe** représente une probabilité associée à l'intervalle considéré pour les quantiles qui bornent l'aire calculée. Concrètement, quelle est la probabilité que *X*, le temps d'attente pour observer un insecte butineur, soit compris entre 2 et 2.5 min ? Nous pouvons répondre en calculant l'aire sous la courbe entre les quantiles 2 et 2.5 (représentée par l'aire en rouge à la Fig. \@ref(fig:unif3)).
 
 ```{r unif3, echo=FALSE, fig.cap="Probabilité qu'un insecte butineur arrive entre 2 et 2.5 min après le début d'une observation (aire en rouge)."}
 #.x2 <- .x
@@ -460,7 +467,7 @@ punif(2.5, min = 0, max = 4, lower.tail = TRUE) -
 punif(2.0, min = 0, max = 4, lower.tail = TRUE)
 ```
 
-La réponse est 0.125, soit une fois sur huit observations, en moyenne, le temps d'attente enregistré sera compris entre 2 et 2.5 minutes.
+La réponse est 0.125, soit une fois sur huit observations, le temps d'attente enregistré sera compris entre 2 et 2.5 minutes (mais cela n'est valable que pour un très grand nombre d'observations, car n'oublions pas que le hasard fait que les temps d'attente successifs ne sont pas parfaitement prédictibles, seule leur probabilité a un sens).
 
 ```{block, type='note'}
 Le calcul de probabilités sur base de lois de distributions continues se fait par l'intermédiaire des aires à gauche ou à droite d'un quantile sur le graphique de densité de probabilité. Pour une aire centrale, nous soustrayons les aires à gauche des deux quantiles respectifs.
@@ -497,7 +504,7 @@ Dans R, la fonction qui effectue ce calcul est `q<distri>()`. Donc ici, il s'agi
 qunif(1/3, min = 0, max = 4, lower.tail = TRUE)
 ```
 
-Donc il faut observer pendant 1.33 min (1 min et 20 secs) pour avoir une chance sur trois d'observer l'arrivée d'un insecte butineur.
+Donc il faut observer pendant 1.33 min (1 min et 20 secs) pour avoir une chance sur trois d'observer l'arrivée d'un insecte butineur (encore une fois, c'est une probabilité, donc cela ne se vérifiera que sur un très grand nombre d'observations successives indépendantes).
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -522,6 +529,7 @@ Le snippet `.iurandom` nécessite quelques explications supplémentaires. R est 
 
 [^07-probabilites-distributions-2]: Si vous utilisez `set.seed()` prenez soin de spécifier **toujours une valeur différente** prise au hasard comme argument de la fonction ! -->
 ```
+
 ### Calculs dans R
 
 Dans R de base, pour chaque distribution statistique, quatre fonctions sont proposées qui commencent par p/q/r/d, suivi d'un diminutif pour la loi de distribution. Pour la distribution uniforme, c'est `unif`. Nous avons donc :
@@ -559,7 +567,7 @@ set.seed(575); generate(U, 5)[[1]]
 set.seed(575); runif(5, min = 0, max = 4)
 ```
 
-Notez l'utilisation de `set.seed()` ici. Cette fonction initialise le générateur de nombres **pseudo-aléatoires**. Il s'agit d'un code informatique qui génère une suite de nombres qui a des propriétés équivalentes à une série réellement aléatoire, mais sans l'être réellement. On initie le générateur à un endroit dans la suite de nombres à l'aide de `set.seed()` auquel on donne un nombre entier au hasard comme argument (naturellement, on doit donner à chaque fois un autre nombre ... sauf si on veut générer exactement la même suite, comme c'est le cas ci-dessus pour comparer la sortie de `generate(U)` par rapport à `runif()`). L'utilisation de `set.seed()` rend votre code **reproductible**. N'hésitez donc pas à l'utiliser avant tout calcul faisant intervenir le générateur de nombres pseudo-aléatoires dans vos documents comme ceci :
+Notez l'utilisation de `set.seed()` ici. Cette fonction initialise le générateur de nombres **pseudo-aléatoires**. Il s'agit d'un code informatique qui génère une suite de nombres qui a des propriétés équivalentes à une série réellement aléatoire, mais sans l'être réellement. On initie le générateur à un endroit dans la suite de nombres à l'aide de `set.seed()` auquel on donne un nombre entier au hasard comme argument (naturellement, on doit donner à chaque fois un autre nombre... sauf si on veut générer exactement la même suite, comme c'est le cas ci-dessus pour comparer la sortie de `generate(U)` par rapport à `runif()`). L'utilisation de `set.seed()` rend votre code **reproductible**. N'hésitez donc pas à l'utiliser avant tout calcul faisant intervenir le générateur de nombres pseudo-aléatoires dans vos documents comme ceci :
 
 ```{r}
 set.seed(946)
@@ -580,7 +588,7 @@ variance(U)
 support(U)
 ```
 
-Bien que nous ne l'utiliserons pas dans ce cours, les objets **distribution** peuvent contenir plusieurs distributions différentes, et même, une mixture de plusieurs distributions. Enfin, dernier avantage, vous pouvez utiliser `chart()` pour créer le graphique de densité de probabilité ou `chart$cumulative()` pour tracer le graphique de densité de probabilité cumulée très facilement pour distribution. Ensuite, vous y ajouter une aire à l'aide de `geom_funfill()` en utilisant `dfun()` pour une aire de densité ou `cdfun()` pour une aire de densité cumulée. Pour annoter le graphique, vous utilisez `annotate("text")`. Voici ce que cela donne :
+Bien que nous ne l'utiliserons pas dans ce cours, les objets **distribution** peuvent contenir plusieurs distributions différentes, et même, une mixture de plusieurs distributions. Enfin, dernier avantage, vous pouvez utiliser `chart()` pour créer le graphique de densité de probabilité ou `chart$cumulative()` pour tracer le graphique de densité de probabilité cumulée très facilement pour les objets **distribution**. Ensuite, vous y ajouter une aire à l'aide de `geom_funfill()` en utilisant `dfun()` pour une aire de densité ou `cdfun()` pour une aire de densité cumulée. Pour annoter le graphique, vous utilisez `annotate("text")`. Voici ce que cela donne :
 
 ```{r}
 chart(U) +
@@ -700,9 +708,13 @@ quantile(N1, p = 0.95)
 qnorm(p = 0.95, mean = 12, sd = 1.5) # Notez le nom des arguments mean = et sd =
 ```
 
+##### À vous de jouer ! {.unnumbered}
+
+`r learnr("A06Lb_distri", title = "Probabilités", toc = "Calculs avec une distribution normale")` 
+
 ### Théorème central limite
 
-Une des raisons pour lesquelles la distribution normale est très répandue est liée au fait que beaucoup d'autres distributions tendent vers elle de manière asymptotique. Par exemple, une distribution binomiale symétrique (avec $p = 0.5$) et pour un $n$ croissant ressemblera de plus en plus à une distribution normale. Le théorème central limite démontre cela, quelle que soit la distribution de départ. En pratique, la distribution normale est souvent une bonne approximation d'autres distributions pour des tailles d'échantillons déjà à partir de quelques dizaines d'individus.
+Une des raisons pour lesquelles la distribution normale est très répandue est liée au fait que beaucoup d'autres distributions tendent vers elle de manière asymptotique. Le **théorème central limite** démontre cela, quelle que soit la distribution de départ. *Sa démonstration sort du cadre de ce cours, mais sachez qu'il s'agit probablement du théorème le plus important en statistiques.* En pratique, la distribution normale est souvent une bonne approximation d'autres distributions pour des tailles d'échantillons déjà à partir de quelques dizaines d'individus.
 
 ```{r, echo=FALSE}
 vembedr::embed_youtube("4dhm2QAA2x4", width = 770, height = 433)
@@ -712,11 +724,11 @@ vembedr::embed_youtube("4dhm2QAA2x4", width = 770, height = 433)
 
 ### Association de deux variables
 
-Nous pouvons décrire une variable numérique à l'aide de plusieurs descripteurs comme la moyenne par exemple
+Nous pouvons décrire une variable numérique à l'aide de plusieurs descripteurs comme la moyenne par exemple (nous venons de rencontrer la moyenne comme paramètre de la distribution normale, mais il s'agit également d'une grandeur que nous pouvons calculer sur nos données : on parle alors d'une **statistique**).
 
 $$\bar{x}=\sum_{i=1}^n{\frac{x_i}{n}}$$
 
-où $x$ est une variable quantitative (donc **numeric** dans R) et $n$ est la taille de l'échantillon, c'est à dire, le nombre d'individus mesurés. On notera $\bar{x}$ la moyenne de $x$, que l'on prononcera "x barre". Nous avons abordé la différence entre un échantillon et une population dans la section \@ref(population). Soyez sur de maîtriser la différence avant de continuer de lire cette section.
+où $x$ est une variable quantitative (donc **numeric** dans R) et $n$ est la taille de l'échantillon, c'est à dire, le nombre d'individus mesurés. On notera $\bar{x}$ la moyenne de $x$, que l'on prononcera "x barre". Nous avons abordé la différence entre un échantillon et une population dans la section \@ref(population). Soyez certain de maîtriser la différence avant de continuer de lire cette section.
 
 Nous pouvons décrire l'étendue d'une variable numérique à l'aide de la **variance** qui, pour rappel, est la somme des écarts à la moyenne divisée par le nombre de degrés de liberté (*n* dans le cas d'une population et *n* - 1 dans le cas d'un échantillon).
 
@@ -770,7 +782,7 @@ C'est embêtant, puisque la forme du nuage de points n'a, lui, pas changé du to
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(127, height = 400, toc = "Covariance entre 2 variables")`
+`r h5p(127, height = 400, toc = "Covariance entre deux variables")`
 
 Le **coefficient de corrélation de Pearson**, noté *r*, est une autre mesure qui est *normée* de telle façon qu'il prenne la valeur +1 pour une proportionnalité directe parfaite (les points sont strictement alignés le long d'une droite) et -1 lorsque la proportionnalité est inverse parfaite (et toujours 0 en cas de non-association).
 
@@ -809,13 +821,13 @@ L'association entre deux variables numériques peut ainsi s'envisager selon troi
 
 1.  La **corrélation**. Ici les deux variables numériques sont sur le même pied d'égalité. Nous nous bornons à *observer* l'association sans élaborer plus d'explication sur son existence. C'est le coefficient de corrélation qui la quantifie.
 
-2.  La **relation**. Ici, nous modélisons l'association, par exemple par une droite, dite **droite de régression**. Nous verrons cet outil très important des statistiques et de la science des données dans la partie modélisation du cours de Science des Données Biologiques II. Dans ce cas, nous considérons qu'un mécanisme sous-jacent est responsable de la forme du nuage de points, et nous considérons qu'une fonction mathématique peut être utilisée pour prédire les valeurs d'une variable connaissant celles de l'autre.
+2.  La **relation**. Ici, nous modélisons l'association, par exemple par une droite, dite **droite de régression**. Nous verrons cet outil très important des statistiques et de la science des données dans la partie modélisation du cours de Science des Données biologiques II. Dans ce cas, nous considérons qu'un mécanisme sous-jacent est responsable de la forme du nuage de points, et nous considérons qu'une fonction mathématique peut être utilisée pour prédire les valeurs d'une variable connaissant celles de l'autre.
 
 3.  La **causalité**. En plus de la relation, nous considérons que c'est la variation d'une des deux variables qui est **à l'origine**, directement ou indirectement de la variation de l'autre. Une relation de cause à effet ne peut être démontrée de manière sûre que par l'expérience, comme expliqué dans la vidéo plus haut.
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(126, height = 400, toc = "Association de 2 variables")`
+`r h5p(126, height = 400, toc = "Association de deux variables")`
 
 #### Matrice de corrélation
 
@@ -823,7 +835,7 @@ Dans un cas multivarié (plus de deux variables), nous pouvons toujours étudier
 
 Prenons un exemple à trois variables. Le jeu de données `trees` rassemble la mesure du diamètre, de la hauteur et du volume de bois de cerisiers noirs. La matrice de corrélation peut se calculer à l'aide de `cor()` dans R, ou mieux, à l'aide de `correlation()` dans `SciViews::R`.
 
-```{r}
+```{r, warning=FALSE}
 trees <- read("trees", package = "datasets")
 tabularise$headtail(trees)
 trees_cor <- correlation(trees)
@@ -840,13 +852,13 @@ $$r_{x,x} = 1$$
 
 $$r_{x,y} = r_{y,x}$$
 
-Pour ces raisons seul le triangle inférieur (ou supérieur) est informatif. Le reste (diagonale et autre triangle) est trivial ou répétitif. Vous trouverez parfois une représentation de la matrice de confusion sous la forme uniquement du triangle inférieur. La fonction `summary()` effectue une telle représentation, et simplifie encore la représentation pour aider à trouver les corrélations importantes dans un gros tableau.
+Pour ces raisons seul le triangle inférieur (ou supérieur) est informatif. Le reste (diagonale et autre triangle) est trivial ou répétitif. Vous trouverez parfois une représentation de la matrice de confusion sous la forme uniquement du triangle inférieur. La méthode `summary()` effectue une telle représentation, et simplifie encore la représentation pour aider à trouver les corrélations importantes dans un gros tableau.
 
 ```{r}
 summary(trees_cor)
 ```
 
-Voyez la page d'aide de `correlation()` pour plus d'information via `?correlation`. Vous pouvez passer un data frame à la fonction, ou encore, utiliser `correlation(data = df, ~ var1 + var2 + var3)` avec une formule pour spécifier les variables à traiter. L'argument `use =` permet de spécifier quoi faire en cas de valeurs manquantes. Si vous indiquez `"complete.obs"`, toute ligne du tableau contenant au moins une valeur manquante sera éliminée avant le calcul. Avec `"pairwise.complete.obs"` les éliminations de valeurs manquantes se font pour chaque paire de variables individuellement des autres.
+Voyez la page d'aide de `correlation()` pour plus d'information via `?correlation`. Vous pouvez passer un **data frame** à la fonction, ou encore, utiliser `correlation(data = df, ~ var1 + var2 + var3)` avec une formule pour spécifier les variables à traiter. L'argument `use =` permet de spécifier quoi faire en cas de valeurs manquantes. Si vous indiquez `"complete.obs"`, toute ligne du tableau contenant au moins une valeur manquante sera éliminée avant le calcul. Avec `"pairwise.complete.obs"` les éliminations de valeurs manquantes se font pour chaque paire de variables individuellement des autres.
 
 Il existe aussi des représentations graphiques spécialisées, appelées **corrélogrammes** pour visualiser les coefficients de corrélations dans un cas multivarié. La fonction `plot()` appliquée à notre objet **Correlation** en offre une version simple.
 
@@ -965,25 +977,25 @@ GGally::ggscatmat(trees, 1:3)
 
 Comme dans le cas de la matrice de corrélation, les graphiques en nuage de points sur la diagonale ne seraient pas très utiles puisqu'ils représenteraient une variable par rapport à elle-même. Ils sont donc remplacés par des graphes de densité montrant la répartition des données pour chaque variable considérée individuellement. Sur le triangle supérieur, ce sont les coefficients de corrélation de Pearson qui sont indiqués. Sur le triangle inférieur, les différentes possibilités de nuages de points deux à deux sont représentées. La variable sur l'axe des abscisses se lit dans la colonne au-dessus et la variable représentée sur l'axe des ordonnées se lit dans la ligne à droite. Par exemple, le graphique en bas à gauche correspond au diamètre en abscisse et au volume en ordonnée. Cette représentation graphique est donc complémentaire au corrélogramme.
 
-#### Matrice de variances-covariances
+#### Matrice de variance-covariance
 
-De même que nous pouvons calculer une matrice de corrélations, nous pouvons calculer une matrice de covariances, mais sachant que $cov_{x,x} = var_x$, nous avons également les variances le long de la diagonale. Pour cette raison, nous appelons ce tableau, une **matrice de variances-covariances**. Par exemple, pour le jeu de données `trees`, cela donne :
+De même que nous pouvons calculer une matrice de corrélation, nous pouvons calculer une matrice de covariance, mais sachant que $cov_{x,x} = var_x$, nous avons également les variances le long de la diagonale. Pour cette raison, nous appelons ce tableau, une **matrice de variance-covariance**. Par exemple, pour le jeu de données `trees`, cela donne :
 
-```{r}
+```{r, warning=FALSE}
 cov(trees) |> tabularise()
 ```
 
-Comme ces descripteurs statistiques ne sont pas normés, ils sont plus difficiles à interpréter. Nous préférons donc la matrice de corrélations pour étudier l'association entre plusieurs variables numériques. Néanmoins, la matrice de variances-covariances interviendra plus tard dans d'autres traitements statistiques et il est utile de la connaitre (par exemple, dans le cadre de l'ACP que nous étudierons en Science des Données Biologiques II).
+Comme ces descripteurs statistiques ne sont pas normés, ils sont plus difficiles à interpréter. Nous préférons donc la matrice de corrélation pour étudier l'association entre plusieurs variables numériques. Néanmoins, la matrice de variances-covariance interviendra plus tard dans d'autres traitements statistiques et il est utile de la connaitre (par exemple, dans le cadre de l'ACP que nous étudierons en Science des Données biologiques II).
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r h5p(130, height = 400, toc = "Matrice de variances-covariances")`
+`r h5p(130, height = 400, toc = "Matrice de variance-covariance")`
 
 #### Corrélations de Spearman et Kendall
 
 Le coefficient de corrélation de Pearson représente une corrélation **linéaire**. Cependant, il se peut que vous soyez intéressé par une corrélation **non linéaire**, un nuage de points qui s'allonge le long d'une courbe. Dans ce cas, vous pouvez utiliser soit le coefficient $\rho$ de Spearman, soit le $\tau$ de Kendall.
 
--   Le $\rho$ de Spearman est le même calcul que le coefficient de Pearson, mais appliqué sur les données préalablement transformées en rangs. Sa valeur vaudra +1 ou -1 lorsque les points s'alignent parfaitement le long de n'importe quelle fonction monotone croissante ou décroissante.
+-   Le $\rho$ de Spearman est le même calcul que le coefficient de Pearson, mais appliqué sur les données préalablement *transformées en rangs* (observations rangées de la plus petite à la plus grande, et ensuite, les valeurs sont remplacées par le numéro d'ordre de chaque observation : 1, 2, 3... pour les trois plus petites par exemple). Sa valeur vaudra +1 ou -1 lorsque les points s'alignent parfaitement le long de n'importe quelle fonction monotone croissante ou décroissante.
 
 -   Le $\tau$ de Kendall utilise un calcul selon la même logique que les tests de Wilcoxon ou de Kruskal-Wallis que nous découvrirons dans les prochains modules \ref(wilcox) et \ref(kruskal). Nous allons ici compter le nombre de paires concordantes $n_c$ définies par $x_i < x_j\ \mathrm{et}\ y_i < y_j$, ou $x_i > x_j\ \mathrm{et}\ y_i > y_j$. Nous compterons aussi le nombre de paires discordantes $n_d$ telles que $x_i < x_j\ \mathrm{et}\ y_i > y_j$, ou $x_i > x_j\ \mathrm{et}\ y_i < y_j$. Enfin, si $x_i = x_j\ \mathrm{et}\ y_i = y_j$, la paire n'est pas comptabilisée. Nous avons alors pour un échantillon de *n* observations des variables numériques *x* et *y* :
 
@@ -1009,11 +1021,11 @@ Les valeurs obtenues diffèrent, mais les tendances restent similaires ici. Les 
 
 ## Test de corrélation
 
-C'est bien beau de pouvoir quantifier une corrélation, mais à partir de quand est-elle *significative*  au sens statistique du terme? En d'autres termes, nous voudrions déterminer si l'allongement du nuage de points peut être fortuit (par le biais de l'échantillonnage aléatoire) ou non. Il existe un test d'hypothèse qui répond à cette question. La section suivante présente traite de l'échantillonnage, du travail préliminaire ainsi que la définition d'un test d'hypothèse.
+C'est bien beau de pouvoir quantifier une corrélation, mais à partir de quand est-elle *significative* au sens statistique du terme ? En d'autres termes, nous voudrions déterminer si l'allongement du nuage de points peut être fortuit (par le biais de l'échantillonnage aléatoire) ou non. Il existe un test d'hypothèse qui répond à cette question. La section suivante traite de l'échantillonnage, du travail préliminaire ainsi que la définition d'un test d'hypothèse.
 
 ### Échantillonnage
 
-Nous avons déjà abordé cette question dans le chapitre 5. Si nous pouvions mesurer **tous** les individus d'une population à chaque fois, nous n'aurions pas besoin des statistiques. Mais ce n'est pratiquement jamais possible. Tout d'abord, le nombre d'individus est potentiellement très grand. Le travail nécessaire risque alors d'être démesuré. Afin de limiter les mesures à un nombre raisonnable de cas, nous effectuons un **échantillonnage** qui consiste à prélever un petit sous-ensemble de taille $N$ donné depuis la population de départ. Il existe différentes stratégies d'échantillonnage, que nous avons déjà abordées.
+Nous avons déjà abordé cette question dans le chapitre 5. Si nous pouvions mesurer **tous** les individus d'une population à chaque fois, nous n'aurions pas besoin des statistiques. Mais ce n'est pratiquement jamais possible. Tout d'abord, le nombre d'individus est potentiellement très grand. Le travail nécessaire risque alors d'être démesuré. Pour limiter les mesures à un nombre raisonnable de cas, nous effectuons un **échantillonnage** qui consiste à prélever un petit sous-ensemble de taille $N$ donné depuis la population de départ. Il existe différentes stratégies d'échantillonnage, que nous avons déjà abordées (toujours au chapitre 5).
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -1024,7 +1036,7 @@ Nous n'avons pas forcément accès à tous les individus d'une population. Dans 
 Quoi qu'il en soit, l'échantillon n'est qu'un petit sous-ensemble, si possible sélectionné par un mécanisme faisant intervenir le hasard. Donc, deux échantillons issus de la même population ont une très forte probabilité d'être différents l'un de l'autre. Il en va également de même des statistiques calculées sur ces échantillons, comme les effectifs observés pour chaque niveau de variables qualitatives ou les valeurs moyennes pour les variables quantitatives, par exemple. **Cette variabilité d'un échantillon à l'autre ne nous intéresse pas, car elle n'apporte pas d'information sur la population elle-même.** Ce qui nous intéresse, c'est d'estimer au mieux les grandeurs (effectifs par niveaux, moyennes, etc.) qui caractérisent la population toute entière.
 
 ```{block, type='note'}
-L'estimation de paramètres d'une population par le biais de calculs sur un échantillon représentatif issu de cette population s'appelle l'**inférence statistique**. Rappelez-vous le schéma qui relie population et échantillon via l'échantillonnage d'une part, et l'inférence d'autre part.
+L'estimation de paramètres d'une population par le biais de calculs sur un échantillon représentatif issu de cette population s'appelle l'**inférence statistique** ou **inférence** tout court. Rappelez-vous le schéma qui relie population et échantillon via l'échantillonnage d'une part, et l'inférence d'autre part.
 
 ![](images/sdd1_06/inference.png)
 
@@ -1057,10 +1069,10 @@ Les deux hypothèses ne sont pas symétriques. Notre intention est de **rejeter*
 
 `r h5p(83, height = 400, toc = "Hypothèse nulle")`
 
-Revenons à notre réflexion qui a initié la réalisation d'un test d'hypothèse. À partir de quand une corrélation entre deux variables est-elle significative ? Il existe un test d'hypothèse qui répond à cette question, avec une version pour chacun des trois coefficients de corrélation : *r* de Pearson, $\rho$ de Spearman et $\tau$ de Kendall. Pour *r* de Pearson, nous aurons les hypothèses suivantes :
+Revenons à notre réflexion qui a initié la réalisation d'un test d'hypothèse. À partir de quand une corrélation entre deux variables est-elle significative ? Il existe un test d'hypothèse qui répond à cette question, avec une version pour chacun des trois coefficients de corrélation : *r* de Pearson, $\rho$ de Spearman et $\tau$ de Kendall. Pour *r* de Pearson, nous aurons les hypothèses suivantes :
 
--   $H_0\ :\ r = 0$
--   $H_1\ :\ r \neq 0$
+-   $H_0:\ r = 0$
+-   $H_1:\ r \neq 0$
 
 Il existe aussi des variantes unilatérales à gauche ($H_1\ :\ r < 0$, dans *r* `less`) ou à droite ($H_1\ :\ r > 0$, dans *r* `greater`) dans le cas où nous aurions des indications que l'association ne peut qu'être de type proportionnalité inverse ou directe, respectivement.
 
@@ -1080,18 +1092,18 @@ L'exécution de ce code nous donne un rapport avec :
 
 -   La dernière ligne donne la valeur précise de la corrélation entre les deux variables
 
--   Le résultat du test se trouve au niveau de la valeur de *P* à la troisième ligne. L'interprétation se fait en fonction de la valeur *P*. En fonction d'un seuil choisi avant de faire le test, et appelé seuil $\alpha$. La décision est prise comme suit :
+-   Le résultat du test se trouve au niveau de la valeur de *p* à la troisième ligne. L'interprétation se fait en fonction de la valeur *p* (*p-value* en anglais). En fonction d'un seuil choisi avant de faire le test, et appelé seuil $\alpha$. La décision est prise comme suit :
 
-    -   Si la valeur *P* est inférieure à $\alpha$, nous rejetons l'hypothèse $H_0$, considérée comme trop peu probable,
-    -   Si la valeur *P* est supérieure ou égale à $\alpha$, nous ne rejetons pas $H_0$, et considérons que notre échantillon ne nous permet pas de considérer cette hypothèse nulle comme suffisamment improbable (soit elle est effectivement correcte, soit l'effectif $N$ de notre échantillon est insuffisant pour démontrer qu'elle ne l'est pas au seuil $\alpha$ choisi).
+    -   Si la valeur *p* est inférieure à $\alpha$, nous rejetons l'hypothèse $H_0$, considérée comme trop peu probable,
+    -   Si la valeur *p* est supérieure ou égale à $\alpha$, nous ne rejetons pas $H_0$, et considérons que notre échantillon ne nous permet pas de déterminer si notre hypothèse nulle est suffisamment improbable (soit elle est effectivement correcte, soit l'effectif $N$ de notre échantillon est insuffisant pour démontrer qu'elle ne l'est pas au seuil $\alpha$ choisi).
 
 Souvent en biologie, on choisi $\alpha$ = 5%, mais dans les cas où nous souhaitons avoir plus de "certitude" dans notre réponse, nous pouvons aussi choisir un seuil plus restrictif de 1%, voire de 0,1%. Encore une fois, les explications sont détaillées ci-dessous.
 
-Prenons la valeur courante en biologie afin d'intepréter ce test. Le test réalisé est un test unilatéral à droite avec `alternative = "greater"` puisque le volume de bois ne peut qu'augmenter avec le diamètre de l'arbre (relation inverse non crédible ici).
+Prenons la valeur courante en biologie afin d'interpréter ce test. Nous avons réalisé un test unilatéral à droite avec `alternative = "greater"` puisque le volume de bois ne peut qu'augmenter avec le diamètre de l'arbre (relation inverse non crédible ici).
 
-On peut utiliser la fonction tabularise() afin d'obtenir un tableau bien formaté pour un carnet de notes.
+On peut utiliser la fonction `tabularise()` pour obtenir un tableau bien formaté (utile dans un rapport) :
 
-```{r}
+```{r, warning=FALSE}
 cor.test(data = trees, ~ diameter + volume, alternative = "greater") |> tabularise()
 ```
 
@@ -1099,7 +1111,7 @@ Comme la valeur *p* est inférieure à $\alpha$, nous pouvons rejeter $H_0$ et c
 
 On s'en doutait avec un coefficient aussi proche de 1. Mais qu'en est-il pour l'association entre le diamètre et la hauteur ?
 
-```{r}
+```{r, warning=FALSE}
 cor.test(data = trees, ~ diameter + height, alternative = "greater") |> tabularise()
 ```
 
@@ -1110,49 +1122,51 @@ cor.test(data = trees, ~ diameter + height,
   alternative = "greater", method = "spearman") |> tabularise()
 ```
 
-Le test nous avertit qu'en présence d'ex aequo, le calcul n'est qu'approchant. Ici aussi, nous rejetons $H_0$. Enfin, pour comparaison (en pratique, on ne fait pas systématiquement tous les tests, mais on choisit celui qui est le plus adéquat), que donnerait un test de Kendall ?
+R nous avertit qu'en présence d'ex æquo, le calcul n'est qu'approchant. Ici aussi, nous rejetons $H_0$. Enfin, pour comparaison (en pratique, on ne fait pas systématiquement tous les tests, mais on choisit celui qui est le plus adéquat), que donnerait un test de Kendall ?
 
 ```{r}
 cor.test(data = trees, ~ diameter + height,
   alternative = "greater", method = "kendall") |> tabularise()
 ```
 
-Même remarque concernant les ex aequo et valeur *p* très similaire ici à celle du test de Spearman.
+Même remarque concernant les ex æquo et valeur *p* très similaire ici à celle du test de Spearman.
 
-Nous venons de réaliser nos premiers tests d'hypothèses. Dans les prochains modules, nous approfondirons la compréhension des tests d'hypothèses.
+Nous venons de réaliser nos premiers tests d'hypothèses. Dans les prochains modules, nous approfondirons la compréhension de ces tests d'hypothèses qui sont des outils statistiques très utilisés en biologie.
 
 ##### À vous de jouer ! {.unnumbered}
 
 `r h5p(131, height = 400, toc = "Test de corrélation")`
 
-`r learnr("A06Lc_correlation", title = "Association de deux variables", toc = "Association de deux variables")`
+`r learnr("A06Lc_correlation", title = "Coefficients et tests de corrélation", toc = "Coefficients et tests de corrélation")`
 
-```{r assign_A06Ia_correlation_I, echo=FALSE, results='asis'}
+```{r assign_A06Ia_correlation, echo=FALSE, results='asis'}
 if (exists("assignment"))
-  assignment("A06Ia_correlation", part = "I",
+  assignment("A06Ia_correlation", part = NULL,
     url = "https://github.com/BioDataScience-Course/A06Ia_correlation",
     course.ids = c(
       'S-BIOG-027' = !"A06Ia_{YY}M_correlation"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/..."),
+      'S-BIOG-027' = "https://classroom.github.com/a/4bocoG5d"),
     course.starts = c(
-      'S-BIOG-027' = !"{W[35]+1} 13:00:00"),
+      'S-BIOG-027' = !"{W[23]+1} 13:00:00"),
     course.ends = c(
-      'S-BIOG-027' = !"{W[37]+1} 23:59:59"),
+      'S-BIOG-027' = !"{W[24]+1} 23:59:59"),
     term = "Q2", level = 3,
     toc = "Association entre des variables")
 ```
 
-````{=html}
-<!--
-**Finalisez maintenant votre gros projet transmodule sur `human_health` en y ajoutant un test de corrélation et en terminant le rapport.**
 
-```{r assign_A06Ga_human_health_V, echo=FALSE, results='asis'}
+```{=html}
+<!--
+
+**Entamez maintenant votre gros projet transmodule sur la santé humaine en y calculant des corrélations et en effectuant des tests de corrélations.**
+
+{r assign_A06Ga_human_health_I, echo=FALSE, results='asis'}
 if (exists("assignment2"))
-  assignment2("A08Ga_human_health", part = "V",
-    url = "https://github.com/BioDataScience-Course/A08Ga_human_health",
+  assignment2("A06Ga_human_health", part = "I",
+    url = "https://github.com/BioDataScience-Course/A06Ga_human_health",
     course.ids = c(
-      'S-BIOG-027' = !"A08Ga_{YY}M_human_health"),
+      'S-BIOG-027' = !"A06Ga_{YY}M_human_health"),
     course.urls = c(
       'S-BIOG-027' = "https://classroom.github.com/a/..."),
     course.starts = c(
@@ -1160,11 +1174,9 @@ if (exists("assignment2"))
     course.ends = c(
       'S-BIOG-027' = !"{W[37]+1} 23:59:59"),
     term = "Q2", level = 4, n = 4,
-    toc = "Biométrie humaine, part V")
-```
-
+    toc = "Biométrie humaine, part I")
 -->
-````
+```
 
 ```{=html}
 <!-- {r assign_A10Ga_urchin_VI, echo=FALSE, results='asis'}
@@ -1185,9 +1197,10 @@ if (exists("assignment2"))
     toc = "Biométrie de l'oursin violet, part VI")
 -->
 ```
+
 ## Récapitulatif des exercices
 
-Vous venez de terminer le module 6. Ce module vous a permis d'apprendre les bases des probabilités, de découvrir les premières lois de distributions, la corrélation et les premiers éléments concernant les tests d'hypothèse. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
+Vous venez de terminer le module six. Ce module vous a permis d'apprendre les bases des probabilités, de découvrir les premières lois de distributions, la corrélation et les premiers éléments concernant les tests d'hypothèse. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 
