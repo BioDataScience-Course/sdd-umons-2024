@@ -6,11 +6,11 @@ SciViews::R("infer", lang = "fr")
 
 <!-- Here, we should add a power analysis + discuss the absolute effect. We also need a nicer output in reportit + labels, incl. in french. A supplemental section that presents alternative tests (G test, permutation test) and also the test on proportions. -->
 
-Dans ce module, nous entrons dans le monde de l'inférence statistique et des tests d'hypothèses qui nous permettront de répondre à des questions biologiques sur base de données empiriques malgré une incertitude inévitable (hasard de l'échantillonnage, variabilité individuelle, erreurs de mesure ...).
+Dans ce module, nous continuons notre découverte de l'inférence statistique et des tests d'hypothèses qui nous permettent de répondre à des questions biologiques sur base de données empiriques malgré une incertitude inévitable (hasard de l'échantillonnage, variabilité individuelle, erreurs de mesure...).
 
 ##### Objectifs {.unnumbered}
 
--   Appréhender des lois de distributions statistiques et leurs utilisations pratiques (distribution binomiale, ,log-normale)
+-   Appréhender des lois de distributions supplémentaires et leurs utilisations pratiques (distribution binomiale, Poisson et log-normale)
 
 -   Comprendre les détails d'un test d'hypothèse
 
@@ -22,7 +22,7 @@ Les probabilités et lois de distributions statistiques vues au module \@ref(pro
 
 ## Distribution binomiale
 
-Partons d'un exemple pratique pour découvrir la distribution binomiale. La [mucoviscidose](http://www.muco.be/fr/mucoviscidose/maladie-génétique) est, dans la population européenne, la plus fréquente des maladies génétiques héréditaires. Elle se caractérise par un mucus dans les voies respiratoires anormalement épais qui est à l'origine de diverses complications. L'altération d'une protéine CFTR est à l'origine de cette maladie. Comme le gène qui code pour cette protéine est récessif, il faut que les deux allèles soient porteurs simultanément de la mutation pour que la maladie apparaisse. Parmi des familles de six enfants dont le père et la mère normaux sont tous deux porteurs hétérozygotes du gène altéré, quelle est la probabilité d'obtenir 0, 1, 2, ..., 6 enfants atteints de mucoviscidose ?
+Partons d'un exemple pratique pour découvrir la distribution binomiale. La [mucoviscidose](http://www.muco.be/fr/mucoviscidose/maladie-génétique) est, dans la population européenne, la plus fréquente des maladies génétiques héréditaires. Elle se caractérise par un mucus dans les voies respiratoires anormalement épais qui est à l'origine de diverses complications. L'altération d'une protéine CFTR est à l'origine de cette maladie. Comme le gène qui code pour cette protéine est récessif, il faut que les deux allèles soient porteurs simultanément de la mutation pour que la maladie se déclare. Parmi des familles de six enfants dont le père et la mère normaux sont tous deux porteurs hétérozygotes du gène altéré, quelle est la probabilité d'obtenir 0, 1, 2, ..., 6 enfants atteints de mucoviscidose ?
 
 ### Épreuve de Bernoulli
 
@@ -49,16 +49,16 @@ Notre exemple de la mucoviscidose au sein d'une famille dont les parents sont to
 
 ### Calculs et graphiques
 
-Les calculs sur base d'une distribution binomiale sont assez similaires à ceux de la distribution uniforme dans R, en remplaçant `unif` par `binom` dans le nom des fonctions p/q/r/d. Sinon, la fonction `dist_binomial(size = 6, prob = 0.75)` la crée. Puisqu'il s'agit d'une distribution discrète, un petit nombre d'évènements possibles existent. Il est assez facile de créer une table qui reprend l'ensemble des probabilités possibles :
+Les calculs sur base d'une distribution binomiale sont assez similaires à ceux de la distribution uniforme dans R, en remplaçant `unif` par `binom` dans le nom des fonctions dont le nom commence par `p`/`q`/`r`/`d`. Sinon, la fonction `dist_binomial(size = 6, prob = 0.75)` crée un objet **distribution** qui peut ensuite être utilisé dans des calculs ou pour tracer un graphique avec `chart()`. Il s'agit d'une distribution **discrète**. Donc, un petit nombre d'évènements possibles existent. Il est assez facile de créer une table qui reprend l'ensemble des probabilités possibles :
 
 ```{r}
 (binom_table <- dtx(succès = 0:6,
   probabilité = dbinom(0:6, size = 6, prob = 0.75)))
 ```
 
-La représentation graphique donne la Fig. \@ref(fig:binom).
+La représentation graphique donne la Fig. \@ref(fig:binom).
 
-```{r binom, echo=FALSE, fig.cap="Probabilité d'avoir *j* enfants sains parmi 6 dans des familles dont les deux parents sont porteurs hétérozygotes du gène de la mucoviscidose."}
+```{r binom, echo=FALSE, fig.cap="Probabilité d'avoir *j* enfants sains parmi six dans des familles dont les deux parents sont porteurs hétérozygotes du gène de la mucoviscidose."}
 #dtx(Quantile = 0:6, Probabilité = dbinom(0:6, size = 6, prob = 0.75)) %>.%
 #  chart(., Probabilité ~ Quantile) +
 #  geom_bar(stat = "identity", width = 0.05)
@@ -79,7 +79,7 @@ chart(dist_binomial(size = 6, prob = 0.5)) +
 
 ## Distribution de Poisson
 
-Maintenant, nous pouvons poser la question autrement. Prenons un couple sain au hasard en Belgique, quelle est la probabilité que ce couple transmette la mucoviscidose à leur descendance ? Ne considérons pas ici les personnes elles-mêmes atteintes de la maladie qui prendront certainement des précautions particulières. Sachant qu'une personne sur 20 est porteuse du gène défectueux (hétérozygote) dans la population saine belge, la probabilité de former un couple doublement hétérozygote qui pourrait transmettre la maladie est de[^07-distributions-chi2-2] :
+Maintenant, nous pouvons poser la question autrement. Prenons un couple sain au hasard en Belgique. Quelle est la probabilité que ce couple transmette la mucoviscidose à leur descendance ? Ne considérons pas ici les personnes elles-mêmes atteintes de la maladie qui prendront certainement des précautions particulières. Sachant qu'une personne sur 20 est porteuse du gène défectueux (hétérozygote) dans la population saine belge, la probabilité de former un couple doublement hétérozygote qui pourrait transmettre la maladie est de[^07-distributions-chi2-2] :
 
 [^07-distributions-chi2-2]: Comme il y a la même proportion d'hommes et de femmes porteurs, nous avons 1/20 des hommes et 1/20 des femmes qui sont porteurs. Nous formons des couples au hasard en piochant un homme dans la population masculine et une femme dans la population féminine de manière indépendante. Dans ce cas, nous obtenons un couple double porteur à une fréquence de 1/20 \* 1/20 = 1/400.
 
@@ -123,7 +123,7 @@ et
 
 $$P(Y=k) = P(Y=k-1) \times \frac{\lambda}{k}$$
 
-Le calcul se réalise de proche en proche en partant de la probabilité de ne jamais observer l'évènement. Comme l'évènement est rare, la probabilité tend très rapidement vers une valeur extrêmement faible. Seul le calcul des quelques premiers termes est donc nécessaire. À titre d'exercice, faites le calcul pour notre exemple d'un échantillon de la population belge, avec $\lambda = 1$ comme paramètre. La densité de probabilité pour cette distribution est représentée à la Fig. \@ref(fig:poisson).
+Le calcul se réalise de proche en proche en partant de la probabilité de ne jamais observer l'évènement. Comme l'évènement est rare, la probabilité tend très rapidement vers une valeur extrêmement faible. Seul le calcul des quelques premiers termes est donc nécessaire. À titre d'exercice, faites le calcul pour notre exemple d'un échantillon de la population belge, avec $\lambda = 1$ comme paramètre. La densité de probabilité pour cette distribution est représentée à la Fig. \@ref(fig:poisson).
 
 ```{r poisson, echo=FALSE, fig.cap="Probabilité d'occurence de mucoviscidose dans un échantillon aléatoire de 1600 belges."}
 #dtx(Quantile = 0:8, Probabilité = dpois(0:8, lambda = 1)) %>.%
@@ -135,7 +135,7 @@ chart(P, xlim = c(0, 8))
 
 ### Loi de Poisson dans R
 
-Vous utilisez le suffixe `pois` pour les fonctions p/q/r/d relatives à la distribution de Poisson et `dist_poisson()` permet de la créer sous forme d'objet **distribution**. Il n'y a qu'un seul paramètre : `lambda =`.
+Vous utilisez le suffixe `pois` pour les fonctions dont le nom commence par `p`/`q`/`r`/`d` relatives à la distribution de Poisson et `dist_poisson()` permet de la créer sous forme d'objet **distribution**. Il n'y a qu'un seul paramètre : `lambda =`.
 
 ```{r}
 P <- dist_poisson(lambda = 3)
@@ -143,10 +143,6 @@ P
 quantile(P, p = 1/4)
 qpois(p = 1/4, lambda = 3)
 ```
-
-##### À vous de jouer ! {.unnumbered}
-
-`r learnr("A06Lb_distri", title = "Lois de distributions", toc = "Lois de distributions")`
 
 ## Distribution log-normale
 
@@ -185,7 +181,7 @@ chart(dist_lognormal(mu = 0, sigma = 0.5), xlim = c(0, 4)) +
 
 ### Fonction dans R pour la log-normale
 
-Les fonctions p/q/r/d relatives à la distribution log-normale dans R utilisent le suffixe `lnorm`. Le calcul de probabilités se fait à l'aide de `plnorm()`, les quantiles se déterminent à partir de `qlnorm()` et un échantillon pseudo-aléatoire se calcule en utilisant `rlnorm()`. Un objet **distribution** contenant une loi log-normale se crée à l'aide de `dist_lognormal()`. Ses arguments sont toujours `mu =` et `sigma =`, mais pour les fonctions p/q/r/d, les arguments correspondants sont `meanlog =`, et `sdlog =`.
+Les fonctions commençant par `p`/`q`/`r`/`d` relatives à la distribution log-normale dans R utilisent le suffixe `lnorm`. Le calcul de probabilités se fait à l'aide de `plnorm()`, les quantiles se déterminent à partir de `qlnorm()` et un échantillon pseudo-aléatoire se calcule en utilisant `rlnorm()`. Un objet **distribution** contenant une loi log-normale se crée à l'aide de `dist_lognormal()`. Ses arguments sont toujours `mu =` et `sigma =`, mais attention : pour les fonctions `p`/`q`/`r`/`d`, les arguments correspondants se nomment `meanlog =`, et `sdlog =`.
 
 ```{r}
 lN1 <- dist_lognormal(mu = 1, sigma = 0.5) # Arguments mu =, sigma =
@@ -262,7 +258,7 @@ Si quasiment tous les points sont compris dans l'enveloppe de confiance à 95%, 
 
 ##### À vous de jouer ! {.unnumbered}
 
-`r learnr("A07La_distri2", title = "Lois de distributions (suite)", toc = "Lois de distributions (suite)")`
+`r learnr("A07La_distri2", title = "Distributions (suite)", toc = "Distributions (suite)")`
 
 ## Test Chi carré {#chi2}
 
@@ -287,11 +283,12 @@ Le bec-croisé des sapins *Loxia curvirostra* Linné 1758 est un passereau qui a
 
 Comme des individus à bec croisé à gauche et d'autres à bec croisé à droite se rencontrent dans la même population, Groth (1992) a comptabilisé les deux types dans un échantillon aléatoire et représentatif de plus de 3000 oiseaux. Il a obtenu le tableau suivant :
 
-```{r}
-(crossbill <- dtx(cb = c(rep("left", 1895), rep("right", 1752))))
+```{r, warning=FALSE}
+crossbill <- dtx(cb = c(rep("left", 1895), rep("right", 1752)))
+tabularise$headtail(crossbill)
 ```
 
-Ce tableau peut être résumé sous la forme d'un tableau de contingence :
+Ce tableau tout en longueur avec une seule colonne, mais 3647 lignes peut être résumé sous la forme d'un tableau de contingence :
 
 ```{r}
 (crossbill_tab <- table(Cross = crossbill$cb))
@@ -299,9 +296,9 @@ Ce tableau peut être résumé sous la forme d'un tableau de contingence :
 
 <!-- TODO: une version française de ce tableau. -->
 
-Ce tableau peut être présenté de façon plus complète avec des pourcentages et des totaux à l'aide de `tabularise()` :
+Ce tableau peut être présenté de façon plus complète et mieux mise en forme avec des pourcentages et des totaux à l'aide de `tabularise()` :
 
-```{r}
+```{r, warning=FALSE}
 tabularise(crossbill_tab)
 ```
 
@@ -314,7 +311,9 @@ Pouvons-nous rejeter $H_0$ ici ?
 
 #### Test Chi^2^ univarié
 
-Le test Chi^2^ (ou $\chi^2$) de Pearson est un test d'hypothèse qui permet de comparer des **effectifs observés** notés $a_i$ à des **effectifs théoriques** notés $\alpha_i$ sous l'hypothèse nulle pour les différents niveaux $i$ allant de 1 à $n$ d'une variable qualitative (version dite univariée du test). À noter que par rapport à la définition des hypothèses ci-dessus, ce ne sont **pas** les probabilités qui sont testées, mais les effectifs.
+Le test Chi^2^ (ou $\chi^2$, prononcez "khi carré") de Pearson est un test d'hypothèse qui permet de comparer des **effectifs observés** notés $a_i$ à des **effectifs théoriques** notés $\alpha_i$ sous l'hypothèse nulle pour les différents niveaux $i$ allant de 1 à $n$ d'une variable qualitative (version dite univariée du test). À noter que par rapport à la définition des hypothèses ci-dessus, ce ne sont **pas** les probabilités qui sont testées, mais les effectifs.
+
+En termes plus simples, le test Chi^2^ univarié permet de vérifier si le nombre de fois que les différents niveaux d'une variable qualitative apparaissent dans un échantillon est significativement différent ou non de ce à quoi on s'attend (probabilités définies *a priori* sous H~0~, ici, probabilités de 50% pour chaque variété).
 
 ###### Conditions d'application {.unnumbered}
 
@@ -344,14 +343,21 @@ L'exécution de ce code nous donne un rapport avec :
 
 -   Un rappel du nom du tableau de contingence traité (`crossbill_tab` ici)
 
--   Le résultat du test à la dernière ligne. Les explications concernant cette ligne sont développés ci-dessous. L'interprétation se fait en fonction de la valeur *P* (`p-value = 0.01789`). En fonction d'un seuil choisi avant de faire le test, et appelé seuil $\alpha$. La décision est prise comme suit :
+-   Le résultat du test à la dernière ligne. Les explications concernant cette ligne sont développés ci-dessous. L'interprétation se fait en fonction de la valeur *p* (`p-value = 0.01789`). En fonction d'un seuil choisi avant de faire le test, et appelé seuil $\alpha$. La décision est prise comme suit :
 
-    -   Si la valeur *P* est inférieure à $\alpha$, nous rejetons l'hypothèse $H_0$, considérée comme trop peu probable,
-    -   Si la valeur *P* est supérieure ou égale à $\alpha$, nous ne rejetons pas $H_0$, et considérons que notre échantillon ne nous permet pas de considérer cette hypothèse nulle comme suffisamment improbable (soit elle est effectivement correcte, soit l'effectif $N$ de notre échantillon est insuffisant pour démontrer qu'elle ne l'est pas au seuil $\alpha$ choisi).
+    -   Si la valeur *p* est inférieure à $\alpha$, nous rejetons l'hypothèse $H_0$, considérée comme trop peu probable,
+    -   Si la valeur *p* est supérieure ou égale à $\alpha$, nous ne rejetons pas $H_0$, et considérons que notre échantillon ne nous permet pas de considérer cette hypothèse nulle comme suffisamment improbable (soit elle est effectivement correcte, soit l'effectif $N$ de notre échantillon est insuffisant pour démontrer qu'elle ne l'est pas au seuil $\alpha$ choisi).
+
+Encore une fois, `tabularise()` nous présente le même résultat, mais avec une plus belle mise en forme, et en français (si l'argument `lang = "fr"` est utilisé dans `SciViews::R()` en début de script R ou de document R Markdown ou Quarto).
+
+```{r, warning=FALSE}
+chisq.test(crossbill_tab, p = c(left = 1/2, right = 1/2), rescale.p = FALSE) |>
+  tabularise()
+```
 
 ###### Explications détaillées {.unnumbered}
 
-Voici comment ce test se construit. *Ces détails sont fournis pour vous aider à comprendre les calculs réalisés, mais en pratique, vous ne devez pas les faire vous-même : vous utiliser simplement `chisq.test()` comme ci-dessus* Notre tableau de contingence à simple entrée `crossbill_tab` contient nos $a_i$. Nous devons donc calculer quels sont les effectifs théoriques $\alpha_i$. Le nombre total d'oiseaux observés est :
+Voici comment ce test se construit. *Ces détails sont fournis pour vous aider à comprendre les calculs réalisés, mais en pratique, vous ne devez pas les faire vous-même : vous utiliser simplement `chisq.test()` comme ci-dessus.* Notre tableau de contingence à simple entrée `crossbill_tab` contient nos $a_i$. Nous devons donc calculer quels sont les effectifs théoriques $\alpha_i$. Le nombre total d'oiseaux observés est :
 
 ```{r}
 sum(crossbill_tab)
@@ -382,9 +388,9 @@ Calculons $\chi^2_\mathrm{obs}$ dans notre cas[^07-distributions-chi2-4] :
 (chi2_obs <- sum((crossbill_tab - alpha_i)^2 / alpha_i))
 ```
 
-Pour répondre à la question, il nous faut une loi de distribution statistique qui permette d'associer une probabilité au quantile $\chi^2_\mathrm{obs}$ sous $H_0$. C'est là que le statisticien Karl Pearson vient à notre secours. Il a, en effet, modélisé la distribution statistique du $\chi^2$. La loi du même nom admet un seul paramètre, les **degrés de liberté** (ddl) qui sont égaux au nombre de niveaux de la variable facteur étudiée $n$ moins un. Ici, ddl = 2 - 1 = 1. La Fig. \@ref(fig:chi2plot) représente la densité de probabilité d'une loi $\chi^2$ typique[^07-distributions-chi2-5]. C'est une distribution qui démarre à zéro, passe par un maximum et est asymptotique horizontale à $+\infty$.
+Pour répondre à la question, il nous faut une loi de distribution statistique qui permette d'associer une probabilité au quantile $\chi^2_\mathrm{obs}$ sous $H_0$. C'est là que le statisticien Karl Pearson vient à notre secours. Il a, en effet, modélisé la distribution statistique du $\chi^2$. La loi du même nom admet un seul paramètre, les **degrés de liberté** (ddl) qui sont égaux au nombre de niveaux de la variable facteur étudiée $N$ moins un. Ici, ddl = 2 - 1 = 1. La Fig. \@ref(fig:chi2plot) représente la densité de probabilité d'une loi $\chi^2$ typique[^07-distributions-chi2-5]. C'est une distribution qui démarre à zéro, passe par un maximum et est asymptotique horizontale à $+\infty$.
 
-[^07-distributions-chi2-5]: Les fonctions qui permettent les calculs relatifs à la distribution $\chi^2$ dans R sont `<x>chisq()`. Leur utilisation est similaire à celle des distributions vues au module \@ref(proba).
+[^07-distributions-chi2-5]: Les fonctions qui permettent les calculs relatifs à la distribution $\chi^2$ dans R sont `<x>chisq()` avec `<x>` étant une lettre parmi `p`/`q`/`r`/`d` comme pour les autres fonctions de base de R relatives aux distributions statistiques. Leur utilisation est similaire à celle vues au module \@ref(proba).
 
 <!-- , et les snippets correspondants dans la SciViews Box sont disponibles à partir de `.ic` -->
 
@@ -418,7 +424,7 @@ Le raisonnement du test d'hypothèse pour répondre à notre question est le sui
 **Choix du seuil $\alpha$ d'un test d'hypothèse.** Le seuil $\alpha$ est choisi *avant* de réaliser le test. Il est un compromis entre le risque de se tromper qui diminue plus $\alpha$ est petit, et la possibilité d'obtenir le rejet de $H_0$ lorsqu'elle est fausse qui augmentera avec $\alpha$. Si on veut être absolument certain du résultat, on prend $\alpha = 0$, mais dans ce cas on ne rejette jamais $H_0$ et on ne tire donc jamais aucune conclusion utile. Donc, nous devons assouplir les règles et accepter un petit risque de se tromper. **Généralement, les statisticiens choisissent $\alpha$ = 5% dans les cas courants**, et prennent 1%, ou même 0,1% dans les cas où il faut être plus strict (par exemple, si des vies dépendent du résultat). Nous pouvons nous baser sur ces références, même si nous verrons plus loin que cette pratique est de plus en plus remise en cause dans la littérature scientifique.
 ```
 
-Poursuivons. Nous choisissons notre seuil $\alpha$ = 5%. Cela définit l'aire la plus extrême de 5% à droite de la distribution $\chi^2$ à 1 ddl comme zone de rejet (remplie en rouge sur la Fig. \@ref(fig:chi2plot2)). Il nous suffit maintenant de voir où se place notre $\chi^2_\mathrm{obs}$. S'il se situe dans la zone en rouge, nous rejetterons $H_0$, sinon, nous ne la rejetterons pas.
+Poursuivons. Nous choisissons notre seuil $\alpha$ = 5%. Cela définit l'aire la plus extrême de 5% à droite de la distribution $\chi^2$ à 1 ddl comme zone de rejet (remplie en rouge sur la Fig. \@ref(fig:chi2plot2)). Il nous suffit maintenant de voir où se place notre $\chi^2_\mathrm{obs}$. S'il se situe dans la zone en rouge, nous rejetterons $H_0$, sinon, nous ne la rejetterons pas.
 
 ```{r chi2plot2, echo=FALSE, fig.cap = "Densité de probabilité sous *H*~0~ (distribution Chi^2^ à 1 ddl), zone de rejet de 5% en rouge et position de la valeur observée (trait vertical rouge)."}
 ## Chi-square distribution (density probability) with parameter:
@@ -454,8 +460,8 @@ Poursuivons. Nous choisissons notre seuil $\alpha$ = 5%. Cela définit l'aire la
 #  annotate("text", x = 7.4, y = 0.2, label = "(aire à droite = valeur P)",
 #    col = "red", fontface = "bold.italic")
 chi2 <- dist_chisq(1)
-#q_ref <- qchisq(0.05, df = 1, lower.tail = FALSE)
 q_ref <- quantile(chi2, p = 1 - 0.05)
+#q_ref <- qchisq(0.05, df = 1, lower.tail = FALSE) # Version R de base
 chart(chi2) +
   ylab("Densité de probabilité") +
   geom_funfill(fun = dfun(chi2), from = 0, to = q_ref, fill = "lightgray") +
@@ -463,7 +469,9 @@ chart(chi2) +
   ylim(0, 0.5) +
   geom_vline(xintercept = 5.61, col = "red") +
   annotate("text", x = 1.55, y = 0.04, label = "Zone de non rejet", col = "black") +
-  annotate("text", x = 4, y = 0.1, label = "plain(Zone ~ de ~ rejet) == plain(seuil) ~ alpha", parse = TRUE, col = "red") +
+  annotate("text", x = 4, y = 0.1,
+    label = "plain(Zone ~ de ~ rejet) == plain(seuil) ~ alpha",
+    parse = TRUE, col = "red") +
   annotate("segment", x = 4.5, y = 0.09, xend = 4.2, yend = 0.01,
     size = 0.5, col = "red", arrow = arrow(length = unit(0.2, "cm"))) +
   annotate("text", x = 6.5, y = 0.25, label = "chi[obs]^2 == 5.61", parse = TRUE,
@@ -478,18 +486,18 @@ Où se situe la limite ? Nous pouvons facilement la calculer :
 qchisq(0.05, df = 1, lower.tail = FALSE)
 ```
 
-Notre $\chi^2_\mathrm{obs}$ = 5,61 est plus grand que cette limite à 3,84 et se situe donc dans la zone de rejet de $H_0$ du test. **Nous rejetons donc** $H_0$ ici. Nous dirons que les becs-croisés à gauche sont significativement plus nombreux que ceux à droite au seuil $\alpha$ de 5% (test $\chi^2$ = 5,61, ddl = 1, valeur *P* = 0,018). **Notez bien la façon particulière de reporter les résultats d'un test d'hypothèse !**
+Notre $\chi^2_\mathrm{obs}$ = 5,61 est plus grand que cette limite à 3,84 et se situe donc dans la zone de rejet de $H_0$ du test. **Nous rejetons donc** $H_0$ ici. Nous dirons que les becs-croisés à gauche sont significativement plus nombreux que ceux à droite au seuil $\alpha$ de 5% (test $\chi^2$ = 5,61, ddl = 1, valeur *p* = 0,018). **Notez bien la façon particulière de reporter les résultats d'un test d'hypothèse !**
 
-Il nous manque encore juste un élément... qu'est-ce que cette "valeur *P*" de 0,018 reportée dans le résultat ? En fait, c'est la valeur de probabilité associée au test et correspond ici à l'aire à droite définie depuis le $\chi^2_\mathrm{obs}$. Calculons-la :
+Il nous manque encore juste un élément... qu'est-ce que cette "valeur *p*" de 0,018 reportée dans le résultat ? En fait, c'est la valeur de probabilité associée au test et correspond ici à l'aire à droite définie depuis le $\chi^2_\mathrm{obs}$. Calculons-la :
 
 ```{r}
 pchisq(5.61, df = 1, lower.tail = FALSE)
 ```
 
-Le test d'hypothèse reporte la valeur *P* afin qu'un lecteur qui aurait choisi un autre seuil $\alpha$ pourrait effectuer immédiatement sa propre comparaison sans devoir refaire les calculs. La règle est simple :
+Le test d'hypothèse reporte la valeur *p* afin qu'un lecteur qui aurait choisi un autre seuil $\alpha$ pourrait effectuer immédiatement sa propre comparaison sans devoir refaire les calculs. La règle est simple :
 
--   valeur *P* \< seuil $\alpha$, $=> \mathrm{R}H_0$ (on rejette $H_0$),
--   valeur *P* ≥ seuil $\alpha$, $=> \rlap{\mathrm{R}} \diagup H_0$ (on ne rejette pas $H_0$).
+-   valeur *p* \< seuil $\alpha$, $=> \mathrm{R}H_0$ (on rejette $H_0$),
+-   valeur *p* ≥ seuil $\alpha$, $=> \rlap{\mathrm{R}} \diagup H_0$ (on ne rejette pas $H_0$).
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -499,9 +507,10 @@ Le test d'hypothèse reporte la valeur *P* afin qu'un lecteur qui aurait choisi 
 <!-- G.E. je pose une question H5P qui reprend cet élément.
 Dans notre exemple, nous pouvons donc rejeter $H_0$ et nous dirons que **la probabilité d'observer un bec croisé gauche est significativement plus grande qu'un bec croisé droit au seuil $\alpha$  de 5% dans la population étudiée (test $\chi^2$ = 5,61, ddl = 1, valeur *P* = 0,018)**. A ce stade, notre analyse statistique se termine. Une interprétation *biologique* du résultat, des hypothèses concernant les *mécanismes biologiques* que cela implique, une confrontation à ce que d'autres ont observé via la littérature scientifique et des conclusions et/ou perspectives finalisent l'étude. -->
 ```
+
 ### Effet de l'effectif étudié
 
-En inférence, la qualité des données (échantillons *représentatifs*) est importante, mais la quantité aussi. **Plus vous pourrez mesurer d'individus, mieux c'est.** Par contre, dès que la taille de l'échantillon (ici, l'effectif total mesuré $N$) est suffisante pour rejeter $H_0$, vous n'avez plus besoin d'augmenter la taille de votre échantillon[^07-distributions-chi2-6]. Voyons l'effet de la taille de l'échantillon sur l'étude des becs-croisés des sapins. Nous n'avons pas besoin d'un effectif plus grand que celui mesuré, car nous rejetons $H_0$ ici. Qu'aurait donné notre test $\chi^2$, par contre, si l'auteur avait mesuré disons 10 fois moins d'oiseaux, les proportions restant par ailleurs identiques entre becs-croisés à gauche et à droite ?
+En inférence, la qualité des données (échantillons *représentatifs*) est importante, mais la quantité aussi. **Plus vous pouvez mesurer d'individus, mieux c'est.** Par contre, dès que la taille de l'échantillon (ici, l'effectif total mesuré $N$) est suffisante pour rejeter $H_0$, vous n'avez plus besoin d'augmenter la taille de votre échantillon[^07-distributions-chi2-6]. Voyons l'effet de la taille de l'échantillon sur l'étude des becs-croisés des sapins. Nous n'avons pas besoin d'un effectif plus grand que celui mesuré, car nous rejetons $H_0$ ici. Qu'aurait donné notre test $\chi^2$, par contre, si l'auteur avait mesuré, disons, 10 fois moins d'oiseaux, les proportions restant par ailleurs identiques entre becs-croisés à gauche et à droite ?
 
 [^07-distributions-chi2-6]: Attention ! Vous devez fixer la taille de l'échantillon dès le départ *a priori*. Vous ne pouvez pas accumuler des données jusqu'à obtenir un rejet de $H_0$, sans quoi votre analyse sera biaisée.
 
@@ -511,7 +520,7 @@ En inférence, la qualité des données (échantillons *représentatifs*) est im
 chisq.test(crossbill_tab2, p = c(left = 1/2, right = 1/2), rescale.p = FALSE)
 ```
 
-Nous constatons que la valeur du $\chi^2_{obs}$ dépend de l'effectif. Sa valeur est plus petite ici. Par conséquent, la valeur *P* a également changé et elle vaut à présent 43%. Cette valeur est *supérieure* maintenant à notre seuil $\alpha$ de 5%. Donc, nous ne pouvons pas rejeter $H_0$. Dans un pareil cas, nous conclurons que les becs-croisés à gauche ne sont **pas significativement** plus nombreux que ceux à droite au seuil $\alpha$ de 5% (test $\chi^2$ = 0,62, ddl = 1, valeur *P* = 0,43). Notez, c'est important, que nous n'avons pas écrit "ne sont **pas**", mais nous avons précisé "ne sont **pas significativement**" plus nombreux. C'est un détail très important. En effet, cela veut dire que l'on ne peut pas conclure qu'il y ait des différences sur base de l'échantillon utilisé, mais il se peut aussi que l'échantillon ne soit pas suffisamment grand pour mettre en évidence une différence. Or, nous avons analysé en réalité un plus grand échantillon (`crossbill`), et nous savons bien que c'est effectivement le cas. Est-ce que vous saisissez bien ce que le mot **significativement** veut dire, et la subtilité qui apparaît lorsqu'un test d'hypothèse ne rejette **pas** $H_0$ ? Les conclusions tirées avec `crossbill` et `crossbill2` et le même test d'hypothèse sont diamétralement opposées, car l'une rejette et l'autre ne rejette pas $H_0$. Pourtant ces deux analyses ne se contredisent pas ! Les deux interprétations sont *simultanément* correctes. C'est l'interprétation asymétrique du test qui permet cela, et l'adverbe **significativement** est indispensable pour introduire cette nuance dans le texte !
+Nous constatons que la valeur du $\chi^2_{obs}$ dépend de l'effectif. Sa valeur est plus petite ici. Par conséquent, la valeur *p* a également changé et elle vaut à présent 43%. Cette valeur est *supérieure* maintenant à notre seuil $\alpha$ de 5%. Donc, nous ne pouvons pas rejeter $H_0$. Dans un pareil cas, nous conclurons que les becs-croisés à gauche ne sont **pas significativement** plus nombreux que ceux à droite au seuil $\alpha$ de 5% (test $\chi^2$ = 0,62, ddl = 1, valeur *P* = 0,43). Notez, c'est important, que nous n'avons pas écrit "ne sont **pas**", mais nous avons précisé "ne sont **pas significativement**" plus nombreux. C'est un détail très important. En effet, cela veut dire que l'on ne peut pas conclure qu'il y ait des différences sur base de l'échantillon utilisé, mais il se peut aussi que l'échantillon ne soit pas suffisamment grand pour mettre en évidence une différence. Or, nous avons analysé en réalité un plus grand échantillon (`crossbill`), et nous savons bien que c'est effectivement le cas. Est-ce que vous saisissez bien ce que le mot **significativement** veut dire, et la subtilité qui apparaît lorsqu'un test d'hypothèse ne rejette **pas** $H_0$ ? Les conclusions tirées avec `crossbill` et `crossbill2` et le même test d'hypothèse sont diamétralement opposées, car l'une rejette et l'autre ne rejette pas $H_0$. Pourtant ces deux analyses ne se contredisent pas ! Les deux interprétations sont *simultanément* correctes. C'est l'interprétation asymétrique du test qui permet cela, et l'adverbe **significativement** est indispensable pour introduire cette nuance dans le texte !
 
 ##### À vous de jouer ! {.unnumbered}
 
@@ -524,7 +533,7 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-027' = !"A07Ia_{YY}M_pea"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/..."),
+      'S-BIOG-027' = "https://classroom.github.com/a/G-X1A4ga"),
     course.starts = c(
       'S-BIOG-027' = !"{W[25]+1} 13:00:00"),
     course.ends = c(
@@ -544,20 +553,21 @@ Comme toujours, le test $\chi^2$ d'indépendance est assortis de conditions d'ap
 -   échantillon représentatif (échantillonnage aléatoire et individus indépendants les uns des autres),
 -   attribution des traitements aux individus de manière aléatoire,
 -   aucun effectif théorique nul,
--   Si possible, aucun effectif observé inférieur à 5 (pas règle stricte, mais voir à utiliser un test exact de Fisher ci-dessous dans la section "pour en savoir plus" en base de page dans ce cas).
+-   Si possible, aucun effectif observé inférieur à 5 (pas une règle stricte, mais voir à utiliser un test exact de Fisher ci-dessous dans la section "pour en savoir plus" en base de page dans ce cas).
 
 ###### Exemple et résolution dans R {.unnumbered}
 
 Prenons le jeu de données concernant le test d'une molécule potentiellement anticancéreuse, le timolol :
 
-```{r}
-(timolol <- dtx(
+```{r, warning=FALSE}
+timolol <- dtx(
   traitement = c(
     rep("timolol", 160), rep("placebo", 147)),
   patient = c(
     rep("sain", 44), rep("malade", 116), 
     rep("sain", 19), rep("malade", 128))
-  ))
+  )
+  tabularise$headtail(timolol)
 ```
 
 ```{r, echo=FALSE, eval=FALSE}
@@ -579,11 +589,11 @@ Nous pouvons résumer ce tableau cas par variable en un tableau de contingence �
 
 Ici encore, une sortie plus élégante est possible avec la fonction `tabularise()` tout en y rajoutant de l'information utile comme les pourcentages et les totaux par lignes et par colonnes :
 
-```{r}
+```{r, warning=FALSE}
 tabularise(timolol_table)
 ```
 
-Nous avons ici un tableau de contingence à double entrée qui répertorie le nombre de cas attribués aléatoirement au traitement au placebo (somme de la première ligne, soit 128 + 19 = 147 patients) et le nombre de cas qui ont reçu du timolol sur la seconde ligne (116 + 44 = 160), tout autre traitement étant par ailleurs équivalent. Nous avons donc un total général de 307 patients étudiés. Les conditions d'application du test sont rencontrées ici.
+Nous avons ici un tableau de contingence à double entrée qui répertorie le nombre de cas attribués aléatoirement au placebo (somme de la première ligne, soit 128 + 19 = 147 patients) et le nombre de cas qui ont reçu du timolol sur la seconde ligne (116 + 44 = 160), tout autre traitement étant par ailleurs équivalent. Nous avons donc un total général de 307 patients étudiés. Les conditions d'application du test sont rencontrées ici.
 
 La répartition dans le tableau selon les colonnes est-elle tributaire des effets respectifs des deux traitements ? La clé ici est de considérer comme $H_0$ un partitionnement des cas équivalents entre les deux traitements. Ceci revient au même que de dire que l'effet d'une variable (le traitement administré) est *indépendant* de l'effet de l'autre variable (être guéri ou non après le traitement). C'est pour cette raison qu'on parle de test $\chi^2$ d'indépendance. Les hypothèses sont :
 
@@ -594,7 +604,7 @@ Toute la difficulté est de déterminer les $\alpha_i$, les effectifs qui devrai
 
 $$\alpha_{i, j} =\frac{total\ ligne_i \times total\ colonne_j}{total\ général}$$
 
-Nous pouvons dès lors calculer le $\chi^2_{obs}$ pratiquement comme nous avnos fait pour la variante univariée du test avec :
+Nous pouvons dès lors calculer le $\chi^2_{obs}$ pratiquement comme nous avons fait pour la variante univariée du test avec :
 
 $$\chi^2_{obs} = \sum_{i=1}^m{\sum_{j=1}^n{\frac{(a_{i,j} - \alpha_{i,j})^2}{\alpha_{i,j}}}}$$
 
@@ -603,19 +613,26 @@ Enfin, nous comparons cette valeur à la distribution théorique de $\chi^2$ à 
 <!-- Vous accédez facilement à ce code depuis le snippet `Chi2 test (independence)` dans le menu `hypothesis tests: contingency` à partir du raccourci `.hc`. -->
 
 ```{r}
-(chi2. <- chisq.test(timolol_table)); cat("Expected frequencies:\n"); chi2.[["expected"]]
+(chi2_timolol <- chisq.test(timolol_table))
+cat("Expected frequencies:\n"); chi2_timolol[["expected"]]
+```
+
+Utilisez `tabularise()` pour une sortie plus élégante du test :
+
+```{r, warning=FALSE}
+tabularise(chi2_timolol)
 ```
 
 ###### Interprétation {.unnumbered}
 
-La valeur *P* de 0,0026 est inférieure au seuil $\alpha$ choisi de 0,01. Donc, nous rejetons $H_0$. Il n'y a pas indépendance entre les deux variables. Pour voir quels sont les effets de la dépendance entre les variables, nous devons comparer les effectifs théoriques affichés ci-dessus avec les effectifs observés. Dans le cas du placebo, sous $H_0$, nous aurions du obtenir 117 malades contre 30 patients guéris. Or, nous en avons 128 malades et seulement 19 guéris. D'un autre côté, sous $H_0$ nous aurions du observer 127 patients malades et 33 sains avec le timolol. Or, nous en observons 116 malades et 44 sains. Donc, les valeurs observées sont en faveur d'un meilleur effet avec le timolol. Nous pourrons dire : le timolol a un effet positif significatif sur la guérison de la maladie au seuil $\alpha$ de 1% ($\chi^2$ d'indépendance = 9,10, ddl = 1, valeur *P* = 0,0026).
+La valeur *p* de 0,0026 est inférieure au seuil $\alpha$ choisi de 0,01. Donc, nous rejetons $H_0$. Il n'y a pas indépendance entre les deux variables. Pour voir quels sont les effets de la dépendance entre les variables, nous devons comparer les effectifs théoriques affichés ci-dessus avec les effectifs observés. Dans le cas du placebo, sous $H_0$, nous aurions du obtenir 117 malades contre 30 patients guéris. Or, nous en avons 128 malades et seulement 19 guéris. D'un autre côté, sous $H_0$ nous aurions du observer 127 patients malades et 33 sains avec le timolol. Or, nous en observons 116 malades et 44 sains. Donc, les valeurs observées sont en faveur d'un meilleur effet avec le timolol. Nous pourrons dire : le timolol a un effet positif significatif sur la guérison de la maladie au seuil $\alpha$ de 1% ($\chi^2$ d'indépendance = 9,10, ddl = 1, valeur *p* = 0,0026).
 
 ###### Correction de Yates {.unnumbered}
 
 Si nous calculons le $\chi^2_{obs}$ à la main, nous obtenons :
 
 ```{r}
-alpha_ij <- chi2.[["expected"]]
+alpha_ij <- chi2_timolol[["expected"]]
 # Les a_i,j sont dans timolol_table
 sum((timolol_table - alpha_ij)^2 / alpha_ij)
 ```
@@ -633,14 +650,14 @@ chisq.test(timolol_table, correct = FALSE)
 
 #### Autres tests Chi^2^
 
-Le test du $\chi^2$ est également utilisé, dans sa forme univariée, pour comparer les effectifs observés par rapport à des effectifs théoriques suivant une loi de distribution discrète. Ce test s'appelle un **test de qualité d'ajustement** ("goodness-of-fit test" en anglais). Dans ce cas, le nombre de degrés de liberté est le nombre de catégories moins le nombre de paramètres de la distribution moins un.
+Le test du $\chi^2$ est également utilisé, dans sa forme univariée, pour comparer les effectifs observés par rapport à des effectifs théoriques suivant une loi de distribution discrète. Ce test s'appelle un **test de qualité d'ajustement** (*goodness-of-fit test* en anglais). Dans ce cas, le nombre de degrés de liberté est le nombre de catégories moins le nombre de paramètres de la distribution moins un.
 
 Pour l'ajustement à une loi de distribution continue, il est possible de découper les données en classes et d'appliquer un test $\chi^2$ dessus ensuite. Il existe cependant d'autres tests considérés comme plus efficaces dans ce cas, comme le test de [Komogorov-Smirnov](https://mistis.inrialpes.fr/software/SMEL/cours/ts/node7.html), notamment avec les corrections introduites par [Lillefors](https://www.alliage-ad.com/data-science/data-science-les-tests-de-kolmogorov-smirnov-et-lilliefors/). Pour l'ajustement à une distribution normale, des tests spécialisés existent comme le test de [Shapiro-Wilk](http://www.sthda.com/french/wiki/test-de-normalite-avec-r-test-de-shapiro-wilk).
 
 <!--Ce dernier est disponible depuis les snippets de la SciViews Box dans le menu `Hypothesis tests: distribution` ou `.hd`, et puis `Shapiro-Wilk test of normality`. -->
 
 ```{block, type='info'}
-Gardez toujours à l'esprit que, quelle que soit la qualité d'un test d'ajustement, vous n'aurez jamais qu'une réponse binaire (oui ou non l'échantillon s'ajuste à la distribution théorique de référence). Les causes de dérive sont innombrables et seules des bonnes représentations graphiques (histogramme, graphe en violon, et surtout, graphique quantile-quantile) sont suffisamment riche en information pour explorer *pourquoi* et *comment* la distribution diffère d'une distribution théorique.
+Gardez toujours à l'esprit que, quelle que soit la qualité d'un test d'ajustement, vous n'aurez jamais qu'une réponse binaire (oui ou non l'échantillon s'ajuste à la distribution théorique de référence). Les causes de dérive sont innombrables et seules des bonnes représentations graphiques (histogramme, graphe en violon, et surtout, graphique quantile-quantile) sont suffisamment riches en information pour explorer *pourquoi* et *comment* la distribution diffère d'une distribution théorique.
 ```
 
 ###### Pour en savoir plus {.unnumbered}
@@ -659,14 +676,14 @@ En science des données, les variables brutes ne sont pas toujours les plus util
 
 ### Morphométrie de crabes
 
-Partons d'un exemple concret. Le jeu de données `crabs` du package {MASS} rassemble des données relatives à la morphométrie de la carapace d'un crabe.
+Partons d'un exemple concret. Le jeu de données `crabs` du package {MASS} rassemble des données relatives à la morphométrie de la carapace de crabes.
 
 ```{r}
 SciViews::R("infer", lang = "fr")
 crabs <- read("crabs", package = "MASS")
 ```
 
-L'aide en ligne de ce jeu de données (voir `.?crabs`) nous indique qu'il s'agit de mesures réalisées sur des crabes de l'espèce *Leptograpsus variegatus* (Fabricius, 1793) collectés à Freemantle à l'ouest de l'Australie. Deux variétés co-existent (correctement libellées `species` dans le jeu de données car il s'agit, en réalité, de deux espèces différentes) : la variété bleue (`B`) et la variété orange (`O`).
+L'aide en ligne de ce jeu de données (voir `.?crabs`) nous indique qu'il s'agit de mesures réalisées sur des crabes de l'espèce *Leptograpsus variegatus* (Fabricius, 1793) collectés à Fremantle à l'ouest de l'Australie. Deux variétés co-existent (correctement libellées `species` dans le jeu de données, car il s'agit, en réalité, de deux espèces différentes) : la variété bleue (`B`) et la variété orange (`O`).
 
 ![Crabe *Leptograpsus variegatus* variété bleue. Photo : Neville Coleman, license CC By 4.0 [Museums Victoria](https://collections.museumvictoria.com.au/species/8662).](images/sdd1_08/Leptograpsus_variegatus.jpg)
 
@@ -678,9 +695,9 @@ table(Espèce = crabs$species, Sexe = crabs$sex)
 
 <!-- Un snippet existe pour obtenir quelque chose de similaire (entrer `...`, puis `exploratory stats` puis `contingency`, puis `contingency table - 2 entries`). -->
 
-Si nous voulons un plus beau tableau, nous utilisons `tabularise()` :
+Si nous voulons un plus beau tableau, avec plus d'information utile, nous utilisons `tabularise()` :
 
-```{r}
+```{r, warning=FALSE}
 table(Espèce = crabs$species, Sexe = crabs$sex) |>
   tabularise()
 ```
@@ -782,18 +799,20 @@ Les **métriques** sont des variables issues de calculs plus complexes et qui vi
 
 `r h5p(85, height = 400, toc = "Variables calculées")`
 
-```{r assign_A07Ga_human_health_I, echo=FALSE, results='asis'}
+Créez maintenant un projet de groupe par quatre étudiants. Attention : ce projet sera également à développer durant les trois modules suivants.
+
+```{r assign_A07Ga_human_I, echo=FALSE, results='asis'}
 if (exists("assignment2"))
-  assignment2("A07Ga_human_health", part = "I",
-    url = "https://github.com/BioDataScience-Course/A07Ga_human_health",
+  assignment2("A07Ga_human", part = "I",
+    url = "https://github.com/BioDataScience-Course/A07Ga_human",
     course.ids = c(
-      'S-BIOG-027' = !"A07Ga_{YY}M_human_health"),
+      'S-BIOG-027' = !"A07Ga_{YY}M_human"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/..."),
+      'S-BIOG-027' = "https://classroom.github.com/a/M2cmViW4"),
     course.starts = c(
       'S-BIOG-027' = !"{W[25]+1} 13:00:00"),
     course.ends = c(
-      'S-BIOG-027' = !"{W[37]+1} 23:59:59"),
+      'S-BIOG-027' = !"{W[36]+2} 23:59:59"),
     term = "Q2", level = 4, n = 4,
     toc = "Biométrie humaine, part I")
 ```
@@ -825,9 +844,10 @@ Les instructions sont détaillées ici\ :
 ``
 -->
 ```
+
 ## Récapitulatif des exercices
 
-Vous venez de terminer le module 7. Ce module vous a permis d'apprendre à réaliser vos premiers tests de chi\^2. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
+Vous venez de terminer le module 7. Ce module vous a permis de découvrir les distributions binomiales, de Poisson et log-normale, le graphique quantile-quantile et d'apprendre à réaliser vos premiers tests de Chi^2^, ainsi que des variables calculées pertinentes. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
 
 `r show_ex_toc()`
 

@@ -1100,18 +1100,18 @@ vembedr::embed_youtube("uIx2xvdwIIo", width = 770, height = 433)
 
 Appliquez vos nouvelles connaissances dans le projet GitHub Classroom de groupe que vous avez débuté au module précédent.
 
-```{r assign_A08Ga_human_health_II, echo=FALSE, results='asis'}
+```{r assign_A07Ga_human_II, echo=FALSE, results='asis'}
 if (exists("assignment2"))
-  assignment2("A07Ga_human_health", part = "II",
-    url = "https://github.com/BioDataScience-Course/A07Ga_human_health",
+  assignment2("A07Ga_human", part = "II",
+    url = "https://github.com/BioDataScience-Course/A07Ga_human",
     course.ids = c(
-      'S-BIOG-027' = !"A07Ga_{YY}M_human_health"),
+      'S-BIOG-027' = !"A07Ga_{YY}M_human"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/..."),
+      'S-BIOG-027' = "https://classroom.github.com/a/M2cmViW4"),
     course.starts = c(
       'S-BIOG-027' = !"{W[25]+1} 13:00:00"),
     course.ends = c(
-      'S-BIOG-027' = !"{W[37]+1} 23:59:59"),
+      'S-BIOG-027' = !"{W[36]+2} 23:59:59"),
     term = "Q2", level = 4, n = 4,
     toc = "Biométrie humaine, part II")
 ```
