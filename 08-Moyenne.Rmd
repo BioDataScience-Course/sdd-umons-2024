@@ -14,7 +14,7 @@ SciViews::R("infer", lang = "fr")
 
 -   Comprendre le principe de la distribution d'un échantillon
 
--   Appréhender l'intervalle de confiance, savoir le calculer et l'utiliser
+-   Appréhender l'intervalle de confiance, être capable de le calculer et de l'utiliser
 
 -   Comprendre les différentes variantes du test *t* de Student et être capable de l'utiliser pour résoudre des questions pratiques en biologie
 
@@ -22,7 +22,7 @@ SciViews::R("infer", lang = "fr")
 
 ##### Prérequis {.unnumbered}
 
-Ce module est élaboré sur les notions vues au module \@ref(proba) concernant les lois de distributions statistiques et sur le concept de test d'hypothèse abordé dans le module \@ref(chi2). Ces deux précédents modules doivent donc être maîtrisés avant d'aller plus avant ici.
+Ce module est élaboré sur les notions de probabilité, de loi de distribution statistique et de test d'hypothèse abordées dans les deux module précédents \@ref(probacorr) et \@ref(districhi2). La matière de ces deux modules doit donc être maîtrisée avant d'aller plus avant ici.
 
 ## Une histoire de bière...
 
