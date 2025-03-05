@@ -22,7 +22,7 @@ SciViews::R("infer", lang = "fr")
 
 ##### Prérequis {.unnumbered}
 
-Ce module est élaboré sur les notions de probabilité, de loi de distribution statistique et de test d'hypothèse abordées dans les deux module précédents \@ref(probacorr) et \@ref(districhi2). La matière de ces deux modules doit donc être maîtrisée avant d'aller plus avant ici.
+Ce module est élaboré sur les notions de probabilité, de loi de distribution statistique et de test d'hypothèse abordées dans les deux modules précédents \@ref(probacorr) et \@ref(districhi2). La matière de ces deux modules doit donc être maîtrisée avant d'aller plus avant ici.
 
 ## Une histoire de bière...
 
@@ -38,7 +38,7 @@ Mais au fait, pourquoi, cette distribution porte-t-elle le nom de "Student" ? V
 vembedr::embed_youtube("GFzCIA9kppM", width = 770, height = 433)
 ```
 
-Le contrat que Gosset a signé avec son employeur l'empêchait de publier des résultats scientifiques sous son vrai nom. Ainsi, il décida de publier sa trouvaille qui occupe aujourd'hui une place très importante en statistiques sous le pseudonyme de "Student" (l'étudiant). Ce n'est qu'à sa mort, en 1937, que l'on put révéler le nom de l'auteur qui fut derrière cette fantastique découverte. Mais au fait, de quoi s'agit-il exactement ? Nous allons l'e découvrir'expliquer dans la section suivante.
+Le contrat que Gosset a signé avec son employeur l'empêchait de publier des résultats scientifiques sous son vrai nom. Ainsi, il décida de publier sa trouvaille qui occupe aujourd'hui une place très importante en statistiques sous le pseudonyme de "Student" (l'étudiant). Ce n'est qu'à sa mort, en 1937, que l'on put révéler le nom de l'auteur qui fut derrière cette fantastique découverte. Mais au fait, de quoi s'agit-il exactement ? Nous allons l'expliquer dans la section suivante.
 
 ## Distribution d'échantillonnage
 
@@ -52,7 +52,7 @@ Pour rappel, nous faisons de l'**inférence** sur base d'un échantillon parce q
 ```
 où $x$ est une variable quantitative (donc **numeric** dans R) et $n$ est la taille de l'échantillon, c'est à dire, le nombre d'individus mesurés. On notera $\bar{x}$ la moyenne de $x$, que l'on prononcera "x barre".
 
-Nous utiliserons également l'écart type, noté $\sigma_x$ pour la population et $s_x$ pour l'échantillon qui se calcule sur base de la somme des écarts à la moyenne au carré (eq. \@ref(eq:sd)) :
+Nous utiliserons également l'écart type, noté $\sigma_x$ pour la population et $s_x$ pour l'échantillon qui se calcule sur base de la somme des écarts à la moyenne au carré (eq. \@ref(eq:sd)) :
 
 ```{=tex}
 \begin{equation} 
@@ -170,7 +170,7 @@ La moyenne de l'échantillon suit une distribution *t* de Student avec comme deg
 ![](images/sdd1_09/t-distribution-snippets.png)
 -->
 ```
-Le calcul avec ces fonctions est un peu plus complexe, car les fonctions `<p|q|r|d>t()` ne considèrent que les distributions *t* de Student *réduites* (donc avec moyenne valant zéro et écart type de un). Nous devons ruser pour transformer le résultat en fonction des valeurs désirées. Considérons le cas $n = 9$ avec un moyenne de 8 et un écart type de 2/3. Voici quelques exemples de calculs réalisables :
+Le calcul avec ces fonctions est un peu plus complexe, car les fonctions `<p|q|r|d>t()` ne considèrent que les distributions *t* de Student *réduites* (donc avec moyenne valant zéro et écart type de un). Nous devons ruser pour transformer le résultat en fonction des valeurs désirées. Considérons le cas $n = 9$ avec une moyenne de 8 et un écart type de 2/3. Voici quelques exemples de calculs réalisables :
 
 -   Quelle est la probabilité que la moyenne d'un échantillon soit égale ou supérieure à 8,5 ?
 
@@ -429,7 +429,7 @@ chart(data = NULL, ~ m_unif_n4) +
   geom_line(aes(x = x, y = dfun(normal1)(x) * 3000))
 ```
 
-La moyenne de l'échantillon se distribue quand même selon une normale ! Nous venons de montrer de manière empirique que lorsque la distribution de la population est différente d'une distribution normale, la distribution d'échantillonnage tend quand même vers une distribution normale (en tous les cas, dans le cas d'une distribution de la population uniforme). Ceci se démontre de manière mathématique par le fameux **théorème central limite** que nous avons déjà abordé et qui est si cher aux statisticiens (nous vous épargnons cette démonstration ici). De plus, si l'écart type est également estimé à partir de l'échantillon, nous travaillerons avec une distribution de Student de même moyenne et écart type, avec $n-1$ degrés de liberté à la place de la distribution normale.
+La moyenne de l'échantillon se distribue quand même selon une normale ! Nous venons de montrer de manière empirique que lorsque la distribution de la population est différente d'une distribution normale, la distribution d'échantillonnage tend quand même vers une distribution normale (en tous les cas, dans le cas d'une distribution de la population uniforme). Ceci se démontre de manière mathématique par le fameux **théorème central limite** que nous avons déjà abordé et qui est si cher aux statisticiens (nous vous épargnons cette démonstration ici). De plus, si l'écart type est également estimé à partir de l'échantillon, nous travaillerons avec une distribution *t* de Student de même moyenne et écart type, avec $n-1$ degrés de liberté à la place de la distribution normale.
 
 ##### Conditions de validité de l'IC {.unnumbered}
 
@@ -446,7 +446,7 @@ L'IC sera pertinent si :
 
 Nous allons également pouvoir utiliser la distribution *t* de Student comme distribution de référence pour comparer une moyenne par rapport à une valeur cible ou pour comparer deux moyennes. C'est le test *t* de Student... ou plutôt *les* tests de Student puisqu'il en existe plusieurs variantes.
 
-Partons d'un exemple concret. Imaginez que vous êtes des biologistes ouest-australiens travaillant à Freemantle. Vous y étudiez le crabe *Leptographus variegatus* (Fabricius, 1793). C'est un crabe qui peut se trouver en populations abondantes sur les côtes rocheuses fortement battues. Il a un régime alimentaire partiellement détritivore et partiellement carnivore.
+Partons d'un exemple concret. Imaginez que vous êtes des biologistes ouest-australiens travaillant à Fremantle. Vous y étudiez le crabe *Leptographus variegatus* (Fabricius, 1793). C'est un crabe qui peut se trouver en populations abondantes sur les côtes rocheuses fortement battues. Il a un régime alimentaire partiellement détritivore et partiellement carnivore.
 
 ![Crabe *Leptograpsus variegatus* par [Johnragla](https://commons.wikimedia.org/wiki/File:Purple_rock_crab_in_Aotea_Harbour_April_2013.jpg).](images/sdd1_08/Leptograpsus-variegatus.jpg)
 
@@ -512,7 +512,7 @@ crabs_stats
 
 Un premier raisonnement consiste à dire que si la valeur attendue sous $H_0$ est comprise dans l'intervalle de confiance, nous ne pouvons pas rejeter l'hypothèse nulle, puisqu'elle représente une des valeurs plausibles à l'intérieur l'IC. Dans le cas présent, l'intervalle de confiance à 95% sur $\Delta rear$ va de 0.81 à 2.19. Il ne contient pas zéro. Donc, nous pouvons rejeter $H_0$ au seuil $\alpha$ de 5%.
 
-Nous pouvons effectivement interpréter le test de cette façon, mais le test *t* de Student se définit de manière plus classique en comparant la valeur $t_{obs}$ à la distribution théorique, et en renvoyant une valeur *P* associée au test, selon le même principe que nous avions appliqué au module précédent pour le test $\chi^2$. Ainsi, le lecteur peut interpréter les résultats avec son propre seuil $\alpha$ éventuellement différent de celui choisi par l'auteur de l'analyse.
+Nous pouvons effectivement interpréter le test de cette façon, mais le test *t* de Student se définit de manière plus classique en comparant la valeur $t_{obs}$ à la distribution théorique, et en renvoyant une valeur *p* associée au test, selon le même principe que nous avions appliqué au module précédent pour le test $\chi^2$. Ainsi, le lecteur peut interpréter les résultats avec son propre seuil $\alpha$ éventuellement différent de celui choisi par l'auteur de l'analyse.
 
 Le raisonnement est le suivant. Sous $H_0$, la distribution de $\Delta rear$ est connue. Elle suit une distribution *t* de Student à $n - 2$ degrés de liberté, de moyenne égale à la vraie valeur de la différence des moyennes, et d'écart type égal à l'erreur standard sur cette différence. En pratique, nous remplaçons les valeurs de la population pour la différence des moyennes et pour les erreurs standard par celles estimées par l'intermédiaire de l'échantillon. Comme dans le cas du test $\chi^2$, nous définissons les zones de rejet et de non-rejet par rapport à cette distribution théorique. Dans le cas du test de Student bilatéral, l'aire $\alpha$ est répartie à moitié à gauche et à moitié à droite (Fig. \@ref(fig:ttest1)).
 
@@ -569,7 +569,7 @@ chart(student_t) +
     col = "red", fontface = "bold.italic")
 ```
 
-Nous pouvons calculer la valeur *P* nous-mêmes comme ceci, sachant la valeur de $t_{obs} = \frac{\Delta rear}{SE_{\Delta rear}}$ parce que nous travaillons avec une distribution *t* réduite :
+Nous pouvons calculer la valeur *p* nous-mêmes comme ceci, sachant la valeur de $t_{obs} = \frac{\Delta rear}{SE_{\Delta rear}}$ parce que nous travaillons avec une distribution *t* réduite :
 
 ```{r}
 (t_obs <- delta_rear / se)
@@ -599,7 +599,7 @@ t.test(data = crabs, rear ~ sex,
   alternative = "two.sided", conf.level = 0.95, var.equal = TRUE)
 ```
 
-Nous retrouvons exactement toutes les valeurs que nous avons calculées à la main. Dans le cas présent, rappelez-vous la façon d'interpréter le test. Nous comparons la valeur *P* à $\alpha$. Si elle est plus petite, nous rejetons $H_0$, sinon, nous ne la rejetons pas. Ici, nous rejetons $H_0$ et pourrons dire que la largeur à l'arrière de la carapace de *L. variegatus* diffère de manière significative entre les mâles et les femelles au seuil $\alpha$ de 5% (test t bilatéral, *t* = 4,29, ddl = 198, valeur *P* \<\< 10^-3^).
+Nous retrouvons exactement toutes les valeurs que nous avons calculées à la main **(donc, maintenant que vous connaissez la fonction `t.test()` vous ne vous amusez plus à faire tous les calculs précédents à la main... que nous avions réalisés ensemble seulement pour vous permettre de bien comprendre comment le test _t_ de Student est élaboré)**. Dans le cas présent, rappelez-vous la façon d'interpréter le test. Nous comparons la valeur *p* à $\alpha$. Si elle est plus petite, nous rejetons $H_0$, sinon, nous ne la rejetons pas. Ici, nous rejetons $H_0$ et pourrons dire que la largeur à l'arrière de la carapace de *L. variegatus* diffère de manière significative entre les mâles et les femelles au seuil $\alpha$ de 5% (test t bilatéral, *t* = 4,29, ddl = 198, valeur *p* \<\< 10^-3^).
 
 ##### Conditions d'application {.unnumbered}
 
@@ -661,7 +661,7 @@ t.test(data = crabs, rear ~ sex,
   alternative = "greater", conf.level = 0.95, var.equal = FALSE)
 ```
 
-Notez que la valeur *P* a été divisée par deux par rapport au test bilatéral. Ceci est le résultat d'une répartition différente de l'aire de rejet qui est placée ici entièrement sur la droite (Fig. \@ref(fig:ttest2)). Nous n'avons donc plus dû multiplier la valeur calculée par deux pour la répartir également de l'autre côté de la distribution.
+Notez que la valeur *p* a été divisée par deux par rapport au test bilatéral. Ceci est le résultat d'une répartition différente de l'aire de rejet qui est placée ici entièrement sur la droite (Fig. \@ref(fig:ttest2)). Nous n'avons donc plus dû multiplier la valeur calculée par deux pour la répartir également de l'autre côté de la distribution.
 
 ```{r ttest2, echo=FALSE, fig.cap="Visualisation de la distribution de Student réduite sous l'hypothèse nulle d'un test unilatéral à droite au seuil de 5%. Toute la zone de rejet est à droite."}
 ## Student's t distribution (density probability) with parameters:
@@ -742,10 +742,8 @@ Nous calculons la moyenne de cette différence notée `delta_f_r`. Nous résumon
 -   l'erreur standard dans `se_f_r` (pour rappel, $SE = \frac{s_x}{\sqrt{n}}$),
 -   la valeur de `t_obs` reportée selon la distribution *t* réduite, donc, en divisant `mean_f_r` par `se_f_r`.
 
-Ici, comme nous utilisons des variables créées dans le `summarise()` à l'intérieur même de la fonction, nous ne pouvons pas le faire avec un **data.table**, ni avec, `fsummarise()` car il nous faut aussi utiliser `n()`. La solution dans ce cas est de recourir au calcul par défaut du package {dplyr} (et non de {dtplyr} comme nous l'avons fait jusqu'ici). Pour ce faire, il suffit de convertir `crabs` en **data.frame** à l'aide de `as_dtf()`. Notez aussi que dans le cas de l'utilisation d'un **data.frame**, l'étape de collecte à la fin n'est pas non plus nécessaire.
-
 ```{r}
-as_dtf(crabs) %>.%
+crabs %>.%
   smutate(., delta_f_r = front - rear) %>.%
   ssummarise(.,
     mean_f_r = fmean(delta_f_r),
@@ -753,13 +751,13 @@ as_dtf(crabs) %>.%
   smutate(., t_obs = mean_f_r / se_f_r)
 ```
 
-La distribution de référence sous $H_0$ à partir de ces calculs est une $t(199, 0, 1)$, avec $n - 1$ comme degrés de liberté. Donc, la valeur *P* peut se calculer comme suit (n'oubliez pas de multiplier par deux pour reporter l'aire des deux côtés de la distribution pour un test bilatéral) :
+La distribution de référence sous $H_0$ à partir de ces calculs est une $t(199, 0, 1)$, avec $n - 1$ comme degrés de liberté. Donc, la valeur *p* peut se calculer comme suit (n'oubliez pas de multiplier par deux pour reporter l'aire des deux côtés de la distribution pour un test bilatéral) :
 
 ```{r}
 pt(25.324, df = 199, lower.tail = FALSE) * 2
 ```
 
-Avant d'effectuer le test, pensez toujours à visualiser vos données avec la représentation la plus judicieuse. Ici, la boite de dispersion parallèle n'est pas très indiquée, car elle ne prend pas en compte l'appariement des données. Un graphique en nuage de points avec la bissectrice (pente de un et ordonnée à l'origine de zéro) ajoutée comme référence convient bien mieux. Sous $H_0$, le nuage de points est sensé se concentrer sur cette bissectrice.
+Avant d'effectuer le test, pensez toujours à visualiser vos données avec la représentation la plus judicieuse. Ici, la boite de dispersion parallèle n'est pas très indiquée, car elle ne prend pas en compte l'appariement des données. Un graphique en nuage de points avec la bissectrice (pente de un et ordonnée à l'origine de zéro) ajoutée comme référence convient bien mieux. Sous $H_0$, le nuage de points est censé se concentrer sur cette bissectrice.
 
 ```{r}
 chart(data = crabs, rear ~ front) +
@@ -769,7 +767,7 @@ chart(data = crabs, rear ~ front) +
 
 Nous voyons très clairement que tous les points se situent du même côté de la bissectrice, ce qui suggère très fortement que $H_0$ ne tient pas la route ici.
 
-Le test correspondant s'obtient toujours avec la fonction `t.test()` mais cette fois-ci au lieu d'une formule, nous indiquons les deux variables suivant la notation `<data.frame>$<variable>`, et nous spécifions `paired = TRUE`. Fixons notre seuil $\alpha$ à 5% avant de faire le test, puis exécutons l'instruction suivante :
+Le test correspondant s'obtient toujours avec la fonction `t.test()` mais cette fois-ci au lieu d'une formule, nous indiquons les deux variables suivant la notation `<data.frame>$<variable>`, et nous spécifions `paired = TRUE`. Fixons notre seuil $\alpha$ à 5% avant de faire le test, puis exécutons l'instruction suivante **(ici à nouveau, les détails de calculs ci-dessus ne sont plus nécessaire une fois que vous avez compris comment utiliser `t.test()` correctement pour un test apparié)** :
 
 <!-- dans la SciViews Box à partir du menu `.hm` pour `hypothesis tests: means` et dans le menu qui apparaît, on sélectionne le "snippet" `paired Student's t test`. -->
 
@@ -778,13 +776,13 @@ t.test(crabs$front, crabs$rear,
   alternative = "two.sided", conf.level = 0.95, paired = TRUE)
 ```
 
-Nous rejetons $H_0$, car la valeur *P* est inférieure à $\alpha$. Nous en concluons que le crabe *L. variegatus* a une carapace significativement plus large à l'avant qu'à l'arrière (t test apparié = 25,3, ddl = 199, valeur *P* \<\< 10^-3^). Naturellement, les variantes unilatérales à gauche et à droite existent aussi pour ce test. Par contre, la question des variances égales ou non ne se pose pas dans ce cas[^08-moyenne-7]. Notez que le test se limite à indiquer que la valeur *P* \< 2,2 . 10^-16^. Effectivement, notre calcul donne 3.7 . 10^-64^.
+Nous rejetons $H_0$, car la valeur *p* est inférieure à $\alpha$. Nous en concluons que le crabe *L. variegatus* a une carapace significativement plus large à l'avant qu'à l'arrière (t test apparié = 25,3, ddl = 199, valeur *p* \<\< 10^-3^). Naturellement, les variantes unilatérales à gauche et à droite existent aussi pour ce test. Par contre, la question des variances égales ou non ne se pose pas dans ce cas[^08-moyenne-7]. Notez que le test se limite à indiquer que la valeur *p* \< 2,2 . 10^-16^. Effectivement, notre calcul donne 3.7 . 10^-64^.
 
 [^08-moyenne-7]: Pouvez-vous expliquer pourquoi ? Réfléchissez, c'est assez évident.
 
 ##### Conditions d'application {.unnumbered}
 
--   échantillon représentatif (échantillonnage aléatoires),
+-   échantillon représentatif (échantillonnage aléatoire),
 -   individus appariés (mesures sur les mêmes individus pour les deux conditions comparées),
 -   observations indépendantes les unes des autres,
 -   deux variables numériques,
@@ -801,17 +799,17 @@ Avant de réaliser une expérience, vous vous demanderez certainement s'il vaut 
 
 Faites très attention à l'encodage des données. Il vous faut un tableau cas par variables correct, sinon vous risquez de vous orienter vers un mauvais test. Prenez le jeu de données `sleep` du package {datasets}.
 
-```{r}
+```{r, warning=TRUE}
 sleep <- read("sleep", package = "datasets")
-DT::datatable(sleep)
+tabularise(sleep)
 ```
 
-Nous avons `extra`, le nombre d'heures supplémentaires de sommeil suite à l'administration de médicaments, soit le `1`, soit le `2`. Le tableau se présente comme pour effectuer un test *t* indépendant (une variable numérique `extra` et une variable facteur à deux niveaux `group`). Cependant, regardez aussi la variable `ID` qui est l'identifiant de la personne testée. **Vous constatez que les mêmes identifiants** reviennent parmi les deux groupes. C'est en réalité un design apparié, mais mal encodé. Nous allons d'abord restructurer ce tableau correctement avant d'appliquer le test adéquat.
+Nous avons `extra`, le nombre d'heures supplémentaires de sommeil suite à l'administration de médicaments, soit le `1`, soit le `2` dans la variable `group`. Le tableau se présente comme pour effectuer un test *t* indépendant (une variable numérique `extra` et une variable facteur à deux niveaux `group`). Cependant, regardez aussi la variable `ID` qui est l'identifiant de la personne testée. **Vous constatez que les mêmes identifiants** reviennent parmi les deux groupes. C'est en réalité un design apparié, mais mal encodé. Nous allons d'abord restructurer ce tableau correctement avant d'appliquer le test adéquat.
 
-```{r}
+```{r, warning=TRUE}
 sleep2 <- spivot_wider(sleep, names_from = group, values_from = extra)
 names(sleep2) <- c("id", "med1", "med2")
-DT::datatable(sleep2)
+tabularise(sleep2)
 ```
 
 Dans `sleep2` nous avons un véritable tableau cas par variable, c'est-à-dire, une ligne par individu. Nous avons alors deux variables numériques `med1` et `med2` mesurées sur les mêmes individus. Le test apparié suivant est correct. Un test indépendant effectué sur `sleep` aurait été **incorrect** !
@@ -866,11 +864,11 @@ t.test(sleep2$med1,
   alternative = "two.sided", mu = 0, conf.level = 0.95)
 ```
 
-La valeur *P* est supérieure à $\alpha$. Nous ne rejetons pas $H_0$. Nous ne pouvons pas dire que le médicament 1 change de manière significative la durée de sommeil chez les patients au seuil $\alpha$ de 5% (test t univarié = 1,33, ddl = 9, valeur *P* = 0,22). Notez également que dans le cas présent, l'intervalle de confiance [-0,53, 2,03] contient zéro (c'est l'autre façon de décider si l'hypothèse nulle est rejetée ou non).
+La valeur *p* est supérieure à $\alpha$. Nous ne rejetons pas $H_0$. Nous ne pouvons pas dire que le médicament 1 change de manière significative la durée de sommeil chez les patients au seuil $\alpha$ de 5% (test t univarié = 1,33, ddl = 9, valeur *p* = 0,22). Notez également que dans le cas présent, l'intervalle de confiance [-0,53, 2,03] contient zéro (c'est l'autre façon de décider si l'hypothèse nulle est rejetée ou non).
 
 ##### Conditions d'application {.unnumbered}
 
--   échantillon représentatif (échantillonnage aléatoires),
+-   échantillon représentatif (échantillonnage aléatoire),
 -   observations indépendantes les unes des autres,
 -   une variable numérique,
 -   distribution de la population...
@@ -889,7 +887,7 @@ if (exists("assignment"))
     course.ids = c(
       'S-BIOG-027' = !"A08Ia_{YY}M_ttest"),
     course.urls = c(
-      'S-BIOG-027' = "https://classroom.github.com/a/..."),
+      'S-BIOG-027' = "https://classroom.github.com/a/pe1zXXfq"),
     course.starts = c(
       'S-BIOG-027' = !"{W[27]+1} 13:00:00"),
     course.ends = c(
@@ -957,7 +955,7 @@ Mais au fait, c'est quoi la "puissance" d'un test d'hypothèse ? Considérons l
 
 ![](images/sdd1_08/type_I_and_II_error.jpg)
 
-L'erreur de première espèce est associée au risque $\alpha$. L'erreur de seconde espèce est associée au risque $\beta$. Plus $\beta$ est petit, plus le test est puissant. La puissance est $1 - \beta$. La puissance d'un test peut se calculer à l'aide des fonctions `pwr.xxx()` du package {pwr}. Par exemple dans le test *t* univarié concernant `med1` nous ferons :
+L'erreur de première espèce (*type I error* en anglais) est associée au risque $\alpha$. L'erreur de seconde espèce (*type II error* en anglais) est associée au risque $\beta$. Plus $\beta$ est petit, plus le test est puissant. La puissance est $1 - \beta$. La puissance d'un test peut se calculer à l'aide des fonctions `pwr.xxx()` du package {pwr}. Par exemple dans le test *t* univarié concernant `med1` nous ferons :
 
 ```{r}
 pwr::pwr.t.test(n = 10, d = 1.3, sig.level = 0.05,
@@ -988,14 +986,14 @@ b <- chart(data = crabs, rear ~ sex) +
   geom_jitter(alpha = 0.3, width = 0.2) +
   stat_summary(geom = "point", fun = "mean", size = 2) +
   stat_summary(geom = "errorbar", width = 0.1,
-    fun.data = "mean_cl_normal", fun.args = list(conf.int = 0.95), size = 1)
+    fun.data = "mean_cl_normal", fun.args = list(conf.int = 0.95), linewidth = 1)
 
 combine_charts(list(a,b))
 ```
 
 Le graphique en barres (encore appelé graphique en dynamite, car il ressemble au déclencheur d'explosion de dynamite dans les dessins animés Walt Disney) et le nuage de points représentent identiquement la même information. Ils représentent la moyenne avec des barres d'erreurs qui matérialisent l'intervalle de confiance à 95%. Le graphique en dynamite avec des barres d'erreurs ne donne aucune information sur le nombre d'observations. Nous avons déjà abordé rapidement cette problématique dans la section \@ref(barres-mean). Il n'est donc pas le graphique optimal pour présenter un test *t* de Student. Donc, préférez systématiquement le graphique de droite ou une de ses variantes (graphique en violon au lieu des points et barres d'erreurs autour des moyennes superposées lorsque le nombre d'observations est très grand).
 
-Malgré le fait que le test *t* de Student est un test paramétrique, on retrouve dans la littérature scientifique la boite de dispersion qui est pourtant un graphique associé à des valeurs non paramétriques. Pour le test de Wilcoxon, la boite de dispersion est le graphique descriptif le plus recommandé (on peut aussi y adjoindre les points, ou passer sur le graphique en violon si le nombre d'observations est très grand).
+Malgré le fait que le test *t* de Student est un test paramétrique, on retrouve dans la littérature scientifique la boite à moustache qui est pourtant un graphique associé à des valeurs non paramétriques. Pour le test de Wilcoxon, la boite à moustache est le graphique descriptif le plus recommandé (on peut aussi y adjoindre les points, ou passer sur le graphique en violon si le nombre d'observations est très grand).
 
 ```{r}
 chart(data = crabs, rear ~ sex) +
@@ -1014,13 +1012,13 @@ chart(data = crabs, rear ~ sex) +
 
 ##### Pièges et astuces : barres d'erreurs {.unnumbered}
 
-Que vous utilisiez le nuage de points ou le graphique en barres, vous devez être extrêmement vigilant aux barres d'erreurs. Vous devez toujours préciser et bien comprendre ce que les barres d'erreurs cachent. Voici quatre graphiques qui présentent différentes barres d'erreurs à partir des *mêmes* données (la taille de l'axe y a volontairement été figée).
+Que vous utilisiez le nuage de points ou le graphique en barres, vous devez être extrêmement vigilant aux barres d'erreurs. Vous devez toujours préciser et bien comprendre ce que les barres d'erreurs cachent. Voici quatre graphiques qui présentent différentes barres d'erreurs à partir des *mêmes* données (la taille de l'axe Y a volontairement été figée).
 
 ```{r, fig.cap="Nuage de points de la largeur de l'arrière de la carapace en focntion du sexe avec la moyenne et des barres d'erreurs. A : moyenne et intervalle de confiance 0.95. B : moyenne et écart-type. C : moyenne et 2*écart-type. D : moyenne et erreur standard" }
 
 p <- chart(data = crabs, rear ~ sex) +
   geom_jitter(alpha = 0.1, width = 0.2) +
-  stat_summary(geom = "point", fun.y = "mean") +
+  stat_summary(geom = "point", fun = "mean") +
   scale_y_continuous(limits = c(5,22))
 
 a <- p +
@@ -1052,7 +1050,7 @@ $$\mathrm{IC}(1 - \alpha) \simeq \bar{x} \pm t_{\alpha/2}^{n-1} \cdot SE_x$$
 mean_cl_normal(crabs$rear)
 ```
 
--   Graphique B : écart-type
+-   Graphique B : écart-type
 
 $$s_x = \sqrt{\sum_{i=1}^n{\frac{(x_i - \bar{x})^2}{n-1}}}$$
 
@@ -1060,7 +1058,7 @@ $$s_x = \sqrt{\sum_{i=1}^n{\frac{(x_i - \bar{x})^2}{n-1}}}$$
 mean_sdl(crabs$rear, mult = 1)
 ```
 
--   Graphique C : deux fois la valeur de l'écart-type
+-   Graphique C : deux fois la valeur de l'écart-type
 
 $$2 \times s_x$$
 
@@ -1068,7 +1066,7 @@ $$2 \times s_x$$
 mean_sdl(crabs$rear, mult = 2)
 ```
 
--   Graphique D : erreur standard
+-   Graphique D : erreur standard
 
 $$SE_x = \frac{s_x}{\sqrt{n}}$$
 
@@ -1076,7 +1074,7 @@ $$SE_x = \frac{s_x}{\sqrt{n}}$$
 mean_se(crabs$rear)
 ```
 
-Comme nous venons de le voir, les barres d'erreurs sont calculées à partir de différentes fonctions. Il est donc indispensable de préciser explicitement ce que les barres d'erreurs représentent. Dans le cas du test *t* de Student, nous avons vu qu'il est lié directement à la notion d'intervalle de confiance. C'est donc la version avec l'IC (variante A) qui permet une comparaison visuelle immédiate du test. Par contre, cet IC, autant que l'erreur standard dépendent de *n*. Autement dit, comme ici, les barres d'erreurs peuvent devenir très petites si *n* est grand, indépendamment de la variation intrinsèque des mesures.
+Comme nous venons de le voir, les barres d'erreurs sont calculées à partir de différentes fonctions. Il est donc indispensable de préciser explicitement ce que les barres d'erreurs représentent. Dans le cas du test *t* de Student, nous avons vu qu'il est lié directement à la notion d'intervalle de confiance. C'est donc la version avec l'IC (variante A) qui permet une comparaison visuelle immédiate du test. Par contre, cet IC, autant que l'erreur standard dépendent de *n*. Autrement dit, comme ici, les barres d'erreurs peuvent devenir très petites si *n* est grand, indépendamment de la variation intrinsèque des mesures.
 
 Si l'on ne souhaite pas faire intervenir *n*, c'est alors l'écart type qui représentera le mieux l'étalement des observations. De plus, nous savons que si la distribution est normale, deux fois l'écart type d'un côté et de l'autre représente à peu près l'intervalle dans lequel 95% des observations doivent se trouver, ce qui donne un sens à la variante qui représente deux fois l'écart type comme barre d'erreur. Donc, il n'y a pas un graphique meilleur que les autres, tout dépend de l'information que vous souhaitez mettre en évidence dans vos données et du contexte de votre analyse.
 
@@ -1084,7 +1082,7 @@ Si l'on ne souhaite pas faire intervenir *n*, c'est alors l'écart type qui repr
 
 -   [Beware of dynamite](https://filedn.com/lzGVgfOGxb6mHFQcRn9ueUb/sdd-umons/sdd1_09/Koyama2003_BewareOfDynamite.pdf). Démonstration de l'impact d'un graphe en barres pour représenter la moyenne (et l'écart type) = graphique en "dynamite".
 
--   [Dynamite plots : unmitigated evil?](http://emdbolker.wikidot.com/blog%3Adynamite) Une autre comparaison du graphe en dynamite avec des représentations alternatives qui montre que le premier peut avoir quand même quelques avantages dans des situations particulières.
+-   [Dynamite plots: unmitigated evil?](http://emdbolker.wikidot.com/blog%3Adynamite) Une autre comparaison du graphe en dynamite avec des représentations alternatives qui montre que le premier peut avoir quand même quelques avantages dans des situations particulières.
 
 -   [Annotation de graphiques avec {{ggpubr}](https://delladata.fr/afficher-p-values-sur-graphiques/). Comment afficher les p-values sur un graph ? Ces variantes annotées des résultats des tests d'hypothèses correspondants se retrouvent fréquemment dans les publications en biologie.
 
@@ -1138,6 +1136,7 @@ if (exists("assignment2"))
 
 -->
 ```
+
 ## Récapitulatif des exercices
 
 Vous venez de terminer le module 8. Ce module vous a permis d'apprendre une grande partie des subtilités qui se cachent derrière la moyenne qui peut nous sembler si simple. Il nous a aussi inité aux tests de Student et de Wilcoxon-Mann-Withney. Pour évaluer votre compréhension de cette matière, vous aviez les exercices suivants à réaliser :
