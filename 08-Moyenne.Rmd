@@ -463,7 +463,7 @@ skimr::skim(crabs)
 
 Toutes les variables qualitatives sont des mesures effectuées sur la carapace des crabes. Nous nous posons la question suivante :
 
--   Les femelles ont-elle une carapace plus large à l'arrière, en moyenne que les mâles ?
+-   Les femelles ont-elle une carapace plus large ou moins large à l'arrière, en moyenne que les mâles ?
 
 Voici une comparaison graphique :
 
@@ -477,7 +477,7 @@ Sur le graphique, il semble que les femelles (`sex == "F"`) tendent à avoir une
 -   $H_0: \overline{rear_F} = \overline{rear_M}$
 -   $H_1: \overline{rear_F} \neq \overline{rear_M}$
 
-Ici, nous n'avons aucune idée *a priori* pour $H_1$ si les femelles sont censées avoir une carapace plus large ou non que les mâles à l'arrière. Donc, nous considérons qu'elle peut être aussi bien plus grande que plus petite. On parle ici de **test bilatéral,** car la différence peut apparaître des deux côtés. Pour ce test, nous pouvons partir de la notion d'intervalle de confiance et de notre idée de calculer les quantiles de part et d'autre de la distribution théorique à parts égales, comme dans la Fig. \@ref(fig:tdistri2).
+Ici, nous n'avons aucune idée *a priori* pour $H_1$ si les femelles sont censées avoir une carapace plus large ou non que les mâles à l'arrière (**notez bien que vous n'utilisez pas ici la différence observée dans votre échantillon, mais les connaissance _a priori_ pour définir la latéralité du test**). Donc, nous considérons qu'elle peut être aussi bien plus grande que plus petite. On parle ici de **test bilatéral,** car la différence peut apparaître des deux côtés. Pour ce test, nous pouvons partir de la notion d'intervalle de confiance et de notre idée de calculer les quantiles de part et d'autre de la distribution théorique à parts égales, comme dans la Fig. \@ref(fig:tdistri2).
 
 Une idée serait de calculer $\overline{rear_F} - \overline{rear_M}$, la différence des moyennes entre mesures pour les femelles et pour les mâles. Les hypothèses deviennent alors :
 
