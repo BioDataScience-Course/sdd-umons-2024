@@ -183,11 +183,15 @@ Avec $fact1:fact2$ étant le terme d'interactions. On peut aussi le simplifier e
 
 $$y \sim fact1 * fact2$$
 
+##### À vous de jouer ! {.unnumbered}
+
+`r h5p(113, height = 400, toc = "Modèle croisé complet")`
+
 Cette fois-ci, la décomposition de la variable se fait en quatre étapes : (1) depuis la moyenne générale µ vers les *j*^èmes^ moyennes pour `fact1`, ensuite (2) de ces moyennes vers les *k*^èmes^ moyennes pour `fact2`, puis (3) de ces dernières vers la moyenne particulière pour le sous-groupe *jk*, et enfin (4) les résidus $\epsilon_i$ pour chaque observation. Voyons ce que donne ce modèle complet sur nos données `crabs2`.
 
 <!-- Un "snippets" est utilisable (`two-way ANOVA (complete model)`). -->
 
-```{r, warning=FALSE}
+```{r,  warning=FALSE}
 crabs2_anova2comp <- lm(data = crabs2, aspect5 ~ species * sex)
 anova(crabs2_anova2comp) %>.%
   tabularise(.)
